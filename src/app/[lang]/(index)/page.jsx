@@ -2,10 +2,9 @@ import { getDictionary } from "../../../dictionaries/dictionaries";
 import EducationSection from "./sections/education";
 import HeroSection from "./sections/hero";
 
-
 export async function generateMetadata({ params }) {
-  const lang = params?.lang ?? "es";
-  const dict = await getDictionary(lang);
+  const { lang } = await params;
+  const dict = await getDictionary(lang ?? "es");
 
   const meta_data = dict.translations.home.meta;
 
@@ -41,8 +40,8 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function HomePage({ params }) {
-  const lang = params?.lang ?? "es";
-  const dict = await getDictionary(lang);
+  const { lang } = await params;
+  const dict = await getDictionary(lang ?? "es");
 
   return (
     <>

@@ -12,7 +12,7 @@ function getLocale(request) {
 
     const languages = negotiatorHeaders.languages()
 
-    const locale = matchLocale(languages, locales, defaultLocale)
+    const locale = matchLocale(languages, locales, defaultLocale) || defaultLocale
     return locale
 }
 
@@ -27,7 +27,7 @@ export function middleware(request) {
         return
     }
 
-    const locale = getLocale(request)
+    const locale = getLocale(request) || defaultLocale
     const url = request.nextUrl.clone()
     url.pathname = `/${locale}${pathname}`
     return NextResponse.redirect(url)
