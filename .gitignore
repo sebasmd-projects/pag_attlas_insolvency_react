@@ -18,6 +18,7 @@ next.zip
 # next.js
 /out/
 .next/
+.next.zip
 
 # production
 /build
