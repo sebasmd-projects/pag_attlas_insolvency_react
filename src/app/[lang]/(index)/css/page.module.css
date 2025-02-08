@@ -1,0 +1,143 @@
+:root {
+    --background-color: #ffffff;
+    /* Background color for the entire website, including individual sections */
+    --default-color: #212529;
+    /* Default color used for the majority of the text content across the entire website */
+    --heading-color: #95D0C8;
+    /* Color for headings, subheadings and title throughout the website */
+    --accent-color: #2957A4;
+    /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
+    --surface-color: #ffffff;
+    /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
+    --contrast-color: #FED100;
+    /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
+}
+
+:root {
+    --nav-color: #3a3939;
+    /* The default color of the main navmenu links */
+    --nav-hover-color: #2957A4;
+    /* Applied to main navmenu links when they are hovered over or active */
+    --nav-mobile-background-color: #dbdbdbeb;
+    /* Used as the background color for mobile navigation menu */
+    --nav-dropdown-background-color: #dbdbdbeb;
+    /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
+    --nav-dropdown-color: #3a3939;
+    /* Used for navigation links of the dropdown items in the navigation menu. */
+    --nav-dropdown-hover-color: #e84545;
+    /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
+}
+
+:root {
+    scroll-behavior: smooth;
+}
+
+
+.darkBackground {
+    --background-color: #060606;
+    --default-color: #ffffff;
+    --heading-color: #ffffff;
+    --surface-color: #252525;
+    --contrast-color: #ffffff;
+}
+
+.lightBackground {
+    --background-color: #f9f9f9;
+    --surface-color: #ffffff;
+}
+
+/*--------------------------------------------------------------
+# Global Sections
+--------------------------------------------------------------*/
+.section {
+    color: var(--default-color);
+    background-color: var(--background-color);
+    padding: 60px 0;
+    scroll-margin-top: 98px;
+    overflow: clip;
+}
+
+.sectionTitle {
+    text-align: center;
+    padding-bottom: 60px;
+    position: relative;
+}
+
+.sectionTitle h3 {
+    font-size: 35px;
+    font-weight: 700;
+    position: relative;
+}
+
+.sectionTitle h3:before,
+.sectionTitle h3:after  {
+    content: "";
+    width: 50px;
+    height: 2px;
+    background: var(--accent-color);
+    display: inline-block;
+}
+
+.sectionTitle h3:before {
+    margin: 0 15px 10px 0;
+}
+
+.sectionTitle h3:after {
+    margin: 0 0 10px 15px;
+}
+
+.sectionTitle p {
+    margin-bottom: 0;
+}
+
+@media (max-width: 1199px) {
+    .section {
+        scroll-margin-top: 64px;
+    }
+}
+
+/*--------------------------------------------------------------
+# Hero Section
+--------------------------------------------------------------*/
+.hero {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    padding: 80px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.heroVideo {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    z-index: 0;
+    filter: brightness(40%);
+}
+
+.hero h2 {
+    margin: 0;
+    font-size: 44px;
+    font-weight: 700;
+}
+
+.hero p {
+    color: color-mix(in srgb, var(--default-color), transparent 20%);
+    margin: 5px 0 0 0;
+    font-size: 20px;
+}
+
+@media (max-width: 768px) {
+    .hero h2 {
+        font-size: 32px;
+    }
+
+    .hero p {
+        font-size: 18px;
+    }
+}
