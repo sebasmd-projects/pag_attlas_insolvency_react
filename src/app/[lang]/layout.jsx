@@ -1,7 +1,7 @@
 import QueryProvider from '@/providers/QueryProvider';
 import ToastProvider from '@/providers/ToastProvider';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../../public/assets/css/globals.css';
+import '@public/assets/css/globals.css';
 
 export async function generateStaticParams() {
   return [{ lang: 'es' }, { lang: 'en' }]
