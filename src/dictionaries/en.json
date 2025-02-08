@@ -47,7 +47,11 @@
                         "url": "https://sebasmoralesd.com"
                     }
                 ],
-                "viewport": "width=device-width, initial-scale=1"
+                "icons": {
+                    "icon": "https://attlasconciliacion.propensionesabogados.com/assets/imgs/favicon/favicon.ico",
+                    "apple": "https://attlasconciliacion.propensionesabogados.com/assets/imgs/favicon/apple-touch-icon.png"
+                },
+                "manifest": "https://attlasconciliacion.propensionesabogados.com/manifest.json"
             },
             "sections": {
                 "hero": {
@@ -62,7 +66,7 @@
                 },
                 "education": {
                     "title": "Education",
-                    "alt_imgs": [
+                    "altImgs": [
                         "imagen de la academia virtual",
                         "imagen de las conferencias y capacitaciones",
                         "imagen de los servicios"

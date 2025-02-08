@@ -1,16 +1,15 @@
-import { Metadata } from "next";
 import { getDictionary } from "../../../dictionaries/dictionaries";
 import EducationSection from "./sections/education";
 import HeroSection from "./sections/hero";
 
-export async function generateMetadata({ params }: { params: { lang?: "es" | "en" } }): Promise<Metadata> {
-  const lang = (await params)?.lang ?? "es";
+
+export async function generateMetadata({ params }) {
+  const lang = params?.lang ?? "es";
   const dict = await getDictionary(lang);
 
   const meta_data = dict.translations.home.meta;
 
   return {
-    viewport: meta_data.viewport,
     applicationName: meta_data.applicationName,
     authors: meta_data.authors,
     title: meta_data.pageTitle,
@@ -41,8 +40,8 @@ export async function generateMetadata({ params }: { params: { lang?: "es" | "en
   };
 }
 
-export default async function HomePage({ params }: { params: { lang?: "es" | "en" } }) {
-  const lang = (await params)?.lang ?? "es";
+export default async function HomePage({ params }) {
+  const lang = params?.lang ?? "es";
   const dict = await getDictionary(lang);
 
   return (

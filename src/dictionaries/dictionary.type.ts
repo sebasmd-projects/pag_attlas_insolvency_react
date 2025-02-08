@@ -20,7 +20,6 @@ export interface Meta {
     metaRobots:      string;
     applicationName: string;
     authors:         Author[];
-    viewport:        string;
     icons:           Icons;
     manifest:        string;
 }
@@ -71,7 +70,8 @@ export interface About {
 }
 
 export interface Education {
-    title: string;
+    title:   string;
+    altImgs: string[];
 }
 
 export interface Hero {

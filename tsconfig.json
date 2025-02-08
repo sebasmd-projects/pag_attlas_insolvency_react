@@ -23,6 +23,6 @@
       "@public/*": ["./public/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/[lang]/(index)/page.tsx", "src/app/[lang]/(index)/sections/hero.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/[lang]/(index)/page.jsx", "src/app/[lang]/(index)/sections/hero.js"],
   "exclude": ["node_modules"]
 }
