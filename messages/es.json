@@ -1,0 +1,47 @@
+{
+  "Error": {
+    "description": "<p>Desafortunadamente, hemos encontrado un error.</p><p>Puedes intentar <retry>recargar la página</retry> que estabas visitando.</p>",
+    "title": "¡Algo salió mal!"
+  },
+  "IndexPage": {
+    "timeUntil":"Estamos trabajando para traerte una mejor experiencia, por favor vuelve el: 15 de Febrero 2025",
+    "description": "¿Ahogado por las deudas y no sabes que camino coger? Transforma tu angustia en tranquiladad, seguridad y en tu mejor GANANCIA.",
+    "title": "ATTLAS Centro de Conciliación e Insolvencia Económica"
+  },
+  "LocaleLayout": {
+    "title": "ATTLAS Centro de Conciliación e Insolvencia Económica"
+  },
+  "LocaleSwitcher": {
+    "label": "Cambiar idioma",
+    "locale": "{locale, select, en {🇺🇸 English} es {🇪🇸 Español} other {Desconocido}}"
+  },
+  "Manifest": {
+    "name": "ATTLAS Centro de Conciliación e Insolvencia Económica"
+  },
+  "Navigation": {
+    "home": "Inicio",
+    "pathnames": "Equipo"
+  },
+  "NotFoundPage": {
+    "description": "Por favor, verifica la barra de direcciones del navegador o usa la navegación para ir a una página conocida.",
+    "title": "Página no encontrada"
+  },
+  "PageLayout": {
+    "links": {
+      "docs": {
+        "description": "Conoce más en https://propensionesabogados.com",
+        "href": "https://propensionesabogados.com",
+        "title": "Propensiones Abogados"
+      },
+      "source": {
+        "description": "Habla con abogado especializado en insolvencia económica y conciliación",
+        "href": "https://api.whatsapp.com/send/?phone=573183280176&text=Hola%2C+quisiera+conocer+m%C3%A1s+sobre+los+procesos+de+insolvencia+econ%C3%B3mica+y+conciliaci%C3%B3n&type=phone_number&app_absent=0",
+        "title": "Contáctanos"
+      }
+    }
+  },
+  "PathnamesPage": {
+    "description": "<p>Los nombres de ruta también están internacionalizados.</p><p>Si estás usando el idioma predeterminado, español, verás <code>/en/pathnames</code> en la barra de direcciones del navegador en esta página.</p><p>Si cambias el idioma a alemán, la URL se actualizará en consecuencia (<code>/en/pfadnamen</code>).</p>",
+    "title": "Nombres de ruta"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "Error": {
+    "description": "<p>We've unfortunately encountered an error.</p><p>You can try to <retry>reload the page</retry> you were visiting.</p>",
+    "title": "Something went wrong!"
+  },
+  "IndexPage": {
+    "timeUntil": "We are working to bring you a better experience, please come back on: February 15, 2025",
+    "description": "Drowning in debt and don't know which path to take? Turn your distress into peace of mind, security, and your best GAIN.",
+    "title": "ATTLAS Center for Conciliation and Economic Insolvency"
+  },
+  "LocaleLayout": {
+    "title": "ATTLAS Center for Conciliation and Economic Insolvency"
+  },
+  "LocaleSwitcher": {
+    "label": "Change language",
+    "locale": "{locale, select, en {🇺🇸 English} es {🇪🇸 Español} other {Unknown}}"
+  },
+  "Manifest": {
+    "name": "ATTLAS Center for Conciliation and Economic Insolvency"
+  },
+  "Navigation": {
+    "home": "Home",
+    "pathnames": "Team"
+  },
+  "NotFoundPage": {
+    "description": "Please double-check the browser address bar or use the navigation to go to a known page.",
+    "title": "Page not found"
+  },
+  "PageLayout": {
+    "links": {
+      "docs": {
+        "description": "Learn more at https://propensionesabogados.com",
+        "href": "https://propensionesabogados.com",
+        "title": "Propensiones Abogados"
+      },
+      "source": {
+        "description": "Talk to a lawyer specialized in economic insolvency and conciliation",
+        "href": "https://api.whatsapp.com/send/?phone=573183280176&text=Hello%2C+I+would+like+to+learn+more+about+the+economic+insolvency+and+conciliation+processes&type=phone_number&app_absent=0",
+        "title": "Contact us"
+      }
+    }
+  },
+  "PathnamesPage": {
+    "description": "<p>The pathnames are internationalized too.</p><p>If you're using the default language English, you'll see <code>/es/pathnames_es</code> in the browser address bar on this page.</p><p>If you change the locale to German, the URL is localized accordingly (<code>/en/pathnames_en</code>).</p>",
+    "title": "Pathnames"
+  }
+}

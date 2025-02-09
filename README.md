@@ -12,3 +12,9 @@ npm run dev
 ```git
 https://github.com/sebasmd-projects/pag_attlas_insolvency_react.git
 ```
+
+## React tools
+
+```cmd
+react-devtools
+```
