@@ -1,21 +1,20 @@
 import Image from 'next/image';
-// import {useTranslations} from 'next-intl';
-// import {setRequestLocale} from 'next-intl/server';
+import {useTranslations} from 'next-intl';
+import {setRequestLocale} from 'next-intl/server';
 import PageLayout from '@/components/PageLayout';
 
-// type Props = {
-//   params: {locale: string};
-// };
+type Props = {
+  params: {locale: string};
+};
 
-// export default function TeamPage({params: {locale}}: Props) {
-export default function TeamPage() {
-  // // Enable static rendering
-  // setRequestLocale(locale);
+export default function TeamPage({params: {locale}}: Props) {
 
-  // const t = useTranslations('PathnamesPage');
+  setRequestLocale(locale);
+
+  const t = useTranslations('TeamPage');
 
   return (
-    <PageLayout title="Equipo">
+    <PageLayout title={t('title')}>
       <div className="flex justify-center">
         <Image
           alt="Equipo"

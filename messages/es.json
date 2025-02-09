@@ -40,8 +40,8 @@
       }
     }
   },
-  "PathnamesPage": {
-    "description": "<p>Los nombres de ruta también están internacionalizados.</p><p>Si estás usando el idioma predeterminado, español, verás <code>/en/pathnames</code> en la barra de direcciones del navegador en esta página.</p><p>Si cambias el idioma a alemán, la URL se actualizará en consecuencia (<code>/en/pfadnamen</code>).</p>",
-    "title": "Nombres de ruta"
+  "TeamPage": {
+    "description": "<p>Los nombres de ruta también están internacionalizados.</p><p>Si estás usando el idioma predeterminado, español, verás <code>/en/equipo</code> en la barra de direcciones del navegador en esta página.</p><p>Si cambias el idioma a alemán, la URL se actualizará en consecuencia (<code>/en/pfadnamen</code>).</p>",
+    "title": "Equipo"
   }
 }

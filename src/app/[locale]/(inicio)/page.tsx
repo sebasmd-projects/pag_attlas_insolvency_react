@@ -1,12 +1,13 @@
 import {useTranslations} from 'next-intl';
 import {setRequestLocale} from 'next-intl/server';
 import PageLayout from '@/components/PageLayout';
+import TestComponents from './components/testComponent'
 
 type Props = {
   params: {locale: string};
 };
 
-export default function IndexPage({params: {locale}}: Props) {
+export default function HomePage({params: {locale}}: Props) {
   // Enable static rendering
   setRequestLocale(locale);
 
@@ -22,6 +23,11 @@ export default function IndexPage({params: {locale}}: Props) {
         })}
       </p>
       <small>{t('timeUntil')}</small>
+
+      <br />
+
+      <TestComponents />
+      
     </PageLayout>
   );
 }
