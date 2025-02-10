@@ -20,7 +20,7 @@
   },
   "Navigation": {
     "home": "Home",
-    "pathnames": "Team"
+    "team": "Team"
   },
   "NotFoundPage": {
     "description": "Please double-check the browser address bar or use the navigation to go to a known page.",
@@ -43,5 +43,41 @@
   "TeamPage": {
     "description": "<p>The pathnames are internationalized too.</p><p>If you're using the default language English, you'll see <code>/es/pathnames_es</code> in the browser address bar on this page.</p><p>If you change the locale to German, the URL is localized accordingly (<code>/en/pathnames_en</code>).</p>",
     "title": "Team"
+  },
+  "AuthPages": {
+    "AuthPage": {
+      "title": "Authentication"
+    },
+    "LoginPage": {
+      "title": "Login",
+      "description": "Please enter your credentials to log in.",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Log in",
+      "forgotPassword": "Forgot your password?",
+      "register": "Don't have an account? Register here."
+    },
+    "RegisterPage": {
+      "title": "Register",
+      "description": "Please enter your information to register.",
+      "name": "Name",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Register",
+      "login": "Already have an account? Log in here."
+    },
+    "ForgotPasswordPage": {
+      "title": "Forgot Password",
+      "description": "Please enter your email to reset your password.",
+      "email": "Email",
+      "submit": "Reset Password",
+      "login": "Remembered your password? Log in here."
+    },
+    "ResetPasswordPage": {
+      "title": "Reset Password",
+      "description": "Please enter your new password.",
+      "password": "Password",
+      "submit": "Reset Password"
+    }
   }
 }

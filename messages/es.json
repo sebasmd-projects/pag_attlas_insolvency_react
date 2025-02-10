@@ -4,7 +4,7 @@
     "title": "¡Algo salió mal!"
   },
   "IndexPage": {
-    "timeUntil":"Estamos trabajando para traerte una mejor experiencia, por favor vuelve el: 15 de Febrero 2025",
+    "timeUntil": "Estamos trabajando para traerte una mejor experiencia, por favor vuelve el: 15 de Febrero 2025",
     "description": "¿Ahogado por las deudas y no sabes que camino coger? Transforma tu angustia en tranquiladad, seguridad y en tu mejor GANANCIA.",
     "title": "ATTLAS Centro de Conciliación e Insolvencia Económica"
   },
@@ -20,7 +20,7 @@
   },
   "Navigation": {
     "home": "Inicio",
-    "pathnames": "Equipo"
+    "team": "Equipo"
   },
   "NotFoundPage": {
     "description": "Por favor, verifica la barra de direcciones del navegador o usa la navegación para ir a una página conocida.",
@@ -43,5 +43,41 @@
   "TeamPage": {
     "description": "<p>Los nombres de ruta también están internacionalizados.</p><p>Si estás usando el idioma predeterminado, español, verás <code>/en/equipo</code> en la barra de direcciones del navegador en esta página.</p><p>Si cambias el idioma a alemán, la URL se actualizará en consecuencia (<code>/en/pfadnamen</code>).</p>",
     "title": "Equipo"
+  },
+  "AuthPages": {
+    "AuthPage": {
+      "title": "Autenticación"
+    },
+    "LoginPage": {
+      "title": "Iniciar sesión",
+      "description": "Por favor, ingresa tus credenciales para iniciar sesión.",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "submit": "Iniciar sesión",
+      "forgotPassword": "¿Olvidaste tu contraseña?",
+      "register": "¿No tienes una cuenta? Regístrate aquí."
+    },
+    "RegisterPage": {
+      "title": "Registrarse",
+      "description": "Por favor, ingresa tu información para registrarte.",
+      "name": "Nombre",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "submit": "Registrarse",
+      "login": "¿Ya tienes una cuenta? Inicia sesión aquí."
+    },
+    "ForgotPasswordPage": {
+      "title": "Recuperar contraseña",
+      "description": "Por favor, ingresa tu correo electrónico para restablecer tu contraseña.",
+      "email": "Correo electrónico",
+      "submit": "Restablecer contraseña",
+      "login": "¿Recordaste tu contraseña? Inicia sesión aquí."
+    },
+    "ResetPasswordPage": {
+      "title": "Restablecer contraseña",
+      "description": "Por favor, ingresa tu nueva contraseña.",
+      "password": "Contraseña",
+      "submit": "Restablecer contraseña"
+    }
   }
 }

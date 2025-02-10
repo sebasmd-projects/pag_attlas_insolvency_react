@@ -6,10 +6,27 @@ export const routing = defineRouting({
   defaultLocale: 'es',
   pathnames: {
     '/': '/',
-    '/equipo': {
-      es: '/equipo',
-      en: '/team'
-    }
+
+
+    '/autenticacion/contrasena-olvidada': {
+      es: '/autenticacion/contrasena-olvidada',
+      en: '/auth/forgot-password'
+    },
+    '/autenticacion/iniciar-sesion': {
+      es: '/autenticacion/iniciar-sesion',
+      en: '/auth/login'
+    },
+    '/autenticacion/registrarse': {
+      es: '/autenticacion/registrarse',
+      en: '/auth/register'
+    },
+    '/autenticacion/restablecer-contrasena': {
+      es: '/autenticacion/restablecer-contrasena',
+      en: '/auth/reset-password'
+    },
+
+
+    '/equipo': { es: '/equipo', en: '/team' },
   }
 });
 

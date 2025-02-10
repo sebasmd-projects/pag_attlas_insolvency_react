@@ -2,6 +2,6 @@ import { ReactNode } from 'react';
 
 type Props = { children: ReactNode; };
 
-export default function TeamLayout({ children }: Props) {
+export default function AuthLayout({ children }: Props) {
   return children;
 }
