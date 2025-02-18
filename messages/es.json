@@ -1,83 +1,125 @@
 {
   "Error": {
-    "description": "<p>Desafortunadamente, hemos encontrado un error.</p><p>Puedes intentar <retry>recargar la página</retry> que estabas visitando.</p>",
-    "title": "¡Algo salió mal!"
+    "description": "",
+    "title": ""
   },
-  "IndexPage": {
-    "timeUntil": "Estamos trabajando para traerte una mejor experiencia, por favor vuelve el: 15 de Febrero 2025",
-    "description": "¿Ahogado por las deudas y no sabes que camino coger? Transforma tu angustia en tranquiladad, seguridad y en tu mejor GANANCIA.",
-    "title": "ATTLAS Centro de Conciliación e Insolvencia Económica"
-  },
-  "LocaleLayout": {
-    "title": "ATTLAS Centro de Conciliación e Insolvencia Económica"
+  "NotFoundPage": {
+    "description": "",
+    "title": ""
   },
   "LocaleSwitcher": {
-    "label": "Cambiar idioma",
+    "label": "Idioma",
     "locale": "{locale, select, en {🇺🇸 English} es {🇪🇸 Español} other {Desconocido}}"
   },
   "Manifest": {
     "name": "ATTLAS Centro de Conciliación e Insolvencia Económica"
   },
   "Navigation": {
-    "home": "Inicio",
-    "team": "Equipo"
-  },
-  "NotFoundPage": {
-    "description": "Por favor, verifica la barra de direcciones del navegador o usa la navegación para ir a una página conocida.",
-    "title": "Página no encontrada"
-  },
-  "PageLayout": {
-    "links": {
-      "docs": {
-        "description": "Conoce más en https://propensionesabogados.com",
-        "href": "https://propensionesabogados.com",
-        "title": "Propensiones Abogados"
-      },
-      "source": {
-        "description": "Habla con abogado especializado en insolvencia económica y conciliación",
-        "href": "https://api.whatsapp.com/send/?phone=573183280176&text=Hola%2C+quisiera+conocer+m%C3%A1s+sobre+los+procesos+de+insolvencia+econ%C3%B3mica+y+conciliaci%C3%B3n&type=phone_number&app_absent=0",
-        "title": "Contáctanos"
+    "index": {
+      "menu": "Inicio"
+    },
+    "aboutUs": {
+      "menu": "Nosotros",
+      "subMenu": {
+        "getToKnowUs": "Conócenos",
+        "culture": "Cultura",
+        "faq": "Preguntas frecuentes",
+        "history": "Historia"
+      }
+    },
+    "contact": {
+      "menu": "Contáctanos"
+    },
+    "auth": {
+      "menu": "Autenticación",
+      "subMenu": {
+        "login": "Iniciar sesión",
+        "register": "Registrarse",
+        "forgotPassword": "Olvidé mi contraseña"
+      }
+    },
+    "freeAdvice": {
+      "menu": "Asesoría gratuita"
+    },
+    "programs": {
+      "menu": "Programas",
+      "subMenu": {
+        "ourPrograms": "Nuestros Programas",
+        "financialEducation": "Educación Financiera"
       }
     }
   },
-  "TeamPage": {
-    "description": "<p>Los nombres de ruta también están internacionalizados.</p><p>Si estás usando el idioma predeterminado, español, verás <code>/en/equipo</code> en la barra de direcciones del navegador en esta página.</p><p>Si cambias el idioma a alemán, la URL se actualizará en consecuencia (<code>/en/pfadnamen</code>).</p>",
-    "title": "Equipo"
-  },
-  "AuthPages": {
-    "AuthPage": {
-      "title": "Autenticación"
-    },
-    "LoginPage": {
-      "title": "Iniciar sesión",
-      "description": "Por favor, ingresa tus credenciales para iniciar sesión.",
-      "email": "Correo electrónico",
-      "password": "Contraseña",
-      "submit": "Iniciar sesión",
-      "forgotPassword": "¿Olvidaste tu contraseña?",
-      "register": "¿No tienes una cuenta? Regístrate aquí."
-    },
-    "RegisterPage": {
-      "title": "Registrarse",
-      "description": "Por favor, ingresa tu información para registrarte.",
-      "name": "Nombre",
-      "email": "Correo electrónico",
-      "password": "Contraseña",
-      "submit": "Registrarse",
-      "login": "¿Ya tienes una cuenta? Inicia sesión aquí."
-    },
-    "ForgotPasswordPage": {
-      "title": "Recuperar contraseña",
-      "description": "Por favor, ingresa tu correo electrónico para restablecer tu contraseña.",
-      "email": "Correo electrónico",
-      "submit": "Restablecer contraseña",
-      "login": "¿Recordaste tu contraseña? Inicia sesión aquí."
-    },
-    "ResetPasswordPage": {
-      "title": "Restablecer contraseña",
-      "description": "Por favor, ingresa tu nueva contraseña.",
-      "password": "Contraseña",
-      "submit": "Restablecer contraseña"
+  "Pages": {
+    "homePage": {
+      "sections": {
+        "heroSection": {
+          "video_tag": "Su navegador no soporta la etiqueta de video.",
+          "title_h1": "Solución Legal a tus Deudas | ATTLAS",
+          "title_h2": "Reestructuración de deudas",
+          "description_p": "Beneficios de la Insolvencia Económica, Suspensión de Embargos, Protección inmediata contra ejecuciones judiciales.",
+          "whatsappButton": "Contáctanos"
+        },
+        "solutionsSection": {
+          "title_h1": "SOLUCIONES Y BENEFICIOS PENSADOS PARA TI",
+          "title_h2": "Cambiemos tus finanzas <span>juntos</span>",
+          "features": {
+            "feature1": {
+              "title": "Asesoría gratuita",
+              "description": "Regístrate y recibe tu primera asesoría financiera sin costo."
+            },
+            "feature2": {
+              "title": "Paz y salvo",
+              "description": "Te acompañamos hasta recibir tu carta de paz y salvo."
+            },
+            "feature3": {
+              "title": "Descuento en tus deudas en mora",
+              "description": "Liquida tus deudas atrasadas con el mayor descuento."
+            },
+            "feature4": {
+              "title": "Cuota fija",
+              "description": "Mensualidades hechas a la medida de tus posibilidades."
+            }
+          }
+        },
+        "mainTeamSection": {
+          "title_h1": "EXPERIENCIA Y CALIDAD HUMANA",
+          "title_h2": "Nuestro <span>equipo</span>"
+        },
+        "whyUsSection": {
+          "title_h1": "NUESTRA EXPERIENCIA",
+          "title_h2": "¿Por qué <span>ATTLAS?</span>",
+          "description_p": "Queremos que retomes el control de tu vida, ayudándote a solucionar los problemas financieros con las deudas y que vuelvas a acceder al crédito.",
+          "footer_p": "¡ÚNETE A LA REVOLUCIÓN FINANCIERA CON ATTLAS!",
+          "features": {
+            "feature1": {
+              "title": "+1000",
+              "description": "Deudas liquidadas"
+            },
+            "feature2": {
+              "title": "+10 años",
+              "description": "De experiencia"
+            },
+            "feature3": {
+              "title": "100%",
+              "description": "En Colombia para Colombianos"
+            },
+            "feature4": {
+              "title": "+2000",
+              "description": "Clientes satisfechos"
+            }
+          }
+        },
+        "stepByStepSection" : {
+          "title_h1": "¿CÓMO LO LOGRAMOS?",
+          "title_h2": "Un plan para <span>tus metas</span>",
+          "features": {
+            "feature1": "Realizamos un diagnóstico de tu perfil financiero para entender tu situación.",
+            "feature2": "Negociamos el mayor descuento en cada una de tus deudas atrasadas.",
+            "feature3": "Obtén más beneficios con un buen comportamiento de pago en tu plan de liquidación.",
+            "feature4": "Te acompañamos y asesoramos de principio a fin."
+          }
+        }
+      }
     }
   }
 }

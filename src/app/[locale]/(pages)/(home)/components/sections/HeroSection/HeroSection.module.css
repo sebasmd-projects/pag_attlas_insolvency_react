@@ -1,0 +1,50 @@
+.hero {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.heroVideoWrapper {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+}
+
+.heroVideoWrapper::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+}
+
+.heroVideo {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+}
+
+.hero .container {
+    position: relative;
+    z-index: 3;
+}
+
+.hero h1 {
+    color: #fff;
+    font-size: 2rem;
+}
+
+.hero h2 {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #FED100;
+}
+
+.hero p {
+    color: #fff;
+    font-size: 1.2rem;
+}

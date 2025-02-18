@@ -8,10 +8,14 @@ const config = {
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: 'fundacionlm.org',
+                hostname: 'attlasconciliacion.propensionesabogados.com',
             },
-        ],
-    },
+            {
+                protocol: 'https',
+                hostname: 'propensionesabogados.com',
+            }
+        ]
+    }
 };
 
 module.exports = withNextIntl(config);

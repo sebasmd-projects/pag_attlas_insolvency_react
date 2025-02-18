@@ -1,0 +1,53 @@
+import Image from 'next/image';
+import Link from "next/link";
+import style from './HeroSection.module.css';
+import { FaWhatsapp } from "react-icons/fa";
+import { useTranslations } from 'next-intl';
+
+
+export default function HeroSection() {
+
+    const t = useTranslations('Pages.homePage.sections.heroSection');
+
+    return (
+        <section id="hero" className={style.hero}>
+            <div className={style.heroVideoWrapper}>
+                <video autoPlay muted loop playsInline className={style.heroVideo}>
+                    <source src="/assets/videos/hero-bg-video.mp4" type="video/mp4" />
+                    {t('video_tag')}
+                </video>
+            </div>
+
+            <div className="container">
+                <div className="row">
+                    <div className="col-lg-10">
+                        <h1 data-aos="fade-right" data-aos-delay="100">
+                            {t('title_h1')}
+                        </h1>
+                        <h2 data-aos="fade-right" data-aos-delay="150" className="mt-3">
+                            {t('title_h2')}
+                        </h2>
+                        <p data-aos="fade-right" data-aos-delay="200" className="mt-3">
+                            {t('description_p')}
+                        </p>
+                    </div>
+                    <div className="col-lg-5 mt-5 text-center" >
+                        <div className="row align-items-center">
+                            <div className="col-6" data-aos="fade-up" data-aos-delay="150">
+                                <Link className="btn " href="https://propensionesabogados.com/" target="_blank" style={{ backgroundColor: "#fff" }} prefetch>
+                                    <Image src="/assets/imgs/page/logo-propensiones-h.png" alt="propensiones abogados logo" className="img-fluid" style={{ maxHeight: "90px" }} width={223} height={50} />
+                                </Link>
+                            </div>
+
+                            <div className="col-6" data-aos="fade-up" data-aos-delay="250">
+                                <div className="btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#whatsappModal">
+                                    {t('whatsappButton')} <FaWhatsapp />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+}

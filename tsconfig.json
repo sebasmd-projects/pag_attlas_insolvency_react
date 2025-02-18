@@ -39,7 +39,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+, "src/components/LocaleSwitcher/LocaleSwitcher.jsx", "src/providers/AOSProvider.jsx"  ],
   "exclude": [
     "node_modules"
   ]

@@ -7,26 +7,52 @@ export const routing = defineRouting({
   pathnames: {
     '/': '/',
 
+    '/about-us': {
+      es: '/nosotros/',
+      en: '/about-us/'
+    },
+    '/about-us/contact': {
+      es: '/nosotros/contacto',
+      en: '/about-us/contact'
+    },
+    '/about-us/culture': {
+      es: '/nosotros/cultura',
+      en: '/about-us/culture'
+    },
+    '/about-us/frequently-asked-questions': {
+      es: '/nosotros/preguntas-frecuentes',
+      en: '/about-us/frequently-asked-questions'
+    },
+    '/about-us/history': {
+      es: '/nosotros/historia',
+      en: '/about-us/history'
+    },
 
-    '/autenticacion/contrasena-olvidada': {
+
+    '/auth/forgot-password': {
       es: '/autenticacion/contrasena-olvidada',
       en: '/auth/forgot-password'
     },
-    '/autenticacion/iniciar-sesion': {
+    '/auth/login': {
       es: '/autenticacion/iniciar-sesion',
       en: '/auth/login'
     },
-    '/autenticacion/registrarse': {
+    '/auth/register': {
       es: '/autenticacion/registrarse',
       en: '/auth/register'
     },
-    '/autenticacion/restablecer-contrasena': {
-      es: '/autenticacion/restablecer-contrasena',
-      en: '/auth/reset-password'
+
+
+    '/free-advice': {
+      es: '/asesoria-gratuita',
+      en: '/free-advice'
     },
 
 
-    '/equipo': { es: '/equipo', en: '/team' },
+    '/programs': {
+      es: '/programas',
+      en: '/programs'
+    }
   }
 });
 

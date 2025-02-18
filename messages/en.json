@@ -1,83 +1,65 @@
 {
   "Error": {
-    "description": "<p>We've unfortunately encountered an error.</p><p>You can try to <retry>reload the page</retry> you were visiting.</p>",
-    "title": "Something went wrong!"
+    "description": "",
+    "title": ""
   },
-  "IndexPage": {
-    "timeUntil": "We are working to bring you a better experience, please come back on: February 15, 2025",
-    "description": "Drowning in debt and don't know which path to take? Turn your distress into peace of mind, security, and your best GAIN.",
-    "title": "ATTLAS Center for Conciliation and Economic Insolvency"
-  },
-  "LocaleLayout": {
-    "title": "ATTLAS Center for Conciliation and Economic Insolvency"
+  "NotFoundPage": {
+    "description": "Please double-check the browser address bar or use the navigation to go to a known page.",
+    "title": "Page not found"
   },
   "LocaleSwitcher": {
-    "label": "Change language",
+    "label": "Language",
     "locale": "{locale, select, en {🇺🇸 English} es {🇪🇸 Español} other {Unknown}}"
   },
   "Manifest": {
     "name": "ATTLAS Center for Conciliation and Economic Insolvency"
   },
   "Navigation": {
-    "home": "Home",
-    "team": "Team"
-  },
-  "NotFoundPage": {
-    "description": "Please double-check the browser address bar or use the navigation to go to a known page.",
-    "title": "Page not found"
-  },
-  "PageLayout": {
-    "links": {
-      "docs": {
-        "description": "Learn more at https://propensionesabogados.com",
-        "href": "https://propensionesabogados.com",
-        "title": "Propensiones Abogados"
-      },
-      "source": {
-        "description": "Talk to a lawyer specialized in economic insolvency and conciliation",
-        "href": "https://api.whatsapp.com/send/?phone=573183280176&text=Hello%2C+I+would+like+to+learn+more+about+the+economic+insolvency+and+conciliation+processes&type=phone_number&app_absent=0",
-        "title": "Contact us"
+    "index": {
+      "menu": "Home"
+    },
+    "aboutUs": {
+      "menu": "About Us",
+      "subMenu": {
+        "getToKnowUs": "Get To Know Us",
+        "cultura": "Culture",
+        "faq": "Frequently Asked Questions",
+        "history": "History"
+      }
+    },
+    "contact": {
+      "menu": "Contact Us"
+    },
+    "auth": {
+      "menu": "Authentication",
+      "subMenu": {
+        "login": "Log In",
+        "register": "Register",
+        "forgotPassword": "Forgot Password"
+      }
+    },
+    "freeAdvice": {
+      "menu": "Free Advice"
+    },
+    "programs": {
+      "menu": "Programs",
+      "subMenu": {
+        "ourPrograms": "Our Programs",
+        "financialEducation": "Financial Education"
       }
     }
   },
-  "TeamPage": {
-    "description": "<p>The pathnames are internationalized too.</p><p>If you're using the default language English, you'll see <code>/es/pathnames_es</code> in the browser address bar on this page.</p><p>If you change the locale to German, the URL is localized accordingly (<code>/en/pathnames_en</code>).</p>",
-    "title": "Team"
-  },
-  "AuthPages": {
-    "AuthPage": {
-      "title": "Authentication"
-    },
-    "LoginPage": {
-      "title": "Login",
-      "description": "Please enter your credentials to log in.",
-      "email": "Email",
-      "password": "Password",
-      "submit": "Log in",
-      "forgotPassword": "Forgot your password?",
-      "register": "Don't have an account? Register here."
-    },
-    "RegisterPage": {
-      "title": "Register",
-      "description": "Please enter your information to register.",
-      "name": "Name",
-      "email": "Email",
-      "password": "Password",
-      "submit": "Register",
-      "login": "Already have an account? Log in here."
-    },
-    "ForgotPasswordPage": {
-      "title": "Forgot Password",
-      "description": "Please enter your email to reset your password.",
-      "email": "Email",
-      "submit": "Reset Password",
-      "login": "Remembered your password? Log in here."
-    },
-    "ResetPasswordPage": {
-      "title": "Reset Password",
-      "description": "Please enter your new password.",
-      "password": "Password",
-      "submit": "Reset Password"
+  "Pages": {
+    "homePage": {
+      "sections": {
+        "heroSection": {
+          "video_tag": "Your browser does not support the video tag.",
+          "title_h1": "Main Title",
+          "title_h2": "Focus on the Secondary Degree",
+          "description_p": "Brief description of what is offered or what the page is about. This can be a text of 2 to 3 lines.",
+          "whatsappButton": "Contact Us"
+        }
+      }
     }
   }
 }
