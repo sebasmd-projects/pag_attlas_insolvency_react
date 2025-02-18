@@ -42,7 +42,7 @@ export default function SolutionsSection() {
                     <div className="col-md-7">
                         <div className="mb-4">
                             <h3 className="text-uppercase mb-3" style={{
-                                color: '#7A68EE',
+                                color: '#0e3692',
                                 fontSize: '1rem',
                                 fontWeight: 800,
                                 letterSpacing: '0.15rem',
@@ -51,14 +51,14 @@ export default function SolutionsSection() {
                                 {t('title_h1')}
                             </h3>
                             <h2 className="display-5 fw-bold" style={{
-                                color: '#2F2F6D',
+                                color: '#7fd2cb',
                                 fontSize: '2rem',
                                 lineHeight: '2.25rem',
                                 marginBottom: '1.5rem'
                             }}>
                                 {t.rich('title_h2', {
                                     span: (chunks) => (
-                                        <span style={{ color: '#7A68EE' }}>
+                                        <span style={{ color: '#0e3692' }}>
                                             {chunks}
                                         </span>
                                     )
@@ -79,14 +79,14 @@ export default function SolutionsSection() {
                                         <h4 className="fw-bold" style={{
                                             fontSize: '1.125rem',
                                             fontWeight: 400,
-                                            color: '#2F2F6D'
+                                            color: '#7fd2cb'
                                         }}>
                                             {feature.title}
                                         </h4>
                                         <p className="text-muted" style={{
                                             fontSize: '1rem',
                                             lineHeight: '1.688rem',
-                                            color: '#2F2F6D'
+                                            color: '#7fd2cb'
                                         }}>
                                             {feature.description}
                                         </p>
@@ -98,7 +98,7 @@ export default function SolutionsSection() {
 
                     <div className="col-md-5 order-1 order-md-0" data-aos="fade-right" data-aos-delay="100">
                         <Image
-                            src="https://propensionesabogados.com/static/assets/imgs/services/justice.png"
+                            src="/assets/imgs/page/solutions-img.png"
                             alt="Financial solutions"
                             className="img-fluid rounded-5"
                             loading="lazy"

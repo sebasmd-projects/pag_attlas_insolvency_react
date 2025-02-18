@@ -43,7 +43,7 @@
 .step-number-inline {
   width: 40px;
   height: 40px;
-  background: #7A68EE;
+  background: #0e3692;
   color: white;
   border-radius: 50%;
   display: flex;
@@ -79,7 +79,7 @@
 .step-number {
   width: 60px;
   height: 60px;
-  background: #7A68EE;
+  background: #0e3692;
   color: white;
   border-radius: 50%;
   display: flex;
@@ -104,7 +104,7 @@
 .step-number-mobile {
   width: 40px;
   height: 40px;
-  background: #7A68EE;
+  background: #0e3692;
   color: white;
   border-radius: 50%;
   display: flex;
@@ -117,19 +117,19 @@
 /* Texto destacado */
 .step-text span {
   font-weight: 700;
-  color: #2F2F6D;
+  color: #7fd2cb;
 }
 
 @media (max-width: 768px) {
   .step-connector {
-      display: none;
+    display: none;
   }
-  
+
   .step-item {
-      margin-bottom: 2rem;
+    margin-bottom: 2rem;
   }
-  
+
   .number-steps-display {
-      display: none;
+    display: none;
   }
 }

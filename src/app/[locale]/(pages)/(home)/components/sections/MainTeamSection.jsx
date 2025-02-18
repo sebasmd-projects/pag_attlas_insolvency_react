@@ -10,7 +10,7 @@ export default function MainTeamSection() {
             <div className="text-center py-5">
                 <div className="mb-4 container-lg">
                     <h3 className="text-uppercase mb-3" style={{
-                        color: '#7A68EE',
+                        color: '#0e3692',
                         fontSize: '1rem',
                         fontWeight: 800,
                         letterSpacing: '0.15rem',
@@ -19,14 +19,14 @@ export default function MainTeamSection() {
                         {t('title_h1')}
                     </h3>
                     <h2 className="display-5 fw-bold" style={{
-                        color: '#2F2F6D',
+                        color: '#7fd2cb',
                         fontSize: '2rem',
                         lineHeight: '2.25rem',
                         marginBottom: '1.5rem'
                     }}>
                         {t.rich('title_h2', {
                             span: (chunks) => (
-                                <span style={{ color: '#7A68EE' }}>
+                                <span style={{ color: '#0e3692' }}>
                                     {chunks}
                                 </span>
                             )

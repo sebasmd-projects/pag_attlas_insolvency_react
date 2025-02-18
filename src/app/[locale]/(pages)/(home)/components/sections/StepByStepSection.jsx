@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { useTranslations } from 'next-intl';
+import Image from "next/image";
 
 
 export default function StepByStepSection() {
@@ -49,7 +49,7 @@ export default function StepByStepSection() {
                     <div className="col-md-7">
                         <div className="mb-4">
                             <h3 className="text-uppercase mb-3" style={{
-                                color: '#7A68EE',
+                                color: '#0e3692',
                                 fontSize: '1rem',
                                 fontWeight: 800,
                                 letterSpacing: '0.15rem',
@@ -59,14 +59,14 @@ export default function StepByStepSection() {
                             </h3>
 
                             <h2 className="display-5 fw-bold" style={{
-                                color: '#2F2F6D',
+                                color: '#7fd2cb',
                                 fontSize: '2rem',
                                 lineHeight: '2.25rem',
                                 marginBottom: '1.5rem'
                             }}>
                                 {t.rich('title_h2', {
                                     span: (chunks) => (
-                                        <span style={{ color: '#7A68EE' }}>
+                                        <span style={{ color: '#0e3692' }}>
                                             {chunks}
                                         </span>
                                     )
@@ -102,10 +102,9 @@ export default function StepByStepSection() {
                                         </div>
 
                                         <div className="col">
-                                            <p className="mb-0" style={{
+                                            <p className="mb-1" style={{
                                                 fontSize: '1rem',
-                                                lineHeight: '1.688rem',
-                                                color: '#2F2F6D'
+                                                lineHeight: '1.7rem',
                                             }}>
                                                 {step.text}
                                             </p>

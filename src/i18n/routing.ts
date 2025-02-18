@@ -49,9 +49,9 @@ export const routing = defineRouting({
     },
 
 
-    '/programs': {
-      es: '/programas',
-      en: '/programs'
+    '/services': {
+      es: '/servicios',
+      en: '/services'
     }
   }
 });

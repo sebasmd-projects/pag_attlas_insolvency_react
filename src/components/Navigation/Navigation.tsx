@@ -10,7 +10,6 @@ import Navbar from 'react-bootstrap/Navbar';
 import LocaleSwitcher from '../LocaleSwitcher/LocaleSwitcher';
 
 export default function Navigation() {
-
   const t = useTranslations('Navigation');
 
   return (
@@ -20,11 +19,11 @@ export default function Navigation() {
           <Image alt="LeyInsolvencia" className='img-fluid' height="40" src="/assets/imgs/page/logo h fundacion attlas.png" width="120" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse className="d-flex justify-content-between" id="basic-navbar-nav">
-          <Nav className="justify-content-center flex-grow-1" navbarScroll style={{ gap: "1.5rem" }} >
-            <NavDropdown id="programs-nav-dropdown" title={t('programs.menu')}>
-              <Link className="dropdown-item" data-rr-ui-dropdown-item href="#">{t('programs.subMenu.ourPrograms')}</Link>
-              <Link className="dropdown-item" data-rr-ui-dropdown-item href="#">{t('programs.subMenu.financialEducation')}</Link>
+        <Navbar.Collapse  className="justify-content-between" id="basic-navbar-nav">
+          <Nav className="justify-content-center flex-grow-1" navbarScroll style={{ gap: "1.5rem" }}>
+            <NavDropdown id="services-nav-dropdown" title={t('services.menu')}>
+              <Link className="dropdown-item" data-rr-ui-dropdown-item href="#">{t('services.subMenu.ourPrograms')}</Link>
+              <Link className="dropdown-item" data-rr-ui-dropdown-item href="#">{t('services.subMenu.financialEducation')}</Link>
             </NavDropdown>
 
             <NavDropdown id="about-us-nav-dropdown" title={t('aboutUs.menu')}>

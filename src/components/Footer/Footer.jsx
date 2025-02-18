@@ -40,8 +40,8 @@ const cellPhones = [
 
 export default function Footer() {
     return (
-        <footer className="pt-5" style={{ backgroundColor: '#444289' }}>
-            <div className="container-lg text-white">
+        <footer className="pt-5" style={{ backgroundColor: '#0e3692' }}>
+            <div className="container-lg" style={{ color: '#7fd2cb' }}>
                 <div className="row justify-content-between">
                     <div className="col-md-3">
                         <div className="mb-4">
@@ -105,12 +105,12 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className="text-center py-4 mt-4" style={{ borderTop: '1px solid #876DE0' }}>
+                <div className="text-center py-4 mt-4 text-white" style={{ borderTop: '1px solid #7fd2cb' }}>
                     <p className="mb-2" style={{ fontSize: '1rem', lineHeight: '1.5rem' }}>
                         © Copyright Propensiones Abogados & Fundación ATTLAS Todos los derechos reservados.
                     </p>
                     <p className="mb-0" style={{ fontSize: '1rem' }}>
-                        Diseñado por <a href="https://sebasmoralesd.com/" className="text-decoration-none">Sebastián Morales</a> &amp; <a href="https://www.linkedin.com/in/carlos-andres-morales-valencia-5873b2189/" className="text-decoration-none">Carlos Morales</a>
+                        Diseñado por <a href="https://sebasmoralesd.com/" className="text-decoration-none" style={{color: '#7fd2cb'}}>Sebastián Morales</a> &amp; <a href="https://www.linkedin.com/in/carlos-andres-morales-valencia-5873b2189/" className="text-decoration-none" style={{color: '#7fd2cb'}}>Carlos Morales</a>
                     </p>
                 </div>
             </div>

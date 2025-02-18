@@ -41,7 +41,7 @@
     "freeAdvice": {
       "menu": "Asesoría gratuita"
     },
-    "programs": {
+    "services": {
       "menu": "Programas",
       "subMenu": {
         "ourPrograms": "Nuestros Programas",
@@ -109,7 +109,7 @@
             }
           }
         },
-        "stepByStepSection" : {
+        "stepByStepSection": {
           "title_h1": "¿CÓMO LO LOGRAMOS?",
           "title_h2": "Un plan para <span>tus metas</span>",
           "features": {
