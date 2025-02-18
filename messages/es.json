@@ -119,6 +119,52 @@
             "feature4": "Te acompañamos y asesoramos de principio a fin."
           }
         }
+      },
+      "metaData": {
+        "title": "Solución Legal a tus Deudas - Reestructuración de Deudas | ATTLAS",
+        "description": "En ATTLAS te ayudamos a reestructurar tus deudas, suspender embargos y protegerte legalmente. Recibe asesoría gratuita y liquida tus deudas con los mayores descuentos. ¡Contáctanos por WhatsApp!",
+        "openGraph": {
+          "title": "ATTLAS - Solución Definitiva a Problemas de Deudas en Colombia",
+          "description": "Protección legal inmediata contra embargos y ejecuciones judiciales. Programa de reestructuración de deudas personalizado para colombianos.",
+          "images": [
+            {
+              "url": "/assets/imgs/favicon/favicon.png",
+              "alt": "Equipo ATTLAS ayudando a clientes"
+            }
+          ],
+          "url": "https://attlasconciliacion.propensionesabogados.com/",
+          "type": "website"
+        },
+        "twitter": {
+          "card": "summary_large_image",
+          "site": "@attlas_legal",
+          "title": "Solución Legal de Deudas | ATTLAS Colombia",
+          "description": "Protección inmediata contra embargos y reestructuración de deudas. ¡Recibe tu asesoría gratuita hoy mismo!",
+          "images": "/assets/imgs/favicon/favicon.png"
+        },
+        "canonical": "https://attlasconciliacion.propensionesabogados.com/",
+        "structuredData": {
+          "context": "https://schema.org",
+          "type": "ProfessionalService",
+          "name": "ATTLAS",
+          "telephone": "+57 XXX XXX XXXX",
+          "address": {
+            "type": "PostalAddress",
+            "streetAddress": "Calle XX # XX-XX",
+            "addressLocality": "Bogotá",
+            "addressRegion": "Cundinamarca",
+            "postalCode": "XXXXXX",
+            "addressCountry": "CO"
+          },
+          "serviceArea": {
+            "type": "AdministrativeArea",
+            "name": "Colombia"
+          },
+          "sameAs": [
+            "https://www.facebook.com/",
+            "https://www.linkedin.com/"
+          ]
+        }
       }
     }
   }

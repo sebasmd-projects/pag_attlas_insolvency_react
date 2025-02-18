@@ -1,6 +1,5 @@
 // app/layout.tsx
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { clsx } from 'clsx';
 import { Inter } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
@@ -22,7 +21,7 @@ export default async function BaseLayout({ children, locale }: Props) {
 
   return (
     <html lang={locale}>
-      <body className={clsx(inter.className, 'flex flex-col')}>
+      <body className={`${inter.className} flex flex-col`}>
         <QueryProvider>
           <ToastProvider>
             <NextIntlClientProvider messages={messages}>

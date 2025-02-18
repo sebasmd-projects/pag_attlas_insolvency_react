@@ -22,7 +22,7 @@
       "menu": "About Us",
       "subMenu": {
         "getToKnowUs": "Get To Know Us",
-        "cultura": "Culture",
+        "culture": "Culture",
         "faq": "Frequently Asked Questions",
         "history": "History"
       }
@@ -54,10 +54,116 @@
       "sections": {
         "heroSection": {
           "video_tag": "Your browser does not support the video tag.",
-          "title_h1": "Main Title",
-          "title_h2": "Focus on the Secondary Degree",
-          "description_p": "Brief description of what is offered or what the page is about. This can be a text of 2 to 3 lines.",
+          "title_h1": "Legal Solution for Your Debts | ATTLAS",
+          "title_h2": "Debt Restructuring",
+          "description_p": "Benefits of Economic Insolvency, Suspension of Seizures, Immediate Protection Against Legal Proceedings.",
           "whatsappButton": "Contact Us"
+        },
+        "solutionsSection": {
+          "title_h1": "SOLUTIONS AND BENEFITS DESIGNED FOR YOU",
+          "title_h2": "Let's Change Your Finances <span>Together</span>",
+          "features": {
+            "feature1": {
+              "title": "Free Consultation",
+              "description": "Sign up and receive your first financial consultation at no cost."
+            },
+            "feature2": {
+              "title": "Debt Clearance Certificate",
+              "description": "We guide you until you receive your debt clearance certificate."
+            },
+            "feature3": {
+              "title": "Discount on Overdue Debts",
+              "description": "Settle your overdue debts with the highest discount."
+            },
+            "feature4": {
+              "title": "Fixed Installment",
+              "description": "Monthly payments tailored to your financial capacity."
+            }
+          }
+        },
+        "mainTeamSection": {
+          "title_h1": "EXPERIENCE AND HUMAN QUALITY",
+          "title_h2": "Our <span>Team</span>"
+        },
+        "whyUsSection": {
+          "title_h1": "OUR EXPERIENCE",
+          "title_h2": "Why <span>ATTLAS?</span>",
+          "description_p": "We want you to regain control of your life by helping you solve financial problems related to debt and regain access to credit.",
+          "footer_p": "JOIN THE FINANCIAL REVOLUTION WITH ATTLAS!",
+          "features": {
+            "feature1": {
+              "title": "+1000",
+              "description": "Debts Settled"
+            },
+            "feature2": {
+              "title": "+10 Years",
+              "description": "Of Experience"
+            },
+            "feature3": {
+              "title": "100%",
+              "description": "In Colombia for Colombians"
+            },
+            "feature4": {
+              "title": "+2000",
+              "description": "Satisfied Clients"
+            }
+          }
+        },
+        "stepByStepSection": {
+          "title_h1": "HOW DO WE ACHIEVE IT?",
+          "title_h2": "A Plan for <span>Your Goals</span>",
+          "features": {
+            "feature1": "We conduct a diagnosis of your financial profile to understand your situation.",
+            "feature2": "We negotiate the highest discount on each of your overdue debts.",
+            "feature3": "Get more benefits with good payment behavior in your settlement plan.",
+            "feature4": "We support and guide you from start to finish."
+          }
+        }
+      },
+      "metaData": {
+        "title": "Legal Solution for Your Debts - Debt Restructuring | ATTLAS",
+        "description": "At ATTLAS, we help you restructure your debts, suspend foreclosures, and protect yourself legally. Get free advice and settle your debts with the highest discounts. Contact us via WhatsApp!",
+        "openGraph": {
+          "title": "ATTLAS - Ultimate Solution to Debt Problems in Colombia",
+          "description": "Immediate legal protection against foreclosures and judicial executions. Personalized debt restructuring program for Colombians.",
+          "images": [
+            {
+              "url": "/assets/imgs/favicon/favicon.png",
+              "alt": "ATTLAS team helping clients"
+            }
+          ],
+          "url": "https://attlasconciliacion.propensionesabogados.com/",
+          "type": "website"
+        },
+        "twitter": {
+          "card": "summary_large_image",
+          "site": "@attlas_legal",
+          "title": "Legal Debt Solution | ATTLAS Colombia",
+          "description": "Immediate protection against foreclosures and debt restructuring. Get your free consultation today!",
+          "images": "/assets/imgs/favicon/favicon.png"
+        },
+        "canonical": "https://attlasconciliacion.propensionesabogados.com/",
+        "structuredData": {
+          "context": "https://schema.org",
+          "type": "ProfessionalService",
+          "name": "ATTLAS",
+          "telephone": "+57 XXX XXX XXXX",
+          "address": {
+            "type": "PostalAddress",
+            "streetAddress": "Calle XX # XX-XX",
+            "addressLocality": "Bogotá",
+            "addressRegion": "Cundinamarca",
+            "postalCode": "XXXXXX",
+            "addressCountry": "CO"
+          },
+          "serviceArea": {
+            "type": "AdministrativeArea",
+            "name": "Colombia"
+          },
+          "sameAs": [
+            "https://www.facebook.com/",
+            "https://www.linkedin.com/"
+          ]
         }
       }
     }
