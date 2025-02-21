@@ -1,8 +1,11 @@
+import ServicesHeroSection from './components/sections/HeroSection';
+import RequirementsSection from './components/sections/RequirementsSection';
 
 export default function ServicesPage() {
     return (
-        <div>
-            <h1>ServicesPage</h1>
-        </div>
+        <>
+            <ServicesHeroSection />
+            <RequirementsSection />
+        </>
     );
 }

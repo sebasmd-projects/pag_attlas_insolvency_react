@@ -15,9 +15,20 @@ export default function WhyUsSection() {
         { value: tf('feature4.title'), icon: <FaPeopleGroup />, label: tf('feature4.description') }
     ];
     return (
-        <section style={{ position: 'relative', overflow: 'hidden' }}>
+        <section>
             <div className="container-lg py-5">
                 <div className="row g-4 align-items-center">
+                    <div className="col-md-6" data-aos="fade-right" data-aos-delay="200">
+                        <Image
+                            src="/assets/imgs/page/whyUs.png"
+                            alt="Experience"
+                            className="img-fluid"
+                            loading="lazy"
+                            width={684}
+                            height={827}
+                        />
+                    </div>
+
                     <div className="col-md-6" >
                         <div className="mb-4">
                             <h3 className="text-uppercase mb-3" style={{
@@ -84,20 +95,6 @@ export default function WhyUsSection() {
                             }}>
                                 {t('footer_p')}
                             </p>
-                        </div>
-
-                    </div>
-
-                    <div className="col-md-6" data-aos="fade-right" data-aos-delay="200">
-                        <div>
-                            <Image
-                                src="/assets/imgs/page/whyUs.png"
-                                alt="Experience"
-                                className="img-fluid"
-                                loading="lazy"
-                                width={684}
-                                height={827}
-                            />
                         </div>
                     </div>
                 </div>

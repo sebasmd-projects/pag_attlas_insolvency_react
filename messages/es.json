@@ -42,12 +42,26 @@
       "menu": "Asesoría gratuita"
     },
     "services": {
-      "menu": "Programas",
+      "menu": "Servicios",
       "subMenu": {
-        "ourPrograms": "Nuestros Programas",
+        "ourServices": "Nuestros Servicios",
         "financialEducation": "Educación Financiera"
       }
     }
+  },
+  "Footer": {
+    "legalLinks": {
+      "t&c": "Términos y condiciones",
+      "cookiesPolicy": "Políticas de Cookies",
+      "privacyPolicy": "Aviso de Privacidad",
+      "processingOfPersonalData": "Tratamiento de datos personales",
+      "policiesForTheTreatmentOfInformation": "Políticas para el tratamiento de la información",
+      "complaintsAndClaims": "Reclamos, quejas y sugerencias"
+    },
+    "socialLinksTitle": "Nuestras redes sociales:",
+    "faqTitle": "Preguntas frecuentes",
+    "copyText": "Copyright Propensiones Abogados & Fundación ATTLAS Todos los derechos reservados.",
+    "designText": "Diseñado por <link1>Sebastián Morales</link1> & <link2>Carlos Morales</link2>"
   },
   "Pages": {
     "homePage": {
@@ -166,6 +180,69 @@
           ]
         }
       }
+    },
+    "servicesPage": {
+      "sections": {
+        "heroSection": {
+          "title_h1": "Nuestros Servicios",
+          "title_h2": "Tus <span>soluciones</span>",
+          "description_p": "Brindamos asesoría y representación legal para personas en dificultades financieras, ayudándoles a suspender embargos, negociar acuerdos de pago y reestructurar sus deudas bajo la Ley de Insolvencia.",
+          "features": {
+            "feature1": {
+              "title": "Suspensión de Embargos",
+              "description": "Detenemos procesos de embargo y remate de bienes durante negociaciones"
+            },
+            "feature2": {
+              "title": "Reestructuración de Deudas",
+              "description": "Renegociamos condiciones de pago con entidades financieras"
+            },
+            "feature3": {
+              "title": "Conciliación con Acreedores",
+              "description": "Representación profesional para acuerdos favorables"
+            },
+            "feature4": {
+              "title": "Protección Patrimonial",
+              "description": "Estrategias legales para conservar tus bienes esenciales"
+            },
+            "feature5": {
+              "title": "Extinción de Deudas",
+              "description": "Gestión legal para eliminación de saldos impagables"
+            },
+            "feature6": {
+              "title": "Suspensión de Intereses",
+              "description": "Detenemos crecimiento desmedido de deudas"
+            },
+            "feature7": {
+              "title": "Defensa Legal Especializada",
+              "description": "Representación en procesos judiciales y administrativos"
+            }
+          }
+        },
+        "requirementsSection": {
+          "title_h1": "REQUISITOS PARA ACCEDER A NUESTROS SERVICIOS",
+          "title_h2": "Qué <span>necesito?</span>",
+          "description_p": "Nuestra ley de insolvencia económica ofrece múltiples beneficios y garantías para personas y empresas con dificultades financieras.",
+          "features": {
+            "feature1": {
+              "title": "¿A quiénes aplica?",
+              "description": "• Pensionados con descuentos excesivos\n• Trabajadores con libranzas\n• Padres con hipotecas\n• Microempresarios afectados\n• Desempleados sin recursos"
+            },
+            "feature2": {
+              "title": "Garantías Principales",
+              "description": "• Protección de vivienda única\n• Suspensión de embargos\n• Renegociación de condiciones\n• Protección de subsistencia básica"
+            },
+            "feature3": {
+              "title": "Beneficios Clave",
+              "description": "• Congelación de intereses\n• Reducción de cuotas\n• Plazos extendidos\n• Evitar costos judiciales\n• Suspensión de remates"
+            },
+            "feature4": {
+              "title": "Deudas Cubiertas",
+              "description": "• Créditos de libre inversión\n• Hipotecas\n• Libranzas\n• Tarjetas de crédito\n• Deudas con entidades financieras"
+            }
+          }
+        }
+      },
+      "metaData": {}
     }
   }
 }

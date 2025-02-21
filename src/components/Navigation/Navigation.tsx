@@ -15,14 +15,14 @@ export default function Navigation() {
   return (
     <Navbar className="bg-body-tertiary" expand="lg" sticky="top">
       <Container>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand href="/">
           <Image alt="LeyInsolvencia" className='img-fluid' height="40" src="/assets/imgs/page/logo h fundacion attlas.png" width="120" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse  className="justify-content-between" id="basic-navbar-nav">
+        <Navbar.Collapse className="justify-content-between" id="basic-navbar-nav">
           <Nav className="justify-content-center flex-grow-1" navbarScroll style={{ gap: "1.5rem" }}>
             <NavDropdown id="services-nav-dropdown" title={t('services.menu')}>
-              <Link className="dropdown-item" data-rr-ui-dropdown-item href="#">{t('services.subMenu.ourPrograms')}</Link>
+              <Link className="dropdown-item" data-rr-ui-dropdown-item href="/services">{t('services.subMenu.ourServices')}</Link>
               <Link className="dropdown-item" data-rr-ui-dropdown-item href="#">{t('services.subMenu.financialEducation')}</Link>
             </NavDropdown>
 

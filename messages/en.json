@@ -42,12 +42,26 @@
       "menu": "Free Advice"
     },
     "services": {
-      "menu": "Programs",
+      "menu": "Services",
       "subMenu": {
-        "ourPrograms": "Our Programs",
+        "ourServices": "Our Services",
         "financialEducation": "Financial Education"
       }
     }
+  },
+  "Footer": {
+    "legalLinks": {
+      "t&c": "Terms and Conditions",
+      "cookiesPolicy": "Cookies Policy",
+      "privacyPolicy": "Privacy Notice",
+      "processingOfPersonalData": "Processing of Personal Data",
+      "policiesForTheTreatmentOfInformation": "Policies for the Treatment of Information",
+      "complaintsAndClaims": "Complaints, Claims, and Suggestions"
+    },
+    "socialLinksTitle": "Our Social Networks:",
+    "faqTitle": "Frequently Asked Questions",
+    "copyText": "Copyright Propensiones Abogados & Fundación ATTLAS. All rights reserved.",
+    "designText": "Designed by <link1>Sebastián Morales</link1> & <link2>Carlos Morales</link2>"
   },
   "Pages": {
     "homePage": {

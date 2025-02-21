@@ -73,10 +73,10 @@ export default function SolutionsSection() {
                                         backgroundColor: '#F2EFFF',
                                         height: '200px'
                                     }}>
-                                        <div className="align-self-start">
+                                        <div className="align-self-center">
                                             {feature.icon}
                                         </div>
-                                        <h4 className="fw-bold" style={{
+                                        <h4 className="fw-bold align-self-center" style={{
                                             fontSize: '1.125rem',
                                             fontWeight: 400,
                                             color: '#7fd2cb'
@@ -86,7 +86,6 @@ export default function SolutionsSection() {
                                         <p className="text-muted" style={{
                                             fontSize: '1rem',
                                             lineHeight: '1.688rem',
-                                            color: '#7fd2cb'
                                         }}>
                                             {feature.description}
                                         </p>

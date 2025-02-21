@@ -1,5 +1,6 @@
+import { useTranslations } from 'next-intl';
 import { FaFacebookF, FaInstagram, FaPhone, FaXTwitter, FaYoutube } from "react-icons/fa6";
-
+import Link from 'next/link';
 
 const socialLinks = [
     {
@@ -24,21 +25,25 @@ const socialLinks = [
     }
 ];
 
-const legalLinks = [
-    { text: 'Términos y condiciones', url: '/' },
-    { text: 'Políticas de Cookies', url: '/' },
-    { text: 'Aviso de Privacidad', url: '/' },
-    { text: 'Tratamiento de datos personales', url: '/' },
-    { text: 'Políticas para el tratamiento de la información', url: '/' },
-    { text: 'Formulario de Reclamos y Consultas', url: '/' }
-];
-
 const cellPhones = [
-    { number: '+573244750710' },
-    { number: '+573156399722' }
+    { number: '+57 318 328 01 76' },
+    { number: '+57 315 639 97 22' },
+    { number: '+57 324 475 07 10' },
 ]
 
 export default function Footer() {
+
+    const t = useTranslations('Footer');
+
+    const legalLinks = [
+        { text: t('legalLinks.t&c'), url: '/' },
+        { text: t('legalLinks.cookiesPolicy'), url: '/' },
+        { text: t('legalLinks.privacyPolicy'), url: '/' },
+        { text: t('legalLinks.processingOfPersonalData'), url: '/' },
+        { text: t('legalLinks.policiesForTheTreatmentOfInformation'), url: '/' },
+        { text: t('legalLinks.complaintsAndClaims'), url: '/' }
+    ];
+
     return (
         <footer className="pt-5" style={{ backgroundColor: '#0e3692' }}>
             <div className="container-lg" style={{ color: '#7fd2cb' }}>
@@ -46,13 +51,13 @@ export default function Footer() {
                     <div className="col-md-3">
                         <div className="mb-4">
                             <h5 className="mb-3" style={{ fontSize: '1.125rem', fontWeight: 800 }}>
-                                Nuestras redes sociales:
+                                {t('socialLinksTitle')}
                             </h5>
                             <div className="d-flex gap-3" style={{ fontSize: '1.5rem' }}>
                                 {socialLinks.map((social, index) => (
-                                    <a key={index} href={social.url} target="_blank" rel="noopener noreferrer" style={{ color: 'white' }}>
+                                    <Link key={index} href={social.url} target="_blank" rel="noopener noreferrer" style={{ color: 'white' }}>
                                         {social.icon}
-                                    </a>
+                                    </Link>
                                 ))}
                             </div>
                         </div>
@@ -62,9 +67,9 @@ export default function Footer() {
                                 {cellPhones.map((cellPhone, index) => (
                                     <li key={index} className="d-flex align-items-center gap-2">
                                         <FaPhone className="text-white" />
-                                        <a href={`tel:${cellPhone.number}`} className="text-white text-decoration-none">
+                                        <Link href={`tel:${cellPhone.number}`} className="text-white text-decoration-none">
                                             {cellPhone.number}
-                                        </a>
+                                        </Link>
                                     </li>
                                 ))}
                             </ul>
@@ -76,13 +81,13 @@ export default function Footer() {
                     <div className="col-md-2">
                         <h5 className="mb-3" style={{ fontSize: '1.125rem', fontWeight: 800 }}>FAQS</h5>
                         <div>
-                            <a
+                            <Link
                                 href="/"
                                 className="d-block text-white text-decoration-none mb-2"
                                 style={{ fontSize: '1rem' }}
                             >
-                                Preguntas frecuentes
-                            </a>
+                                {t('faqTitle')}
+                            </Link>
                         </div>
                     </div>
 
@@ -90,7 +95,7 @@ export default function Footer() {
                         <h5 className="mb-3" style={{ fontSize: '1.125rem', fontWeight: 800 }}>LEGAL</h5>
                         <div className="d-flex flex-column gap-2">
                             {legalLinks.map((link, index) => (
-                                <a
+                                <Link
                                     key={index}
                                     href={link.url}
                                     target="_blank"
@@ -99,7 +104,7 @@ export default function Footer() {
                                     style={{ fontSize: '1rem' }}
                                 >
                                     {link.text}
-                                </a>
+                                </Link>
                             ))}
                         </div>
                     </div>
@@ -107,10 +112,29 @@ export default function Footer() {
 
                 <div className="text-center py-4 mt-4 text-white" style={{ borderTop: '1px solid #7fd2cb' }}>
                     <p className="mb-2" style={{ fontSize: '1rem', lineHeight: '1.5rem' }}>
-                        © Copyright Propensiones Abogados & Fundación ATTLAS Todos los derechos reservados.
+                        {new Date().getFullYear()} © {t('copyText')}
                     </p>
                     <p className="mb-0" style={{ fontSize: '1rem' }}>
-                        Diseñado por <a href="https://sebasmoralesd.com/" className="text-decoration-none" style={{color: '#7fd2cb'}}>Sebastián Morales</a> &amp; <a href="https://www.linkedin.com/in/carlos-andres-morales-valencia-5873b2189/" className="text-decoration-none" style={{color: '#7fd2cb'}}>Carlos Morales</a>
+                        {t.rich('designText', {
+                            link1: (chunks) => (
+                                <Link
+                                    href="https://sebasmoralesd.com/"
+                                    className="text-decoration-none color-primary"
+                                    style={{ color: '#7fd2cb' }}
+                                >
+                                    {chunks}
+                                </Link>
+                            ),
+                            link2: (chunks) => (
+                                <Link
+                                    href="https://www.linkedin.com/in/carlos-andres-morales-valencia-5873b2189/"
+                                    className="text-decoration-none color-primary"
+                                    style={{ color: '#7fd2cb' }}
+                                >
+                                    {chunks}
+                                </Link>
+                            )
+                        })}
                     </p>
                 </div>
             </div>
