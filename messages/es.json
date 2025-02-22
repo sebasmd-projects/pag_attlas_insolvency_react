@@ -242,7 +242,18 @@
           }
         }
       },
+      "financialEducation": {
+        "title_h1": "Educación Financiera",
+        "title_h2": "Aprende a administrar tus <span>finanzas</span>",
+        "search_placeholder": "Buscar en Educación Financiera",
+        "all_category": "todas"
+      },
       "metaData": {}
+    },
+    "documents": {
+      "legal": {
+        "termsAndConditions": "/assets/documents/legal/terms-and-conditions.pdf"
+      }
     }
   }
 }

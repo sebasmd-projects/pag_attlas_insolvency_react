@@ -52,7 +52,34 @@ export const routing = defineRouting({
     '/services': {
       es: '/servicios',
       en: '/services'
-    }
+    },
+
+
+    '/documents/legal/complaints-and-queries': {
+      es: '/documentos/legales/reclamaciones-y-consultas',
+      en: '/documents/legal/complaints-and-queries'
+    },
+    '/documents/legal/cookies': {
+      es: '/documentos/legales/cookies',
+      en: '/documents/legal/cookies'
+    },
+    '/documents/legal/policies-for-the-treatment-of-information': {
+      es: '/documentos/legales/politicas-para-el-tratamiento-de-la-informacion',
+      en: '/documents/legal/policies-for-the-treatment-of-information'
+    },
+    '/documents/legal/privacy-notice': {
+      es: '/documentos/legales/aviso-de-privacidad',
+      en: '/documents/legal/privacy-notice'
+    },
+    '/documents/legal/processing-of-personal-data': {
+      es: '/documentos/legales/tratamiento-de-datos-personales',
+      en: '/documents/legal/processing-of-personal-data'
+    },
+    '/documents/legal/terms-and-conditions': {
+      es: '/documentos/legales/terminos-y-condiciones',
+      en: '/documents/legal/terms-and-conditions'
+    },
+
   }
 });
 

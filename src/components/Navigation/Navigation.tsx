@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
+import { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -11,35 +12,57 @@ import LocaleSwitcher from '../LocaleSwitcher/LocaleSwitcher';
 
 export default function Navigation() {
   const t = useTranslations('Navigation');
+  const [expanded, setExpanded] = useState(false);
 
   return (
-    <Navbar className="bg-body-tertiary" expand="lg" sticky="top">
+    <Navbar className="bg-body-tertiary" expand="lg" expanded={expanded} sticky="top">
       <Container>
-        <Navbar.Brand href="/">
-          <Image alt="LeyInsolvencia" className='img-fluid' height="40" src="/assets/imgs/page/logo h fundacion attlas.png" width="120" />
+        <Navbar.Brand as={Link} href="/">
+          <Image
+            alt="LeyInsolvencia"
+            className="img-fluid"
+            height="40"
+            src="/assets/imgs/page/logo h fundacion attlas.png"
+            width="120"
+          />
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setExpanded(!expanded)} />
         <Navbar.Collapse className="justify-content-between" id="basic-navbar-nav">
           <Nav className="justify-content-center flex-grow-1" navbarScroll style={{ gap: "1.5rem" }}>
             <NavDropdown id="services-nav-dropdown" title={t('services.menu')}>
-              <Link className="dropdown-item" data-rr-ui-dropdown-item href="/services">{t('services.subMenu.ourServices')}</Link>
-              <Link className="dropdown-item" data-rr-ui-dropdown-item href="#">{t('services.subMenu.financialEducation')}</Link>
+              <NavDropdown.Item as={Link} href="/services" onClick={() => setExpanded(false)}>
+                {t('services.subMenu.ourServices')}
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} href="#" onClick={() => setExpanded(false)}>
+                {t('services.subMenu.financialEducation')}
+              </NavDropdown.Item>
             </NavDropdown>
 
             <NavDropdown id="about-us-nav-dropdown" title={t('aboutUs.menu')}>
-              <Link className="dropdown-item" data-rr-ui-dropdown-item href="#">{t('aboutUs.subMenu.getToKnowUs')}</Link>
-              <Link className="dropdown-item" data-rr-ui-dropdown-item href="#">{t('aboutUs.subMenu.culture')}</Link>
-              <Link className="dropdown-item" data-rr-ui-dropdown-item href="#">{t('aboutUs.subMenu.history')}</Link>
+              <NavDropdown.Item as={Link} href="#" onClick={() => setExpanded(false)}>
+                {t('aboutUs.subMenu.getToKnowUs')}
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} href="#" onClick={() => setExpanded(false)}>
+                {t('aboutUs.subMenu.culture')}
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} href="#" onClick={() => setExpanded(false)}>
+                {t('aboutUs.subMenu.history')}
+              </NavDropdown.Item>
               <NavDropdown.Divider />
-              <Link className="dropdown-item" data-rr-ui-dropdown-item href="#">{t('aboutUs.subMenu.faq')}</Link>
+              <NavDropdown.Item as={Link} href="#" onClick={() => setExpanded(false)}>
+                {t('aboutUs.subMenu.faq')}
+              </NavDropdown.Item>
             </NavDropdown>
 
-            <Nav.Link href="#">{t('contact.menu')}</Nav.Link>
+            <Nav.Link as={Link} href="#" onClick={() => setExpanded(false)}>
+              {t('contact.menu')}
+            </Nav.Link>
 
             <div className="d-flex gap-3 align-items-center">
               <Link
                 className="btn btn-primary-gradient rounded-pill px-4"
                 href="#"
+                onClick={() => setExpanded(false)}
                 onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
                 onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
                 style={{

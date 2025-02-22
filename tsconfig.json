@@ -39,7 +39,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-, "src/components/LocaleSwitcher/LocaleSwitcher.jsx", "src/providers/AOSProvider.jsx", "src/app/[locale]/(pages)/(home)/page.jsx"  ],
+, "src/components/LocaleSwitcher/LocaleSwitcher.jsx", "src/providers/AOSProvider.jsx", "src/app/[locale]/(pages)/(home)/page.jsx", "src/app/[locale]/(pages)/services/financial-education/page.jsx"  ],
   "exclude": [
     "node_modules"
   ]

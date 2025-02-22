@@ -115,7 +115,7 @@ export default function ServicesHeroSection() {
                                 letterSpacing: '0.15rem',
                                 paddingBottom: '2rem'
                             }}>
-                                Nuestros Servicios
+                                {t('title_h1')}
                             </h3>
                             <h2 className="display-5 fw-bold" style={{
                                 color: '#7fd2cb',
@@ -123,10 +123,16 @@ export default function ServicesHeroSection() {
                                 lineHeight: '2.25rem',
                                 marginBottom: '1.5rem'
                             }}>
-                                Tus <span style={{ color: '#0e3692' }}>soluciones</span>
+                                {t.rich('title_h2', {
+                                    span: (chunks) => (
+                                        <span style={{ color: '#0e3692' }}>
+                                            {chunks}
+                                        </span>
+                                    )
+                                })}
                             </h2>
                             <p className="text-muted mb-4" style={{ fontSize: '1rem', lineHeight: '1.688rem' }}>
-                                Brindamos asesoría y representación legal para personas en dificultades financieras, ayudándoles a suspender embargos, negociar acuerdos de pago y reestructurar sus deudas bajo la Ley de Insolvencia.
+                                {t('description_p')}
                             </p>
                         </div>
 

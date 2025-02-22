@@ -1,0 +1,38 @@
+{
+    "sections": [
+        {
+            "id": 1,
+            "title": "Diferencias entre pensión y jubilación",
+            "videoUrl": "https://www.youtube.com/embed/Acq9UEA2akU?si=FUzj6_btVZeoapZq",
+            "category": [
+                "es"
+            ],
+            "description": "<p>Esta es una <strong>descripción en español</strong> para el video sobre pensiones.</p>"
+        },
+        {
+            "id": 2,
+            "title_en": "Retirement Planning",
+            "videoUrl": "https://www.youtube.com/embed/Acq9UEA2akU?si=FUzj6_btVZeoapZq",
+            "category_en": [
+                "en"
+            ],
+            "description_en": "<p>This is an <em>English description</em> for the retirement planning video.</p>"
+        },
+        {
+            "id": 3,
+            "title": "Cómo solicitar crédito",
+            "title_en": "How to apply for credit",
+            "videoUrl": "https://www.youtube.com/embed/Acq9UEA2akU?si=FUzj6_btVZeoapZq",
+            "category": [
+                "es",
+                "en"
+            ],
+            "category_en": [
+                "es",
+                "en"
+            ],
+            "description": "<p>Guía para solicitar crédito en español.</p>",
+            "description_en": "<p>Guide on how to apply for credit in English.</p>"
+        }
+    ]
+}

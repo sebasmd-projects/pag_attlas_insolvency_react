@@ -180,6 +180,80 @@
           ]
         }
       }
+    },
+    "servicesPage": {
+      "sections": {
+        "heroSection": {
+          "title_h1": "Our Services",
+          "title_h2": "Your <span>Solutions</span>",
+          "description_p": "We provide legal advice and representation for individuals facing financial difficulties, helping them suspend foreclosures, negotiate payment agreements, and restructure their debts under the Insolvency Law.",
+          "features": {
+            "feature1": {
+              "title": "Foreclosure Suspension",
+              "description": "We stop foreclosure and asset auction processes during negotiations"
+            },
+            "feature2": {
+              "title": "Debt Restructuring",
+              "description": "We renegotiate payment terms with financial institutions"
+            },
+            "feature3": {
+              "title": "Creditor Negotiation",
+              "description": "Professional representation for favorable agreements"
+            },
+            "feature4": {
+              "title": "Asset Protection",
+              "description": "Legal strategies to preserve your essential assets"
+            },
+            "feature5": {
+              "title": "Debt Cancellation",
+              "description": "Legal management to eliminate unpayable balances"
+            },
+            "feature6": {
+              "title": "Interest Suspension",
+              "description": "We stop the excessive growth of debts"
+            },
+            "feature7": {
+              "title": "Specialized Legal Defense",
+              "description": "Representation in judicial and administrative proceedings"
+            }
+          }
+        },
+        "requirementsSection": {
+          "title_h1": "REQUIREMENTS TO ACCESS OUR SERVICES",
+          "title_h2": "What do I <span>need?</span>",
+          "description_p": "Our economic insolvency law offers multiple benefits and guarantees for individuals and businesses facing financial difficulties.",
+          "features": {
+            "feature1": {
+              "title": "Who does it apply to?",
+              "description": "• Pensioners with excessive deductions\n• Employees with payroll loans\n• Parents with mortgages\n• Affected small business owners\n• Unemployed individuals without resources"
+            },
+            "feature2": {
+              "title": "Main Guarantees",
+              "description": "• Protection of primary residence\n• Foreclosure suspension\n• Renegotiation of conditions\n• Basic subsistence protection"
+            },
+            "feature3": {
+              "title": "Key Benefits",
+              "description": "• Interest freeze\n• Reduced installments\n• Extended terms\n• Avoid judicial costs\n• Auction suspension"
+            },
+            "feature4": {
+              "title": "Covered Debts",
+              "description": "• Personal loans\n• Mortgages\n• Payroll loans\n• Credit cards\n• Debts with financial institutions"
+            }
+          }
+        }
+      },
+      "financialEducation": {
+        "title_h1": "Financial Education",
+        "title_h2": "Learn to manage your <span>finances</span>",
+        "search_placeholder": "Search in Financial Education",
+        "all_category": "all"
+      },
+      "metaData": {}
+    },
+    "documents": {
+      "legal": {
+        "termsAndConditions": "/assets/documents/legal/terms-and-conditions_en.pdf"
+      }
     }
   }
 }

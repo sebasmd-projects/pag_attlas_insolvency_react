@@ -1,8 +1,12 @@
+import { useTranslations } from 'next-intl';
 
 export default function ProcessingOfPersonalDataPage() {
+
+    const t = useTranslations('Pages.documents.legal');
+
     return (
-        <div>
-            <h1>Tratamiento de datos personales</h1>
+        <div className="container">
+            <embed src={t('termsAndConditions')} type="application/pdf" className="vh-100 d-inline-block w-100" />
         </div>
     );
 }
