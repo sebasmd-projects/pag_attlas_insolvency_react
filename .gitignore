@@ -3,6 +3,9 @@
 next.zip
 .zip
 
+public/api/*
+financial-education.json
+
 # dependencies
 /node_modules
 /.pnp

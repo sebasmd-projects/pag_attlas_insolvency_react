@@ -62,7 +62,7 @@ export default function ServicesHeroSection() {
                             <div className="col-lg-6 col-md-6 col-6">
                                 <div className="row">
                                     <div className="col-lg-12 col-md-12 mt-4 pt-2">
-                                        <div className="card work-desk rounded border-0 shadow-lg overflow-hidden">
+                                        <div className="card work-desk rounded border-0 shadow-lg overflow-hidden" data-aos="fade-right" data-aos-delay="100">
                                             <Image
                                                 src="/assets/imgs/page/241x362.png" className="img-fluid"
                                                 alt="Image"
@@ -78,7 +78,7 @@ export default function ServicesHeroSection() {
                             <div className="col-lg-6 col-md-6 col-6">
                                 <div className="row">
                                     <div className="col-lg-12 col-md-12">
-                                        <div className="card work-desk rounded border-0 shadow-lg overflow-hidden">
+                                        <div className="card work-desk rounded border-0 shadow-lg overflow-hidden" data-aos="fade-down" data-aos-delay="100">
                                             <Image
                                                 src="/assets/imgs/page/337x450.png" className="img-fluid"
                                                 alt="Image"
@@ -90,7 +90,7 @@ export default function ServicesHeroSection() {
                                     </div>
 
                                     <div className="col-lg-12 col-md-12 mt-4 pt-2">
-                                        <div className="card work-desk rounded border-0 shadow-lg overflow-hidden">
+                                        <div className="card work-desk rounded border-0 shadow-lg overflow-hidden" data-aos="fade-up" data-aos-delay="100">
                                             <Image
                                                 src="/assets/imgs/page/600x400.png" className="img-fluid"
                                                 alt="Image"
@@ -107,7 +107,7 @@ export default function ServicesHeroSection() {
 
                     {/* Sección de Contenido */}
                     <div className="col-lg-6 order-lg-2 order-1">
-                        <div className="mb-4">
+                        <div className="mb-4" data-aos="fade-left" data-aos-delay="100">
                             <h3 className="text-uppercase mb-3" style={{
                                 color: '#0e3692',
                                 fontSize: '1rem',
@@ -122,7 +122,7 @@ export default function ServicesHeroSection() {
                                 fontSize: '2rem',
                                 lineHeight: '2.25rem',
                                 marginBottom: '1.5rem'
-                            }}>
+                            }} >
                                 {t.rich('title_h2', {
                                     span: (chunks) => (
                                         <span style={{ color: '#0e3692' }}>
@@ -139,7 +139,7 @@ export default function ServicesHeroSection() {
                         {/* Características Principales */}
                         <div className="row g-4">
                             {mainFeatures.map((feature, index) => (
-                                <div key={index} className="col-md-6">
+                                <div key={index} className="col-md-6" data-aos="zoom-in" data-aos-delay="100">
                                     <div className="d-flex flex-column gap-2 p-3 rounded-5" style={{
                                         backgroundColor: '#F2EFFF',
                                         minHeight: '200px'
@@ -170,7 +170,7 @@ export default function ServicesHeroSection() {
                 {/* Características Adicionales */}
                 <div className="row g-4 mt-4">
                     {additionalFeatures.map((feature, index) => (
-                        <div key={index} className="col-md-4">
+                        <div key={index} className="col-md-4" data-aos="zoom-in-up" data-aos-delay="100">
                             <div className="d-flex flex-column gap-2 p-3 rounded-5" style={{
                                 backgroundColor: '#F2EFFF',
                                 minHeight: '200px'

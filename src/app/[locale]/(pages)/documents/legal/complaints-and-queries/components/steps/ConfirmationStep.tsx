@@ -42,11 +42,11 @@ function ConfirmationStep({ errors, formData, setFormData }: ConfirmationStepPro
                 <Form>
                     {Object.entries(formData)
                         .filter(([key, value]) => {
-                            // Excluir 'documents' y 'terms_accepted'
-                            if (key === 'documents' || key === 'terms_accepted') return false;
-                            // Excluir valores nulos o undefined
+                            // Excluir 'documents' y 'terms_accepted' siempre.
+                            if (key === 'documents' || key === 'terms_accepted' || key === 'contact_methods') return false;
+                            // Excluir valores nulos o undefined.
                             if (value === null || value === undefined) return false;
-                            // Si es cadena, omitir si está vacía o solo contiene espacios
+                            // Si es cadena, omitir si está vacía o solo contiene espacios.
                             if (typeof value === 'string' && value.trim() === '') return false;
                             return true;
                         })

@@ -1,8 +1,8 @@
 import { useTranslations } from 'next-intl';
 import { Button, Col, Form, Row, Stack } from 'react-bootstrap';
 
-export default function FilterSection({searchQuery, setSearchQuery, selectedCategory, setSelectedCategory, categoriesForButtons}) {
-    
+export default function FilterSection({ searchQuery, setSearchQuery, selectedCategory, setSelectedCategory, categoriesForButtons }) {
+
     const t = useTranslations('Pages.servicesPage.financialEducation');
 
     return (

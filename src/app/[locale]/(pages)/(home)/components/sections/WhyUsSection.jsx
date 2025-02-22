@@ -18,7 +18,7 @@ export default function WhyUsSection() {
         <section>
             <div className="container-lg py-5">
                 <div className="row g-4 align-items-center">
-                    <div className="col-md-6" data-aos="fade-right" data-aos-delay="200">
+                    <div className="col-md-6" data-aos="fade-right" data-aos-delay="100">
                         <Image
                             src="/assets/imgs/page/whyUs.png"
                             alt="Experience"
@@ -86,7 +86,7 @@ export default function WhyUsSection() {
                             ))}
                         </div>
 
-                        <div data-aos="fade-right" data-aos-delay="150">
+                        <div data-aos="fade-right" data-aos-delay="100">
                             <p className="text-uppercase" style={{
                                 fontSize: '1rem',
                                 fontWeight: 500,

@@ -1,5 +1,6 @@
 import { Button, Card, Col, Ratio, Row, Stack } from 'react-bootstrap';
 
+
 export default function ContentSection({ filteredSections, isEnglish, sanitizeHTML }) {
     return (
         <Row>
@@ -28,7 +29,7 @@ export default function ContentSection({ filteredSections, isEnglish, sanitizeHT
                         <Col md={6} className={index % 2 !== 0 ? 'order-md-1' : ''}>
                             <Card className="h-100 shadow-sm">
                                 <Card.Body>
-                                    <Card.Title as="h3">{localizedTitle}</Card.Title>
+                                    <Card.Title as="h3" style={{ color: '#7fd2cb', fontSize: '2rem', lineHeight: '2.25rem' }}>{localizedTitle}</Card.Title>
                                     <Card.Text className="text-muted"  >
                                         {
                                             localizedDescription && (
@@ -53,5 +54,8 @@ export default function ContentSection({ filteredSections, isEnglish, sanitizeHT
                 );
             })}
         </Row>
-    );
+    )
 }
+
+
+

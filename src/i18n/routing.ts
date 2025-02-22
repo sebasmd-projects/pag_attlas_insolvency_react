@@ -53,6 +53,10 @@ export const routing = defineRouting({
       es: '/servicios',
       en: '/services'
     },
+    '/services/financial-education': {
+      es: '/servicios/educacion-financiera',
+      en: '/services/financial-education'
+    },
 
 
     '/documents/legal/complaints-and-queries': {
