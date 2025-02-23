@@ -34,9 +34,9 @@ export default function Navigation() {
               <NavDropdown.Item as={Link} href="/services" onClick={() => setExpanded(false)}>
                 {t('services.subMenu.ourServices')}
               </NavDropdown.Item>
-              <NavDropdown.Item as={Link} href="/services/financial-education" onClick={() => setExpanded(false)}>
+              {/* <NavDropdown.Item as={Link} href="/services/financial-education" onClick={() => setExpanded(false)}>
                 {t('services.subMenu.financialEducation')}
-              </NavDropdown.Item>
+              </NavDropdown.Item> */}
             </NavDropdown>
 
             {/* <NavDropdown id="about-us-nav-dropdown" title={t('aboutUs.menu')}>
