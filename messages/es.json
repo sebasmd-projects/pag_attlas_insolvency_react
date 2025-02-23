@@ -1,11 +1,12 @@
 {
   "Error": {
-    "description": "",
-    "title": ""
+    "title": "Ups! Algo salió mal.",
+    "description": "Por favor, inténtalo de nuevo más tarde."
   },
   "NotFoundPage": {
-    "description": "",
-    "title": ""
+    "title_h1": "Página no encontrada",
+    "title_h2": "404",
+    "description_p": "Vuelve a verificar la barra de direcciones del navegador o utilice la navegación para ir a una página conocida."
   },
   "LocaleSwitcher": {
     "label": "Idioma",
@@ -246,9 +247,37 @@
         "title_h1": "Educación Financiera",
         "title_h2": "Aprende a administrar tus <span>finanzas</span>",
         "search_placeholder": "Buscar en Educación Financiera",
-        "all_category": "todas"
+        "all_category": "todas",
+        "metaData": {}
       },
       "metaData": {}
+    },
+    "aboutUs": {
+      "sections": {},
+      "metaData": {},
+      "pages": {
+        "contact": {
+          "title": "Contáctanos",
+          "name": "Nombres",
+          "email": "Correo",
+          "message": "Mensage",
+          "sendButton": "Enviar",
+          "sendingMessage": "Enviando mensaje...",
+          "metaData": {}
+        },
+        "culture": {
+          "sections": {},
+          "metaData": {}
+        },
+        "faq": {
+          "sections": {},
+          "metaData": {}
+        },
+        "history": {
+          "sections": {},
+          "metaData": {}
+        }
+      }
     },
     "documents": {
       "legal": {

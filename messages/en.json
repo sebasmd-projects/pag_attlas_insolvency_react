@@ -1,11 +1,12 @@
 {
   "Error": {
-    "description": "",
-    "title": ""
+    "title": "An error has occurred",
+    "description": "Please try again later."
   },
   "NotFoundPage": {
-    "description": "Please double-check the browser address bar or use the navigation to go to a known page.",
-    "title": "Page not found"
+    "title_h1": "Page not found",
+    "title_h2": "404",
+    "description_p": "Please double-check the browser address bar or use the navigation to go to a known page."
   },
   "LocaleSwitcher": {
     "label": "Language",
@@ -249,6 +250,33 @@
         "all_category": "all"
       },
       "metaData": {}
+    },
+    "aboutUs": {
+      "sections": {},
+      "metaData": {},
+      "pages": {
+        "contact": {
+          "title": "Contact Us",
+          "name": "Full Name",
+          "email": "Email",
+          "message": "Message",
+          "sendButton": "Send",
+          "sendingMessage": "Sending message...",
+          "metaData": {}
+        },
+        "culture": {
+          "sections": {},
+          "metaData": {}
+        },
+        "faq": {
+          "sections": {},
+          "metaData": {}
+        },
+        "history": {
+          "sections": {},
+          "metaData": {}
+        }
+      }
     },
     "documents": {
       "legal": {

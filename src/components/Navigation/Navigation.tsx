@@ -8,6 +8,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Navbar from 'react-bootstrap/Navbar';
+import { FaWhatsapp } from "react-icons/fa";
 import LocaleSwitcher from '../LocaleSwitcher/LocaleSwitcher';
 
 export default function Navigation() {
@@ -38,7 +39,7 @@ export default function Navigation() {
               </NavDropdown.Item>
             </NavDropdown>
 
-            <NavDropdown id="about-us-nav-dropdown" title={t('aboutUs.menu')}>
+            {/* <NavDropdown id="about-us-nav-dropdown" title={t('aboutUs.menu')}>
               <NavDropdown.Item as={Link} href="#" onClick={() => setExpanded(false)}>
                 {t('aboutUs.subMenu.getToKnowUs')}
               </NavDropdown.Item>
@@ -52,16 +53,16 @@ export default function Navigation() {
               <NavDropdown.Item as={Link} href="#" onClick={() => setExpanded(false)}>
                 {t('aboutUs.subMenu.faq')}
               </NavDropdown.Item>
-            </NavDropdown>
+            </NavDropdown> */}
 
-            <Nav.Link as={Link} href="#" onClick={() => setExpanded(false)}>
+            <Nav.Link as={Link} href="/about-us/contact" onClick={() => setExpanded(false)}>
               {t('contact.menu')}
             </Nav.Link>
 
             <div className="d-flex gap-3 align-items-center">
               <Link
                 className="btn btn-primary-gradient rounded-pill px-4"
-                href="#"
+                href="https://wa.me/573183280176"
                 onClick={() => setExpanded(false)}
                 onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
                 onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
@@ -71,7 +72,7 @@ export default function Navigation() {
                   border: 'none'
                 }}
               >
-                {t('freeAdvice.menu')}
+                {t('freeAdvice.menu')} <FaWhatsapp />
               </Link>
             </div>
           </Nav>
