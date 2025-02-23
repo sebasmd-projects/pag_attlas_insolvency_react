@@ -55,9 +55,9 @@ export default function Navigation() {
               </NavDropdown.Item>
             </NavDropdown> */}
 
-            <Nav.Link as={Link} href="/about-us/contact" onClick={() => setExpanded(false)}>
+            {/* <Nav.Link as={Link} href="/about-us/contact" onClick={() => setExpanded(false)}>
               {t('contact.menu')}
-            </Nav.Link>
+            </Nav.Link> */}
 
             <div className="d-flex gap-3 align-items-center">
               <Link

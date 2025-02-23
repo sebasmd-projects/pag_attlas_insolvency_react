@@ -257,11 +257,15 @@
       "pages": {
         "contact": {
           "title": "Contact Us",
-          "name": "Full Name",
+          "name": "Name",
+          "last_name": "Last Name",
+          "subject": "Subject",
           "email": "Email",
           "message": "Message",
           "sendButton": "Send",
           "sendingMessage": "Sending message...",
+          "successMessage": "Message sent successfully!",
+          "errorMessage": "An error occurred while sending the message.",
           "metaData": {}
         },
         "culture": {

@@ -259,10 +259,14 @@
         "contact": {
           "title": "Contáctanos",
           "name": "Nombres",
+          "last_name": "Apellidos",
+          "subject": "Asunto",
           "email": "Correo",
           "message": "Mensage",
           "sendButton": "Enviar",
           "sendingMessage": "Enviando mensaje...",
+          "successMessage": "Mensaje enviado con éxito",
+          "errorMessage": "Error al enviar mensaje",
           "metaData": {}
         },
         "culture": {
