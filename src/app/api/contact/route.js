@@ -6,7 +6,7 @@ export async function POST(request) {
     const { email, last_name, message, name, subject } = await request.json();
 
     try {
-        const response = await axios.post('http://localhost:8000/api/v1/contact/', {
+        const response = await axios.post('https://propensionesabogados.com/api/v1/contact/', {
             name,
             last_name,
             email,
