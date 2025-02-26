@@ -257,6 +257,7 @@
       "pages": {
         "contact": {
           "title": "Contact Us",
+          "subTitle": "We are here to help you",
           "name": "Name",
           "last_name": "Last Name",
           "subject": "Subject",
@@ -266,6 +267,7 @@
           "sendingMessage": "Sending message...",
           "successMessage": "Message sent successfully!",
           "errorMessage": "An error occurred while sending the message.",
+          "terms": "I accept <termsLink>Terms and Conditions</termsLink> & <privacyLink>Privacy Policies</privacyLink>",
           "metaData": {}
         },
         "culture": {
@@ -284,7 +286,9 @@
     },
     "documents": {
       "legal": {
-        "termsAndConditions": "/assets/documents/legal/terms-and-conditions_en.pdf"
+        "termsAndConditions": "/assets/documents/legal/terms-and-conditions_en.pdf",
+        "cookies": "/assets/documents/legal/cookies_en.pdf",
+        "policyPersonalData": "/assets/documents/legal/policy-for-the-treatment-of-personal-data_en.pdf"
       }
     }
   }

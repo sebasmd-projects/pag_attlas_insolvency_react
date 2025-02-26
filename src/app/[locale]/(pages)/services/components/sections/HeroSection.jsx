@@ -107,7 +107,7 @@ export default function ServicesHeroSection() {
 
                     {/* Sección de Contenido */}
                     <div className="col-lg-6 order-lg-2 order-1">
-                        <div className="mb-4" data-aos="fade-left" data-aos-delay="100">
+                        <div className="mb-4">
                             <h3 className="text-uppercase mb-3" style={{
                                 color: '#0e3692',
                                 fontSize: '1rem',

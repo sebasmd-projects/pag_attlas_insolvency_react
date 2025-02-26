@@ -90,7 +90,7 @@ export default function FinancialEducationPage() {
     );
 
     // Filter sections available in current locale
-    const localeSections = data.sections.filter(section =>
+    const localeSections = data.filter(section =>
         isEnglish ? section.title_en !== undefined : section.title !== undefined
     );
 
@@ -110,17 +110,18 @@ export default function FinancialEducationPage() {
     // Filter sections based on search and category
     const filteredSections = localeSections.filter(section => {
         const localizedTitle = isEnglish ? section.title_en : section.title;
-        const localizedDescription = isEnglish ?
-            (section.description_en ?? section.description) : section.description;
-        const rawCategory = isEnglish ?
-            (section.category_en ?? section.category) :
-            (section.category ?? section.category_en);
+        const localizedDescription = isEnglish ? section.description_en : section.description;
+        const rawCategory = isEnglish ? section.category_en : section.category;
         const categories = rawCategory ? (Array.isArray(rawCategory) ? rawCategory : [rawCategory]) : [];
 
         const matchesCategory = selectedCategory === t('all_category') ||
             categories.includes(selectedCategory);
-        const matchesSearch = localizedTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            (localizedDescription || '').toLowerCase().includes(searchQuery.toLowerCase());
+
+        const matchesSearch = (localizedTitle || '')
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase()) || (localizedDescription || '')
+                .toLowerCase()
+                .includes(searchQuery.toLowerCase());
 
         return matchesCategory && matchesSearch;
     });

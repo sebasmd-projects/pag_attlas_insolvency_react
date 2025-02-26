@@ -34,12 +34,12 @@ export default function Navigation() {
               <NavDropdown.Item as={Link} href="/services" onClick={() => setExpanded(false)}>
                 {t('services.subMenu.ourServices')}
               </NavDropdown.Item>
-              {/* <NavDropdown.Item as={Link} href="/services/financial-education" onClick={() => setExpanded(false)}>
+              <NavDropdown.Item as={Link} href="/services/financial-education" onClick={() => setExpanded(false)}>
                 {t('services.subMenu.financialEducation')}
-              </NavDropdown.Item> */}
+              </NavDropdown.Item>
             </NavDropdown>
 
-            {/* <NavDropdown id="about-us-nav-dropdown" title={t('aboutUs.menu')}>
+            <NavDropdown id="about-us-nav-dropdown" title={t('aboutUs.menu')}>
               <NavDropdown.Item as={Link} href="#" onClick={() => setExpanded(false)}>
                 {t('aboutUs.subMenu.getToKnowUs')}
               </NavDropdown.Item>
@@ -53,16 +53,16 @@ export default function Navigation() {
               <NavDropdown.Item as={Link} href="#" onClick={() => setExpanded(false)}>
                 {t('aboutUs.subMenu.faq')}
               </NavDropdown.Item>
-            </NavDropdown> */}
+            </NavDropdown>
 
-            {/* <Nav.Link as={Link} href="/about-us/contact" onClick={() => setExpanded(false)}>
+            <Nav.Link as={Link} href="/about-us/contact" onClick={() => setExpanded(false)}>
               {t('contact.menu')}
-            </Nav.Link> */}
+            </Nav.Link>
 
             <div className="d-flex gap-3 align-items-center">
               <Link
                 className="btn btn-primary-gradient rounded-pill px-4"
-                href="https://wa.me/573183280176"
+                href="https://wa.me/573156399722"
                 onClick={() => setExpanded(false)}
                 onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
                 onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
@@ -71,6 +71,7 @@ export default function Navigation() {
                   transition: 'transform 0.3s',
                   border: 'none'
                 }}
+                target='_blank'
               >
                 {t('freeAdvice.menu')} <FaWhatsapp />
               </Link>

@@ -258,6 +258,7 @@
       "pages": {
         "contact": {
           "title": "Contáctanos",
+          "subTitle": "Estamos aquí para ayudarte",
           "name": "Nombres",
           "last_name": "Apellidos",
           "subject": "Asunto",
@@ -267,6 +268,7 @@
           "sendingMessage": "Enviando mensaje...",
           "successMessage": "Mensaje enviado con éxito",
           "errorMessage": "Error al enviar mensaje",
+          "terms": "Acepto los <termsLink>Terminos y condiciones</termsLink> y <privacyLink>Politicas de privacidad</privacyLink>",
           "metaData": {}
         },
         "culture": {
@@ -285,7 +287,9 @@
     },
     "documents": {
       "legal": {
-        "termsAndConditions": "/assets/documents/legal/terms-and-conditions.pdf"
+        "termsAndConditions": "/assets/documents/legal/terms-and-conditions.pdf",
+        "cookies": "/assets/documents/legal/cookies.pdf",
+        "policyPersonalData": "/assets/documents/legal/policy-for-the-treatment-of-personal-data.pdf"
       }
     }
   }

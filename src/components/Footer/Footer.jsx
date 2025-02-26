@@ -36,11 +36,11 @@ export default function Footer() {
     const t = useTranslations('Footer');
 
     const legalLinks = [
-        // { text: t('legalLinks.complaintsAndClaims'), url: '/documents/legal/complaints-and-queries' },
-        // { text: t('legalLinks.cookiesPolicy'), url: '/documents/legal/cookies' },
-        // { text: t('legalLinks.policiesForTheTreatmentOfInformation'), url: '/documents/legal/policies-for-the-treatment-of-information' },
-        // { text: t('legalLinks.privacyPolicy'), url: '/documents/legal/privacy-notice' },
-        // { text: t('legalLinks.processingOfPersonalData'), url: '/documents/legal/processing-of-personal-data' },
+        { text: t('legalLinks.complaintsAndClaims'), url: '/documents/legal/complaints-and-queries' },
+        { text: t('legalLinks.cookiesPolicy'), url: '/documents/legal/cookies' },
+        { text: t('legalLinks.policiesForTheTreatmentOfInformation'), url: '/documents/legal/policies-for-the-treatment-of-information' },
+        { text: t('legalLinks.privacyPolicy'), url: '/documents/legal/privacy-notice' },
+        { text: t('legalLinks.processingOfPersonalData'), url: '/documents/legal/processing-of-personal-data' },
         { text: t('legalLinks.t&c'), url: '/documents/legal/terms-and-conditions' }
     ];
 
@@ -78,7 +78,7 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    {/* <div className="col-md-2">
+                    <div className="col-md-2">
                         <h5 className="mb-3" style={{ fontSize: '1.125rem', fontWeight: 800 }}>FAQS</h5>
                         <div>
                             <Link
@@ -89,7 +89,7 @@ export default function Footer() {
                                 {t('faqTitle')}
                             </Link>
                         </div>
-                    </div> */}
+                    </div>
 
                     <div className="col-md-4">
                         <h5 className="mb-3" style={{ fontSize: '1.125rem', fontWeight: 800 }}>LEGAL</h5>

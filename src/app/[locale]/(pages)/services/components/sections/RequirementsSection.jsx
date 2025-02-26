@@ -43,7 +43,7 @@ export default function RequirementsSection() {
                                 fontWeight: 800,
                                 letterSpacing: '0.15rem',
                                 paddingBottom: '2rem'
-                            }} data-aos="fade-right" data-aos-delay="100">
+                            }}>
                                 {t('title_h1')}
                             </h3>
                             <h2 className="display-5 fw-bold" style={{
@@ -51,7 +51,7 @@ export default function RequirementsSection() {
                                 fontSize: '2rem',
                                 lineHeight: '2.25rem',
                                 marginBottom: '1.5rem'
-                            }} data-aos="fade-right" data-aos-delay="100">
+                            }}>
                                 {t.rich('title_h2', {
                                     span: (chunks) => (
                                         <span style={{ color: '#0e3692' }}>
@@ -63,7 +63,7 @@ export default function RequirementsSection() {
                             <p className="mb-4" style={{
                                 fontSize: '1rem',
                                 lineHeight: '1.688rem',
-                            }} data-aos="fade-right" data-aos-delay="100">
+                            }}>
                                 {t('description_p')}
                             </p>
                         </div>

@@ -13,10 +13,6 @@ const config = {
             {
                 protocol: 'https',
                 hostname: 'propensionesabogados.com',
-            },
-            {
-                protocol: 'https',
-                hostname: 'www.bootdey.com',
             }
         ]
     }
