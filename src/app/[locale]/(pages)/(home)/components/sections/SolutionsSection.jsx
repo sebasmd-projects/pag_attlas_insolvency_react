@@ -1,37 +1,36 @@
+"use client";
+
 import CardComponent from '@/components/micro-components/card';
 import SubTitleComponent from '@/components/micro-components/sub_title';
 import TitleComponent from '@/components/micro-components/title';
-import blearning from '@public/assets/imgs/icons/blearning.svg';
-import contact from '@public/assets/imgs/icons/contact.svg';
-import family from '@public/assets/imgs/icons/family.svg';
-import hand_person_hearth from '@public/assets/imgs/icons/hand_person_hearth.svg';
 import { useTranslations } from 'next-intl';
 import Image from "next/image";
+import { ReactSVG } from 'react-svg';
 
 export default function SolutionsSection() {
     const t = useTranslations('Pages.homePage.sections.solutionsSection');
 
     const features = [
         {
-            icon: contact,
+            icon: <ReactSVG src="/assets/imgs/icons/contact.svg" />,
             title: t('features.feature1.title'),
             description: t('features.feature1.description'),
             aosDelay: 100
         },
         {
-            icon: family,
+            icon: <ReactSVG src="/assets/imgs/icons/family.svg" />,
             title: t('features.feature2.title'),
             description: t('features.feature2.description'),
             aosDelay: 150
         },
         {
-            icon: blearning,
+            icon: <ReactSVG src="/assets/imgs/icons/blearning.svg" />,
             title: t('features.feature3.title'),
             description: t('features.feature3.description'),
             aosDelay: 200
         },
         {
-            icon: hand_person_hearth,
+            icon: <ReactSVG src="/assets/imgs/icons/hand_person_hearth.svg" />,
             title: t('features.feature4.title'),
             description: t('features.feature4.description'),
             aosDelay: 250

@@ -2,7 +2,8 @@
   "name": "example-app-router",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
+    "dev": "next dev",
+    "devt": "next dev --turbo",
     "lint": "eslint src && tsc && prettier src --check",
     "test": "pnpm run test:playwright && pnpm run test:jest",
     "test:playwright": "playwright test",
@@ -25,6 +26,7 @@
     "react-bootstrap": "^2.10.9",
     "react-dom": "18.3.1",
     "react-icons": "^5.4.0",
+    "react-svg": "^16.3.0",
     "react-toastify": "11.0.3",
     "sharp": "0.33.5"
   },
