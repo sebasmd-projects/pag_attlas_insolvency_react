@@ -1,5 +1,6 @@
 // app/layout.tsx
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { Analytics } from "@vercel/analytics/react";
 import { Inter } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
@@ -22,12 +23,14 @@ export default async function BaseLayout({ children, locale }: Props) {
   return (
     <html lang={locale}>
       <body className={`${inter.className} flex flex-col`}>
+
         <QueryProvider>
           <ToastProvider>
             <NextIntlClientProvider messages={messages}>
               <AOSProvider>
                 <Navigation />
                 {children}
+                <Analytics />
                 <Footer />
               </AOSProvider>
             </NextIntlClientProvider>
