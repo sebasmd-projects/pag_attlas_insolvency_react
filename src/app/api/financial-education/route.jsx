@@ -5,7 +5,7 @@ export async function GET() {
     try {
         // Realiza la solicitud GET a la API externa
         const response = await axios.get(
-            'http://localhost:8000/api/v1/financial-education/'
+            'https://propensionesabogados.com/api/v1/financial-education/'
         );
 
         if (!response.data) {
