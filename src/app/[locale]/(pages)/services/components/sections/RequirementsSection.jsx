@@ -2,6 +2,8 @@ import { useTranslations } from 'next-intl';
 import Image from "next/image";
 import { FaHandHoldingUsd, FaShieldAlt, FaUsers } from "react-icons/fa";
 import { FaUnlockKeyhole } from "react-icons/fa6";
+import TitleComponent from '@/components/micro-components/title';
+import SubTitleComponent from '@/components/micro-components/sub_title';
 
 export default function RequirementsSection() {
 
@@ -37,29 +39,8 @@ export default function RequirementsSection() {
                 <div className="row g-4 align-items-center">
                     <div className="col-md-8">
                         <div className="mb-4">
-                            <h3 className="text-uppercase mb-3" style={{
-                                color: '#0e3692',
-                                fontSize: '1rem',
-                                fontWeight: 800,
-                                letterSpacing: '0.15rem',
-                                paddingBottom: '2rem'
-                            }}>
-                                {t('title_h1')}
-                            </h3>
-                            <h2 className="display-5 fw-bold" style={{
-                                color: '#7fd2cb',
-                                fontSize: '2rem',
-                                lineHeight: '2.25rem',
-                                marginBottom: '1.5rem'
-                            }}>
-                                {t.rich('title_h2', {
-                                    span: (chunks) => (
-                                        <span style={{ color: '#0e3692' }}>
-                                            {chunks}
-                                        </span>
-                                    )
-                                })}
-                            </h2>
+                            <TitleComponent title={t('title_h1')} />
+                            <SubTitleComponent t={t} sub_title={'title_h2'} />
                             <p className="mb-4" style={{
                                 fontSize: '1rem',
                                 lineHeight: '1.688rem',

@@ -69,30 +69,31 @@
       "sections": {
         "heroSection": {
           "video_tag": "Su navegador no soporta la etiqueta de video.",
-          "title_h1": "Solución Legal a tus Deudas | ATTLAS",
-          "title_h2": "Reestructuración de deudas",
-          "description_p": "Beneficios de la Insolvencia Económica, Suspensión de Embargos, Protección inmediata contra ejecuciones judiciales.",
+          "title_h1": "Solución Legal para Insolvencia Económica | ATTLAS",
+          "title_h2": "Alivio de deuda, un nuevo comienzo",
+          "description_p": "Humanizamos la insolvencia",
           "whatsappButton": "Contáctanos"
         },
         "solutionsSection": {
           "title_h1": "SOLUCIONES Y BENEFICIOS PENSADOS PARA TI",
-          "title_h2": "Cambiemos tus finanzas <span>juntos</span>",
+          "title_h2": "Cambiemos la economía de Colombia <span>juntos</span>",
+          "description_p": "Este programa busca humanizar la Ley de insolvencia como fundamento en el derecho a una vida digna y la protección frente a la pobreza estructural, estableciendo un modelo de reinserción financiera y social para personas en estado de crisis económica.",
           "features": {
             "feature1": {
-              "title": "Asesoría gratuita",
+              "title": "Asesoría Gratuita",
               "description": "Regístrate y recibe tu primera asesoría financiera sin costo."
             },
             "feature2": {
-              "title": "Paz y salvo",
-              "description": "Te acompañamos hasta recibir tu carta de paz y salvo."
+              "title": "Centro de Conciliación",
+              "description": "Centro de conciliación para insolvencia económica y negociación de deudas."
             },
             "feature3": {
-              "title": "Descuento en tus deudas en mora",
-              "description": "Liquida tus deudas atrasadas con el mayor descuento."
+              "title": "Centro de Educación B-Learning",
+              "description": "Plataforma B-Learning para un nuevo comienzo personal y financiero."
             },
             "feature4": {
-              "title": "Cuota fija",
-              "description": "Mensualidades hechas a la medida de tus posibilidades."
+              "title": "Impacto Social",
+              "description": "Pro-bono y voluntariado para personas en estado de vulnerabilidad."
             }
           }
         },
@@ -101,37 +102,38 @@
           "title_h2": "Nuestro <span>equipo</span>"
         },
         "whyUsSection": {
-          "title_h1": "NUESTRA EXPERIENCIA",
+          "title_h1": "Justicia Financiera y Derechos Humanos",
           "title_h2": "¿Por qué <span>ATTLAS?</span>",
-          "description_p": "Queremos que retomes el control de tu vida, ayudándote a solucionar los problemas financieros con las deudas y que vuelvas a acceder al crédito.",
-          "footer_p": "¡ÚNETE A LA REVOLUCIÓN FINANCIERA CON ATTLAS!",
+          "description_p": "La insolvencia económica no es un delito, es una realidad que puede afectar a cualquiera. En ATTLAS, protegemos tu derecho a la dignidad, la igualdad y la justicia financiera, conforme a los principios de los Derechos Humanos Internacionales. Porque empezar de nuevo no es un privilegio, es un derecho fundamental.",
           "features": {
             "feature1": {
-              "title": "+1000",
-              "description": "Deudas liquidadas"
+              "title": "Cobertura nacional",
+              "description": "Salas de atención virtual"
             },
             "feature2": {
-              "title": "+10 años",
-              "description": "De experiencia"
+              "title": "Centro de Conciliación Movil",
+              "description": "Eje Cafetero y Valle del Cauca"
             },
             "feature3": {
-              "title": "100%",
-              "description": "En Colombia para Colombianos"
+              "title": "Protección",
+              "description": "De la única vivienda y alimentación"
             },
             "feature4": {
-              "title": "+2000",
-              "description": "Clientes satisfechos"
+              "title": "Marco Legal",
+              "description": "Protección contra la pobreza financiera y el equilibrio social"
             }
-          }
+          },
+          "footer_p": "Únete a la Revolución del Equilibrio Financiero con ATTLAS"
         },
         "stepByStepSection": {
           "title_h1": "¿CÓMO LO LOGRAMOS?",
           "title_h2": "Un plan para <span>tus metas</span>",
           "features": {
-            "feature1": "Realizamos un diagnóstico de tu perfil financiero para entender tu situación.",
-            "feature2": "Negociamos el mayor descuento en cada una de tus deudas atrasadas.",
-            "feature3": "Obtén más beneficios con un buen comportamiento de pago en tu plan de liquidación.",
-            "feature4": "Te acompañamos y asesoramos de principio a fin."
+            "feature1": "Con Dignindad Humana",
+            "feature2": "Enfoque Humanitario",
+            "feature3": "Restructuración Humanitaria de Deudas",
+            "feature4": "Rescate financiero y social",
+            "feature5": "Educación financiera y reinserción económica"
           }
         }
       },
@@ -187,58 +189,58 @@
         "heroSection": {
           "title_h1": "Nuestros Servicios",
           "title_h2": "Tus <span>soluciones</span>",
-          "description_p": "Brindamos asesoría y representación legal para personas en dificultades financieras, ayudándoles a suspender embargos, negociar acuerdos de pago y reestructurar sus deudas bajo la Ley de Insolvencia.",
+          "description_p": "Convertimos cada reto en una oportunidad, brindando soluciones justas, equitativas y sostenibles, siempre con un enfoque social y en defensa de los derechos fundamentales y humanos. Porque la estabilidad y la dignidad son un derecho de todos",
           "features": {
             "feature1": {
-              "title": "Suspensión de Embargos",
-              "description": "Detenemos procesos de embargo y remate de bienes durante negociaciones"
+              "title": "Conciliación en Derecho",
+              "description": "Centro especializado en soluciones legales para insolvencia con justicia y dignidad"
             },
             "feature2": {
-              "title": "Reestructuración de Deudas",
-              "description": "Renegociamos condiciones de pago con entidades financieras"
+              "title": "Insolvencia Económica para Persona Natural",
+              "description": "Comerciante y NO Comerciante"
             },
             "feature3": {
-              "title": "Conciliación con Acreedores",
-              "description": "Representación profesional para acuerdos favorables"
+              "title": "Mediación",
+              "description": "Procesos de diálogo para lograr acuerdos justos y equilibrados entre las partes"
             },
             "feature4": {
-              "title": "Protección Patrimonial",
-              "description": "Estrategias legales para conservar tus bienes esenciales"
+              "title": "Brigadas Sociales",
+              "description": "Jornadas sociales de apoyo jurídico y soluciones en insolvencia con enfoque en derechos humanos"
             },
             "feature5": {
-              "title": "Extinción de Deudas",
-              "description": "Gestión legal para eliminación de saldos impagables"
+              "title": "Educación y Formación",
+              "description": "Educación que convierte la insolvencia en un nuevo comienzo"
             },
             "feature6": {
-              "title": "Suspensión de Intereses",
-              "description": "Detenemos crecimiento desmedido de deudas"
+              "title": "Proyectos",
+              "description": "Compromiso social y ambiental para un futuro sostenible"
             },
             "feature7": {
-              "title": "Defensa Legal Especializada",
-              "description": "Representación en procesos judiciales y administrativos"
+              "title": "Internacionalización en Derechos Humanos",
+              "description": "Insolvencia económica con enfoque en derechos humanos internacionales"
             }
           }
         },
         "requirementsSection": {
           "title_h1": "REQUISITOS PARA ACCEDER A NUESTROS SERVICIOS",
           "title_h2": "Qué <span>necesito?</span>",
-          "description_p": "Nuestra ley de insolvencia económica ofrece múltiples beneficios y garantías para personas y empresas con dificultades financieras.",
+          "description_p": "Ofrecemos múltiples beneficios y garantías para personas y empresas con dificultades financieras.",
           "features": {
             "feature1": {
               "title": "¿A quiénes aplica?",
-              "description": "• Pensionados con descuentos excesivos\n• Trabajadores con libranzas\n• Padres con hipotecas\n• Microempresarios afectados\n• Desempleados sin recursos"
+              "description": "• Personas Naturales\n• Comerciantes\n• Trabajadores y Empleadores\n• Familias\n• Propietarios e Inquilinos\n• Entidades Públicas y Privadas\n• Deudores y Acreedores\n• Víctimas de Vulneración de Derechos\n• Organizaciones Comunitarias y Sociales\n• Personas en Situación de Insolvencia"
             },
             "feature2": {
-              "title": "Garantías Principales",
-              "description": "• Protección de vivienda única\n• Suspensión de embargos\n• Renegociación de condiciones\n• Protección de subsistencia básica"
+              "title": "Requisitos",
+              "description": "• Identificación válida\n• Solicitud formal de conciliación\n• Interés legítimo en el conflicto\n• Materia conciliable según la ley\n• Voluntad de las partes para conciliar\n• Pago de derechos (si aplica)\n• Soporte documental del caso\n• Representación legal (si aplica)\n• Medios de contacto actualizados\n• Autorización para tratamiento de datos"
             },
             "feature3": {
-              "title": "Beneficios Clave",
-              "description": "• Congelación de intereses\n• Reducción de cuotas\n• Plazos extendidos\n• Evitar costos judiciales\n• Suspensión de remates"
+              "title": "Garantías principales",
+              "description": "• Imparcialidad y Neutralidad\n• Confidencialidad del Proceso\n• Acceso a la Justicia\n• Respeto por los Derechos Fundamentales\n• Legalidad y Seguridad Jurídica\n• Voluntariedad de las Partes\n• Eficiencia y Celeridad Procesal\n• Equidad en los Acuerdos\n• Reconocimiento de los Derechos Humanos\n• Transparencia en la Gestión"
             },
             "feature4": {
-              "title": "Deudas Cubiertas",
-              "description": "• Créditos de libre inversión\n• Hipotecas\n• Libranzas\n• Tarjetas de crédito\n• Deudas con entidades financieras"
+              "title": "Presupuestos",
+              "description": "• Resolución rápida y efectiva de conflictos\n• Reducción de costos legales\n• Confidencialidad y protección de la información\n• Acceso a justicia de manera equitativa\n• Evita procesos judiciales prolongados\n• Fomenta el diálogo y la cooperación\n• Seguridad jurídica en los acuerdos alcanzados\n• Protección de derechos fundamentales y humanos\n• Flexibilidad en la solución de disputas\n• Restablecimiento de relaciones entre las partes"
             }
           }
         }
@@ -258,7 +260,7 @@
       "pages": {
         "contact": {
           "title": "Contáctanos",
-          "subTitle": "Estamos aquí para ayudarte",
+          "subTitle": "Estamos aquí para <span>ayudarte</span>",
           "name": "Nombres",
           "last_name": "Apellidos",
           "subject": "Asunto",
@@ -276,20 +278,28 @@
           "metaData": {}
         },
         "faq": {
-          "sections": {},
-          "metaData": {}
-        },
-        "history": {
-          "sections": {},
-          "metaData": {}
+          "sections": {
+            "heroSection": {
+              "title_h1": "Preguntas Frecuentes",
+              "title_h2": "¿Tienes alguna <span>duda</span>?",
+              "search_placeholder": "Buscar en Preguntas Frecuentes",
+              "show_more": "Mostrar más"
+            },
+            "metaData": {}
+          },
+          "history": {
+            "sections": {},
+            "metaData": {}
+          }
         }
-      }
-    },
-    "documents": {
-      "legal": {
-        "termsAndConditions": "/assets/documents/legal/terms-and-conditions.pdf",
-        "cookies": "/assets/documents/legal/cookies.pdf",
-        "policyPersonalData": "/assets/documents/legal/policy-for-the-treatment-of-personal-data.pdf"
+      },
+      "documents": {
+        "legal": {
+          "termsAndConditions": "/assets/documents/legal/terms-and-conditions.pdf",
+          "cookies": "/assets/documents/legal/cookies.pdf",
+          "policyPersonalData": "/assets/documents/legal/policy-for-the-treatment-of-personal-data.pdf"
+        },
+        "complaintsAndQueries": "Reclamos, quejas y sugerencias (PQRS)"
       }
     }
   }

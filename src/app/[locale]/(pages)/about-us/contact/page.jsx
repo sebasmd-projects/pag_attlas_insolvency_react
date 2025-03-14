@@ -10,6 +10,8 @@ import { HiOutlinePencilAlt } from "react-icons/hi";
 import { IoIosSend } from 'react-icons/io';
 import { MdFormatAlignLeft } from "react-icons/md";
 import { toast } from 'react-toastify';
+import TitleComponent from '@/components/micro-components/title';
+import SubTitleComponent from '@/components/micro-components/sub_title';
 
 export default function ContactPage({ params: { locale } }) {
     const t = useTranslations('Pages.aboutUs.pages.contact');
@@ -84,30 +86,9 @@ export default function ContactPage({ params: { locale } }) {
 
     return (
         <div className="container py-5">
-            <h1 className="text-uppercase mb-3" style={{
-                color: '#0e3692',
-                fontSize: '1rem',
-                fontWeight: 800,
-                letterSpacing: '0.15rem',
-                paddingBottom: '2rem'
-            }}>
-                {t('title')}
-            </h1>
 
-            <h2 className="display-5 fw-bold" style={{
-                color: '#7fd2cb',
-                fontSize: '2rem',
-                lineHeight: '2.25rem',
-                marginBottom: '1.5rem'
-            }}>
-                {t.rich('subTitle', {
-                    span: (chunks) => (
-                        <span style={{ color: '#0e3692' }}>
-                            {chunks}
-                        </span>
-                    )
-                })}
-            </h2>
+            <TitleComponent title={t('title')} />
+            <SubTitleComponent t={t} sub_title={'subTitle'} />
 
             <form onSubmit={handleSubmit} className="row g-3">
                 {/* Nombre */}

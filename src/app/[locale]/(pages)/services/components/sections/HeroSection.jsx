@@ -5,7 +5,9 @@ import { FaMoneyBillTrendUp } from "react-icons/fa6";
 import { RiHomeHeartLine } from "react-icons/ri";
 import { TbPigMoney } from "react-icons/tb";
 import { useTranslations } from 'next-intl';
-
+import TitleComponent from '@/components/micro-components/title';
+import SubTitleComponent from '@/components/micro-components/sub_title';
+import CardComponent from '@/components/micro-components/card';
 
 export default function ServicesHeroSection() {
 
@@ -108,29 +110,8 @@ export default function ServicesHeroSection() {
                     {/* Sección de Contenido */}
                     <div className="col-lg-6 order-lg-2 order-1">
                         <div className="mb-4">
-                            <h3 className="text-uppercase mb-3" style={{
-                                color: '#0e3692',
-                                fontSize: '1rem',
-                                fontWeight: 800,
-                                letterSpacing: '0.15rem',
-                                paddingBottom: '2rem'
-                            }}>
-                                {t('title_h1')}
-                            </h3>
-                            <h2 className="display-5 fw-bold" style={{
-                                color: '#7fd2cb',
-                                fontSize: '2rem',
-                                lineHeight: '2.25rem',
-                                marginBottom: '1.5rem'
-                            }} >
-                                {t.rich('title_h2', {
-                                    span: (chunks) => (
-                                        <span style={{ color: '#0e3692' }}>
-                                            {chunks}
-                                        </span>
-                                    )
-                                })}
-                            </h2>
+                            <TitleComponent title={t('title_h1')} />
+                            <SubTitleComponent t={t} sub_title={'title_h2'} />
                             <p className="text-muted mb-4" style={{ fontSize: '1rem', lineHeight: '1.688rem' }}>
                                 {t('description_p')}
                             </p>
@@ -140,27 +121,7 @@ export default function ServicesHeroSection() {
                         <div className="row g-4">
                             {mainFeatures.map((feature, index) => (
                                 <div key={index} className="col-md-6" data-aos="zoom-in" data-aos-delay="100">
-                                    <div className="d-flex flex-column gap-2 p-3 rounded-5" style={{
-                                        backgroundColor: '#F2EFFF',
-                                        minHeight: '200px'
-                                    }}>
-                                        <div className="align-self-center" style={{ color: '#0e3692' }}>
-                                            {feature.icon}
-                                        </div>
-                                        <h4 className="fw-bold text-center" style={{
-                                            fontSize: '1.125rem',
-                                            fontWeight: 400,
-                                            color: '#7fd2cb'
-                                        }}>
-                                            {feature.title}
-                                        </h4>
-                                        <p className="text-muted" style={{
-                                            fontSize: '1rem',
-                                            lineHeight: '1.688rem',
-                                        }}>
-                                            {feature.description}
-                                        </p>
-                                    </div>
+                                    <CardComponent icon={feature.icon} title={feature.title} description={feature.description} />
                                 </div>
                             ))}
                         </div>
@@ -171,27 +132,7 @@ export default function ServicesHeroSection() {
                 <div className="row g-4 mt-4">
                     {additionalFeatures.map((feature, index) => (
                         <div key={index} className="col-md-4" data-aos="zoom-in-up" data-aos-delay="100">
-                            <div className="d-flex flex-column gap-2 p-3 rounded-5" style={{
-                                backgroundColor: '#F2EFFF',
-                                minHeight: '200px'
-                            }}>
-                                <div className="align-self-center" style={{ color: '#0e3692' }}>
-                                    {feature.icon}
-                                </div>
-                                <h4 className="fw-bold text-center" style={{
-                                    fontSize: '1.125rem',
-                                    fontWeight: 400,
-                                    color: '#7fd2cb'
-                                }}>
-                                    {feature.title}
-                                </h4>
-                                <p className="text-muted" style={{
-                                    fontSize: '1rem',
-                                    lineHeight: '1.688rem',
-                                }}>
-                                    {feature.description}
-                                </p>
-                            </div>
+                            <CardComponent icon={feature.icon} title={feature.title} description={feature.description} />
                         </div>
                     ))}
                 </div>

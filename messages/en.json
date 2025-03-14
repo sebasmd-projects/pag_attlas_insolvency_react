@@ -1,6 +1,6 @@
 {
   "Error": {
-    "title": "An error has occurred",
+    "title": "Oops! Something went wrong.",
     "description": "Please try again later."
   },
   "NotFoundPage": {
@@ -22,7 +22,7 @@
     "aboutUs": {
       "menu": "About Us",
       "subMenu": {
-        "getToKnowUs": "Get To Know Us",
+        "getToKnowUs": "Get to Know Us",
         "culture": "Culture",
         "faq": "Frequently Asked Questions",
         "history": "History"
@@ -57,9 +57,9 @@
       "privacyPolicy": "Privacy Notice",
       "processingOfPersonalData": "Processing of Personal Data",
       "policiesForTheTreatmentOfInformation": "Policies for the Treatment of Information",
-      "complaintsAndClaims": "Complaints, Claims, and Suggestions"
+      "complaintsAndClaims": "Complaints, Claims, and Suggestions (PQRS)"
     },
-    "socialLinksTitle": "Our Social Networks:",
+    "socialLinksTitle": "Our social networks:",
     "faqTitle": "Frequently Asked Questions",
     "copyText": "Copyright Propensiones Abogados & Fundación ATTLAS. All rights reserved.",
     "designText": "Designed by <link1>Sebastián Morales</link1> & <link2>Carlos Morales</link2>"
@@ -69,30 +69,31 @@
       "sections": {
         "heroSection": {
           "video_tag": "Your browser does not support the video tag.",
-          "title_h1": "Legal Solution for Your Debts | ATTLAS",
-          "title_h2": "Debt Restructuring",
-          "description_p": "Benefits of Economic Insolvency, Suspension of Seizures, Immediate Protection Against Legal Proceedings.",
+          "title_h1": "Legal Solution for Economic Insolvency | ATTLAS",
+          "title_h2": "Debt Relief, a New Beginning",
+          "description_p": "We humanize insolvency",
           "whatsappButton": "Contact Us"
         },
         "solutionsSection": {
           "title_h1": "SOLUTIONS AND BENEFITS DESIGNED FOR YOU",
-          "title_h2": "Let's Change Your Finances <span>Together</span>",
+          "title_h2": "Let’s Change Colombia’s Economy <span>together</span>",
+          "description_p": "This program seeks to humanize the Insolvency Law based on the right to a dignified life and protection against structural poverty, establishing a model of financial and social reintegration for people in a state of economic crisis.",
           "features": {
             "feature1": {
               "title": "Free Consultation",
-              "description": "Sign up and receive your first financial consultation at no cost."
+              "description": "Register and receive your first financial consultation at no cost."
             },
             "feature2": {
-              "title": "Debt Clearance Certificate",
-              "description": "We guide you until you receive your debt clearance certificate."
+              "title": "Conciliation Center",
+              "description": "Conciliation center for economic insolvency and debt negotiation."
             },
             "feature3": {
-              "title": "Discount on Overdue Debts",
-              "description": "Settle your overdue debts with the highest discount."
+              "title": "B-Learning Education Center",
+              "description": "B-Learning platform for a new personal and financial beginning."
             },
             "feature4": {
-              "title": "Fixed Installment",
-              "description": "Monthly payments tailored to your financial capacity."
+              "title": "Social Impact",
+              "description": "Pro-bono and volunteer work for people in vulnerable situations."
             }
           }
         },
@@ -101,50 +102,51 @@
           "title_h2": "Our <span>Team</span>"
         },
         "whyUsSection": {
-          "title_h1": "OUR EXPERIENCE",
+          "title_h1": "Financial Justice and Human Rights",
           "title_h2": "Why <span>ATTLAS?</span>",
-          "description_p": "We want you to regain control of your life by helping you solve financial problems related to debt and regain access to credit.",
-          "footer_p": "JOIN THE FINANCIAL REVOLUTION WITH ATTLAS!",
+          "description_p": "Economic insolvency is not a crime; it is a reality that can affect anyone. At ATTLAS, we protect your right to dignity, equality, and financial justice, in accordance with the principles of International Human Rights. Because starting over is not a privilege; it is a fundamental right.",
           "features": {
             "feature1": {
-              "title": "+1000",
-              "description": "Debts Settled"
+              "title": "Nationwide Coverage",
+              "description": "Virtual service rooms"
             },
             "feature2": {
-              "title": "+10 Years",
-              "description": "Of Experience"
+              "title": "Mobile Conciliation Center",
+              "description": "Coffee Region and Valle del Cauca"
             },
             "feature3": {
-              "title": "100%",
-              "description": "In Colombia for Colombians"
+              "title": "Protection",
+              "description": "Safeguarding your only home and subsistence"
             },
             "feature4": {
-              "title": "+2000",
-              "description": "Satisfied Clients"
+              "title": "Legal Framework",
+              "description": "Protection against financial poverty and ensuring social balance"
             }
-          }
+          },
+          "footer_p": "Join the Financial Balance Revolution with ATTLAS"
         },
         "stepByStepSection": {
           "title_h1": "HOW DO WE ACHIEVE IT?",
-          "title_h2": "A Plan for <span>Your Goals</span>",
+          "title_h2": "A plan for <span>your goals</span>",
           "features": {
-            "feature1": "We conduct a diagnosis of your financial profile to understand your situation.",
-            "feature2": "We negotiate the highest discount on each of your overdue debts.",
-            "feature3": "Get more benefits with good payment behavior in your settlement plan.",
-            "feature4": "We support and guide you from start to finish."
+            "feature1": "With Human Dignity",
+            "feature2": "Humanitarian Approach",
+            "feature3": "Humanitarian Debt Restructuring",
+            "feature4": "Financial and Social Rescue",
+            "feature5": "Financial Education and Economic Reintegration"
           }
         }
       },
       "metaData": {
-        "title": "Legal Solution for Your Debts - Debt Restructuring | ATTLAS",
-        "description": "At ATTLAS, we help you restructure your debts, suspend foreclosures, and protect yourself legally. Get free advice and settle your debts with the highest discounts. Contact us via WhatsApp!",
+        "title": "Legal Solution to Your Debts - Debt Restructuring | ATTLAS",
+        "description": "At ATTLAS, we help you restructure your debts, suspend garnishments, and protect yourself legally. Receive free advice and settle your debts with the highest discounts. Contact us via WhatsApp!",
         "openGraph": {
-          "title": "ATTLAS - Ultimate Solution to Debt Problems in Colombia",
-          "description": "Immediate legal protection against foreclosures and judicial executions. Personalized debt restructuring program for Colombians.",
+          "title": "ATTLAS – The Definitive Solution to Debt Problems in Colombia",
+          "description": "Immediate legal protection against garnishments and judicial actions. A personalized debt restructuring program for Colombians.",
           "images": [
             {
               "url": "/assets/imgs/favicon/favicon.png",
-              "alt": "ATTLAS team helping clients"
+              "alt": "ATTLAS team assisting clients"
             }
           ],
           "url": "https://attlasconciliacion.propensionesabogados.com/",
@@ -154,7 +156,7 @@
           "card": "summary_large_image",
           "site": "@attlas_legal",
           "title": "Legal Debt Solution | ATTLAS Colombia",
-          "description": "Immediate protection against foreclosures and debt restructuring. Get your free consultation today!",
+          "description": "Immediate protection against garnishments and debt restructuring. Get your free consultation today!",
           "images": "/assets/imgs/favicon/favicon.png"
         },
         "canonical": "https://attlasconciliacion.propensionesabogados.com/",
@@ -186,59 +188,59 @@
       "sections": {
         "heroSection": {
           "title_h1": "Our Services",
-          "title_h2": "Your <span>Solutions</span>",
-          "description_p": "We provide legal advice and representation for individuals facing financial difficulties, helping them suspend foreclosures, negotiate payment agreements, and restructure their debts under the Insolvency Law.",
+          "title_h2": "Your <span>solutions</span>",
+          "description_p": "We transform every challenge into an opportunity, offering fair, equitable, and sustainable solutions with a social approach and in defense of fundamental and human rights. Because stability and dignity are everyone’s right.",
           "features": {
             "feature1": {
-              "title": "Foreclosure Suspension",
-              "description": "We stop foreclosure and asset auction processes during negotiations"
+              "title": "Conciliation in Law",
+              "description": "Specialized center for legal solutions in insolvency with justice and dignity"
             },
             "feature2": {
-              "title": "Debt Restructuring",
-              "description": "We renegotiate payment terms with financial institutions"
+              "title": "Economic Insolvency for Natural Persons",
+              "description": "For both Merchant and Non-Merchant"
             },
             "feature3": {
-              "title": "Creditor Negotiation",
-              "description": "Professional representation for favorable agreements"
+              "title": "Mediation",
+              "description": "Dialogue processes to reach fair and balanced agreements between parties"
             },
             "feature4": {
-              "title": "Asset Protection",
-              "description": "Legal strategies to preserve your essential assets"
+              "title": "Social Brigades",
+              "description": "Social days providing legal support and insolvency solutions focusing on human rights"
             },
             "feature5": {
-              "title": "Debt Cancellation",
-              "description": "Legal management to eliminate unpayable balances"
+              "title": "Education and Training",
+              "description": "Education that turns insolvency into a new beginning"
             },
             "feature6": {
-              "title": "Interest Suspension",
-              "description": "We stop the excessive growth of debts"
+              "title": "Projects",
+              "description": "Social and environmental commitment for a sustainable future"
             },
             "feature7": {
-              "title": "Specialized Legal Defense",
-              "description": "Representation in judicial and administrative proceedings"
+              "title": "Internationalization in Human Rights",
+              "description": "Economic insolvency with a focus on international human rights"
             }
           }
         },
         "requirementsSection": {
           "title_h1": "REQUIREMENTS TO ACCESS OUR SERVICES",
           "title_h2": "What do I <span>need?</span>",
-          "description_p": "Our economic insolvency law offers multiple benefits and guarantees for individuals and businesses facing financial difficulties.",
+          "description_p": "We offer multiple benefits and guarantees for individuals and companies facing financial difficulties.",
           "features": {
             "feature1": {
               "title": "Who does it apply to?",
-              "description": "• Pensioners with excessive deductions\n• Employees with payroll loans\n• Parents with mortgages\n• Affected small business owners\n• Unemployed individuals without resources"
+              "description": "• Natural Persons\n• Merchants\n• Workers and Employers\n• Families\n• Property Owners and Tenants\n• Public and Private Entities\n• Debtors and Creditors\n• Victims of Rights Violations\n• Community and Social Organizations\n• People in a Situation of Insolvency"
             },
             "feature2": {
-              "title": "Main Guarantees",
-              "description": "• Protection of primary residence\n• Foreclosure suspension\n• Renegotiation of conditions\n• Basic subsistence protection"
+              "title": "Requirements",
+              "description": "• Valid identification\n• Formal conciliation request\n• Legitimate interest in the conflict\n• Matter subject to conciliation according to law\n• Willingness of the parties to conciliate\n• Payment of fees (if applicable)\n• Documentary support of the case\n• Legal representation (if applicable)\n• Updated contact information\n• Authorization for data processing"
             },
             "feature3": {
-              "title": "Key Benefits",
-              "description": "• Interest freeze\n• Reduced installments\n• Extended terms\n• Avoid judicial costs\n• Auction suspension"
+              "title": "Main Guarantees",
+              "description": "• Impartiality and Neutrality\n• Confidentiality of the Process\n• Access to Justice\n• Respect for Fundamental Rights\n• Legality and Legal Certainty\n• Voluntariness of the Parties\n• Efficiency and Procedural Speed\n• Equity in the Agreements\n• Recognition of Human Rights\n• Transparency in Management"
             },
             "feature4": {
-              "title": "Covered Debts",
-              "description": "• Personal loans\n• Mortgages\n• Payroll loans\n• Credit cards\n• Debts with financial institutions"
+              "title": "Budgets",
+              "description": "• Quick and effective conflict resolution\n• Reduced legal costs\n• Confidentiality and information protection\n• Equitable access to justice\n• Avoid prolonged legal proceedings\n• Encourages dialogue and cooperation\n• Legal certainty in reached agreements\n• Protection of fundamental and human rights\n• Flexibility in dispute resolution\n• Restoration of relationships between the parties"
             }
           }
         }
@@ -247,7 +249,8 @@
         "title_h1": "Financial Education",
         "title_h2": "Learn to manage your <span>finances</span>",
         "search_placeholder": "Search in Financial Education",
-        "all_category": "all"
+        "all_category": "all",
+        "metaData": {}
       },
       "metaData": {}
     },
@@ -257,17 +260,17 @@
       "pages": {
         "contact": {
           "title": "Contact Us",
-          "subTitle": "We are here to help you",
-          "name": "Name",
+          "subTitle": "We are here to <span>help you</span>",
+          "name": "First Name",
           "last_name": "Last Name",
           "subject": "Subject",
           "email": "Email",
           "message": "Message",
           "sendButton": "Send",
           "sendingMessage": "Sending message...",
-          "successMessage": "Message sent successfully!",
-          "errorMessage": "An error occurred while sending the message.",
-          "terms": "I accept <termsLink>Terms and Conditions</termsLink> & <privacyLink>Privacy Policies</privacyLink>",
+          "successMessage": "Message sent successfully",
+          "errorMessage": "Error sending message",
+          "terms": "I accept the <termsLink>Terms and Conditions</termsLink> and <privacyLink>Privacy Policies</privacyLink>",
           "metaData": {}
         },
         "culture": {
@@ -275,20 +278,28 @@
           "metaData": {}
         },
         "faq": {
-          "sections": {},
-          "metaData": {}
-        },
-        "history": {
-          "sections": {},
-          "metaData": {}
+          "sections": {
+            "heroSection": {
+              "title_h1": "Frequently Asked Questions",
+              "title_h2": "Do you have any <span>questions</span>?",
+              "search_placeholder": "Search in Frequently Asked Questions",
+              "show_more": "Show More"
+            },
+            "metaData": {}
+          },
+          "history": {
+            "sections": {},
+            "metaData": {}
+          }
         }
-      }
-    },
-    "documents": {
-      "legal": {
-        "termsAndConditions": "/assets/documents/legal/terms-and-conditions_en.pdf",
-        "cookies": "/assets/documents/legal/cookies_en.pdf",
-        "policyPersonalData": "/assets/documents/legal/policy-for-the-treatment-of-personal-data_en.pdf"
+      },
+      "documents": {
+        "legal": {
+          "termsAndConditions": "/assets/documents/legal/terms-and-conditions.pdf",
+          "cookies": "/assets/documents/legal/cookies.pdf",
+          "policyPersonalData": "/assets/documents/legal/policy-for-the-treatment-of-personal-data.pdf"
+        },
+        "complaintsAndQueries": "Complaints, Claims, and Suggestions (PQRS)"
       }
     }
   }

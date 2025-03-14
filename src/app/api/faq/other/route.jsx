@@ -3,9 +3,8 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
     try {
-        // Realiza la solicitud GET a la API externa
         const response = await axios.get(
-            'http://localhost:8000/api/v1/financial-education/'
+            'http://localhost:8000/api/v1/other-faq/'
         );
 
         if (!response.data) {
@@ -16,7 +15,7 @@ export async function GET() {
             status: 200,
         });
     } catch (error) {
-        console.error('Error en financial-education route:', error.message);
+        console.error('Error en FAQ route:', error.message);
 
         return NextResponse.json(
             {

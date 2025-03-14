@@ -1,7 +1,10 @@
 'use client';
 
+import SubTitleComponent from '@/components/micro-components/sub_title';
+import TitleComponent from '@/components/micro-components/title';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { toast } from 'react-toastify';
@@ -298,10 +301,12 @@ export default function ComplaintFormWizard() {
         }
     };
 
+    const t = useTranslations('Pages.documents.complaintsAndQueries');
+
     return (
         <div className="container py-5">
-            <h1 className="mb-4 text-center">Peticiones, Quejas, Reclamos y Sugerencias</h1>
-            <h2 className="mb-4 text-center">Propensiones Abogados y Fundación Attlas</h2>
+            <TitleComponent title={t('title_h1')} />
+            <SubTitleComponent t={t} sub_title={'title_h2'} />
 
             <div className={`${styles.wizardProgress} mb-5`}>
                 {STEPS.map((step, index) => (

@@ -50,7 +50,7 @@ export default function Navigation() {
                 {t('aboutUs.subMenu.history')}
               </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item as={Link} href="#" onClick={() => setExpanded(false)}>
+              <NavDropdown.Item as={Link} href="/about-us/frequently-asked-questions" onClick={() => setExpanded(false)}>
                 {t('aboutUs.subMenu.faq')}
               </NavDropdown.Item>
             </NavDropdown>

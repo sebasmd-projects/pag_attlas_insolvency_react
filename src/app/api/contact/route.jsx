@@ -1,12 +1,14 @@
 import axios from 'axios';
 import { NextResponse } from 'next/server';
 
+
 export async function POST(request) {
+
     try {
         const data = await request.json();
 
         const response = await axios.post(
-            'https://propensionesabogados.com/api/v1/contact/',
+            'http://localhost:8000/api/v1/contact/',
             data
         );
 

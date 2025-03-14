@@ -1,6 +1,10 @@
+import SubTitleComponent from '@/components/micro-components/sub_title';
+import TitleComponent from '@/components/micro-components/title';
 import { useTranslations } from 'next-intl';
 import Image from "next/image";
-import { FaMoneyBillTrendUp, FaPeopleGroup, FaRegCalendarCheck } from "react-icons/fa6";
+import { AiOutlineTruck } from "react-icons/ai";
+import { FaUserShield } from "react-icons/fa";
+import { FaPeopleGroup } from "react-icons/fa6";
 import { GiColombia } from "react-icons/gi";
 
 export default function WhyUsSection() {
@@ -9,10 +13,10 @@ export default function WhyUsSection() {
     const tf = useTranslations('Pages.homePage.sections.whyUsSection.features');
 
     const stats = [
-        { value: tf('feature1.title'), icon: <FaMoneyBillTrendUp />, label: tf('feature1.description') },
-        { value: tf('feature2.title'), icon: <FaRegCalendarCheck />, label: tf('feature2.description') },
-        { value: tf('feature3.title'), icon: <GiColombia />, label: tf('feature3.description') },
-        { value: tf('feature4.title'), icon: <FaPeopleGroup />, label: tf('feature4.description') }
+        { value: tf('feature1.title'), icon: <GiColombia />, label: tf('feature1.description') },
+        { value: tf('feature2.title'), icon: <AiOutlineTruck />, label: tf('feature2.description') },
+        { value: tf('feature3.title'), icon: <FaUserShield />, label: tf('feature3.description') },
+        { value: tf('feature4.title'), icon: <FaPeopleGroup />, label: tf('feature4.description') },
     ];
     return (
         <section>
@@ -31,29 +35,9 @@ export default function WhyUsSection() {
 
                     <div className="col-md-6" >
                         <div className="mb-4">
-                            <h3 className="text-uppercase mb-3" style={{
-                                color: '#0e3692',
-                                fontSize: '1rem',
-                                fontWeight: 800,
-                                letterSpacing: '0.15rem',
-                                paddingBottom: '2rem'
-                            }}>
-                                {t('title_h1')}
-                            </h3>
-                            <h2 className="display-5 fw-bold" style={{
-                                color: '#7fd2cb',
-                                fontSize: '2rem',
-                                lineHeight: '2.25rem',
-                                marginBottom: '1.5rem'
-                            }}>
-                                {t.rich('title_h2', {
-                                    span: (chunks) => (
-                                        <span style={{ color: '#0e3692' }}>
-                                            {chunks}
-                                        </span>
-                                    )
-                                })}
-                            </h2>
+                            <TitleComponent title={t('title_h1')} />
+                            <SubTitleComponent t={t} sub_title={'title_h2'} />
+
                             <p className="mb-4" style={{
                                 fontSize: '1rem',
                                 lineHeight: '1.688rem',
@@ -67,9 +51,9 @@ export default function WhyUsSection() {
                                 <div key={index} className="col-6">
                                     <div className="h-100">
                                         <h4 className="fw-bold" style={{
-                                            fontSize: '1.5rem',
+                                            fontSize: '1.2rem',
                                             fontWeight: 400,
-                                            color: '#7fd2cb',
+                                            color: '#0e3692',
                                             marginBottom: '0.5rem'
                                         }}>
                                             {stat.value} {stat.icon}

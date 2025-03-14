@@ -1,6 +1,7 @@
 import { useTranslations } from 'next-intl';
 import Image from "next/image";
-
+import TitleComponent from '@/components/micro-components/title';
+import SubTitleComponent from '@/components/micro-components/sub_title';
 
 export default function StepByStepSection() {
 
@@ -26,6 +27,11 @@ export default function StepByStepSection() {
             icon: '/assets/imgs/page/stepBYstep4.svg',
             text: t('features.feature4'),
             aosDelay: 250
+        },
+        {
+            icon: '/assets/imgs/page/stepBYstep5.svg',
+            text: t('features.feature5'),
+            aosDelay: 250
         }
     ];
 
@@ -48,30 +54,8 @@ export default function StepByStepSection() {
 
                     <div className="col-md-7">
                         <div className="mb-4">
-                            <h3 className="text-uppercase mb-3" style={{
-                                color: '#0e3692',
-                                fontSize: '1rem',
-                                fontWeight: 800,
-                                letterSpacing: '0.15rem',
-                                paddingBottom: '2rem'
-                            }}>
-                                {t('title_h1')}
-                            </h3>
-
-                            <h2 className="display-5 fw-bold" style={{
-                                color: '#7fd2cb',
-                                fontSize: '2rem',
-                                lineHeight: '2.25rem',
-                                marginBottom: '1.5rem'
-                            }}>
-                                {t.rich('title_h2', {
-                                    span: (chunks) => (
-                                        <span style={{ color: '#0e3692' }}>
-                                            {chunks}
-                                        </span>
-                                    )
-                                })}
-                            </h2>
+                            <TitleComponent title={t('title_h1')} />
+                            <SubTitleComponent t={t} sub_title={'title_h2'} />
                         </div>
 
                         <div className="steps-container" style={{ position: 'relative' }}>

@@ -2,7 +2,7 @@
   "name": "example-app-router",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "lint": "eslint src && tsc && prettier src --check",
     "test": "pnpm run test:playwright && pnpm run test:jest",
     "test:playwright": "playwright test",
@@ -14,7 +14,7 @@
     "@tanstack/react-query": "5.66.0",
     "@tanstack/react-query-devtools": "5.66.0",
     "aos": "2.3.4",
-    "axios": "1.7.9",
+    "axios": "^1.8.3",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "1.11.3",
     "dompurify": "^3.2.4",
@@ -31,6 +31,7 @@
   "devDependencies": {
     "@jest/globals": "29.7.0",
     "@playwright/test": "1.50.1",
+    "@svgr/webpack": "^8.1.0",
     "@testing-library/react": "16.2.0",
     "@types/jest": "29.5.14",
     "@types/lodash": "4.17.15",

@@ -3,7 +3,7 @@
 const withNextIntl = require('next-intl/plugin')();
 
 /** @type {import('next').NextConfig} */
-const config = {
+const nextConfig = {
     images: {
         remotePatterns: [
             {
@@ -15,7 +15,15 @@ const config = {
                 hostname: 'propensionesabogados.com',
             }
         ]
+    },
+    webpack(config) {
+        config.module.rules.push({
+            test: /\.svg$/,
+            use: ["@svgr/webpack"]
+        });
+
+        return config;
     }
 };
 
-module.exports = withNextIntl(config);
+module.exports = withNextIntl(nextConfig);

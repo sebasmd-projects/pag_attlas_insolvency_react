@@ -55,7 +55,7 @@ export default function Footer() {
                             </h5>
                             <div className="d-flex gap-3" style={{ fontSize: '1.5rem' }}>
                                 {socialLinks.map((social, index) => (
-                                    <Link key={index} href={social.url} target="_blank" rel="noopener noreferrer" style={{ color: 'white' }}>
+                                    <Link key={index} href={social.url} target="_blank" rel="noopener noreferrer" style={{ color: 'white' }} alt={social.alt}>
                                         {social.icon}
                                     </Link>
                                 ))}
@@ -82,7 +82,7 @@ export default function Footer() {
                         <h5 className="mb-3" style={{ fontSize: '1.125rem', fontWeight: 800 }}>FAQS</h5>
                         <div>
                             <Link
-                                href="/"
+                                href="/about-us/frequently-asked-questions"
                                 className="d-block text-white text-decoration-none mb-2"
                                 style={{ fontSize: '1rem' }}
                             >

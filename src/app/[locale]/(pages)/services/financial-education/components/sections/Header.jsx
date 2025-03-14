@@ -1,18 +1,16 @@
+import SubTitleComponent from '@/components/micro-components/sub_title';
+import TitleComponent from '@/components/micro-components/title';
 import { useTranslations } from 'next-intl';
 
 export default function HeaderSection() {
 
-    const translation = useTranslations('Pages.servicesPage.financialEducation');
+    const t = useTranslations('Pages.servicesPage.financialEducation');
 
     return (
         <div className="row mb-5 text-center">
             <div className='col'>
-                <h3 style={{ color: '#0e3692', fontSize: '1rem', fontWeight: 800, letterSpacing: '0.15rem', paddingBottom: '2rem' }}>
-                    {translation('title_h1')}
-                </h3>
-                <h2 className="display-5 fw-bold" style={{ color: '#7fd2cb', fontSize: '2rem', lineHeight: '2.25rem' }}>
-                    {translation.rich('title_h2', { span: (chunks) => <span style={{ color: '#0e3692' }}>{chunks}</span> })}
-                </h2>
+                <TitleComponent title={t('title_h1')} />
+                <SubTitleComponent t={t} sub_title={'title_h2'} />
             </div>
         </div>
     );
