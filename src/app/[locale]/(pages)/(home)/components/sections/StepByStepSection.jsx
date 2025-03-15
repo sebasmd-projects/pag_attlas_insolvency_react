@@ -1,7 +1,8 @@
+import SubTitleComponent from '@/components/micro-components/sub_title';
+import TitleComponent from '@/components/micro-components/title';
 import { useTranslations } from 'next-intl';
 import Image from "next/image";
-import TitleComponent from '@/components/micro-components/title';
-import SubTitleComponent from '@/components/micro-components/sub_title';
+import { PiNumberFive, PiNumberFour, PiNumberOne, PiNumberThree, PiNumberTwo } from "react-icons/pi";
 
 export default function StepByStepSection() {
 
@@ -9,29 +10,29 @@ export default function StepByStepSection() {
 
     const steps = [
         {
-            icon: '/assets/imgs/page/stepBYstep1.svg',
+            icon: <PiNumberOne size={20} color="#876DE0" />,
             text: t('features.feature1'),
-            aosDelay: 100
+            aosDelay: 20
         },
         {
-            icon: '/assets/imgs/page/stepBYstep2.svg',
+            icon: <PiNumberTwo size={20} color="#876DE0" />,
             text: t('features.feature2'),
-            aosDelay: 150
+            aosDelay: 30
         },
         {
-            icon: '/assets/imgs/page/stepBYstep3.svg',
+            icon: <PiNumberThree size={20} color="#876DE0" />,
             text: t('features.feature3'),
-            aosDelay: 200
+            aosDelay: 40
         },
         {
-            icon: '/assets/imgs/page/stepBYstep4.svg',
+            icon: <PiNumberFour size={20} color="#876DE0" />,
             text: t('features.feature4'),
-            aosDelay: 250
+            aosDelay: 50
         },
         {
-            icon: '/assets/imgs/page/stepBYstep5.svg',
+            icon: <PiNumberFive size={20} color="#876DE0" />,
             text: t('features.feature5'),
-            aosDelay: 250
+            aosDelay: 60
         }
     ];
 
@@ -64,24 +65,8 @@ export default function StepByStepSection() {
                                     <div className="row g-3 align-items-start">
                                         <div className="col-auto">
                                             <div className="position-relative">
-                                                <Image
-                                                    src={step.icon}
-                                                    alt={`Paso ${index + 1}`}
-                                                    style={{ width: '50px' }}
-                                                    width={50}
-                                                    height={50}
-                                                />
-                                                {index < steps.length - 1 && (
-                                                    <div style={{
-                                                        position: 'absolute',
-                                                        left: '50%',
-                                                        top: '100%',
-                                                        width: '2px',
-                                                        height: '40px',
-                                                        backgroundColor: '#876DE0',
-                                                        transform: 'translateX(-50%)'
-                                                    }}></div>
-                                                )}
+                                                {step.icon}
+                                                
                                             </div>
                                         </div>
 
