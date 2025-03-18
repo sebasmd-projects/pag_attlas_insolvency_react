@@ -39,9 +39,9 @@
         "forgotPassword": "Forgot Password"
       }
     },
-    "freeAdvice": {
-      "menu": "Free Advice"
-    },
+    "freeAdvice":  "Free Advice",
+    "donation":  "Donation",
+    "campus":  "B-Learning Platform",
     "services": {
       "menu": "Services",
       "subMenu": {
@@ -95,7 +95,8 @@
               "title": "Social Impact",
               "description": "Pro-bono and volunteer work for people in vulnerable situations."
             }
-          }
+          },
+          "onu_desa": "The Attlas Foundation is registered in the civil society database of the ONU Department of Economic and Social Affairs (DESA)."
         },
         "mainTeamSection": {
           "title_h1": "EXPERIENCE AND HUMAN QUALITY",

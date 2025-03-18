@@ -10,6 +10,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Navbar from 'react-bootstrap/Navbar';
 import { FaWhatsapp } from "react-icons/fa";
 import LocaleSwitcher from '../LocaleSwitcher/LocaleSwitcher';
+import NavButton from './components/NavButton';
 
 export default function Navigation() {
   const t = useTranslations('Navigation');
@@ -59,22 +60,37 @@ export default function Navigation() {
               {t('contact.menu')}
             </Nav.Link>
 
+
+
             <div className="d-flex gap-3 align-items-center">
-              <Link
-                className="btn btn-primary-gradient rounded-pill px-4"
-                href="https://wa.me/573156399722"
-                onClick={() => setExpanded(false)}
-                onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
-                onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-                style={{
-                  background: 'linear-gradient(90deg, #4F46E5 0%, #8B5CF6 100%)',
-                  transition: 'transform 0.3s',
-                  border: 'none'
-                }}
-                target='_blank'
-              >
-                {t('freeAdvice.menu')} <FaWhatsapp />
-              </Link>
+              <NavButton
+                gradient="linear-gradient(90deg, #1a4ab3 0%, #0e3692 100%)"
+                href='https://wa.me/573183280176'
+                icon={FaWhatsapp}
+                label="freeAdvice"
+                setExpanded={setExpanded}
+              />
+            </div>
+
+
+            <div className="d-flex gap-3 align-items-center">
+              <NavButton
+                color='black'
+                gradient="linear-gradient(90deg, #7fd2cb 0%, #5ab8b0 100%)"
+                href='https://wa.me/573183280176'
+                label="donation"
+                setExpanded={setExpanded}
+              />
+            </div>
+
+
+            <div className="d-flex gap-3 align-items-center">
+              <NavButton
+                color='black'
+                gradient="linear-gradient(90deg, #ffdf40 0%, #FED100 50%, #d4a900 100%)"
+                label="campus"
+                setExpanded={setExpanded}
+              />
             </div>
           </Nav>
 

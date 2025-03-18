@@ -84,6 +84,14 @@ export default function SolutionsSection() {
                             height={600}
                         />
                     </div>
+
+                    <div className="col-12">
+                        <div className="d-flex justify-content-center">
+                            <h5>
+                                {t('onu_desa')}
+                            </h5>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
