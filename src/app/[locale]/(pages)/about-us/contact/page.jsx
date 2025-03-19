@@ -109,7 +109,7 @@ export default function ContactPage({ params: { locale } }) {
                 </div>
 
                 {/* Apellido */}
-                <div className="col-md-6" data-aos="fade-left">
+                <div className="col-md-6" data-aos="fade-down">
                     <label htmlFor="last_name" className="form-label">
                         <FaUser className="me-1" />
                         {t('last_name')}
@@ -143,7 +143,7 @@ export default function ContactPage({ params: { locale } }) {
                 </div>
 
                 {/* Asunto */}
-                <div className="col-md-6" data-aos="fade-left">
+                <div className="col-md-6" data-aos="fade-down">
                     <label htmlFor="subject" className="form-label">
                         <HiOutlinePencilAlt className="me-1" />
                         {t('subject')}

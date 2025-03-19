@@ -84,8 +84,12 @@ export default function SolutionsSection() {
                             height={600}
                         />
                     </div>
-                    
-                    <div className="col-md-5 d-flex justify-content-center align-items-center order-1 order-md-0" data-aos="fade-right" data-aos-delay="50">
+
+
+                </div>
+
+                <div className="row mt-5 d-flex justify-content-center align-items-center">
+                    <div className="col-md-6 " data-aos="fade-right" data-aos-delay="50">
                         <Image
                             src="/assets/imgs/page/desa.jpeg"
                             alt="Financial solutions"
@@ -96,7 +100,7 @@ export default function SolutionsSection() {
                         />
                     </div>
 
-                    <div className="col-6" data-aos="fade-left" data-aos-delay="50">
+                    <div className="col-md-6" data-aos="fade-down" data-aos-delay="50">
                         <div className="d-flex justify-content-center">
                             <h5>
                                 {

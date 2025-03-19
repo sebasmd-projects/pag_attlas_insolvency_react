@@ -79,7 +79,7 @@ export default function RequirementsSection() {
                             loading="lazy"
                             width={600}
                             height={400}
-                            data-aos="fade-left" data-aos-delay="100"
+                            data-aos="fade-down" data-aos-delay="100"
                         />
                     </div>
                 </div>
