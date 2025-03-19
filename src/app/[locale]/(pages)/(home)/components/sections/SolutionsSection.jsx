@@ -87,7 +87,7 @@ export default function SolutionsSection() {
                     
                     <div className="col-md-5 d-flex justify-content-center align-items-center order-1 order-md-0" data-aos="fade-right" data-aos-delay="50">
                         <Image
-                            src="/assets/imgs/page/solutions-img.png"
+                            src="/assets/imgs/page/desa.jpeg"
                             alt="Financial solutions"
                             className="img-fluid rounded-2"
                             loading="lazy"
