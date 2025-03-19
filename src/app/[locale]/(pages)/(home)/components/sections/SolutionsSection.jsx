@@ -99,7 +99,15 @@ export default function SolutionsSection() {
                     <div className="col-6" data-aos="fade-left" data-aos-delay="50">
                         <div className="d-flex justify-content-center">
                             <h5>
-                                {t('onu_desa')}
+                                {
+                                    t.rich('onu_desa', {
+                                        p: (chunks) => (
+                                            <p>
+                                                {chunks}
+                                            </p>
+                                        ),
+                                    })
+                                }
                             </h5>
                         </div>
                     </div>

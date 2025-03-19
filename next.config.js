@@ -8,12 +8,16 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: 'attlasconciliacion.propensionesabogados.com',
+                hostname: 'propensionesabogados.com',
             },
             {
                 protocol: 'https',
-                hostname: 'propensionesabogados.com',
-            }
+                hostname: 'fundacionattlas.com',
+            },
+            {
+                protocol: 'https',
+                hostname: 'fundacionattlas.org',
+            },
         ]
     },
     webpack(config) {

@@ -39,9 +39,9 @@
         "forgotPassword": "Olvidé mi contraseña"
       }
     },
-    "freeAdvice":  "Asesoría gratuita",
-    "donation":  "Donación",
-    "campus":  "Plataforma B-Learning",
+    "freeAdvice": "Asesoría gratuita",
+    "donation": "Donación",
+    "campus": "Plataforma B-Learning",
     "services": {
       "menu": "Servicios",
       "subMenu": {
@@ -96,7 +96,7 @@
               "description": "Pro-bono y voluntariado para personas en estado de vulnerabilidad."
             }
           },
-          "onu_desa": "La Fundación Attlas está aceptada en la base de datos de la sociedad civil del Departamento de Asuntos Económicos y Sociales de la ONU (DESA)."
+          "onu_desa": "<p>La Fundación Attlas Org, ESTA  INSCRITA en la base de datos del United Nations Department of Economic and Social Affairs (UN DESA - ONU), impulsa el proyecto \"Alivio de Deuda Colombia: Un Nuevo Comienzo\", una iniciativa respaldada por la firma de abogados Propensiones Internacional.</p> <p>Este programa representa un modelo innovador de justicia económica, diseñado para fortalecer la recuperación patrimonial y la estabilidad financiera de sectores vulnerables mediante mecanismos jurídicos avanzados y estrategias financieras especializadas. Basado en los principios de cooperación internacional y desarrollo sostenible, este proyecto no solo busca aliviar las cargas económicas de miles de familias, sino también establecer un marco legal que garantice su inclusión social y estabilidad a largo plazo.</p>"
         },
         "mainTeamSection": {
           "title_h1": "EXPERIENCIA Y CALIDAD HUMANA",
@@ -150,7 +150,7 @@
               "alt": "Equipo ATTLAS ayudando a clientes"
             }
           ],
-          "url": "https://attlasconciliacion.propensionesabogados.com/",
+          "url": "https://fundacionattlas.org/",
           "type": "website"
         },
         "twitter": {
@@ -160,7 +160,7 @@
           "description": "Protección inmediata contra embargos y reestructuración de deudas. ¡Recibe tu asesoría gratuita hoy mismo!",
           "images": "/assets/imgs/favicon/favicon.png"
         },
-        "canonical": "https://attlasconciliacion.propensionesabogados.com/",
+        "canonical": "https://fundacionattlas.org/",
         "structuredData": {
           "context": "https://schema.org",
           "type": "ProfessionalService",

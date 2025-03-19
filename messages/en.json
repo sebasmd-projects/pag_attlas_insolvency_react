@@ -96,7 +96,7 @@
               "description": "Pro-bono and volunteer work for people in vulnerable situations."
             }
           },
-          "onu_desa": "The Attlas Foundation is registered in the civil society database of the ONU Department of Economic and Social Affairs (DESA)."
+          "onu_desa": "<p>The Attlas Org Foundation, REGISTERED in the database of the United Nations Department of Economic and Social Affairs (UN DESA - ONU), promotes the project \"Colombia Debt Relief: A New Beginning\", an initiative supported by the law firm Propensiones Internacional.</p> <p>This program represents an innovative model of economic justice, designed to strengthen asset recovery and financial stability for vulnerable sectors through advanced legal mechanisms and specialized financial strategies. Based on the principles of international cooperation and sustainable development, this project not only seeks to alleviate the economic burdens of thousands of families, but also to establish a legal framework that guarantees their social inclusion and long-term stability.</p>"
         },
         "mainTeamSection": {
           "title_h1": "EXPERIENCE AND HUMAN QUALITY",
@@ -150,7 +150,7 @@
               "alt": "ATTLAS team assisting clients"
             }
           ],
-          "url": "https://attlasconciliacion.propensionesabogados.com/",
+          "url": "https://fundacionattlas.org/",
           "type": "website"
         },
         "twitter": {
@@ -160,7 +160,7 @@
           "description": "Immediate protection against garnishments and debt restructuring. Get your free consultation today!",
           "images": "/assets/imgs/favicon/favicon.png"
         },
-        "canonical": "https://attlasconciliacion.propensionesabogados.com/",
+        "canonical": "https://fundacionattlas.org/",
         "structuredData": {
           "context": "https://schema.org",
           "type": "ProfessionalService",
