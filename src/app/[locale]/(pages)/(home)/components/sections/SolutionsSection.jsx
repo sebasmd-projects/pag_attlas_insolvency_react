@@ -74,7 +74,7 @@ export default function SolutionsSection() {
                         </div>
                     </div>
 
-                    <div className="col-md-5 d-flex justify-content-center align-items-center order-1 order-md-0" data-aos="fade-right" data-aos-delay="100">
+                    <div className="col-md-5 d-flex justify-content-center align-items-center order-1 order-md-0" data-aos="fade-down" data-aos-delay="100">
                         <Image
                             src="/assets/imgs/page/solutions-img.png"
                             alt="Financial solutions"
@@ -85,7 +85,7 @@ export default function SolutionsSection() {
                         />
                     </div>
                     
-                    <div className="col-md-5 d-flex justify-content-center align-items-center order-1 order-md-0" data-aos="fade-right" data-aos-delay="100">
+                    <div className="col-md-5 d-flex justify-content-center align-items-center order-1 order-md-0" data-aos="fade-right" data-aos-delay="50">
                         <Image
                             src="/assets/imgs/page/solutions-img.png"
                             alt="Financial solutions"
@@ -96,7 +96,7 @@ export default function SolutionsSection() {
                         />
                     </div>
 
-                    <div className="col-6">
+                    <div className="col-6" data-aos="fade-left" data-aos-delay="50">
                         <div className="d-flex justify-content-center">
                             <h5>
                                 {t('onu_desa')}
