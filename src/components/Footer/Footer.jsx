@@ -121,6 +121,7 @@ export default function Footer() {
                                     href="https://sebasmoralesd.com/"
                                     className="text-decoration-none color-primary"
                                     style={{ color: '#7fd2cb' }}
+                                    target="_blank"
                                 >
                                     {chunks}
                                 </Link>
@@ -130,6 +131,7 @@ export default function Footer() {
                                     href="https://www.linkedin.com/in/carlos-andres-morales-valencia-5873b2189/"
                                     className="text-decoration-none color-primary"
                                     style={{ color: '#7fd2cb' }}
+                                    target="_blank"
                                 >
                                     {chunks}
                                 </Link>

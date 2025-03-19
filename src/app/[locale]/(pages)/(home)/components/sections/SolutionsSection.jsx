@@ -15,25 +15,25 @@ export default function SolutionsSection() {
             icon: <ReactSVG src="/assets/imgs/icons/contact.svg" />,
             title: t('features.feature1.title'),
             description: t('features.feature1.description'),
-            aosDelay: 100
+            aosDelay: 50
         },
         {
             icon: <ReactSVG src="/assets/imgs/icons/family.svg" />,
             title: t('features.feature2.title'),
             description: t('features.feature2.description'),
-            aosDelay: 150
+            aosDelay: 60
         },
         {
             icon: <ReactSVG src="/assets/imgs/icons/blearning.svg" />,
             title: t('features.feature3.title'),
             description: t('features.feature3.description'),
-            aosDelay: 200
+            aosDelay: 70
         },
         {
             icon: <ReactSVG src="/assets/imgs/icons/hand_person_hearth.svg" />,
             title: t('features.feature4.title'),
             description: t('features.feature4.description'),
-            aosDelay: 250
+            aosDelay: 80
         }
     ];
 
@@ -84,8 +84,19 @@ export default function SolutionsSection() {
                             height={600}
                         />
                     </div>
+                    
+                    <div className="col-md-5 d-flex justify-content-center align-items-center order-1 order-md-0" data-aos="fade-right" data-aos-delay="100">
+                        <Image
+                            src="/assets/imgs/page/solutions-img.png"
+                            alt="Financial solutions"
+                            className="img-fluid rounded-2"
+                            loading="lazy"
+                            width={600}
+                            height={600}
+                        />
+                    </div>
 
-                    <div className="col-12">
+                    <div className="col-6">
                         <div className="d-flex justify-content-center">
                             <h5>
                                 {t('onu_desa')}

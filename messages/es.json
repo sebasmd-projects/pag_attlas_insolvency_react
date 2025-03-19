@@ -293,14 +293,17 @@
             "metaData": {}
           }
         }
+      }
+    },
+    "documents": {
+      "legal": {
+        "termsAndConditions": "/assets/documents/legal/terms-and-conditions.pdf",
+        "cookies": "/assets/documents/legal/cookies.pdf",
+        "policyPersonalData": "/assets/documents/legal/policy-for-the-treatment-of-personal-data.pdf"
       },
-      "documents": {
-        "legal": {
-          "termsAndConditions": "/assets/documents/legal/terms-and-conditions.pdf",
-          "cookies": "/assets/documents/legal/cookies.pdf",
-          "policyPersonalData": "/assets/documents/legal/policy-for-the-treatment-of-personal-data.pdf"
-        },
-        "complaintsAndQueries": "Reclamos, quejas y sugerencias (PQRS)"
+      "complaintsAndQueries": {
+        "title_h1": "Reclamos, quejas y sugerencias (PQRS)",
+        "title_h2": "Si tienes alguna inquietud, reclamo, queja o sugerencia, por favor diligencia el siguiente formulario y nos pondremos en contacto contigo a la mayor brevedad posible."
       }
     }
   }
