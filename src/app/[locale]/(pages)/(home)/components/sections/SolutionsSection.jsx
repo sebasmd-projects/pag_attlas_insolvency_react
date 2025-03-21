@@ -6,6 +6,7 @@ import TitleComponent from '@/components/micro-components/title';
 import { useTranslations } from 'next-intl';
 import Image from "next/image";
 import { ReactSVG } from 'react-svg';
+import Link from 'next/link';
 
 export default function SolutionsSection() {
     const t = useTranslations('Pages.homePage.sections.solutionsSection');
@@ -103,16 +104,16 @@ export default function SolutionsSection() {
                     <div className="col-md-6" data-aos="fade-down" data-aos-delay="50">
                         <div className="d-flex justify-content-center">
                             <h5>
-                                {
-                                    t.rich('onu_desa', {
-                                        p: (chunks) => (
-                                            <p>
-                                                {chunks}
-                                            </p>
-                                        ),
-                                    })
-                                }
+                                {t.rich('onu_desa', {
+                                    p: (chunks) => <p>{chunks}</p>,
+                                    link: (chunks) => (
+                                        <Link href="https://propensionesabogados.com/" target="_blank" rel="opener referrer">
+                                            {chunks}
+                                        </Link>
+                                    ),
+                                })}
                             </h5>
+
                         </div>
                     </div>
                 </div>
