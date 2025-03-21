@@ -39,7 +39,7 @@ export default function SkeletonLoaderComponent({ t }) {
                 <div className="col-12">
                     <Form.Control
                         type="text"
-                        placeholder={t('search_placeholder')}
+                        placeholder={t('heroSection.search_placeholder')}
                         className="mb-4 disabled"
                         disabled
                     />
@@ -58,7 +58,7 @@ export default function SkeletonLoaderComponent({ t }) {
                                     </div>
                                     <p className="mb-1">... ... ...</p>
                                     <small className="text-muted">
-                                        <u>{t('show_more')}</u>
+                                        <u>{t('contentSection.show_more')}</u>
                                     </small>
                                 </ListGroup.Item>
                             ))

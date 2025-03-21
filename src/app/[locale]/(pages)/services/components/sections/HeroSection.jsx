@@ -1,13 +1,13 @@
+import CardComponent from '@/components/micro-components/card';
+import SubTitleComponent from '@/components/micro-components/sub_title';
+import TitleComponent from '@/components/micro-components/title';
+import { useTranslations } from 'next-intl';
 import Image from "next/image";
 import { BsStoplights } from "react-icons/bs";
 import { FaBalanceScale, FaFileContract, FaHandshake } from "react-icons/fa";
 import { FaMoneyBillTrendUp } from "react-icons/fa6";
 import { RiHomeHeartLine } from "react-icons/ri";
 import { TbPigMoney } from "react-icons/tb";
-import { useTranslations } from 'next-intl';
-import TitleComponent from '@/components/micro-components/title';
-import SubTitleComponent from '@/components/micro-components/sub_title';
-import CardComponent from '@/components/micro-components/card';
 
 export default function ServicesHeroSection() {
 
@@ -66,10 +66,10 @@ export default function ServicesHeroSection() {
                                     <div className="col-lg-12 col-md-12 mt-4 pt-2">
                                         <div className="card work-desk rounded border-0 shadow-lg overflow-hidden" data-aos="fade-right" data-aos-delay="100">
                                             <Image
-                                                src="/assets/imgs/page/241x362.png" className="img-fluid"
+                                                src="/assets/imgs/page/306x241.jpg" className="img-fluid"
                                                 alt="Image"
-                                                width={241}
-                                                height={362}
+                                                width={306}
+                                                height={241}
                                             />
                                             <div className="img-overlay bg-dark"></div>
                                         </div>
@@ -82,7 +82,7 @@ export default function ServicesHeroSection() {
                                     <div className="col-lg-12 col-md-12">
                                         <div className="card work-desk rounded border-0 shadow-lg overflow-hidden" data-aos="fade-down" data-aos-delay="100">
                                             <Image
-                                                src="/assets/imgs/page/337x450.png" className="img-fluid"
+                                                src="/assets/imgs/page/337x450.avif" className="img-fluid"
                                                 alt="Image"
                                                 width={337}
                                                 height={450}
@@ -94,7 +94,7 @@ export default function ServicesHeroSection() {
                                     <div className="col-lg-12 col-md-12 mt-4 pt-2">
                                         <div className="card work-desk rounded border-0 shadow-lg overflow-hidden" data-aos="fade-up" data-aos-delay="100">
                                             <Image
-                                                src="/assets/imgs/page/600x400.png" className="img-fluid"
+                                                src="/assets/imgs/page/600x400.jpg" className="img-fluid"
                                                 alt="Image"
                                                 width={600}
                                                 height={400}

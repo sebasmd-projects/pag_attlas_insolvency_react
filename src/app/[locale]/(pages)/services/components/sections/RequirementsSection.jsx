@@ -73,7 +73,7 @@ export default function RequirementsSection() {
 
                     <div className="col-md-4">
                         <Image
-                            src="/assets/imgs/page/whyUs.png"
+                            src="/assets/imgs/page/que_necesito.jpeg"
                             alt="Financial Protection"
                             className="img-fluid rounded-3"
                             loading="lazy"

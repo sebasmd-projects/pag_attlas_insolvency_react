@@ -55,8 +55,8 @@ export default function FAQPage() {
                         alt="Financial solutions"
                         className="img-fluid rounded-5"
                         loading="lazy"
-                        width={600}
-                        height={600}
+                        width={300}
+                        height={300}
                     />
                 </div>
             </div>

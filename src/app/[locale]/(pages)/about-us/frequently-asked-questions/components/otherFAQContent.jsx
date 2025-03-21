@@ -7,7 +7,7 @@ export default function OtherFAQComponent({ t, filteredOtherFAQs, openItems, tog
         <>
             <ListGroup className="w-100">
                 {filteredOtherFAQs.length === 0 ? (
-                    <ListGroup.Item className="text-center">{t('no_search_avaible')}</ListGroup.Item>
+                    <ListGroup.Item className="text-center">{t('contentSection.no_search_avaible')}</ListGroup.Item>
                 ) : (
                     filteredOtherFAQs.map((faq) => (
                         <ListGroup.Item
@@ -21,7 +21,7 @@ export default function OtherFAQComponent({ t, filteredOtherFAQs, openItems, tog
                             </div>
                             <p className="mb-1">{faq.short_answer}</p>
                             <small className="text-muted">
-                                <u>{openItems.includes(faq.id) ? t('show_less') : t('show_more')}</u>
+                                <u>{openItems.includes(faq.id) ? t('contentSection.show_less') : t('contentSection.show_more')}</u>
                             </small>
                             <div
                                 className={`${styles.collapseContent} ${openItems.includes(faq.id) ? styles.open : ""}`}

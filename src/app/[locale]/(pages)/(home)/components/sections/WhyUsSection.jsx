@@ -24,7 +24,7 @@ export default function WhyUsSection() {
                 <div className="row g-4 align-items-center">
                     <div className="col-md-6" data-aos="fade-right" data-aos-delay="100">
                         <Image
-                            src="/assets/imgs/page/whyUs.png"
+                            src="/assets/imgs/page/whyUs.webp"
                             alt="Experience"
                             className="img-fluid"
                             loading="lazy"

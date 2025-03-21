@@ -283,8 +283,12 @@
             "heroSection": {
               "title_h1": "Preguntas Frecuentes",
               "title_h2": "¿Tienes alguna <span>duda</span>?",
-              "search_placeholder": "Buscar en Preguntas Frecuentes",
-              "show_more": "Mostrar más"
+              "search_placeholder": "Buscar en Preguntas Frecuentes"
+            },
+            "contentSection": {
+              "no_search_avaible": "No hay resultados para la búsqueda",
+              "show_more": "Mostrar más",
+              "show_less": "Mostrar menos"
             },
             "metaData": {}
           },

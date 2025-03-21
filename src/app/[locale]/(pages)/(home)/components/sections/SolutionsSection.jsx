@@ -89,14 +89,14 @@ export default function SolutionsSection() {
                 </div>
 
                 <div className="row mt-5 d-flex justify-content-center align-items-center">
-                    <div className="col-md-6 " data-aos="fade-right" data-aos-delay="50">
+                    <div className="col-md-6 text-center" data-aos="fade-right" data-aos-delay="50">
                         <Image
                             src="/assets/imgs/page/desa.jpeg"
                             alt="Financial solutions"
                             className="img-fluid rounded-2"
                             loading="lazy"
-                            width={600}
-                            height={600}
+                            width={400}
+                            height={400}
                         />
                     </div>
 

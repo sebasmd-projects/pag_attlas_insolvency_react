@@ -39,8 +39,8 @@ export default function Footer() {
         { text: t('legalLinks.complaintsAndClaims'), url: '/documents/legal/complaints-and-queries' },
         { text: t('legalLinks.cookiesPolicy'), url: '/documents/legal/cookies' },
         { text: t('legalLinks.policiesForTheTreatmentOfInformation'), url: '/documents/legal/policies-for-the-treatment-of-information' },
-        { text: t('legalLinks.privacyPolicy'), url: '/documents/legal/privacy-notice' },
-        { text: t('legalLinks.processingOfPersonalData'), url: '/documents/legal/processing-of-personal-data' },
+        // { text: t('legalLinks.privacyPolicy'), url: '/documents/legal/privacy-notice' },
+        // { text: t('legalLinks.processingOfPersonalData'), url: '/documents/legal/processing-of-personal-data' },
         { text: t('legalLinks.t&c'), url: '/documents/legal/terms-and-conditions' }
     ];
 

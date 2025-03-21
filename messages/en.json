@@ -284,8 +284,10 @@
               "title_h1": "Frequently Asked Questions",
               "title_h2": "Do you have any <span>questions</span>?",
               "search_placeholder": "Search in Frequently Asked Questions",
-              "show_more": "Show More"
+              "no_search_avaible": "No results found for the search"
             },
+            "show_more": "Show More",
+            "show_less": "Show Less",
             "metaData": {}
           },
           "history": {

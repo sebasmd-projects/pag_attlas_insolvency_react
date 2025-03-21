@@ -5,7 +5,7 @@ export default function InputSearchComponent({ t, searchTerm, setSearchTerm }) {
         <>
             <Form.Control
                 type="text"
-                placeholder={t('search_placeholder')}
+                placeholder={t('heroSection.search_placeholder')}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="mb-4"

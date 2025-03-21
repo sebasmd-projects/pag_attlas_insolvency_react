@@ -43,7 +43,7 @@ export default function StepByStepSection() {
                     <div className="col-md-5 order-1 order-md-0">
                         <div className="text-end" data-aos="zoom-in" data-aos-delay="100">
                             <Image
-                                src="/assets/imgs/page/stepBYstep.png"
+                                src="/assets/imgs/page/stepBYstepImg.png"
                                 alt="Pasos"
                                 loading="lazy"
                                 width={786}
@@ -66,7 +66,6 @@ export default function StepByStepSection() {
                                         <div className="col-auto">
                                             <div className="position-relative">
                                                 {step.icon}
-                                                
                                             </div>
                                         </div>
 
