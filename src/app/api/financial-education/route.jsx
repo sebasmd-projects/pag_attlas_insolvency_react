@@ -3,7 +3,6 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
     try {
-        // Realiza la solicitud GET a la API externa
         const response = await axios.get(
             'https://propensionesabogados.com/api/v1/financial-education/'
         );

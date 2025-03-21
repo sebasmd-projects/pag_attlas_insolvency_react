@@ -24,12 +24,12 @@ export default function WhyUsSection() {
                 <div className="row g-4 align-items-center">
                     <div className="col-md-6" data-aos="fade-right" data-aos-delay="100">
                         <Image
-                            src="/assets/imgs/page/whyUs.webp"
-                            alt="Experience"
+                            src="/assets/imgs/page/whyUsImg.png"
+                            alt="why us"
                             className="img-fluid"
                             loading="lazy"
-                            width={684}
-                            height={827}
+                            width={500}
+                            height={551}
                         />
                     </div>
 

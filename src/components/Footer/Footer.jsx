@@ -28,7 +28,6 @@ const socialLinks = [
 const cellPhones = [
     { number: '+57 318 328 01 76' },
     { number: '+57 315 639 97 22' },
-    { number: '+57 324 475 07 10' },
 ]
 
 export default function Footer() {
