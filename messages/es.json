@@ -72,7 +72,8 @@
           "title_h1": "Solución Legal para Insolvencia Económica | ATTLAS",
           "title_h2": "Alivio de deuda, un nuevo comienzo",
           "description_p": "Humanizamos la insolvencia",
-          "whatsappButton": "Contáctanos"
+          "calculator": "Calculadora de insolvencia",
+          "platform": "Plataforma de Insolvencia"
         },
         "solutionsSection": {
           "title_h1": "SOLUCIONES Y BENEFICIOS PENSADOS PARA TI",
@@ -308,6 +309,36 @@
       "complaintsAndQueries": {
         "title_h1": "Reclamos, quejas y sugerencias (PQRS)",
         "title_h2": "Si tienes alguna inquietud, reclamo, queja o sugerencia, por favor diligencia el siguiente formulario y nos pondremos en contacto contigo a la mayor brevedad posible."
+      }
+    }
+  },
+  "Platform": {
+    "calculator": {
+      "title": "Calcula tu insolvencia",
+      "description": "Conoce cuánto tiempo te tomará pagar tus deudas con la calculadora de deudas de ATTLAS",
+      "form": {
+        "inputs": {
+          "essentialExpenses": "Gastos esenciales",
+          "totalDebt": "Total de deudas",
+          "currentDebtPayment": "Pago actual a deudas",
+          "payrollDiscount": "¿Tiene descuentos por nómina?",
+          "discountAmount": "Monto de descuentos por nómina",
+          "income": "Total de ingresos"
+        },
+        "yes": "Sí",
+        "no": "No",
+        "optional": "Opcional",
+        "calculate": "Calcular",
+        "validation": {
+          "debtZero": "El total de deudas debe ser mayor a cero"
+        }
+      },
+      "result": {
+        "title": "Resultado",
+        "cantPay": "No tiene capacidad de pago.",
+        "success": "Podrías pagar la deuda en {time}.",
+        "years": "años",
+        "months": "meses"
       }
     }
   }

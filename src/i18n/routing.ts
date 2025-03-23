@@ -84,6 +84,11 @@ export const routing = defineRouting({
       en: '/documents/legal/terms-and-conditions'
     },
 
+    '/platform/calculator': {
+      es: '/plataforma/calculadora',
+      en: '/platform/calculator'
+    },
+
   }
 });
 

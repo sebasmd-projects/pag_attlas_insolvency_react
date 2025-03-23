@@ -72,7 +72,8 @@
           "title_h1": "Legal Solution for Economic Insolvency | ATTLAS",
           "title_h2": "Debt Relief, a New Beginning",
           "description_p": "We humanize insolvency",
-          "whatsappButton": "Contact Us"
+          "calculator": "Debt Calculator",
+          "platform": "Insolvency Platform"
         },
         "solutionsSection": {
           "title_h1": "SOLUTIONS AND BENEFITS DESIGNED FOR YOU",
@@ -308,6 +309,38 @@
       "complaintsAndQueries": {
         "title_h1": "Complaints, Claims, and Suggestions (PQRS)",
         "title_h2": "If you have any concerns, complaints, or suggestions, please fill out the following form and we will contact you as soon as possible."
+      }
+    }
+  },
+  "Platform": {
+    "calculator": {
+      "title": "Debt Calculator",
+      "description": "Find out how long it will take you to pay off your debts with ATTLAS's debt calculator",
+      "form": {
+        "inputs": {
+          "essentialExpenses": "Essential Expenses",
+          "totalDebt": "Total Debt",
+          "currentDebtPayment": "Current Debt Payment",
+          "payrollDiscount": "Do you have payroll discounts?",
+          "discountAmount": "Payroll Discount Amount",
+          "income": "Total Income"
+        },
+        "yes": "Yes",
+        "no": "No",
+        "optional": "Optional",
+        "calculate": "Calculate",
+        "validation": {
+          "debtZero": "Total debt must be greater than zero"
+        }
+      },
+      "result": {
+        "title": "Calculation Results",
+        "totalDiscounts": "Total Discounts",
+        "remainingValue": "Remaining Value",
+        "finalValue": "Final Value",
+        "cantPay": "You cannot afford to pay. Remaining value: ${value}",
+        "months": "You will be able to pay your debt in approximately {months} months",
+        "years": "You will be able to pay your debt in approximately {years} year(s)"
       }
     }
   }
