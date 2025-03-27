@@ -8,7 +8,9 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Navbar from 'react-bootstrap/Navbar';
-import { FaWhatsapp } from "react-icons/fa";
+import { BiDonateHeart } from "react-icons/bi";
+import { LuLayoutDashboard } from "react-icons/lu";
+import { MdCastForEducation } from "react-icons/md";
 import LocaleSwitcher from '../LocaleSwitcher/LocaleSwitcher';
 import NavButton from './components/NavButton';
 
@@ -56,9 +58,9 @@ export default function Navigation() {
               </NavDropdown.Item>
             </NavDropdown> */}
 
-            <Nav.Link as={Link} href="/about-us/contact" onClick={() => setExpanded(false)}>
+            {/* <Nav.Link as={Link} href="/about-us/contact" onClick={() => setExpanded(false)}>
               {t('contact.menu')}
-            </Nav.Link>
+            </Nav.Link> */}
 
 
 
@@ -66,8 +68,8 @@ export default function Navigation() {
               <NavButton
                 gradient="linear-gradient(90deg, #1a4ab3 0%, #0e3692 100%)"
                 href='https://wa.me/573183280176'
-                icon={FaWhatsapp}
-                label="freeAdvice"
+                icon={MdCastForEducation}
+                label="campus"
                 setExpanded={setExpanded}
               />
             </div>
@@ -78,6 +80,7 @@ export default function Navigation() {
                 color='black'
                 gradient="linear-gradient(90deg, #7fd2cb 0%, #5ab8b0 100%)"
                 href='https://wa.me/573183280176'
+                icon={BiDonateHeart}
                 label="donation"
                 setExpanded={setExpanded}
               />
@@ -88,7 +91,9 @@ export default function Navigation() {
               <NavButton
                 color='black'
                 gradient="linear-gradient(90deg, #ffdf40 0%, #FED100 50%, #d4a900 100%)"
-                label="campus"
+                href='/platform'
+                icon={LuLayoutDashboard}
+                label="insolvency_platform"
                 setExpanded={setExpanded}
               />
             </div>

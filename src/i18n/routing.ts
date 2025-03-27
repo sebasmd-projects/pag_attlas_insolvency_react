@@ -7,48 +7,15 @@ export const routing = defineRouting({
   pathnames: {
     '/': '/',
 
-    '/about-us': {
-      es: '/nosotros/',
-      en: '/about-us/'
-    },
-    '/about-us/contact': {
-      es: '/nosotros/contacto',
-      en: '/about-us/contact'
-    },
-    '/about-us/culture': {
-      es: '/nosotros/cultura',
-      en: '/about-us/culture'
-    },
+
+    // About us
     '/about-us/frequently-asked-questions': {
       es: '/nosotros/preguntas-frecuentes',
       en: '/about-us/frequently-asked-questions'
     },
-    '/about-us/history': {
-      es: '/nosotros/historia',
-      en: '/about-us/history'
-    },
 
 
-    '/auth/forgot-password': {
-      es: '/autenticacion/contrasena-olvidada',
-      en: '/auth/forgot-password'
-    },
-    '/auth/login': {
-      es: '/autenticacion/iniciar-sesion',
-      en: '/auth/login'
-    },
-    '/auth/register': {
-      es: '/autenticacion/registrarse',
-      en: '/auth/register'
-    },
-
-
-    '/free-advice': {
-      es: '/asesoria-gratuita',
-      en: '/free-advice'
-    },
-
-
+    // Services
     '/services': {
       es: '/servicios',
       en: '/services'
@@ -59,6 +26,7 @@ export const routing = defineRouting({
     },
 
 
+    // Documents
     '/documents/legal/complaints-and-queries': {
       es: '/documentos/legales/reclamaciones-y-consultas',
       en: '/documents/legal/complaints-and-queries'
@@ -84,10 +52,24 @@ export const routing = defineRouting({
       en: '/documents/legal/terms-and-conditions'
     },
 
+
+    // Platform
     '/platform/calculator': {
       es: '/plataforma/calculadora',
       en: '/platform/calculator'
     },
+    '/platform': {
+      es: '/plataforma',
+      en: '/platform'
+    },
+    '/platform/auth/login': {
+      es: '/plataforma/auth/iniciar-sesion',
+      en: '/platform/auth/login'
+    },
+    '/platform/auth/register': {
+      es: '/plataforma/auth/registro',
+      en: '/platform/auth/register'
+    }
 
   }
 });
@@ -95,5 +77,4 @@ export const routing = defineRouting({
 export type Pathnames = keyof typeof routing.pathnames;
 export type Locale = (typeof routing.locales)[number];
 
-export const { Link, getPathname, redirect, usePathname, useRouter } =
-  createNavigation(routing);
+export const { Link, getPathname, redirect, usePathname, useRouter } = createNavigation(routing);

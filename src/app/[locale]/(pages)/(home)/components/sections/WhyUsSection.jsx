@@ -19,7 +19,7 @@ export default function WhyUsSection() {
         { value: tf('feature4.title'), icon: <FaPeopleGroup />, label: tf('feature4.description') },
     ];
     return (
-        <section>
+        <section id="why-us">
             <div className="container-lg py-5">
                 <div className="row g-4 align-items-center">
                     <div className="col-md-6" data-aos="fade-right" data-aos-delay="100">

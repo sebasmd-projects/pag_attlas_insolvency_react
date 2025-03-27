@@ -51,13 +51,14 @@ export default function HeroSection() {
                             </div>
 
                             <div className="col-6" data-aos="fade-up" data-aos-delay="100">
-                                <div className="btn btn-outline-light btn-lg"
+                                <Link href="/platform"
+                                    className="btn btn-outline-light btn-lg"
                                     style={{ backgroundColor: isHoveredB2 ? '#f8f9fa' : '#d5dbdb40', transition: 'background-color 0.3s ease' }}
                                     onMouseEnter={() => setIsHoveredB2(true)}
                                     onMouseLeave={() => setIsHoveredB2(false)}
                                 >
                                     {t('platform')} <LuLayoutDashboard />
-                                </div>
+                                </Link>
                             </div>
                         </div>
                     </div>

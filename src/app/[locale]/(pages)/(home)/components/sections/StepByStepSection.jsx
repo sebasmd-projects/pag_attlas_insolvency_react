@@ -37,7 +37,7 @@ export default function StepByStepSection() {
     ];
 
     return (
-        <section style={{ position: 'relative', backgroundColor: '#F9F9F9' }}>
+        <section style={{ position: 'relative', backgroundColor: '#F9F9F9' }} id="step-by-step">
             <div className="container-lg py-5">
                 <div className="align-items-center row g-4">
                     <div className="col-md-5 order-1 order-md-0">

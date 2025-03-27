@@ -39,7 +39,7 @@ export default function SolutionsSection() {
     ];
 
     return (
-        <section>
+        <section id="solutions">
             <div className="container-lg py-5">
                 <div className="row g-4 align-items-center d-flex">
                     <div className="col-md-7">
@@ -92,7 +92,7 @@ export default function SolutionsSection() {
                 <div className="row mt-5 d-flex justify-content-center align-items-center">
                     <div className="col-md-6 text-center" data-aos="fade-right" data-aos-delay="50">
                         <Image
-                            src="/assets/imgs/page/desa.jpeg"
+                            src="/assets/imgs/page/desa.gif"
                             alt="Financial solutions"
                             className="img-fluid rounded-2"
                             loading="lazy"

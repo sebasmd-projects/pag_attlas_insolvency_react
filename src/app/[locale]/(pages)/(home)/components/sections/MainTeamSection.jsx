@@ -8,7 +8,7 @@ export default function MainTeamSection() {
     const t = useTranslations('Pages.homePage.sections.mainTeamSection');
 
     return (
-        <section>
+        <section id="main-team">
             <div className="text-center py-5">
                 <div className="mb-4 container-lg">
                     <TitleComponent title={t('title_h1')} />
