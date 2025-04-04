@@ -1,18 +1,34 @@
-// src/app/[locale]/platform/insolvency/wizard/steps/Step0Instrucciones.jsx
+// src/app/[locale]/platform/(home)/steps/Step0Instrucciones.jsx
 
 'use client';
-import TitleComponent from '@/components/micro-components/title';
+
+import { useEffect, useState } from 'react';
 import SubTitleComponent from '@/components/micro-components/sub_title';
+import TitleComponent from '@/components/micro-components/title';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { FaArrowCircleRight } from "react-icons/fa";
+import { ReactSVG } from 'react-svg';
 
 export default function Step0Instrucciones({ onNext, isSubmitting }) {
 
     const t = useTranslations('Platform.pages.home.wizard.steps.step0');
+    const wizardButton = useTranslations('Platform.pages.home.wizard.buttons');
 
-    function commonText({ articleTitle, articleDescription, articleTitleExample, articleExample, articleExampleHeaders, articleExampleItems }) {
+    const [form, setForm] = useState({
+        accept_terms: false,
+    });
+
+    useEffect(() => {
+        setForm({
+            accept_terms: false,
+        });
+    }, []);
+
+    function commonText({ articleTitle, articleDescription }) {
         return (
             <>
-                <h4 className='h6'>{t(articleTitle)}</h4>
+                <h4 className='h6'><strong>{t(articleTitle)}</strong></h4>
                 <p>
                     {t.rich(articleDescription, {
                         bold: (chunks) => (
@@ -22,120 +38,127 @@ export default function Step0Instrucciones({ onNext, isSubmitting }) {
                         )
                     })}
                 </p>
-
-                {
-                    articleTitleExample && (
-                        <p>
-                            {t.rich(articleTitleExample, {
-                                bold: (chunks) => (
-                                    <strong>
-                                        {chunks}
-                                    </strong>
-                                )
-                            })}
-                        </p>
-                    )
-                }
-
-                <p className='card'>
-                    <span className='card-body'>
-                        {t.rich(articleExample, {
-                            bold: (chunks) => (
-                                <strong>
-                                    {chunks}
-                                </strong>
-                            ),
-                            p: (chunks) => (
-                                <p>
-                                    {chunks}
-                                </p>
-                            ),
-                        })}
-                    </span>
-                </p>
-
-                {articleExampleHeaders && articleExampleItems && (
-                    <table className="table table-bordered">
-                        <thead>
-                            <tr>
-                                {articleExampleHeaders.map((header, index) => (
-                                    <th key={index}>{header}</th>
-                                ))}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {articleExampleItems.map((row, rowIndex) => (
-                                <tr key={rowIndex}>
-                                    {row.map((value, colIndex) => (
-                                        <td key={colIndex}>{value}</td>
-                                    ))}
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                )}
             </>
         )
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (!form.accept_terms) return;
+        onNext(form);
+    };
+
     return (
-        <div>
+        <div className='container my-5'>
             <TitleComponent title={t('title')} />
             <SubTitleComponent t={t} sub_title={'subTitle'} />
 
-            <h3 className='h5'>Ten en cuenta que los datos recopilados serán utilizados de la siguiente forma:</h3>
+            <h3 className="h5 my-5 d-flex align-items-center">
+                <span style={{ width: '20px', height: '20px' }} className="mx-5">
+                    <ReactSVG src="/assets/imgs/icons/contact.svg" />
+                </span>
+                <span className="ms-2">
+                    {t.rich('description', {
+                        link: (chunks) => (
+                            <Link href="https://wa.me/573183280176" rel="noopener noreferrer" target="_blank">
+                                {chunks}
+                            </Link>
+                        )
+                    })}
+                </span>
+            </h3>
 
-            <ol type='I'>
-                <li>
-                    {commonText({ articleTitle: 'articles.1.title', articleDescription: 'articles.1.description', articleExample: 'articles.1.example' })}
+            <h4>
+                {
+                    t.rich('advisor', {
+                        u: (chunks) => (
+                            <u className="">
+                                {chunks}
+                            </u>
+                        )
+                    })
+                }
+            </h4>
+
+            <ol type='I' className=''>
+                <li className="mb-3">
+                    {commonText({ articleTitle: 'articles.1.title', articleDescription: 'articles.1.description' })}
                 </li>
 
-                <li>
-                    {commonText({ articleTitle: 'articles.2.title', articleDescription: 'articles.2.description', articleExample: 'articles.2.example' })}
+                <li className="mb-3">
+                    {commonText({ articleTitle: 'articles.2.title', articleDescription: 'articles.2.description' })}
                 </li>
 
-                <li>
-                    {commonText({ articleTitle: 'articles.3.title', articleDescription: 'articles.3.description', articleTitleExample: "articles.3.accompaniment", articleExample: 'articles.3.example' })}
+                <li className="mb-3">
+                    {commonText({ articleTitle: 'articles.3.title', articleDescription: 'articles.3.description' })}
                 </li>
 
-                <li>
-                    {commonText({ articleTitle: 'articles.4.title', articleDescription: 'articles.4.description', articleTitleExample: "articles.4.accompaniment", articleExample: 'articles.4.example' })}
+                <li className="mb-3">
+                    {commonText({ articleTitle: 'articles.4.title', articleDescription: 'articles.4.description' })}
                 </li>
 
-                <li>
-                    {commonText({ articleTitle: 'articles.5.title', articleDescription: 'articles.5.description', articleExampleHeaders: 'articles.5.exampleHeaders' })}
+                <li className="mb-3">
+                    {commonText({ articleTitle: 'articles.5.title', articleDescription: 'articles.5.description' })}
                 </li>
 
-                <li>
-                    {commonText({ articleTitle: 'articles.6.title', articleDescription: 'articles.6.description', articleExample: 'articles.6.example' })}
+                <li className="mb-3">
+                    {commonText({ articleTitle: 'articles.6.title', articleDescription: 'articles.6.description' })}
                 </li>
 
-                <li>
-                    {commonText({ articleTitle: 'articles.7.title', articleDescription: 'articles.7.description', articleExample: 'articles.7.example' })}
+                <li className="mb-3">
+                    {commonText({ articleTitle: 'articles.7.title', articleDescription: 'articles.7.description' })}
                 </li>
 
-                <li>
-                    {commonText({ articleTitle: 'articles.8.title', articleDescription: 'articles.8.description', articleExample: 'articles.8.example' })}
+                <li className="mb-3">
+                    {commonText({ articleTitle: 'articles.8.title', articleDescription: 'articles.8.description' })}
                 </li>
 
-                <li>
-                    {commonText({ articleTitle: 'articles.9.title', articleDescription: 'articles.5.description', articleExample: 'articles.9.example' })}
+                <li className="mb-3">
+                    {commonText({ articleTitle: 'articles.9.title', articleDescription: 'articles.5.description' })}
                 </li>
 
-                <li>
-                    {commonText({ articleTitle: 'articles.10.title', articleDescription: 'articles.10.description', articleExample: 'articles.10.example' })}
+                <li className="mb-3">
+                    {commonText({ articleTitle: 'articles.10.title', articleDescription: 'articles.10.description' })}
                 </li>
 
+                <li className="mb-3">
+                    {commonText({ articleTitle: 'articles.11.title', articleDescription: 'articles.11.description' })}
+                </li>
             </ol>
 
-            <button
-                type="button"
-                className="btn btn-primary"
-                onClick={() => onNext({})}
-                disabled={isSubmitting}
-            >
-                Siguiente
-            </button>
+            <form onSubmit={handleSubmit}>
+                <div className="mb-3 form-check">
+                    <input
+                        type="checkbox"
+                        className="form-check-input"
+                        id="accept_terms"
+                        required
+                        checked={form.accept_terms}
+                        onChange={(e) =>
+                            setForm(prev => ({ ...prev, accept_terms: e.target.checked }))
+                        }
+                    />
+                    <label className="form-check-label" htmlFor="accept_terms">
+                        {t('accept_terms')}
+                    </label>
+                </div>
+                <button
+                    type="submit"
+                    className="btn btn-primary"
+                    disabled={isSubmitting}
+                >
+                    {isSubmitting ? (
+                        <>
+                            <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                            {wizardButton('processing')}
+                        </>
+                    ) : (
+                        <>
+                            {wizardButton('next')} <FaArrowCircleRight className='ms-2' />
+                        </>
+                    )}
+                </button>
+            </form>
         </div>
     );
 }

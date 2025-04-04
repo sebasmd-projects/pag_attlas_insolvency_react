@@ -1,17 +1,17 @@
-// src/app/[locale]/platform/auth/login/page.jsx
-
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import { useTranslations } from 'next-intl';
 import DOMPurify from 'dompurify';
+import { FaUserPlus  } from 'react-icons/fa';
+import Link from 'next/link';
+
 
 export default function AuthLoginPage() {
   const t = useTranslations('Platform.pages.auth.login');
-
   const router = useRouter();
 
   const [formData, setFormData] = useState({
@@ -19,8 +19,17 @@ export default function AuthLoginPage() {
     document_issue_date: '',
     birth_date: '',
   });
-
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [showSpinner, setShowSpinner] = useState(false);
+  const timerRef = useRef(null);
+
+  // Run redirect if conditions met
+  useEffect(() => {
+    if (!isSubmitting && isSuccess) {
+      router.push('/platform');
+    }
+  }, [isSubmitting, isSuccess, router]);
 
   const { mutate } = useMutation({
     mutationKey: ['loginUser'],
@@ -39,14 +48,21 @@ export default function AuthLoginPage() {
       }
       return result;
     },
-    onSuccess: (data) => {
-      toast.success(t('successLogin') || t('successLogin'));
+    onSuccess: () => {
+      toast.success(t('successLogin'));
       setIsSubmitting(false);
-      router.push('/platform');
+      setIsSuccess(true);
     },
     onError: (error) => {
       toast.error(error.message || t('generalError'));
       setIsSubmitting(false);
+    },
+    onSettled: () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+        timerRef.current = null;
+      }
+      setShowSpinner(false);
     },
   });
 
@@ -63,6 +79,9 @@ export default function AuthLoginPage() {
     if (isSubmitting) return;
 
     setIsSubmitting(true);
+    timerRef.current = setTimeout(() => {
+      setShowSpinner(true);
+    }, 1000);
 
     const sanitizedData = Object.keys(formData).reduce((acc, key) => {
       acc[key] = DOMPurify.sanitize(formData[key]);
@@ -76,7 +95,9 @@ export default function AuthLoginPage() {
     <div className="container my-5 align-content-center">
       <form onSubmit={handleSubmit} className="row g-3 my-5">
         <div className="col-6">
-          <label htmlFor="document_number" className="form-label">{t('form.documentNumber')}</label>
+          <label htmlFor="document_number" className="form-label">
+            {t('form.documentNumber')}
+          </label>
           <input
             type="text"
             className="form-control"
@@ -89,7 +110,9 @@ export default function AuthLoginPage() {
         </div>
 
         <div className="col-6">
-          <label htmlFor="document_issue_date" className="form-label">{t('form.documentIssueDate')}</label>
+          <label htmlFor="document_issue_date" className="form-label">
+            {t('form.documentIssueDate')}
+          </label>
           <input
             type="date"
             className="form-control"
@@ -102,7 +125,9 @@ export default function AuthLoginPage() {
         </div>
 
         <div className="col-12">
-          <label htmlFor="birth_date" className="form-label">{t('form.birthDate')}</label>
+          <label htmlFor="birth_date" className="form-label">
+            {t('form.birthDate')}
+          </label>
           <input
             type="date"
             className="form-control"
@@ -120,8 +145,30 @@ export default function AuthLoginPage() {
             className="btn btn-outline-success w-100"
             disabled={isSubmitting}
           >
-            {isSubmitting ? 'Ingresando...' : 'Ingresar'}
+            {isSubmitting ? (
+              showSpinner ? (
+                <>
+                  <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true" />
+                  Validando información...
+                </>
+              ) : (
+                'Ingresando...'
+              )
+            ) : (
+              'Ingresar'
+            )}
           </button>
+
+          {/* Sección de registro */}
+          <div className="text-center mt-4">
+            <Link
+              href="/platform/auth/register"
+              className="btn btn-link text-decoration-none d-inline-flex align-items-center gap-2"
+            >
+              <FaUserPlus className="me-1" />
+              {t('registerLink')}
+            </Link>
+          </div>
         </div>
       </form>
     </div>

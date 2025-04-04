@@ -1,53 +1,66 @@
+// src/app/[locale]/platform/(home)/steps/Step4Acreedores.jsx
+
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
+import { toast } from 'react-toastify';
+import { FaArrowCircleLeft, FaArrowCircleRight } from 'react-icons/fa';
 
 export default function Step4Acreedores({ data, onNext, onBack, isSubmitting }) {
-    // Función para formatear números según locale es-CO
+    const t = useTranslations('Platform.pages.home.wizard.steps.step4');
+    const wizardButton = useTranslations('Platform.pages.home.wizard.buttons');
+
     const formatToLocaleNumber = (value) => {
         if (value === '' || value === null || value === undefined) return '';
-
-        const numericValue = typeof value === 'string'
-            ? parseFloat(value.replace(/\./g, '').replace(',', '.'))
-            : value;
-
+        const numericValue =
+            typeof value === 'string'
+                ? parseFloat(value.replace(/\./g, '').replace(',', '.'))
+                : value;
         if (isNaN(numericValue)) return '';
-
         return new Intl.NumberFormat('es-CO', {
             minimumFractionDigits: 0,
-            maximumFractionDigits: 2
+            maximumFractionDigits: 3,
         }).format(numericValue);
     };
 
-    // Inicializar estado con valores formateados
     const initialCreditors = data.creditors?.length
-        ? data.creditors.map(c => ({
+        ? data.creditors.map((c) => ({
             ...c,
-            capital_value: c.capital_value ? formatToLocaleNumber(c.capital_value) : ''
+            capital_value: c.capital_value ? formatToLocaleNumber(c.capital_value) : '',
         }))
-        : [{ name: '', nature: '', guarantee_support: '', capital_value: '', days_overdue: '' }];
+        : [
+            { name: '', nature: '', guarantee_support: '', capital_value: '', days_overdue: '' },
+        ];
 
-    const [acreedores, setAcreedores] = useState(initialCreditors);
+    const [form, setForm] = useState({
+        creditors: initialCreditors,
+    });
 
-    // Función para normalizar texto (quitar acentos y poner en mayúsculas)
-    const normalizeText = (str) => {
-        return str.normalize("NFD").replace(/[^a-zA-Z0-9 ]/g, "").toUpperCase();
-    };
+    useEffect(() => {
+        const newCreditors = data.creditors?.length
+            ? data.creditors.map((c) => ({
+                ...c,
+                capital_value: c.capital_value ? formatToLocaleNumber(c.capital_value) : '',
+            }))
+            : [{ name: '', nature: '', guarantee_support: '', capital_value: '', days_overdue: '' }];
+        setForm({ creditors: newCreditors });
+    }, [data]);
 
-    // Función para convertir el valor formateado a número
+    const normalizeText = (str) =>
+        str.normalize('NFD').replace(/[^a-zA-Z0-9 ]/g, '').toUpperCase();
+
     const parseCurrencyToNumber = (value) => {
         if (!value) return 0;
         const numericString = value.replace(/\./g, '').replace(',', '.');
         return parseFloat(numericString);
     };
 
-    // Manejar cambios en los inputs
     const handleChange = (index, e) => {
         const { name, value, files } = e.target;
-        const updated = [...acreedores];
+        const updated = [...form.creditors];
 
         if (name === 'capital_value') {
-            // Permitir solo números, puntos y comas durante la edición
             const filteredValue = value.replace(/[^0-9.,]/g, '');
             updated[index][name] = filteredValue;
         } else if (name === 'name' || name === 'nature') {
@@ -58,53 +71,52 @@ export default function Step4Acreedores({ data, onNext, onBack, isSubmitting }) 
             updated[index][name] = value;
         }
 
-        setAcreedores(updated);
+        setForm({ creditors: updated });
     };
 
-    // Formatear el valor al salir del campo
     const handleBlur = (index, e) => {
         const { name, value } = e.target;
         if (name === 'capital_value') {
-            const updated = [...acreedores];
+            const updated = [...form.creditors];
             updated[index][name] = formatToLocaleNumber(value);
-            setAcreedores(updated);
+            setForm({ creditors: updated });
         }
     };
 
-    // Agregar nueva fila de acreedor
     const addRow = () => {
-        setAcreedores([...acreedores, {
-            name: '',
-            nature: '',
-            guarantee_support: '',
-            capital_value: '',
-            days_overdue: ''
-        }]);
+        setForm({
+            creditors: [
+                ...form.creditors,
+                { name: '', nature: '', guarantee_support: '', capital_value: '', days_overdue: '' },
+            ],
+        });
     };
 
-    // Eliminar fila de acreedor
     const removeRow = (index) => {
-        if (acreedores.length <= 1) return;
-        const updated = [...acreedores];
+        if (form.creditors.length <= 1) return;
+        const updated = [...form.creditors];
         updated.splice(index, 1);
-        setAcreedores(updated);
+        setForm({ creditors: updated });
     };
 
-    // Enviar el formulario
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // Validar campos requeridos
-        if (acreedores.some(a => !a.name || !a.nature)) {
-            alert('Debes completar al menos el nombre y la naturaleza de cada acreedor');
+        if (
+            form.creditors.some(
+                (a) => !a.name || !a.nature || !a.capital_value || !a.days_overdue
+            )
+        ) {
+            toast.error(
+                t('form.error')
+            );
             return;
         }
 
-        // Preparar datos para enviar (convertir valores formateados a números)
-        const creditorsToSend = acreedores.map(acreedor => ({
+        const creditorsToSend = form.creditors.map((acreedor) => ({
             ...acreedor,
             capital_value: parseCurrencyToNumber(acreedor.capital_value),
-            days_overdue: acreedor.days_overdue ? parseInt(acreedor.days_overdue) : 0
+            days_overdue: acreedor.days_overdue ? parseInt(acreedor.days_overdue) : 0,
         }));
 
         onNext({ creditors: creditorsToSend });
@@ -112,22 +124,22 @@ export default function Step4Acreedores({ data, onNext, onBack, isSubmitting }) 
 
     return (
         <form onSubmit={handleSubmit}>
-            <h5 className="mb-4">Relación de Acreedores</h5>
+            <h5 className="mb-4">{t('title')}</h5>
 
             <div className="table-responsive mb-4">
                 <table className="table table-bordered align-middle">
                     <thead className="table-light">
                         <tr>
-                            <th>Acreedor</th>
-                            <th>Naturaleza</th>
-                            <th>Soporte de garantía</th>
-                            <th>Capital</th>
-                            <th>Días en mora</th>
-                            <th>Acciones</th>
+                            <th>{t('form.headers.creditor')}</th>
+                            <th>{t('form.headers.nature')}</th>
+                            <th>{t('form.headers.supportGuarantee')}</th>
+                            <th>{t('form.headers.capital')}</th>
+                            <th>{t('form.headers.daysInArrears')}</th>
+                            <th>{t('form.headers.actions.title')}</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {acreedores.map((acreedor, index) => (
+                        {form.creditors.map((acreedor, index) => (
                             <tr key={index}>
                                 <td>
                                     <input
@@ -167,7 +179,8 @@ export default function Step4Acreedores({ data, onNext, onBack, isSubmitting }) 
                                         onBlur={(e) => handleBlur(index, e)}
                                         className="form-control text-end"
                                         inputMode="decimal"
-                                        onWheel={(e) => (e.target).blur()}
+                                        onWheel={(e) => e.target.blur()}
+                                        required
                                     />
                                 </td>
                                 <td>
@@ -178,6 +191,7 @@ export default function Step4Acreedores({ data, onNext, onBack, isSubmitting }) 
                                         onChange={(e) => handleChange(index, e)}
                                         className="form-control"
                                         min="0"
+                                        required
                                     />
                                 </td>
                                 <td className="text-center">
@@ -185,9 +199,9 @@ export default function Step4Acreedores({ data, onNext, onBack, isSubmitting }) 
                                         type="button"
                                         className="btn btn-sm btn-danger"
                                         onClick={() => removeRow(index)}
-                                        disabled={acreedores.length <= 1}
+                                        disabled={form.creditors.length <= 1}
                                     >
-                                        Eliminar
+                                        {t('form.headers.actions.delete')}
                                     </button>
                                 </td>
                             </tr>
@@ -202,25 +216,34 @@ export default function Step4Acreedores({ data, onNext, onBack, isSubmitting }) 
                     className="btn btn-outline-success"
                     onClick={addRow}
                 >
-                    + Agregar Acreedor
+                    {t('form.addCreditor')}
                 </button>
             </div>
 
-            <div className="d-flex justify-content-between mt-4">
+            <div className="col-12 d-flex justify-content-between">
                 <button
                     type="button"
                     className="btn btn-secondary"
                     onClick={onBack}
                     disabled={isSubmitting}
                 >
-                    Atrás
+                    <FaArrowCircleLeft /> <span className="ms-2">{wizardButton('back')}</span>
                 </button>
                 <button
                     type="submit"
                     className="btn btn-primary"
                     disabled={isSubmitting}
                 >
-                    {isSubmitting ? 'Procesando...' : 'Siguiente'}
+                    {isSubmitting ? (
+                        <>
+                            <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                            {wizardButton('processing')}
+                        </>
+                    ) : (
+                        <>
+                            {wizardButton('next')} <FaArrowCircleRight className='ms-2' />
+                        </>
+                    )}
                 </button>
             </div>
         </form>

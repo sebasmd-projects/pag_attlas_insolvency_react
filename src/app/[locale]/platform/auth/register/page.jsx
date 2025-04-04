@@ -8,6 +8,8 @@ import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import { useTranslations } from 'next-intl';
 import DOMPurify from 'dompurify';
+import { FaUserPlus  } from 'react-icons/fa';
+import Link from 'next/link';
 
 export default function AuthRegisterPage() {
 
@@ -123,6 +125,17 @@ export default function AuthRegisterPage() {
           >
             {isSubmitting ? 'Registrando...' : 'Registrarme'}
           </button>
+
+          {/* Sección de Inicio de sesión */}
+          <div className="text-center mt-4">
+            <Link
+              href="/platform/auth/login"
+              className="btn btn-link text-decoration-none d-inline-flex align-items-center gap-2"
+            >
+              <FaUserPlus className="me-1" />
+              {t('loginLink')}
+            </Link>
+          </div>
         </div>
       </form>
     </div>

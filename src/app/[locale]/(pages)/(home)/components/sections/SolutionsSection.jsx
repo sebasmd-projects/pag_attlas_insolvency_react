@@ -96,6 +96,7 @@ export default function SolutionsSection() {
                             alt="Financial solutions"
                             className="img-fluid rounded-2"
                             loading="lazy"
+                            unoptimized
                             width={400}
                             height={400}
                         />

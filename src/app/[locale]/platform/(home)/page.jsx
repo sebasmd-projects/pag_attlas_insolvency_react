@@ -1,4 +1,5 @@
-// src/app/[locale]/platform/insolvency/wizard/page.jsx
+// src/app/[locale]/platform/(home)/page.jsx
+
 'use client';
 
 import { useMutation } from '@tanstack/react-query';
@@ -8,28 +9,28 @@ import { toast } from 'react-toastify';
 
 import Step0Instrucciones from './steps/Step0Instrucciones';
 import Step1DatosPersonales from './steps/Step1DatosPersonales';
-import Step2Informe from './steps/Step2Informe';
-import Step3Propuesta from './steps/Step3Propuesta';
+import Step2DeclaracionDeCesacionDePagos from './steps/Step2DeclaracionDeCesacionDePagos';
+import Step3InformeDeCesacionDePagos from './steps/Step3InformeDeCesacionDePagos';
 import Step4Acreedores from './steps/Step4Acreedores';
 import Step5Bienes from './steps/Step5Bienes';
 import Step6Procesos from './steps/Step6Procesos';
 import Step7Ingresos from './steps/Step7Ingresos';
 import Step8Recursos from './steps/Step8Recursos';
 import Step9Sociedad from './steps/Step9Sociedad';
-import Step10Alimentos from './steps/Step10Alimentos';
+import Step10LegalDocuments from './steps/Step10LegalDocuments';
 
 const steps = [
     Step0Instrucciones,
     Step1DatosPersonales,
-    Step2Informe,
-    Step3Propuesta,
+    Step2DeclaracionDeCesacionDePagos,
+    Step3InformeDeCesacionDePagos,
     Step4Acreedores,
     Step5Bienes,
     Step6Procesos,
     Step7Ingresos,
     Step8Recursos,
     Step9Sociedad,
-    Step10Alimentos,
+    Step10LegalDocuments,
 ];
 
 const STORAGE_KEY = 'insolvency_form_data';
@@ -50,56 +51,93 @@ export default function PlatformHomePage() {
     const router = useRouter();
     const [stepIndex, setStepIndex] = useState(0);
     const [formData, setFormData] = useState(loadFromStorage());
+    const [isProcessing, setIsProcessing] = useState(false);
 
     const StepComponent = steps[stepIndex];
 
     const { mutate, isPending } = useMutation({
         mutationFn: async (data) => {
-            const res = await fetch('/api/platform/insolvency', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data),
-            });
-            if (!res.ok) throw new Error('Error al guardar');
-            const result = await res.json();
+            setIsProcessing(true);
+            try {
+                const res = await fetch('/api/platform/insolvency-form', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ form_data: data }),
+                });
 
-            await fetch(`/api/v1/insolvency/${result.id}/submit/`, { method: 'POST' });
+                if (!res.ok) {
+                    const errorData = await res.json();
+                    throw new Error(errorData.detail);
+                }
 
-            return result;
+                return await res.json();
+            } finally {
+                setIsProcessing(false);
+            }
         },
         onSuccess: () => {
-            toast.success('Formulario completado y enviado al abogado');
+            toast.success('Formulario enviado con éxito');
             localStorage.removeItem(STORAGE_KEY);
-            router.push('/platform');
+            router.push('/');
         },
-        onError: () => toast.error('Hubo un error al guardar'),
+        onError: (error) => {
+            toast.error(error.message);
+        },
     });
 
-    const nextStep = (data) => {
+    const validateSession = async () => {
+        try {
+            const res = await fetch('/api/platform/auth/token-info');
+            if (!res.ok) {
+                throw new Error('Sesión inválida');
+            }
+            return true;
+        } catch (error) {
+            router.push('/platform/auth/login');
+            return false;
+        }
+    };
+
+    const handleNextStep = async (data) => {
+        if (isProcessing || isPending) return;
+
+        setIsProcessing(true);
+
+        const sessionValid = await validateSession();
+        if (!sessionValid) {
+            setIsProcessing(false);
+            return;
+        }
+
         const updatedData = { ...formData, ...data };
         setFormData(updatedData);
         saveToStorage(updatedData);
 
         if (stepIndex === steps.length - 1) {
             mutate(updatedData);
-            localStorage.removeItem(STORAGE_KEY);
         } else {
             setStepIndex((prev) => prev + 1);
+            setIsProcessing(false);
         }
     };
+
 
     const prevStep = () => {
         if (stepIndex > 0) setStepIndex((prev) => prev - 1);
     };
 
+    console.log('Form Data:', formData);
+
     return (
         <div className="container py-4">
-            <h3 className="mb-4">Paso {stepIndex} de {steps.length - 1}</h3>
+            <h3 className="mb-4">
+                Paso {stepIndex} de {steps.length - 1}
+            </h3>
             <StepComponent
                 data={formData}
-                onNext={nextStep}
+                onNext={handleNextStep}
                 onBack={prevStep}
-                isSubmitting={isPending}
+                isSubmitting={isProcessing || isPending}
             />
         </div>
     );

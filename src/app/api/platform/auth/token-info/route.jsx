@@ -26,11 +26,10 @@ export async function GET() {
         return NextResponse.json(
             {
                 detail:
-                    error.response?.data?.detail ||
-                    'Error al recibir la información del backend.',
+                    error.response?.data?.detail,
             },
             {
-                status: error.response?.status || 500,
+                status: error.response?.status,
             }
         );
     }
