@@ -1,13 +1,14 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import { useState, useEffect, useRef } from 'react';
+import SubTitleComponent from '@/components/micro-components/sub_title';
 import { useMutation } from '@tanstack/react-query';
-import { toast } from 'react-toastify';
-import { useTranslations } from 'next-intl';
 import DOMPurify from 'dompurify';
-import { FaUserPlus  } from 'react-icons/fa';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
+import { FaUserPlus } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 
 export default function AuthLoginPage() {
@@ -49,9 +50,9 @@ export default function AuthLoginPage() {
       return result;
     },
     onSuccess: () => {
-      toast.success(t('successLogin'));
-      setIsSubmitting(false);
       setIsSuccess(true);
+      window.location.href = '/platform';
+      toast.success(t('successLogin'));
     },
     onError: (error) => {
       toast.error(error.message || t('generalError'));
@@ -93,6 +94,7 @@ export default function AuthLoginPage() {
 
   return (
     <div className="container my-5 align-content-center">
+      <SubTitleComponent t={t} sub_title={'title'} />
       <form onSubmit={handleSubmit} className="row g-3 my-5">
         <div className="col-6">
           <label htmlFor="document_number" className="form-label">

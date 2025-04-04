@@ -19,7 +19,7 @@ export default function WhatsAppButton() {
     return (
         <div className={styles.actionButtons}>
             <a
-                href="https://wa.me/+573183280176"
+                href="https://wa.me/573012283818"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`${styles.whatsappButton} ${isScrolled ? styles.scrolled : ''}`}

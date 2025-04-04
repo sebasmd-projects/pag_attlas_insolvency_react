@@ -3,7 +3,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { useMemo, useState, useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { FaArrowCircleLeft, FaArrowCircleRight, FaMinus, FaPlus } from 'react-icons/fa';
 
 export default function Step8Subsistence({ data, onNext, onBack, isSubmitting }) {
@@ -25,14 +25,9 @@ export default function Step8Subsistence({ data, onNext, onBack, isSubmitting })
         { label: t('table.defaults.items.baseExpenses.item12.label'), legal: t('table.defaults.items.baseExpenses.item12.legalSupport'), value: '', editable: true, depent: false, id_nuber: 12 }, // Impuestos
         { label: t('table.defaults.items.baseExpenses.item13.label'), legal: t('table.defaults.items.baseExpenses.item13.legalSupport'), value: '', editable: false, depent: true, id_nuber: 13 }, // Recreación y deporte (30.000 adultos  40.000 hijos)
         { label: t('table.defaults.items.baseExpenses.item14.label'), legal: t('table.defaults.items.baseExpenses.item14.legalSupport'), value: '', editable: true, depent: false, id_nuber: 14 }, // Comunicaciones
-        { label: t('table.defaults.items.baseExpenses.item15.label'), legal: t('table.defaults.items.baseExpenses.item15.legalSupport'), value: '', editable: true, depent: false, id_nuber: 15 }, // Obligación alimentaria (REDAM)
     ];
 
-    const FOOD_OBLIGATION_ITEM = {
-        label: t('table.defaults.items.baseExpenses.item15.label'),
-        legal: t('table.defaults.items.baseExpenses.item15.legalSupport'),
-        value: '',
-    };
+    const FOOD_OBLIGATION_ITEM = { label: t('table.defaults.items.baseExpenses.item15.label'), legal: t('table.defaults.items.baseExpenses.item15.legalSupport'), value: '', editable: true, depent: false, id_nuber: 15 };
 
     const formatToLocaleNumber = (value) => {
         if (!value) return '';
@@ -67,7 +62,6 @@ export default function Step8Subsistence({ data, onNext, onBack, isSubmitting })
     const [newGender, setNewGender] = useState('male');
     const [childCount, setChildCount] = useState(0);
 
-    // Sincronizar estado con props.data
     useEffect(() => {
         if (data?.tables) {
             const initialChildCount = data.tables.filter(tbl => tbl.relationship === 'child').length;
@@ -81,7 +75,7 @@ export default function Step8Subsistence({ data, onNext, onBack, isSubmitting })
                         value: formatToLocaleNumber(it.value),
                     })),
                 })),
-                hasFoodObligation: hasObligation, // Setear valor inicial
+                hasFoodObligation: hasObligation,
                 proposedMonthlyValue: formatToLocaleNumber(data.proposedMonthlyValue),
                 childrenCount: initialChildCount,
             });
@@ -150,10 +144,6 @@ export default function Step8Subsistence({ data, onNext, onBack, isSubmitting })
                 tables: newTables
             };
         });
-    };
-
-    const tableHasFoodObligation = (tableIndex) => {
-        return form.tables[tableIndex].items.some(it => it.label === FOOD_OBLIGATION_ITEM.label);
     };
 
     const insertItemBelow = (tableIndex, itemIndex) => {

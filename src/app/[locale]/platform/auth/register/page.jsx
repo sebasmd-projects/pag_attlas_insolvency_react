@@ -8,8 +8,9 @@ import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import { useTranslations } from 'next-intl';
 import DOMPurify from 'dompurify';
-import { FaUserPlus  } from 'react-icons/fa';
+import { FaUserPlus } from 'react-icons/fa';
 import Link from 'next/link';
+import SubTitleComponent from '@/components/micro-components/sub_title';
 
 export default function AuthRegisterPage() {
 
@@ -43,9 +44,9 @@ export default function AuthRegisterPage() {
       return result;
     },
     onSuccess: (data) => {
-      toast.success(t('successRegister') || t('successRegister'));
+      toast.success(t('successRegister'));
       setIsSubmitting(false);
-      router.push('/platform');
+      router.push('/platform/login');
     },
     onError: (error) => {
       toast.error(error.message || t('generalError'));
@@ -77,6 +78,7 @@ export default function AuthRegisterPage() {
 
   return (
     <div className="container my-5 align-content-center">
+      <SubTitleComponent t={t} sub_title={'title'} />
       <form onSubmit={handleSubmit} className="row g-3 my-5">
         <div className="col-6">
           <label htmlFor="document_number" className="form-label">{t('form.documentNumber')}</label>

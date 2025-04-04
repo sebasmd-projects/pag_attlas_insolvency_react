@@ -67,7 +67,7 @@ export default function Navigation() {
             <div className="d-flex gap-3 align-items-center">
               <NavButton
                 gradient="linear-gradient(90deg, #1a4ab3 0%, #0e3692 100%)"
-                href='https://wa.me/573183280176'
+                href='https://wa.me/573012283818'
                 icon={MdCastForEducation}
                 label="campus"
                 setExpanded={setExpanded}
@@ -79,7 +79,7 @@ export default function Navigation() {
               <NavButton
                 color='black'
                 gradient="linear-gradient(90deg, #7fd2cb 0%, #5ab8b0 100%)"
-                href='https://wa.me/573183280176'
+                href='https://wa.me/573012283818'
                 icon={BiDonateHeart}
                 label="donation"
                 setExpanded={setExpanded}

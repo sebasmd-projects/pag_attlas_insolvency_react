@@ -218,14 +218,14 @@ export default function CalculatorPage() {
                                         ? t.rich('result.cantPay', {
                                             link1: (chunks) => <Link href="/#contact">{chunks}</Link>,
                                             link2: (chunks) => (
-                                                <a href="https://wa.me/573183280176" rel="noopener noreferrer" target="_blank">{chunks}</a>
+                                                <a href="https://wa.me/573012283818" rel="noopener noreferrer" target="_blank">{chunks}</a>
                                             ),
                                         })
                                         : t.rich('result.success', {
                                             time: result.time ?? '',
                                             link1: (chunks) => <Link href="/#contact">{chunks}</Link>,
                                             link2: (chunks) => (
-                                                <a href="https://wa.me/573183280176" rel="noopener noreferrer" target="_blank">{chunks}</a>
+                                                <a href="https://wa.me/573012283818" rel="noopener noreferrer" target="_blank">{chunks}</a>
                                             ),
                                         })}
                                     <DebtGauge

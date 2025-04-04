@@ -60,7 +60,7 @@ export default function Step0Instrucciones({ onNext, isSubmitting }) {
                 <span className="ms-2">
                     {t.rich('description', {
                         link: (chunks) => (
-                            <Link href="https://wa.me/573183280176" rel="noopener noreferrer" target="_blank">
+                            <Link href="https://wa.me/573012283818" rel="noopener noreferrer" target="_blank">
                                 {chunks}
                             </Link>
                         )

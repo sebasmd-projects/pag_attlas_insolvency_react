@@ -876,6 +876,7 @@
       },
       "auth": {
         "login": {
+          "title": "Iniciar sesión",
           "errorLogin": "Datos incorrectos, por favor verifica tu información.",
           "successLogin": "Inicio de sesión exitoso",
           "generalError": "Ocurrió un error, por favor intenta más tarde.",
@@ -887,6 +888,7 @@
           "registerLink": "¿No tienes cuenta? Regístrate aquí"
         },
         "register": {
+          "title": "Registro",
           "errorLogin": "Datos incorrectos, por favor verifica tu información.",
           "successLogin": "Registro exitoso",
           "generalError": "Ocurrió un error, por favor intenta más tarde.",
