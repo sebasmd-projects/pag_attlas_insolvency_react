@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useRef, useState, useEffect } from 'react';
-import SignatureCanvas from 'react-signature-canvas';
+import React, { useState } from 'react';
 import { FaArrowCircleLeft } from 'react-icons/fa';
 import { LuSend } from "react-icons/lu";
 import { useTranslations } from 'next-intl';
@@ -12,39 +11,15 @@ export default function Step10LegalDocuments({ data, onNext, onBack, isSubmittin
 
   const [cedulaFront, setCedulaFront] = useState(data?.cedulaFront || '');
   const [cedulaBack, setCedulaBack] = useState(data?.cedulaBack || '');
+  const [signatureData, setSignatureData] = useState(data?.signature || '');
   const [hasAccepted, setHasAccepted] = useState(!!data?.hasAccepted);
 
-  // Firma: referencia al lienzo
-  const signatureRef = useRef(null);
-  const [signatureData, setSignatureData] = useState(data?.signature || '');
-
-  // Validaciones locales
   const [errorMessages, setErrorMessages] = useState({
     cedulaFront: '',
     cedulaBack: '',
     signature: '',
     accepted: '',
   });
-
-  // Rehidratar la firma si hay un valor en base64
-  useEffect(() => {
-    if (signatureData && signatureRef.current) {
-      signatureRef.current.fromDataURL(signatureData);
-    }
-  }, []);
-
-  const handleClearSignature = () => {
-    signatureRef.current?.clear();
-    setSignatureData('');
-  };
-
-  const handleSaveSignature = () => {
-    if (!signatureRef.current?.isEmpty()) {
-      const trimmedCanvas = signatureRef.current.getTrimmedCanvas();
-      const base64Signature = trimmedCanvas.toDataURL('image/png');
-      setSignatureData(base64Signature);
-    }
-  };
 
   // Convertir imágenes a base64
   const handleFileChange = async (file, setFile) => {
@@ -56,7 +31,6 @@ export default function Step10LegalDocuments({ data, onNext, onBack, isSubmittin
     reader.readAsDataURL(file);
   };
 
-  // Validar
   const validateFields = () => {
     let hasError = false;
     const newErrors = {
@@ -118,7 +92,6 @@ export default function Step10LegalDocuments({ data, onNext, onBack, isSubmittin
         {cedulaFront && (
           <div className="mt-2">
             <p className="text-success">{t('fields.cedulaFront.successMessage')}</p>
-            {/* Vista previa opcional de la cédula cargada */}
             <img
               src={cedulaFront}
               alt="Cédula frente"
@@ -143,7 +116,6 @@ export default function Step10LegalDocuments({ data, onNext, onBack, isSubmittin
         {cedulaBack && (
           <div className="mt-2">
             <p className="text-success">{t('fields.cedulaBack.successMessage')}</p>
-            {/* Vista previa opcional de la cédula cargada */}
             <img
               src={cedulaBack}
               alt="Cédula reverso"
@@ -159,48 +131,28 @@ export default function Step10LegalDocuments({ data, onNext, onBack, isSubmittin
       {/* Firma */}
       <div className="mb-4">
         <label className="form-label">{t('fields.signature.label')}</label>
-        <div>
-          <SignatureCanvas
-            ref={signatureRef}
-            penColor="black"
-            canvasProps={{
-              width: 800,
-              height: 200,
-              style: {
-                border: '1px solid #ccc',
-                marginBottom: '8px',
-              },
-            }}
-          />
-        </div>
-
-        <div className="d-flex gap-3">
-          <button
-            type="button"
-            className="btn btn-outline-secondary btn-sm"
-            onClick={handleClearSignature}
-          >
-            {t('fields.signature.clear')}
-          </button>
-          <button
-            type="button"
-            className="btn btn-outline-primary btn-sm"
-            onClick={handleSaveSignature}
-          >
-            {t('fields.signature.save')}
-          </button>
-        </div>
+        <input
+          type="file"
+          accept="image/*"
+          className="form-control"
+          onChange={(e) => handleFileChange(e.target.files[0], setSignatureData)}
+        />
         {signatureData && (
-          <p className="text-success mt-2">
-            {t('fields.signature.successMessage')}
-          </p>
+          <div className="mt-2">
+            <p className="text-success">{t('fields.signature.successMessage')}</p>
+            <img
+              src={signatureData}
+              alt="Firma"
+              style={{ maxWidth: '200px', display: 'block', marginTop: '8px' }}
+            />
+          </div>
         )}
         {errorMessages.signature && (
           <div className="text-danger">{errorMessages.signature}</div>
         )}
       </div>
 
-      {/* Check de confirmación */}
+      {/* Aceptar términos */}
       <div className="mb-4">
         <div className="form-check">
           <input

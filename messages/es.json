@@ -852,7 +852,7 @@
                   "successMessage": "Imagen posterior cargada correctamente"
                 },
                 "signature": {
-                  "label": "Firma (dibuje en el recuadro)",
+                  "label": "Firma",
                   "clear": "Limpiar",
                   "save": "Guardar Firma",
                   "successMessage": "Firma guardada correctamente"

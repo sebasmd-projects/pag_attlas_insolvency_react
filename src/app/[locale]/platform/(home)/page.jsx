@@ -126,8 +126,6 @@ export default function PlatformHomePage() {
         if (stepIndex > 0) setStepIndex((prev) => prev - 1);
     };
 
-    console.log('Form Data:', formData);
-
     return (
         <div className="container py-4">
             <h3 className="mb-4">
