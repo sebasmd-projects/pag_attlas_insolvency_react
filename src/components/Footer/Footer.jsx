@@ -46,7 +46,7 @@ export default function Footer() {
         <footer className="pt-5" style={{ backgroundColor: '#0e3692' }}>
             <div className="container-lg" style={{ color: '#7fd2cb' }}>
                 <div className="row justify-content-between">
-                    <div className="col-md-3">
+                    <div className="col-md-4">
                         <div className="mb-4">
                             <h5 className="mb-3" style={{ fontSize: '1.125rem', fontWeight: 800 }}>
                                 {t('socialLinksTitle')}
@@ -64,15 +64,13 @@ export default function Footer() {
                             <ul style={{ listStyle: 'none' }} className="gap-2">
                                 {cellPhones.map((cellPhone, index) => (
                                     <li key={index} className="d-flex align-items-center gap-2">
-                                        <FaPhone className="text-white" />
+                                        <FaPhone className="text-white" />{t('callUs')}:
                                         <Link href={`tel:${cellPhone.number}`} className="text-white text-decoration-none">
                                             {cellPhone.number}
                                         </Link>
                                     </li>
                                 ))}
                             </ul>
-
-
                         </div>
                     </div>
 

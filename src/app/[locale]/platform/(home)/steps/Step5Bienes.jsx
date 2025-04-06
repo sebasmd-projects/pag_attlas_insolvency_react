@@ -9,14 +9,16 @@ import { toast } from 'react-toastify';
 
 const AFFECT_OPTIONS = (t) => [
     '',
-    t('form.affectation.options.noAsset'),
-    t('form.affectation.options.na'),
-    t('form.affectation.options.other'),
+    t('form.affectation.options.family_heritage'),
+    t('form.affectation.options.family_home'),
+    t('form.affectation.options.decent_housing'),
+    t('form.affectation.options.not_apply'),
 ];
 
 const MEASURE_OPTIONS = (t) => [
     t('form.measure.options.seizure'),
     t('form.measure.options.confiscation'),
+    t('form.measure.options.auction'),
     t('form.measure.options.none'),
 ];
 
@@ -27,6 +29,8 @@ export default function Step5Bienes({ data, onNext, onBack, isSubmitting }) {
     const [hasImmutableExclusion, setHasImmutableExclusion] = useState(false);
     const t = useTranslations('Platform.pages.home.wizard.steps.step5');
     const wizardButton = useTranslations('Platform.pages.home.wizard.buttons');
+
+    const MEASURE_OPTIONS_BLOCK = MEASURE_OPTIONS(t)[3];
 
     useEffect(() => {
         const movableExclusion = initialAssets.some(a =>
@@ -130,7 +134,7 @@ export default function Step5Bienes({ data, onNext, onBack, isSubmitting }) {
     const handleCheckboxChange = (index, option) => {
         const updated = [...form.assets];
         let currentMeasures = updated[index].legal_measure || [];
-        const noneOption = MEASURE_OPTIONS(t)[2];
+        const noneOption = MEASURE_OPTIONS_BLOCK;
         if (option === noneOption) {
             if (currentMeasures.includes(noneOption)) {
                 currentMeasures = currentMeasures.filter((m) => m !== noneOption);
@@ -152,7 +156,7 @@ export default function Step5Bienes({ data, onNext, onBack, isSubmitting }) {
     };
 
     const isNoneSelected = (asset) => {
-        const noneOption = MEASURE_OPTIONS(t)[2];
+        const noneOption = MEASURE_OPTIONS_BLOCK;
         return asset.legal_measure && asset.legal_measure.includes(noneOption);
     };
 
@@ -313,13 +317,13 @@ export default function Step5Bienes({ data, onNext, onBack, isSubmitting }) {
                                     {MEASURE_OPTIONS(t).map((opt, i) => {
                                         const disableOther =
                                             isNoneSelected(asset) &&
-                                            opt !== MEASURE_OPTIONS(t)[2];
+                                            opt !== MEASURE_OPTIONS_BLOCK;
                                         const disableNone =
                                             asset.legal_measure &&
                                             asset.legal_measure.some(
-                                                (m) => m !== MEASURE_OPTIONS(t)[2]
+                                                (m) => m !== MEASURE_OPTIONS_BLOCK
                                             ) &&
-                                            opt === MEASURE_OPTIONS(t)[2];
+                                            opt === MEASURE_OPTIONS_BLOCK;
                                         return (
                                             <div className="form-check form-check-inline" key={i}>
                                                 <input

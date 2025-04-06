@@ -102,14 +102,17 @@ export default function Step4Acreedores({ data, onNext, onBack, isSubmitting }) 
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        if (form.creditors.length < 2) {
+            toast.error(t('form.minTwoCreditorsError'));
+            return;
+        }
+
         if (
             form.creditors.some(
                 (a) => !a.name || !a.nature || !a.capital_value || !a.days_overdue
             )
         ) {
-            toast.error(
-                t('form.error')
-            );
+            toast.error(t('form.error'));
             return;
         }
 

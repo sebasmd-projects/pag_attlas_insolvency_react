@@ -19,6 +19,7 @@ import Step8Recursos from './steps/Step8Recursos';
 import Step9Sociedad from './steps/Step9Sociedad';
 import Step10LegalDocuments from './steps/Step10LegalDocuments';
 
+
 const steps = [
     Step0Instrucciones,
     Step1DatosPersonales,
@@ -37,14 +38,53 @@ const STORAGE_KEY = 'insolvency_form_data';
 
 const loadFromStorage = () => {
     try {
-        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+        const stored = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+        return stored;
     } catch {
         return {};
     }
 };
 
+
 const saveToStorage = (data) => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    const toStore = { ...data };
+
+    
+    if (toStore.supportDocs) {
+        toStore.supportDocs = toStore.supportDocs.map(doc => ({
+            description: doc.description,
+            fileName: doc.fileName
+        }));
+    }
+    
+    delete toStore.cedulaFront;
+    delete toStore.cedulaBack;
+    delete toStore.signature;
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(toStore));
+};
+
+
+const getLocalStorageUsage = () => {
+    let total = 0;
+    for (let key in localStorage) {
+        if (!localStorage.hasOwnProperty(key)) continue;
+        const value = localStorage.getItem(key);
+        total += key.length + (value ? value.length : 0);
+    }
+    return total;
+};
+
+const getLocalStorageUsageInKB = () => {
+    const bytes = getLocalStorageUsage();
+    return (bytes / 1024).toFixed(2);
+};
+
+const isLocalStorageNearLimit = (thresholdPercentage = 80) => {
+    const MAX_LIMIT_KB = 5120;
+    const currentUsageKB = getLocalStorageUsageInKB();
+    const usagePercent = (currentUsageKB / MAX_LIMIT_KB) * 100;
+    return usagePercent >= thresholdPercentage;
 };
 
 export default function PlatformHomePage() {
@@ -113,6 +153,11 @@ export default function PlatformHomePage() {
         setFormData(updatedData);
         saveToStorage(updatedData);
 
+        if (isLocalStorageNearLimit(80)) {
+            const usage = getLocalStorageUsageInKB();
+            toast.warning(`¡Atención! Estás usando ${usage} KB de almacenamiento. Si cargas más documentos grandes, podrías tener errores.`);
+        }
+
         if (stepIndex === steps.length - 1) {
             mutate(updatedData);
         } else {
@@ -120,7 +165,6 @@ export default function PlatformHomePage() {
             setIsProcessing(false);
         }
     };
-
 
     const prevStep = () => {
         if (stepIndex > 0) setStepIndex((prev) => prev - 1);

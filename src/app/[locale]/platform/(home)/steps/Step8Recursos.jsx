@@ -20,7 +20,7 @@ export default function Step8Subsistence({ data, onNext, onBack, isSubmitting })
         { label: t('table.defaults.items.baseExpenses.item7.label'), legal: t('table.defaults.items.baseExpenses.item7.legalSupport'), value: '', editable: true, depent: false, id_nuber: 7 }, // Servicios Públicos (Gas)
         { label: t('table.defaults.items.baseExpenses.item8.label'), legal: t('table.defaults.items.baseExpenses.item8.legalSupport'), value: '', editable: true, depent: false, id_nuber: 8 }, // Seguridad social
         { label: t('table.defaults.items.baseExpenses.item9.label'), legal: t('table.defaults.items.baseExpenses.item9.legalSupport'), value: '', editable: true, depent: false, id_nuber: 9 }, // Transporte
-        { label: t('table.defaults.items.baseExpenses.item10.label'), legal: t('table.defaults.items.baseExpenses.item10.legalSupport'), value: '', editable: false, depent: true, id_nuber: 10 }, // Vestuario y Calzado (68.333)
+        { label: t('table.defaults.items.baseExpenses.item10.label'), legal: t('table.defaults.items.baseExpenses.item10.legalSupport'), value: '68.333', editable: false, depent: true, id_nuber: 10 }, // Vestuario y Calzado (68.333)
         { label: t('table.defaults.items.baseExpenses.item11.label'), legal: t('table.defaults.items.baseExpenses.item11.legalSupport'), value: '', editable: true, depent: true, id_nuber: 11 }, // Educación
         { label: t('table.defaults.items.baseExpenses.item12.label'), legal: t('table.defaults.items.baseExpenses.item12.legalSupport'), value: '', editable: true, depent: false, id_nuber: 12 }, // Impuestos
         { label: t('table.defaults.items.baseExpenses.item13.label'), legal: t('table.defaults.items.baseExpenses.item13.legalSupport'), value: '', editable: false, depent: true, id_nuber: 13 }, // Recreación y deporte (30.000 adultos  40.000 hijos)
@@ -79,6 +79,8 @@ export default function Step8Subsistence({ data, onNext, onBack, isSubmitting })
                 proposedMonthlyValue: formatToLocaleNumber(data.proposedMonthlyValue),
                 childrenCount: initialChildCount,
             });
+
+            setChildCount(initialChildCount);
         }
     }, [data]);
 

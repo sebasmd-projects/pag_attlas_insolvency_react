@@ -2,8 +2,9 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -17,6 +18,27 @@ import NavButton from './components/NavButton';
 export default function Navigation() {
   const t = useTranslations('Navigation');
   const [expanded, setExpanded] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    async function checkTokenInfo() {
+      try {
+        const res = await fetch('/api/platform/auth/token-info', { cache: 'no-store' });
+        if (res.ok) {
+          setLoggedIn(true);
+        } else {
+          setLoggedIn(false);
+        }
+      } catch (error) {
+        console.error('Error validating token:', error);
+        setLoggedIn(false);
+      }
+    }
+
+    checkTokenInfo();
+  }, []);
+
 
   return (
     <Navbar className="bg-body-tertiary" expand="lg" expanded={expanded} sticky="top">
@@ -97,6 +119,24 @@ export default function Navigation() {
                 setExpanded={setExpanded}
               />
             </div>
+
+            {loggedIn && (
+              <Nav.Link
+                as="button"
+                className="btn btn-outline-danger"
+                onClick={async () => {
+                  try {
+                    await fetch('/api/platform/auth/logout', { method: 'POST' });
+                    setLoggedIn(false);
+                    router.push('/platform/auth/login');
+                  } catch (error) {
+                    console.error('Error logging out:', error);
+                  }
+                }}
+              >
+                Cerrar sesión
+              </Nav.Link>
+            )}
           </Nav>
 
           <div className="d-flex align-items-center">

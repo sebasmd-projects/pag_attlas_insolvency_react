@@ -1,9 +1,11 @@
 'use client';
 
 import React, { useState } from 'react';
-import { FaArrowCircleLeft } from 'react-icons/fa';
-import { LuSend } from "react-icons/lu";
+import { FaArrowCircleLeft, FaPlus, FaMinus } from 'react-icons/fa';
+import { LuSend } from 'react-icons/lu';
 import { useTranslations } from 'next-intl';
+import { toast } from 'react-toastify';
+
 
 export default function Step10LegalDocuments({ data, onNext, onBack, isSubmitting }) {
   const t = useTranslations('Platform.pages.home.wizard.steps.step10');
@@ -13,6 +15,7 @@ export default function Step10LegalDocuments({ data, onNext, onBack, isSubmittin
   const [cedulaBack, setCedulaBack] = useState(data?.cedulaBack || '');
   const [signatureData, setSignatureData] = useState(data?.signature || '');
   const [hasAccepted, setHasAccepted] = useState(!!data?.hasAccepted);
+  const [supportDocs, setSupportDocs] = useState(data?.supportDocs || []);
 
   const [errorMessages, setErrorMessages] = useState({
     cedulaFront: '',
@@ -21,41 +24,62 @@ export default function Step10LegalDocuments({ data, onNext, onBack, isSubmittin
     accepted: '',
   });
 
-  // Convertir imágenes a base64
-  const handleFileChange = async (file, setFile) => {
+  const handleFileChange = (file, index) => {
     if (!file) return;
+    if (!file.type.startsWith('image/')) {
+      toast.error('Solo se permiten imágenes. Si necesitas enviar un PDF, por favor envíalo al correo insolvencia@propensionesabogados.com incluyendo tu número de documento.');
+      return;
+    }
     const reader = new FileReader();
     reader.onloadend = () => {
-      setFile(reader.result); // base64
+      const newDocs = [...supportDocs];
+      newDocs[index].file = reader.result;
+      newDocs[index].fileName = file.name;
+      setSupportDocs(newDocs);
     };
     reader.readAsDataURL(file);
   };
 
+  const addSupportDoc = () => {
+    setSupportDocs([...supportDocs, { description: '', file: '', fileName: '' }]);
+  };
+
+  const removeSupportDoc = (index) => {
+    const newDocs = [...supportDocs];
+    newDocs.splice(index, 1);
+    setSupportDocs(newDocs);
+  };
+
+  const handleDescriptionChange = (index, value) => {
+    const newDocs = [...supportDocs];
+    newDocs[index].description = value;
+    setSupportDocs(newDocs);
+  };
+
+  const handleSimpleFileChange = async (file, setFile) => {
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      toast.error('Solo se permiten imágenes. Si necesitas enviar un PDF, por favor envíalo al correo insolvencia@propensionesabogados.com incluyendo tu número de documento.');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setFile(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
+
   const validateFields = () => {
     let hasError = false;
-    const newErrors = {
-      cedulaFront: '',
-      cedulaBack: '',
-      signature: '',
-      accepted: '',
-    };
+    const newErrors = { cedulaFront: '', cedulaBack: '', signature: '', accepted: '' };
 
-    if (!cedulaFront) {
-      newErrors.cedulaFront = t('validations.cedulaFrontRequired');
-      hasError = true;
-    }
-    if (!cedulaBack) {
-      newErrors.cedulaBack = t('validations.cedulaBackRequired');
-      hasError = true;
-    }
-    if (!signatureData) {
-      newErrors.signature = t('validations.signatureRequired');
-      hasError = true;
-    }
-    if (!hasAccepted) {
-      newErrors.accepted = t('validations.acceptRequired');
-      hasError = true;
-    }
+    if (!cedulaFront) newErrors.cedulaFront = t('validations.cedulaFrontRequired'), hasError = true;
+    if (!cedulaBack) newErrors.cedulaBack = t('validations.cedulaBackRequired'), hasError = true;
+    if (!signatureData) newErrors.signature = t('validations.signatureRequired'), hasError = true;
+    if (!hasAccepted) newErrors.accepted = t('validations.acceptRequired'), hasError = true;
 
     setErrorMessages(newErrors);
     return !hasError;
@@ -63,15 +87,17 @@ export default function Step10LegalDocuments({ data, onNext, onBack, isSubmittin
 
   const handleNextClick = (e) => {
     e.preventDefault();
-    if (!validateFields()) {
-      return;
-    }
+    if (!validateFields()) return;
+
+    const filteredSupportDocs = supportDocs.filter(doc => doc.file && doc.fileName);
+
     const payload = {
       ...data,
       cedulaFront,
       cedulaBack,
       signature: signatureData,
       hasAccepted,
+      supportDocs: filteredSupportDocs,
     };
     onNext(payload);
   };
@@ -80,52 +106,30 @@ export default function Step10LegalDocuments({ data, onNext, onBack, isSubmittin
     <div>
       <h2 className="mb-4">{t('title')}</h2>
 
-      {/* Cédula (frente) */}
+      {/* Cédula frente */}
       <div className="mb-4">
         <label className="form-label">{t('fields.cedulaFront.label')}</label>
         <input
           type="file"
           accept="image/*"
           className="form-control"
-          onChange={(e) => handleFileChange(e.target.files[0], setCedulaFront)}
+          onChange={(e) => handleSimpleFileChange(e.target.files[0], setCedulaFront)}
         />
-        {cedulaFront && (
-          <div className="mt-2">
-            <p className="text-success">{t('fields.cedulaFront.successMessage')}</p>
-            <img
-              src={cedulaFront}
-              alt="Cédula frente"
-              style={{ maxWidth: '200px', display: 'block', marginTop: '8px' }}
-            />
-          </div>
-        )}
-        {errorMessages.cedulaFront && (
-          <div className="text-danger">{errorMessages.cedulaFront}</div>
-        )}
+        {cedulaFront && <img src={cedulaFront} alt="Cédula frente" style={{ maxWidth: '200px', marginTop: '8px' }} />}
+        {errorMessages.cedulaFront && <div className="text-danger">{errorMessages.cedulaFront}</div>}
       </div>
 
-      {/* Cédula (reverso) */}
+      {/* Cédula reverso */}
       <div className="mb-4">
         <label className="form-label">{t('fields.cedulaBack.label')}</label>
         <input
           type="file"
           accept="image/*"
           className="form-control"
-          onChange={(e) => handleFileChange(e.target.files[0], setCedulaBack)}
+          onChange={(e) => handleSimpleFileChange(e.target.files[0], setCedulaBack)}
         />
-        {cedulaBack && (
-          <div className="mt-2">
-            <p className="text-success">{t('fields.cedulaBack.successMessage')}</p>
-            <img
-              src={cedulaBack}
-              alt="Cédula reverso"
-              style={{ maxWidth: '200px', display: 'block', marginTop: '8px' }}
-            />
-          </div>
-        )}
-        {errorMessages.cedulaBack && (
-          <div className="text-danger">{errorMessages.cedulaBack}</div>
-        )}
+        {cedulaBack && <img src={cedulaBack} alt="Cédula reverso" style={{ maxWidth: '200px', marginTop: '8px' }} />}
+        {errorMessages.cedulaBack && <div className="text-danger">{errorMessages.cedulaBack}</div>}
       </div>
 
       {/* Firma */}
@@ -135,21 +139,80 @@ export default function Step10LegalDocuments({ data, onNext, onBack, isSubmittin
           type="file"
           accept="image/*"
           className="form-control"
-          onChange={(e) => handleFileChange(e.target.files[0], setSignatureData)}
+          onChange={(e) => handleSimpleFileChange(e.target.files[0], setSignatureData)}
         />
-        {signatureData && (
-          <div className="mt-2">
-            <p className="text-success">{t('fields.signature.successMessage')}</p>
-            <img
-              src={signatureData}
-              alt="Firma"
-              style={{ maxWidth: '200px', display: 'block', marginTop: '8px' }}
+        {signatureData && <img src={signatureData} alt="Firma" style={{ maxWidth: '200px', marginTop: '8px' }} />}
+        {errorMessages.signature && <div className="text-danger">{errorMessages.signature}</div>}
+      </div>
+
+      {/* Nota para PDFs */}
+      <div className="alert alert-info" role="alert">
+        Si el documento a cargar es un <strong>PDF</strong>, por favor envíalo al correo <strong>insolvencia@propensionesabogados.com</strong> incluyendo tu <strong>número de documento</strong>.
+      </div>
+
+      {/* Documentos de soporte */}
+      <div className="mb-4">
+        <p><label className="form-label">Documentos demostrativos (solo imágenes)</label></p>
+
+        {supportDocs.map((doc, index) => (
+          <div key={index} className="input-group mb-3">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Descripción"
+              value={doc.description}
+              onChange={(e) => handleDescriptionChange(index, e.target.value)}
+              required
             />
+            <input
+              type="file"
+              className="form-control"
+              accept="image/*"
+              id={`fileInput-${index}`}
+              onChange={(e) => handleFileChange(e.target.files[0], index)}
+              required
+            />
+            <button
+              className="btn btn-outline-success"
+              type="button"
+              onClick={addSupportDoc}
+              style={{ display: index === supportDocs.length - 1 ? 'inline-block' : 'none' }}
+            >
+              <FaPlus />
+            </button>
+            <button
+              className="btn btn-outline-danger"
+              type="button"
+              onClick={() => removeSupportDoc(index)}
+            >
+              <FaMinus />
+            </button>
           </div>
+        ))}
+
+        {/* Botón inicial si no hay documentos */}
+        {supportDocs.length === 0 && (
+          <button
+            type="button"
+            className="btn btn-outline-primary mt-2"
+            onClick={addSupportDoc}
+          >
+            + Añadir documento
+          </button>
         )}
-        {errorMessages.signature && (
-          <div className="text-danger">{errorMessages.signature}</div>
-        )}
+
+        {/* Previsualización */}
+        {supportDocs.map((doc, index) => (
+          <div key={`preview-${index}`} className="mt-2">
+            {doc.file && (
+              <img
+                src={doc.file}
+                alt="Documento cargado"
+                style={{ maxWidth: '200px', marginTop: '8px' }}
+              />
+            )}
+          </div>
+        ))}
       </div>
 
       {/* Aceptar términos */}
@@ -166,19 +229,12 @@ export default function Step10LegalDocuments({ data, onNext, onBack, isSubmittin
             {t('fields.checkConfirmation')}
           </label>
         </div>
-        {errorMessages.accepted && (
-          <div className="text-danger">{errorMessages.accepted}</div>
-        )}
+        {errorMessages.accepted && <div className="text-danger">{errorMessages.accepted}</div>}
       </div>
 
-      {/* Botones de navegación */}
+      {/* Botones navegación */}
       <div className="d-flex justify-content-between">
-        <button
-          type="button"
-          className="btn btn-secondary"
-          onClick={onBack}
-          disabled={isSubmitting}
-        >
+        <button type="button" className="btn btn-secondary" onClick={onBack} disabled={isSubmitting}>
           <FaArrowCircleLeft /> <span className="ms-2">{wizardButton('back')}</span>
         </button>
         <button
@@ -189,11 +245,7 @@ export default function Step10LegalDocuments({ data, onNext, onBack, isSubmittin
         >
           {isSubmitting ? (
             <>
-              <span
-                className="spinner-border spinner-border-sm me-2"
-                role="status"
-                aria-hidden="true"
-              ></span>
+              <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
               {wizardButton('processing')}
             </>
           ) : (

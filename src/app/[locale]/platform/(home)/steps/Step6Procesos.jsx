@@ -11,14 +11,15 @@ const getStatesOptions = (t) => [
     t('form.processStatus.options.sequesteredPending'),
     t('form.processStatus.options.lawsuitInProgress'),
     t('form.processStatus.options.admissionOrder'),
+    t('form.processStatus.options.auction'),
     t('form.processStatus.options.processCompleted'),
 ];
 
 export default function Step6Procesos({ data, onNext, onBack, isSubmitting }) {
     const t = useTranslations('Platform.pages.home.wizard.steps.step6');
     const wizardButton = useTranslations('Platform.pages.home.wizard.buttons');
-
     const statesOptions = getStatesOptions(t);
+    const STATE_OPTIONS_BLOCK = statesOptions[5]
 
     const [form, setForm] = useState({
         processes: data.processes || [],
@@ -33,12 +34,12 @@ export default function Step6Procesos({ data, onNext, onBack, isSubmitting }) {
     const toggleCheckbox = (index, value) => {
         const current = form.processes[index].status || [];
         let updatedStatus;
-        if (value === statesOptions[4]) {
-            updatedStatus = current.includes(statesOptions[4]) ? [] : [statesOptions[4]];
+        if (value === STATE_OPTIONS_BLOCK) {
+            updatedStatus = current.includes(STATE_OPTIONS_BLOCK) ? [] : [STATE_OPTIONS_BLOCK];
         } else {
             updatedStatus = current.includes(value)
                 ? current.filter((item) => item !== value)
-                : [...current.filter((item) => item !== statesOptions[4]), value];
+                : [...current.filter((item) => item !== STATE_OPTIONS_BLOCK), value];
         }
         handleChange(index, 'status', updatedStatus);
     };
@@ -89,6 +90,7 @@ export default function Step6Procesos({ data, onNext, onBack, isSubmitting }) {
                             <label className="form-label">{t('form.court')}</label>
                             <textarea
                                 className="form-control"
+                                required
                                 value={proceso.court}
                                 rows={2}
                                 onChange={(e) => handleChange(index, 'court', e.target.value)}
@@ -98,6 +100,7 @@ export default function Step6Procesos({ data, onNext, onBack, isSubmitting }) {
                             <label className="form-label">{t('form.description')}</label>
                             <input
                                 type="text"
+                                required
                                 className="form-control"
                                 value={proceso.description}
                                 onChange={(e) => handleChange(index, 'description', e.target.value)}
@@ -123,9 +126,9 @@ export default function Step6Procesos({ data, onNext, onBack, isSubmitting }) {
                                             id={`estado-${index}-${estado}`}
                                             checked={proceso.status.includes(estado)}
                                             disabled={
-                                                estado === statesOptions[4]
-                                                    ? proceso.status.some((item) => item !== statesOptions[4])
-                                                    : proceso.status.includes(statesOptions[4])
+                                                estado === STATE_OPTIONS_BLOCK
+                                                    ? proceso.status.some((item) => item !== STATE_OPTIONS_BLOCK)
+                                                    : proceso.status.includes(STATE_OPTIONS_BLOCK)
                                             }
                                             onChange={() => toggleCheckbox(index, estado)}
                                         />

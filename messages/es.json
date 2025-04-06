@@ -62,7 +62,8 @@
     "socialLinksTitle": "Nuestras redes sociales:",
     "faqTitle": "Preguntas frecuentes",
     "copyText": "Copyright Propensiones Abogados & Fundación ATTLAS Todos los derechos reservados.",
-    "designText": "Diseñado por <link1>Sebastián Morales</link1> & <link2>Carlos Morales</link2>"
+    "designText": "Diseñado por <link1>Sebastián Morales</link1> & <link2>Carlos Morales</link2>",
+    "callUs": "Línea de atención al cliente"
   },
   "Pages": {
     "homePage": {
@@ -560,6 +561,7 @@
               "title": "Relación de Acreedores",
               "subTitle": "Por favor completa la siguiente información",
               "form": {
+                "minTwoCreditorsError": "Debes completar al menos dos acreedores",
                 "error": "Debes completar al menos el nombre, la naturaleza, el capital y los días en mora de cada acreedor",
                 "addCreditor": "+ Agregar Acreedor",
                 "headers": {
@@ -605,10 +607,10 @@
                   "label": "Afectación",
                   "placeholder": "Selecciona uno",
                   "options": {
-                    "otherPlaceholder": "Especifica la afectación",
-                    "noAsset": "No tiene",
-                    "na": "No aplica",
-                    "other": "Otro"
+                    "family_heritage": "Patrimonio familiar",
+                    "family_home": "Vivienda familiar",
+                    "decent_housing": "Única vivienda digna",
+                    "not_apply": "No aplica"
                   }
                 },
                 "measure": {
@@ -616,6 +618,7 @@
                   "options": {
                     "seizure": "Embargo",
                     "confiscation": "Secuestre",
+                    "auction": "Remate",
                     "none": "No tiene"
                   }
                 },
@@ -652,6 +655,7 @@
                   "placeholder": "Selecciona el estado del proceso",
                   "options": {
                     "seizure": "Embargo",
+                    "auction": "Remate",
                     "sequesteredPending": "Secuestre pendiente",
                     "lawsuitInProgress": "Demanda en curso",
                     "admissionOrder": "Auto admisorio",
