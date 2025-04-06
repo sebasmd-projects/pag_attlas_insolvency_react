@@ -170,7 +170,6 @@ export default function Step5Bienes({ data, onNext, onBack, isSubmitting }) {
                     identification: '',
                     lien: '',
                     affectation: '',
-                    affectation_other: '',
                     legal_measure: [],
                     patrimonial_society: '',
                     commercial_value: '',
@@ -288,22 +287,7 @@ export default function Step5Bienes({ data, onNext, onBack, isSubmitting }) {
                                         </option>
                                     ))}
                                 </select>
-                                {asset.affectation === t('form.affectation.options.other') && (
-                                    <input
-                                        type="text"
-                                        required
-                                        className="form-control mt-2"
-                                        placeholder={t('form.affectation.options.otherPlaceholder')}
-                                        value={asset.affectation_other || ''}
-                                        onChange={(e) =>
-                                            handleChange(
-                                                index,
-                                                'affectation_other',
-                                                e.target.value
-                                            )
-                                        }
-                                    />
-                                )}
+                        
                             </div>
 
                             <div className="col-md-6">
