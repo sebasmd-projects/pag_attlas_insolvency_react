@@ -2,6 +2,7 @@
 
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Inter } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
@@ -34,6 +35,7 @@ export default async function BaseLayout({ children, locale }: Props) {
                 <Navigation />
                 {children}
                 <Analytics />
+                <SpeedInsights />
                 <Footer />
                 <WhatsAppButton />
               </AOSProvider>
