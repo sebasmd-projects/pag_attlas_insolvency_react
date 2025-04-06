@@ -27,10 +27,20 @@ export async function POST(request) {
         return NextResponse.json(response.data, { status: 200 });
 
     } catch (error) {
-        console.error('Error al enviar formulario:', error.message);
-        return NextResponse.json(
-            { detail: error.response?.data?.detail || 'Error del servidor' },
-            { status: error.response?.status || 500 }
-        );
+        console.error('Error al enviar formulario:', error);
+
+        let detail = 'Error del servidor';
+
+        if (error.response) {
+            if (typeof error.response.data === 'object') {
+                detail = error.response.data.detail || 'Error del servidor';
+            } else if (typeof error.response.data === 'string') {
+                detail = error.response.data;
+            }
+        } else if (error.message) {
+            detail = error.message;
+        }
+
+        return NextResponse.json({ detail }, { status: error.response?.status || 500 });
     }
 }

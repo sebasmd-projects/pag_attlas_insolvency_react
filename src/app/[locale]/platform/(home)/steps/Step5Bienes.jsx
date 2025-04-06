@@ -204,11 +204,6 @@ export default function Step5Bienes({ data, onNext, onBack, isSubmitting }) {
         }
         const mapped = form.assets.map((asset) => ({
             ...asset,
-            affectation:
-                asset.affectation === t('form.affectation.options.other')
-                    ? asset.affectation_other
-                    : asset.affectation,
-            commercial_value: asset.commercial_value,
         }));
         onNext({ assets: mapped });
     };
