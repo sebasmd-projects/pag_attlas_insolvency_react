@@ -4,8 +4,9 @@
 
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
+import pako from 'pako';
 
 import Step0Instrucciones from './steps/Step0Instrucciones';
 import Step1DatosPersonales from './steps/Step1DatosPersonales';
@@ -18,7 +19,6 @@ import Step7Ingresos from './steps/Step7Ingresos';
 import Step8Recursos from './steps/Step8Recursos';
 import Step9Sociedad from './steps/Step9Sociedad';
 import Step10LegalDocuments from './steps/Step10LegalDocuments';
-
 
 const steps = [
     Step0Instrucciones,
@@ -45,25 +45,22 @@ const loadFromStorage = () => {
     }
 };
 
-
 const saveToStorage = (data) => {
     const toStore = { ...data };
 
-    
     if (toStore.supportDocs) {
         toStore.supportDocs = toStore.supportDocs.map(doc => ({
             description: doc.description,
             fileName: doc.fileName
         }));
     }
-    
+
     delete toStore.cedulaFront;
     delete toStore.cedulaBack;
     delete toStore.signature;
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(toStore));
 };
-
 
 const getLocalStorageUsage = () => {
     let total = 0;
@@ -81,28 +78,60 @@ const getLocalStorageUsageInKB = () => {
 };
 
 const isLocalStorageNearLimit = (thresholdPercentage = 80) => {
-    const MAX_LIMIT_KB = 5120;
+    const MAX_LIMIT_KB = 5120; // 5MB
     const currentUsageKB = getLocalStorageUsageInKB();
     const usagePercent = (currentUsageKB / MAX_LIMIT_KB) * 100;
     return usagePercent >= thresholdPercentage;
 };
+
+async function compressData(data) {
+    const jsonString = JSON.stringify(data);
+    const compressed = pako.deflate(jsonString);
+
+    const base64Compressed = btoa(
+        compressed.reduce((data, byte) => data + String.fromCharCode(byte), '')
+    );
+
+    return base64Compressed;
+}
 
 export default function PlatformHomePage() {
     const router = useRouter();
     const [stepIndex, setStepIndex] = useState(0);
     const [formData, setFormData] = useState(loadFromStorage());
     const [isProcessing, setIsProcessing] = useState(false);
+    const [compressedSizeKB, setCompressedSizeKB] = useState(0);
 
     const StepComponent = steps[stepIndex];
+
+    useEffect(() => {
+        async function updateCompressedSize() {
+            try {
+                const compressedData = await compressData({ form_data: formData });
+                const compressedSizeInBytes = atob(compressedData).length;
+                const compressedSizeInKB = compressedSizeInBytes / 1024;
+                setCompressedSizeKB(compressedSizeInKB);
+            } catch (error) {
+                console.error('Error calculando tamaño comprimido:', error);
+            }
+        }
+
+        updateCompressedSize();
+    }, [formData]);
 
     const { mutate, isPending } = useMutation({
         mutationFn: async (data) => {
             setIsProcessing(true);
             try {
+                const compressedData = await compressData({ form_data: data });
+
                 const res = await fetch('/api/platform/insolvency-form', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ form_data: data }),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Content-Encoding': 'gzip'
+                    },
+                    body: JSON.stringify({ compressed_form_data: compressedData }),
                 });
 
                 if (!res.ok) {
@@ -158,10 +187,29 @@ export default function PlatformHomePage() {
             toast.warning(`¡Atención! Estás usando ${usage} KB de almacenamiento. Si cargas más documentos grandes, podrías tener errores.`);
         }
 
-        if (stepIndex === steps.length - 1) {
-            mutate(updatedData);
-        } else {
-            setStepIndex((prev) => prev + 1);
+        try {
+            const compressedData = await compressData({ form_data: updatedData });
+
+            const compressedSizeInBytes = atob(compressedData).length;
+            const compressedSizeInKB = compressedSizeInBytes / 1024;
+
+            // Actualizar el peso en KB
+            setCompressedSizeKB(compressedSizeInKB);
+
+            if (stepIndex === steps.length - 1) {
+                if (compressedSizeInKB > 4096) { // 4MB = 4096 KB
+                    toast.error(`El formulario comprimido pesa ${compressedSizeKB.toFixed(2)} KB, y el límite es 4096 KB. Por favor elimina o reduce el tamaño de las imágenes.`);
+                    setIsProcessing(false);
+                    return;
+                }
+                mutate(updatedData);
+            } else {
+                setStepIndex((prev) => prev + 1);
+                setIsProcessing(false);
+            }
+        } catch (error) {
+            console.error('Error al comprimir:', error);
+            toast.error('Ocurrió un error al comprimir los datos.');
             setIsProcessing(false);
         }
     };
@@ -181,6 +229,12 @@ export default function PlatformHomePage() {
                 onBack={prevStep}
                 isSubmitting={isProcessing || isPending}
             />
+            <div className="text-end mt-2">
+                <small className="text-muted">
+                    Peso actual del formulario: {compressedSizeKB.toFixed(2)} KB
+                </small>
+            </div>
         </div>
     );
 }
+

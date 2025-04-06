@@ -1,5 +1,3 @@
-// app/api/platform/insolvency-form/route.js
-
 import axios from 'axios';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
@@ -7,15 +5,21 @@ import { NextResponse } from 'next/server';
 export async function POST(request) {
     try {
         const rawToken = cookies().get('auth_token')?.value;
-        const formData = await request.json();
+        const body = await request.json();
 
         if (!rawToken) {
             return NextResponse.json({ detail: 'Token no encontrado' }, { status: 401 });
         }
 
+        // IMPORTANTE: ahora el cuerpo debe ser { compressed_form_data: "..." }
+        const compressedData = body.compressed_form_data;
+        if (!compressedData) {
+            return NextResponse.json({ detail: 'No se encontró compressed_form_data' }, { status: 400 });
+        }
+
         const response = await axios.post(
             'https://propensionesabogados.com/api/v1/insolvency-form/',
-            formData,
+            { compressed_form_data: compressedData },
             {
                 headers: {
                     'Authorization': `Bearer ${rawToken}`,

@@ -5,6 +5,7 @@ import { FaArrowCircleLeft, FaPlus, FaMinus } from 'react-icons/fa';
 import { LuSend } from 'react-icons/lu';
 import { useTranslations } from 'next-intl';
 import { toast } from 'react-toastify';
+import imageCompression from 'browser-image-compression';
 
 
 export default function Step10LegalDocuments({ data, onNext, onBack, isSubmitting }) {
@@ -24,21 +25,43 @@ export default function Step10LegalDocuments({ data, onNext, onBack, isSubmittin
     accepted: '',
   });
 
-  const handleFileChange = (file, index) => {
+  const handleFileChange = async (file, index) => {
     if (!file) return;
     if (!file.type.startsWith('image/')) {
-      toast.error('Solo se permiten imágenes. Si necesitas enviar un PDF, por favor envíalo al correo insolvencia@propensionesabogados.com incluyendo tu número de documento.');
+      toast.error('Solo se permiten imágenes...');
       return;
     }
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      const newDocs = [...supportDocs];
-      newDocs[index].file = reader.result;
-      newDocs[index].fileName = file.name;
-      setSupportDocs(newDocs);
-    };
-    reader.readAsDataURL(file);
+
+    try {
+      let fileToUse = file;
+
+      // Si el archivo supera 200KB, comprimimos
+      if (file.size > 200 * 1024) {
+        const options = {
+          maxSizeMB: 0.2, // 200 KB
+          maxWidthOrHeight: 1024, // opcional, redimensiona si es necesario
+          useWebWorker: true
+        };
+        fileToUse = await imageCompression(file, options);
+        toast.info('La imagen fue optimizada automáticamente para reducir su tamaño.');
+      }
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const newDocs = [...supportDocs];
+        newDocs[index].file = reader.result;
+        newDocs[index].fileName = fileToUse.name;
+        setSupportDocs(newDocs);
+      };
+      reader.readAsDataURL(fileToUse);
+
+    } catch (error) {
+      console.error('Error optimizando la imagen:', error);
+      toast.error('Error al optimizar la imagen.');
+    }
   };
+
+
 
   const addSupportDoc = () => {
     setSupportDocs([...supportDocs, { description: '', file: '', fileName: '' }]);
@@ -60,15 +83,33 @@ export default function Step10LegalDocuments({ data, onNext, onBack, isSubmittin
     if (!file) return;
 
     if (!file.type.startsWith('image/')) {
-      toast.error('Solo se permiten imágenes. Si necesitas enviar un PDF, por favor envíalo al correo insolvencia@propensionesabogados.com incluyendo tu número de documento.');
+      toast.error('Solo se permiten imágenes...');
       return;
     }
 
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setFile(reader.result);
-    };
-    reader.readAsDataURL(file);
+    try {
+      let fileToUse = file;
+
+      if (file.size > 200 * 1024) {
+        const options = {
+          maxSizeMB: 0.2, // 200 KB
+          maxWidthOrHeight: 1024, // opcional
+          useWebWorker: true
+        };
+        fileToUse = await imageCompression(file, options);
+        toast.info('La imagen fue optimizada automáticamente para reducir su tamaño.');
+      }
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFile(reader.result);
+      };
+      reader.readAsDataURL(fileToUse);
+
+    } catch (error) {
+      console.error('Error optimizando la imagen:', error);
+      toast.error('Error al optimizar la imagen.');
+    }
   };
 
 
@@ -162,7 +203,7 @@ export default function Step10LegalDocuments({ data, onNext, onBack, isSubmittin
               placeholder="Descripción"
               value={doc.description}
               onChange={(e) => handleDescriptionChange(index, e.target.value)}
-              required
+
             />
             <input
               type="file"
@@ -170,7 +211,7 @@ export default function Step10LegalDocuments({ data, onNext, onBack, isSubmittin
               accept="image/*"
               id={`fileInput-${index}`}
               onChange={(e) => handleFileChange(e.target.files[0], index)}
-              required
+
             />
             <button
               className="btn btn-outline-success"
