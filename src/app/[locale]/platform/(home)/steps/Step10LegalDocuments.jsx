@@ -12,15 +12,11 @@ export default function Step10LegalDocuments({ data, onNext, onBack, isSubmittin
   const t = useTranslations('Platform.pages.home.wizard.steps.step10');
   const wizardButton = useTranslations('Platform.pages.home.wizard.buttons');
 
-  const [cedulaFront, setCedulaFront] = useState(data?.cedulaFront || '');
-  const [cedulaBack, setCedulaBack] = useState(data?.cedulaBack || '');
   const [signatureData, setSignatureData] = useState(data?.signature || '');
   const [hasAccepted, setHasAccepted] = useState(!!data?.hasAccepted);
   const [supportDocs, setSupportDocs] = useState(data?.supportDocs || []);
 
   const [errorMessages, setErrorMessages] = useState({
-    cedulaFront: '',
-    cedulaBack: '',
     signature: '',
     accepted: '',
   });
@@ -60,8 +56,6 @@ export default function Step10LegalDocuments({ data, onNext, onBack, isSubmittin
       toast.error('Error al optimizar la imagen.');
     }
   };
-
-
 
   const addSupportDoc = () => {
     setSupportDocs([...supportDocs, { description: '', file: '', fileName: '' }]);
@@ -115,11 +109,8 @@ export default function Step10LegalDocuments({ data, onNext, onBack, isSubmittin
 
   const validateFields = () => {
     let hasError = false;
-    const newErrors = { cedulaFront: '', cedulaBack: '', signature: '', accepted: '' };
+    const newErrors = { signature: '', accepted: '' };
 
-    if (!cedulaFront) newErrors.cedulaFront = t('validations.cedulaFrontRequired'), hasError = true;
-    if (!cedulaBack) newErrors.cedulaBack = t('validations.cedulaBackRequired'), hasError = true;
-    if (!signatureData) newErrors.signature = t('validations.signatureRequired'), hasError = true;
     if (!hasAccepted) newErrors.accepted = t('validations.acceptRequired'), hasError = true;
 
     setErrorMessages(newErrors);
@@ -134,8 +125,6 @@ export default function Step10LegalDocuments({ data, onNext, onBack, isSubmittin
 
     const payload = {
       ...data,
-      cedulaFront,
-      cedulaBack,
       signature: signatureData,
       hasAccepted,
       supportDocs: filteredSupportDocs,
@@ -146,32 +135,6 @@ export default function Step10LegalDocuments({ data, onNext, onBack, isSubmittin
   return (
     <div>
       <h2 className="mb-4">{t('title')}</h2>
-
-      {/* Cédula frente */}
-      <div className="mb-4">
-        <label className="form-label">{t('fields.cedulaFront.label')}</label>
-        <input
-          type="file"
-          accept="image/*"
-          className="form-control"
-          onChange={(e) => handleSimpleFileChange(e.target.files[0], setCedulaFront)}
-        />
-        {cedulaFront && <img src={cedulaFront} alt="Cédula frente" style={{ maxWidth: '200px', marginTop: '8px' }} />}
-        {errorMessages.cedulaFront && <div className="text-danger">{errorMessages.cedulaFront}</div>}
-      </div>
-
-      {/* Cédula reverso */}
-      <div className="mb-4">
-        <label className="form-label">{t('fields.cedulaBack.label')}</label>
-        <input
-          type="file"
-          accept="image/*"
-          className="form-control"
-          onChange={(e) => handleSimpleFileChange(e.target.files[0], setCedulaBack)}
-        />
-        {cedulaBack && <img src={cedulaBack} alt="Cédula reverso" style={{ maxWidth: '200px', marginTop: '8px' }} />}
-        {errorMessages.cedulaBack && <div className="text-danger">{errorMessages.cedulaBack}</div>}
-      </div>
 
       {/* Firma */}
       <div className="mb-4">

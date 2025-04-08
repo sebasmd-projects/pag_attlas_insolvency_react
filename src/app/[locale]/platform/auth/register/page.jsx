@@ -39,7 +39,7 @@ export default function AuthRegisterPage() {
 
       const result = await response.json();
       if (!response.ok) {
-        throw new Error(result.detail || t('errorRegister'));
+        throw new Error(result.detail || t('generalError'));
       }
       return result;
     },

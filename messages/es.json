@@ -893,8 +893,8 @@
         },
         "register": {
           "title": "Registro",
-          "errorLogin": "Datos incorrectos, por favor verifica tu información.",
-          "successLogin": "Registro exitoso",
+          "errorRegister": "Datos incorrectos, por favor verifica tu información.",
+          "successRegister": "Registro exitoso",
           "generalError": "Ocurrió un error, por favor intenta más tarde.",
           "form": {
             "documentNumber": "Número de documento",
