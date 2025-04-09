@@ -316,7 +316,9 @@
   "Platform": {
     "calculator": {
       "title": "Calcula tu insolvencia",
-      "subTitle": "¿Cuánto tiempo te tomará pagar tus <span>deudas</span>?",
+      "subTitle": "¿Cuánto tiempo te tomará <span>pagar tus deudas?</span>",
+      "caseOfInsolvency": "Supuesto de insolvencia",
+      "becomeInsolvent": "¿Me <span>puedo</span> insolventar?",
       "description": "Conoce cuánto tiempo te tomará pagar tus deudas con la calculadora de deudas de ATTLAS",
       "form": {
         "inputs": {
@@ -327,10 +329,10 @@
             "item2": "Seguro (muebles/inmuebles)",
             "item3": "Alimentación",
             "item4": "Servicios públicos",
-            "item5": "Seguridad social",
+            "item5": "Seguridad social integral",
             "item6": "Transporte",
             "item7": "Vestuario y calzado (3 mudas por año)",
-            "item8": "Educación",
+            "item8": "Educación (Mensualidad)",
             "item9": "Impuestos",
             "item10": "Recreación y deporte",
             "item11": "Administración",
@@ -694,9 +696,9 @@
             },
             "step8": {
               "title": "Recursos disponibles y gastos esenciales",
-              "addSubsistenceTable": "Agregar tabla de subsistencia",
+              "addSubsistenceTable": "Agregar tabla de dependientes",
               "removeSubsistenceTable": "Eliminar tabla de subsistencia",
-              "proposedMonthlyValueLabel": "Valor mensual propuesto",
+              "proposedMonthlyValueLabel": "Propuesta de <span>pago mensual</span> del deudor",
               "table": {
                 "defaults": {
                   "debtorTitle": "Deudor",
@@ -751,7 +753,7 @@
                         "legalSupport": "C.P.C. art. 365"
                       },
                       "item8": {
-                        "label": "Seguridad social",
+                        "label": "Seguridad social integral",
                         "legalSupport": "Ley 100 de 1993 S.S.S."
                       },
                       "item9": {
@@ -763,7 +765,7 @@
                         "legalSupport": "C.C. art. 411"
                       },
                       "item11": {
-                        "label": "Educación",
+                        "label": "Educación (Mensualidad)",
                         "legalSupport": "C.P.C. art. 67, Ley 115 1994 (L.G.E.)"
                       },
                       "item12": {
@@ -806,7 +808,7 @@
                   }
                 },
                 "disability": {
-                  "label": "¿Tiene alguna discapacidad?",
+                  "label": "¿Tiene discapacidad?",
                   "options": {
                     "yes": "Sí",
                     "no": "No"

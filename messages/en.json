@@ -316,7 +316,7 @@
   "Platform": {
     "calculator": {
       "title": "Calcula tu insolvencia",
-      "subTitle": "¿Cuánto tiempo te tomará pagar tus <span>deudas</span>?",
+      "subTitle": "¿Cuánto tiempo te tomará <span>pagar tus deudas?</span>",
       "description": "Conoce cuánto tiempo te tomará pagar tus deudas con la calculadora de deudas de ATTLAS",
       "form": {
         "inputs": {
@@ -327,7 +327,7 @@
             "item2": "Seguro (muebles/inmuebles)",
             "item3": "Alimentación",
             "item4": "Servicios públicos",
-            "item5": "Seguridad social",
+            "item5": "Seguridad social integral",
             "item6": "Transporte",
             "item7": "Vestuario y calzado (3 mudas por año)",
             "item8": "Educación",
@@ -751,7 +751,7 @@
                         "legalSupport": "C.P.C. art. 365"
                       },
                       "item8": {
-                        "label": "Seguridad social",
+                        "label": "Seguridad social integral",
                         "legalSupport": "Ley 100 de 1993 S.S.S."
                       },
                       "item9": {

@@ -1,15 +1,18 @@
 'use client';
 
+import SubTitleComponent from '@/components/micro-components/sub_title';
+import TitleComponent from '@/components/micro-components/title';
+import { useTranslations } from 'next-intl';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { Alert, Button, Form } from 'react-bootstrap';
 import { RiAlarmWarningLine } from 'react-icons/ri';
-import SubTitleComponent from '@/components/micro-components/sub_title';
-import TitleComponent from '@/components/micro-components/title';
+import { ReactSVG } from 'react-svg';
+
 
 const DebtGauge = dynamic(() => import('./components/DebtGauge'));
+const VerifyCompliment = dynamic(() => import('./components/VerifyCompliment'))
 
 export default function CalculatorPage() {
     const t = useTranslations('Platform.calculator');
@@ -105,6 +108,7 @@ export default function CalculatorPage() {
 
     return (
         <div className="container my-5">
+            {/* Calculadora */}
             <div className="mb-4 container-lg">
                 <TitleComponent title={t('title')} />
                 <SubTitleComponent sub_title="subTitle" t={t} />
@@ -123,7 +127,7 @@ export default function CalculatorPage() {
                                 </div>
 
                                 <div className="row">
-                                    <div className="col-6">
+                                    <div className="col-md-6">
                                         <ul className="list-unstyled">
                                             {itemKeys.slice(0, Math.ceil(itemKeys.length / 2)).map((key) => {
                                                 const fullKey = `form.inputs.essentialExpensesItems.${key}`;
@@ -131,7 +135,7 @@ export default function CalculatorPage() {
                                             })}
                                         </ul>
                                     </div>
-                                    <div className="col-6">
+                                    <div className="col-md-6">
                                         <ul className="list-unstyled">
                                             {itemKeys.slice(Math.ceil(itemKeys.length / 2)).map((key) => {
                                                 const fullKey = `form.inputs.essentialExpensesItems.${key}`;
@@ -209,7 +213,7 @@ export default function CalculatorPage() {
                 </div>
 
                 <div className="col-md-6 d-flex justify-content-center align-items-center" style={{ minHeight: '100%' }}>
-                    {(result.time || result.isError) && (
+                    {(result.time || result.isError) ? (
                         <div className="w-100">
                             <Alert className="text-center" variant={result.isError ? 'danger' : 'success'}>
                                 <h4 className="mb-3">{t('result.title')}</h4>
@@ -235,9 +239,30 @@ export default function CalculatorPage() {
                                 </p>
                             </Alert>
                         </div>
+                    ) : (
+                        <div className='mt-4' style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} >
+                            <ReactSVG
+                                beforeInjection={(svg) => {
+                                    svg.setAttribute('width', '600px');
+                                    svg.setAttribute('height', '600px');
+                                }}
+                                src="/assets/imgs/icons/calculadora.svg"
+                            />
+                        </div>
                     )}
                 </div>
+            </div>
 
+            <hr className='my-2' />
+
+            {/* Supuesto de insolvencia */}
+            <div className="mt-4 container-lg">
+                <TitleComponent title={t('caseOfInsolvency')} /> {/* Supuesto de insolvencia */}
+                <SubTitleComponent sub_title="becomeInsolvent" t={t} /> {/* ¿Me puedo insolventar? */}
+            </div>
+
+            <div className="row">
+                <VerifyCompliment />
             </div>
         </div>
     );
