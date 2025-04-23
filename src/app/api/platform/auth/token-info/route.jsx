@@ -1,3 +1,5 @@
+// src/app/api/platform/auth/token-info/route.js
+
 import axios from 'axios';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
@@ -10,7 +12,7 @@ export async function GET() {
             return NextResponse.json({ detail: 'Token no encontrado en cookies' }, { status: 401 });
         }
 
-        const response = await axios.get('https://propensionesabogados.com/api/v1/token-info/', {
+        const response = await axios.get('http://localhost:8000/api/v1/token-info/', {
             headers: {
                 Authorization: `Bearer ${rawToken}`,
             },

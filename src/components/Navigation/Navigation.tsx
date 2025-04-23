@@ -1,3 +1,5 @@
+// src/components/Navigation/Navigation.tsx
+
 'use client';
 
 import Image from 'next/image';
@@ -24,21 +26,25 @@ export default function Navigation() {
   useEffect(() => {
     async function checkTokenInfo() {
       try {
-        const res = await fetch('/api/platform/auth/token-info', { cache: 'no-store' });
+        const res = await fetch('/api/platform/auth/token-info', { cache: 'no-store', credentials: 'include' });
+
         if (res.ok) {
           setLoggedIn(true);
         } else {
+          try {
+            await fetch('/api/platform/auth/logout', { method: 'POST', credentials: 'include' });
+          }
+          catch (logoutError) {
+            console.error('Error during automatic logout:', logoutError);
+          }
           setLoggedIn(false);
         }
       } catch (error) {
         console.error('Error validating token:', error);
-        setLoggedIn(false);
       }
     }
-
     checkTokenInfo();
-  }, []);
-
+  }, [router]);
 
   return (
     <Navbar className="bg-body-tertiary" expand="lg" expanded={expanded} sticky="top">
@@ -84,8 +90,6 @@ export default function Navigation() {
               {t('contact.menu')}
             </Nav.Link> */}
 
-
-
             <div className="d-flex gap-3 align-items-center">
               <NavButton
                 gradient="linear-gradient(90deg, #1a4ab3 0%, #0e3692 100%)"
@@ -95,7 +99,6 @@ export default function Navigation() {
                 setExpanded={setExpanded}
               />
             </div>
-
 
             <div className="d-flex gap-3 align-items-center">
               <NavButton
@@ -107,7 +110,6 @@ export default function Navigation() {
                 setExpanded={setExpanded}
               />
             </div>
-
 
             <div className="d-flex gap-3 align-items-center">
               <NavButton

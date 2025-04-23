@@ -1,4 +1,4 @@
-// src/app/[locale]/platform/auth/register/page.jsx
+// src/app/[locale]/consultants/auth/register/page.jsx
 
 'use client';
 
@@ -6,49 +6,53 @@ import SubTitleComponent from '@/components/micro-components/sub_title';
 import { useMutation } from '@tanstack/react-query';
 import DOMPurify from 'dompurify';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { FaUserPlus } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 
 export default function AuthRegisterPage() {
 
-  const t = useTranslations('Platform.pages.auth.register');
+  const t = useTranslations('Consultants.pages.auth.register');
 
   const router = useRouter();
 
   const [formData, setFormData] = useState({
-    document_number: '',
-    birth_date: '',
+    first_name: '',
+    last_name: '',
+    password: '',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { mutate } = useMutation({
-    mutationKey: ['registerUser'],
+    mutationKey: ['registerConsultant'],
     mutationFn: async (data) => {
-      const response = await fetch('/api/platform/auth/register', {
+      const response = await fetch('/api/consultants/auth/register', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
 
-      const result = await response.json();
+      const contentType = response.headers.get('content-type');
+      const responseData = contentType?.includes('application/json')
+        ? await response.json()
+        : { detail: await response.text() };
+
       if (!response.ok) {
-        throw new Error(result.detail || t('generalError'));
+        throw new Error(
+          responseData.detail || t('generalError')
+        );
       }
-      return result;
+      return responseData;
     },
     onSuccess: (data) => {
       toast.success(t('successRegister'));
       setIsSubmitting(false);
-      router.push('/platform/login');
+      window.location.href = '/platform';
     },
     onError: (error) => {
       toast.error(error.message || t('generalError'));
+      console.error(error);
       setIsSubmitting(false);
     },
   });
@@ -80,28 +84,40 @@ export default function AuthRegisterPage() {
       <SubTitleComponent t={t} sub_title={'title'} />
       <form onSubmit={handleSubmit} className="row g-3 my-5">
         <div className="col-md-6 mt-5">
-          <label htmlFor="document_number" className="form-label">{t('form.documentNumber')}</label>
+          <label htmlFor="first_name" className="form-label">{t('form.first_name')}</label>
           <input
             type="text"
             className="form-control"
-            name="document_number"
-            id="document_number"
+            name="first_name"
+            id="first_name"
             required
-            value={formData.document_number}
+            value={formData.first_name}
             onChange={handleChange}
-            autoComplete="off"
           />
         </div>
 
         <div className="col-md-6 mt-5">
-          <label htmlFor="birth_date" className="form-label">{t('form.birthDate')}</label>
+          <label htmlFor="last_name" className="form-label">{t('form.last_name')}</label>
           <input
-            type="date"
+            type="text"
             className="form-control"
-            name="birth_date"
-            id="birth_date"
+            name="last_name"
+            id="last_name"
             required
-            value={formData.birth_date}
+            value={formData.last_name}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="col-md-6 mt-5">
+          <label htmlFor="password" className="form-label">{t('form.password')}</label>
+          <input
+            type="password"
+            className="form-control"
+            name="password"
+            id="password"
+            required
+            value={formData.password}
             onChange={handleChange}
           />
         </div>
@@ -112,19 +128,8 @@ export default function AuthRegisterPage() {
             className="btn btn-outline-success w-100"
             disabled={isSubmitting}
           >
-            {isSubmitting ? 'Registrando...' : 'Registrarme'}
+            {isSubmitting ? 'Registrando...' : 'Registrar Consultor'}
           </button>
-
-          {/* Sección de Inicio de sesión */}
-          <div className="text-center mt-4">
-            <Link
-              href="/platform/auth/login"
-              className="btn btn-link text-decoration-none d-inline-flex align-items-center gap-2"
-            >
-              <FaUserPlus className="me-1" />
-              {t('loginLink')}
-            </Link>
-          </div>
         </div>
       </form>
     </div>

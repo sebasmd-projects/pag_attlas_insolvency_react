@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Alert } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
@@ -10,6 +10,39 @@ export default function VerifyCompliment() {
     ]);
 
     const [result, setResult] = useState(null);
+    const [overdueDebt, setOverdueDebt] = useState(0);
+    const [onTimeDebt, setOnTimeDebt] = useState(0);
+    const [totalDebt, setTotalDebt] = useState(0);
+
+    useEffect(() => {
+        const filteredCreditors = creditors.filter(c =>
+            c.nature !== 'CRÉDITO DE LIBRANZA' && c.nature !== 'CRÉDITO DE NÓMINA'
+        );
+
+        let overdue = 0;
+        let onTime = 0;
+        let total = 0;
+
+        filteredCreditors.forEach(c => {
+            const capital = parseCurrencyToNumber(c.capital_value);
+            const overdueDays = parseInt(c.days_overdue);
+
+            if (!isNaN(capital)) {
+                total += capital;
+                if (!isNaN(overdueDays)) {
+                    if (overdueDays >= 90) {
+                        overdue += capital;
+                    } else {
+                        onTime += capital;
+                    }
+                }
+            }
+        });
+
+        setOverdueDebt(overdue);
+        setOnTimeDebt(onTime);
+        setTotalDebt(total);
+    }, [creditors]);
 
     const normalizeText = (str) => str.normalize('NFD').replace(/[^a-zA-Z0-9 ]/g, '').toUpperCase();
 
@@ -183,13 +216,14 @@ export default function VerifyCompliment() {
                                 </td>
                                 <td>
                                     <input
-                                        type="number"
-                                        name="days_overdue"
-                                        value={c.days_overdue}
-                                        onChange={(e) => handleChange(index, e)}
                                         className="form-control"
                                         min="0"
+                                        name="days_overdue"
+                                        onChange={(e) => handleChange(index, e)}
+                                        onWheel={(e) => e.target.blur()}
                                         required
+                                        type="number"
+                                        value={c.days_overdue}
                                     />
                                 </td>
                                 <td className="text-center">
@@ -206,6 +240,18 @@ export default function VerifyCompliment() {
                         ))}
                     </tbody>
                 </table>
+            </div>
+
+            <div className="row mb-4">
+                <div className="col-md-4">
+                    <strong>Total capital en mora:</strong> $ {formatToLocaleNumber(overdueDebt)}
+                </div>
+                <div className="col-md-4">
+                    <strong>Total capital al día:</strong> $ {formatToLocaleNumber(onTimeDebt)}
+                </div>
+                <div className="col-md-4">
+                    <strong>Total deudas:</strong> $ {formatToLocaleNumber(totalDebt)}
+                </div>
             </div>
 
             <div className="d-flex mb-4 gap-2">

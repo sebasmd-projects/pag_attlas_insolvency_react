@@ -1,14 +1,14 @@
 'use client';
 
-import SubTitleComponent from '@/components/micro-components/sub_title';
-import TitleComponent from '@/components/micro-components/title';
-import { useTranslations } from 'next-intl';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { Alert, Button, Form } from 'react-bootstrap';
 import { RiAlarmWarningLine } from 'react-icons/ri';
 import { ReactSVG } from 'react-svg';
+import SubTitleComponent from '@/components/micro-components/sub_title';
+import TitleComponent from '@/components/micro-components/title';
 
 
 const DebtGauge = dynamic(() => import('./components/DebtGauge'));

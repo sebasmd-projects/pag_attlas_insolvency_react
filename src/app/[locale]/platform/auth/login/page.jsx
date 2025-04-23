@@ -1,3 +1,5 @@
+// src/app/[locale]/platform/auth/login/page.jsx
+
 'use client';
 
 import SubTitleComponent from '@/components/micro-components/sub_title';
@@ -10,6 +12,35 @@ import { useEffect, useRef, useState } from 'react';
 import { FaUserPlus } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 
+const MAX_RETRIES = 3;
+const RETRY_DELAY = 1000; // 1 segundo entre reintentos
+const FETCH_TIMEOUT = 60000; // 60 segundos de timeout
+
+async function fetchWithTimeoutAndRetry(url, options, retries = MAX_RETRIES) {
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT);
+
+    const response = await fetch(url, {
+      ...options,
+      signal: controller.signal,
+    });
+
+    clearTimeout(timeoutId);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return response;
+  } catch (error) {
+    if (retries > 0) {
+      await new Promise(resolve => setTimeout(resolve, RETRY_DELAY));
+      return fetchWithTimeoutAndRetry(url, options, retries - 1);
+    }
+    throw error;
+  }
+}
 
 export default function AuthLoginPage() {
   const t = useTranslations('Platform.pages.auth.login');
@@ -17,7 +48,7 @@ export default function AuthLoginPage() {
 
   const [formData, setFormData] = useState({
     document_number: '',
-    document_issue_date: '',
+    password: '',
     birth_date: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -25,7 +56,14 @@ export default function AuthLoginPage() {
   const [showSpinner, setShowSpinner] = useState(false);
   const timerRef = useRef(null);
 
-  // Run redirect if conditions met
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    };
+  }, []);
+
   useEffect(() => {
     if (!isSubmitting && isSuccess) {
       router.push('/platform');
@@ -35,7 +73,7 @@ export default function AuthLoginPage() {
   const { mutate } = useMutation({
     mutationKey: ['loginUser'],
     mutationFn: async (data) => {
-      const response = await fetch('/api/platform/auth/login', {
+      const response = await fetchWithTimeoutAndRetry('/api/platform/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -55,7 +93,10 @@ export default function AuthLoginPage() {
       toast.success(t('successLogin'));
     },
     onError: (error) => {
-      toast.error(error.message || t('generalError'));
+      const errorMessage = error.name === 'AbortError'
+        ? t('timeoutError')
+        : error.message || t('generalError');
+      toast.error(errorMessage);
       setIsSubmitting(false);
     },
     onSettled: () => {
@@ -93,10 +134,10 @@ export default function AuthLoginPage() {
   };
 
   return (
-    <div className="container my-5 align-content-center">
+    <div className="container my-5 align-content-center" style={{ minHeight: '60vh' }}>
       <SubTitleComponent t={t} sub_title={'title'} />
       <form onSubmit={handleSubmit} className="row g-3 my-5">
-        <div className="col-6">
+        <div className="col-md-4 mt-5">
           <label htmlFor="document_number" className="form-label">
             {t('form.documentNumber')}
           </label>
@@ -108,25 +149,11 @@ export default function AuthLoginPage() {
             required
             value={formData.document_number}
             onChange={handleChange}
+            autoComplete="off"
           />
         </div>
 
-        <div className="col-6">
-          <label htmlFor="document_issue_date" className="form-label">
-            {t('form.documentIssueDate')}
-          </label>
-          <input
-            type="date"
-            className="form-control"
-            name="document_issue_date"
-            id="document_issue_date"
-            required
-            value={formData.document_issue_date}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className="col-12">
+        <div className="col-md-4 mt-5">
           <label htmlFor="birth_date" className="form-label">
             {t('form.birthDate')}
           </label>
@@ -141,7 +168,23 @@ export default function AuthLoginPage() {
           />
         </div>
 
-        <div className="col-12">
+        <div className="col-md-4 mt-5">
+          <label htmlFor="password" className="form-label">
+            {t('form.password')}
+          </label>
+          <input
+            type="password"
+            className="form-control"
+            name="password"
+            id="password"
+            placeholder='ABCD-****'
+            required
+            value={formData.password}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="col-12 mt-5">
           <button
             type="submit"
             className="btn btn-outline-success w-100"
@@ -161,7 +204,6 @@ export default function AuthLoginPage() {
             )}
           </button>
 
-          {/* Sección de registro */}
           <div className="text-center mt-4">
             <Link
               href="/platform/auth/register"

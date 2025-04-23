@@ -1,13 +1,10 @@
-// src/app/api/platform/insolvency-form/route.jsx
-// ---------------------------------------------
-// src/app/api/platform/insolvency-form/route.js
-// PATCH  /api/platform/insolvency-form/?step=N
-// ---------------------------------------------
+// src/app/api/platform/insolvency-form/get-data/route.jsx
+
 import axios from 'axios';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
-export async function PATCH(request) {
+export async function GET(request) {
     const rawToken = cookies().get('auth_token')?.value;
     if (!rawToken) {
         return NextResponse.json({ detail: 'Token no encontrado' }, { status: 401 });
@@ -15,13 +12,16 @@ export async function PATCH(request) {
 
     const { searchParams } = new URL(request.url);
     const step = searchParams.get('step') || '1';
-    const body = await request.json();
 
     try {
-        const { data, status } = await axios.patch(
+        const { data, status } = await axios.get(
             `http://localhost:8000/api/v1/insolvency-form/?step=${step}`,
-            body,
-            { headers: { Authorization: `Bearer ${rawToken}` } }
+            {
+                headers: {
+                    Authorization: `Bearer ${rawToken}`,
+                    'Content-Type': 'application/json'
+                }
+            }
         );
         return NextResponse.json(data, { status });
     } catch (err) {

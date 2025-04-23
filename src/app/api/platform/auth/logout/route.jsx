@@ -1,3 +1,5 @@
+// src/api/platform/auth/logout/route.jsx
+
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 

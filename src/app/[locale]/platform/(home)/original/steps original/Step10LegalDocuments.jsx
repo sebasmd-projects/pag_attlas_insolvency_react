@@ -1,20 +1,38 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { FaArrowCircleLeft, FaPlus, FaMinus } from 'react-icons/fa';
 import { LuSend } from 'react-icons/lu';
 import { useTranslations } from 'next-intl';
 import { toast } from 'react-toastify';
 import imageCompression from 'browser-image-compression';
+import SignatureCanvas from 'react-signature-canvas';
 
 
 export default function Step10LegalDocuments({ data, onNext, onBack, isSubmitting }) {
   const t = useTranslations('Platform.pages.home.wizard.steps.step10');
   const wizardButton = useTranslations('Platform.pages.home.wizard.buttons');
 
+  const signaturePadRef = useRef();
+
   const [signatureData, setSignatureData] = useState(data?.signature || '');
   const [hasAccepted, setHasAccepted] = useState(!!data?.hasAccepted);
   const [supportDocs, setSupportDocs] = useState(data?.supportDocs || []);
+
+  const clearSignature = () => {
+    signaturePadRef.current?.clear();
+    setSignatureData('');
+  };
+  
+  const saveSignature = () => {
+    if (signaturePadRef.current?.isEmpty()) {
+      toast.error('Debe firmar antes de guardar.');
+      return;
+    }
+    const dataUrl = signaturePadRef.current.getTrimmedCanvas().toDataURL('image/png');
+    setSignatureData(dataUrl);
+  };
+  
 
   const [errorMessages, setErrorMessages] = useState({
     signature: '',
@@ -136,6 +154,38 @@ export default function Step10LegalDocuments({ data, onNext, onBack, isSubmittin
     <div>
       <h2 className="mb-4">{t('title')}</h2>
 
+      <div className="mb-4">
+        <label className="form-label">{t('fields.signature.label')}</label>
+
+        {/* Cuadro para firmar */}
+        <div className="border" style={{ width: '100%', height: '200px' }}>
+          <SignatureCanvas
+            penColor="black"
+            canvasProps={{ width: 500, height: 200, className: 'sigCanvas' }}
+            ref={(ref) => { if (ref) signaturePadRef.current = ref }}
+          />
+        </div>
+
+        <div className="mt-2 d-flex gap-2">
+          <button type="button" className="btn btn-outline-danger" onClick={clearSignature}>
+            Borrar firma
+          </button>
+          <button type="button" className="btn btn-outline-primary" onClick={saveSignature}>
+            Guardar firma
+          </button>
+        </div>
+
+        {signatureData && (
+          <div className="mt-3">
+            <p><strong>Vista previa de la firma:</strong></p>
+            <img src={signatureData} alt="Firma" style={{ maxWidth: '200px', border: '1px solid #ccc' }} />
+          </div>
+        )}
+
+        {errorMessages.signature && <div className="text-danger">{errorMessages.signature}</div>}
+      </div>
+
+
       {/* Firma */}
       <div className="mb-4">
         <label className="form-label">{t('fields.signature.label')}</label>
@@ -220,11 +270,12 @@ export default function Step10LegalDocuments({ data, onNext, onBack, isSubmittin
       </div>
 
       {/* Aceptar términos */}
-      <div className="mb-4">
-        <div className="form-check">
+      <div className="mb-4 card justify-content-center align-items-center alert alert-success">
+        <div className="form-check col-6 card-body">
           <input
-            className="form-check-input"
+            className="form-check-input bold"
             type="checkbox"
+            style={{ fontSize: '1.5rem' }}
             id="hasAccepted"
             checked={hasAccepted}
             onChange={(e) => setHasAccepted(e.target.checked)}

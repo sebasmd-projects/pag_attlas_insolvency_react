@@ -21,7 +21,7 @@ export default function middleware(request: NextRequest) {
 
     '/platform/auth/register',
     '/en/platform/auth/register',
-    '/es/plataforma/auth/registro',
+    '/es/plataforma/auth/registro'
   ];
 
   const isLoginRoute =
@@ -48,8 +48,6 @@ export default function middleware(request: NextRequest) {
   // Ejecuta el middleware de internacionalización normalmente
   return intlMiddleware(request);
 }
-
-
 
 export const config = {
   matcher: [

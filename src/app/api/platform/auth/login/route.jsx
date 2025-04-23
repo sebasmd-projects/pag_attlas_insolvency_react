@@ -8,16 +8,28 @@ export async function POST(request) {
     try {
         const data = await request.json();
 
-        const response = await axios.post('https://propensionesabogados.com/api/v1/login/', data);
+        // Split the password into initials and password
+        const [user, password] = data.password.split('-');
+
+        // Create new data object with the split values
+        const backendData = {
+            user: user.toUpperCase(),
+            password: password,
+            birth_date: data.birth_date,
+            document_number: data.document_number
+        };
+
+        const response = await axios.post('http://localhost:8000/api/v1/login/', backendData);
 
         const token = response.data.token;
+        const expiresIn = response.data.expires_in;
 
         cookies().set('auth_token', token, {
             httpOnly: true,
             secure: true,
             sameSite: 'Strict',
             path: '/',
-            maxAge: 3600,
+            maxAge: expiresIn,
         });
 
         return NextResponse.json({ success: true }, { status: 200 });

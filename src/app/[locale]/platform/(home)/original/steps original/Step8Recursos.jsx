@@ -1,24 +1,25 @@
-// src/app/[locale]/platform/(home)/steps/Step8Subsistence.jsx
+// src/app/[locale]/platform/(home)/steps/Step10Expenses.jsx
 
 'use client';
 
 import { useTranslations } from 'next-intl';
 import { useEffect, useMemo, useState } from 'react';
-import { FaArrowCircleLeft, FaArrowCircleRight, FaMinus, FaPlus } from 'react-icons/fa';
+import { FaMinus, FaPlus } from 'react-icons/fa';
+import SubTitleComponent from '@/components/micro-components/sub_title';
+import { ReactSVG } from 'react-svg';
 
-export default function Step8Subsistence({ data, onNext, onBack, isSubmitting }) {
-    const t = useTranslations('Platform.pages.home.wizard.steps.step8');
-    const wizardButton = useTranslations('Platform.pages.home.wizard.buttons');
+export default function Step10Expenses({ data, updateData, onNext }) {
+    const t = useTranslations('Platform.pages.home.wizard.steps.step10');
 
     const BASE_EXPENSES = [
         { label: t('table.defaults.items.baseExpenses.item1.label'), legal: t('table.defaults.items.baseExpenses.item1.legalSupport'), value: '', editable: true, depent: false, id_nuber: 1 }, // Arriendo o Pago cuota de vivienda
         { label: t('table.defaults.items.baseExpenses.item2.label'), legal: t('table.defaults.items.baseExpenses.item2.legalSupport'), value: '', editable: true, depent: false, id_nuber: 2 }, // Seguro Muebles
         { label: t('table.defaults.items.baseExpenses.item3.label'), legal: t('table.defaults.items.baseExpenses.item3.legalSupport'), value: '', editable: true, depent: false, id_nuber: 3 }, // Seguro Inmuebles
-        { label: t('table.defaults.items.baseExpenses.item4.label'), legal: t('table.defaults.items.baseExpenses.item4.legalSupport'), value: '625.000', editable: false, depent: true, id_nuber: 4 }, // Alimentación (0 a 5 años: 375000        6 a 9 años: 464.000        10 a 13 años: 630.000        14 a 17 años (varones): 884.000        14 a 17 años (mujeres): 666.000        18 a 59 años (varones): 833.000        18 a 59 años (mujeres): 666.000         Adultos mayores de 60 años: 625.000)
+        { label: t('table.defaults.items.baseExpenses.item4.label'), legal: t('table.defaults.items.baseExpenses.item4.legalSupport'), value: '', editable: false, depent: true, id_nuber: 4 }, // Alimentación (0 a 5 años: 375000        6 a 9 años: 464.000        10 a 13 años: 630.000        14 a 17 años (varones): 884.000        14 a 17 años (mujeres): 666.000        18 a 59 años (varones): 833.000        18 a 59 años (mujeres): 666.000         Adultos mayores de 60 años: 625.000)
         { label: t('table.defaults.items.baseExpenses.item5.label'), legal: t('table.defaults.items.baseExpenses.item5.legalSupport'), value: '', editable: true, depent: false, id_nuber: 5 }, // Servicios Públicos (Agua)
         { label: t('table.defaults.items.baseExpenses.item6.label'), legal: t('table.defaults.items.baseExpenses.item6.legalSupport'), value: '', editable: true, depent: false, id_nuber: 6 }, // Servicios Públicos (Luz/Energía)
         { label: t('table.defaults.items.baseExpenses.item7.label'), legal: t('table.defaults.items.baseExpenses.item7.legalSupport'), value: '', editable: true, depent: false, id_nuber: 7 }, // Servicios Públicos (Gas)
-        { label: t('table.defaults.items.baseExpenses.item8.label'), legal: t('table.defaults.items.baseExpenses.item8.legalSupport'), value: '', editable: true, depent: false, id_nuber: 8 }, // Seguridad social
+        { label: t('table.defaults.items.baseExpenses.item8.label'), legal: t('table.defaults.items.baseExpenses.item8.legalSupport'), value: '', editable: true, depent: false, id_nuber: 8 }, // Seguridad social integral
         { label: t('table.defaults.items.baseExpenses.item9.label'), legal: t('table.defaults.items.baseExpenses.item9.legalSupport'), value: '', editable: true, depent: false, id_nuber: 9 }, // Transporte
         { label: t('table.defaults.items.baseExpenses.item10.label'), legal: t('table.defaults.items.baseExpenses.item10.legalSupport'), value: '68.333', editable: false, depent: true, id_nuber: 10 }, // Vestuario y Calzado (68.333)
         { label: t('table.defaults.items.baseExpenses.item11.label'), legal: t('table.defaults.items.baseExpenses.item11.legalSupport'), value: '', editable: true, depent: true, id_nuber: 11 }, // Educación
@@ -488,11 +489,11 @@ export default function Step8Subsistence({ data, onNext, onBack, isSubmitting })
             </div>
 
             {showAddForm && (
-                <div className="border rounded p-3 mb-4">
+                <div className="border rounded p-3 mb-4 row">
                     <h6>{t('addTableForm.title')}</h6>
 
                     {/* Relación */}
-                    <div className="mb-3">
+                    <div className="mb-3 col-md-4">
                         <label className="form-label">{t('addTableForm.relationShip.label')}</label>
                         <select
                             className="form-select"
@@ -510,7 +511,7 @@ export default function Step8Subsistence({ data, onNext, onBack, isSubmitting })
                     {/* Edad y género solo si no es DEBTOR */}
                     {newRelationship !== 'DEBTOR' && (
                         <>
-                            <div className="mb-3">
+                            <div className="mb-3 col-md-2">
                                 <label className="form-label">
                                     {t('addTableForm.age.label')}
                                 </label>
@@ -519,10 +520,11 @@ export default function Step8Subsistence({ data, onNext, onBack, isSubmitting })
                                     className="form-control"
                                     value={newAge}
                                     onChange={(e) => setNewAge(e.target.value)}
+                                    onWheel={(e) => e.target.blur()}
                                 />
                             </div>
 
-                            <div className="mb-3">
+                            <div className="mb-3 col-md-3">
                                 <label className="form-label">
                                     {t('addTableForm.gender.label')}
                                 </label>
@@ -539,7 +541,7 @@ export default function Step8Subsistence({ data, onNext, onBack, isSubmitting })
                     )}
 
                     {/* Discapacidad */}
-                    <div className="mb-3">
+                    <div className="mb-3 col-md-2">
                         <label className="form-label">{t('addTableForm.disability.label')}</label>
                         <select
                             className="form-select"
@@ -564,18 +566,42 @@ export default function Step8Subsistence({ data, onNext, onBack, isSubmitting })
             )}
 
             {/* Valor mensual propuesto */}
-            <div className="mb-4">
-                <label className="form-label">{t('proposedMonthlyValueLabel')}</label>
-                <input
-                    type="text"
-                    className="form-control"
-                    value={form.proposedMonthlyValue}
-                    onChange={handleProposedMonthlyValueChange}
-                    onBlur={handleProposedMonthlyValueBlur}
-                    inputMode="decimal"
-                    required
-                    onWheel={(e) => e.target.blur()}
-                />
+            <div className="my-5 card">
+                <div className="row justify-content-center align-items-center card-body">
+                    <div className="col-5">
+                        <label className="form-label d-flex align-items-center gap-2">
+                            <div style={{ width: '150px', height: '150px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                <ReactSVG
+                                    src="/assets/imgs/icons/family_insolvency.svg"
+                                    beforeInjection={(svg) => {
+                                        svg.setAttribute('width', '150px');
+                                        svg.setAttribute('height', '150px');
+                                    }}
+                                />
+                            </div>
+                            <div className='mx-5'>
+                                <SubTitleComponent t={t} sub_title="proposedMonthlyValueLabel" />
+                            </div>
+                        </label>
+                    </div>
+
+                    <div className="col-3">
+                        <div className="input-group input-group-lg">
+                            <span className="input-group-text" style={{ fontSize: '1.5rem' }}>$</span>
+                            <input
+                                type="text"
+                                style={{ fontSize: '2.5rem' }}
+                                className="form-control"
+                                value={form.proposedMonthlyValue}
+                                onChange={handleProposedMonthlyValueChange}
+                                onBlur={handleProposedMonthlyValueBlur}
+                                inputMode="decimal"
+                                required
+                                onWheel={(e) => e.target.blur()}
+                            />
+                        </div>
+                    </div>
+                </div>
             </div>
 
             {/* Botones 'Atrás' / 'Siguiente' */}

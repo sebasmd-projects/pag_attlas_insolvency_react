@@ -1,3 +1,5 @@
+// src/i18n/routing.ts
+
 import { createNavigation } from 'next-intl/navigation';
 import { defineRouting } from 'next-intl/routing';
 
@@ -7,13 +9,11 @@ export const routing = defineRouting({
   pathnames: {
     '/': '/',
 
-
     // About us
     '/about-us/frequently-asked-questions': {
       es: '/nosotros/preguntas-frecuentes',
       en: '/about-us/frequently-asked-questions'
     },
-
 
     // Services
     '/services': {
@@ -24,7 +24,6 @@ export const routing = defineRouting({
       es: '/servicios/educacion-financiera',
       en: '/services/financial-education'
     },
-
 
     // Documents
     '/documents/legal/complaints-and-queries': {
@@ -52,12 +51,13 @@ export const routing = defineRouting({
       en: '/documents/legal/terms-and-conditions'
     },
 
+    // Consultants
+    '/consultants/auth/register': {
+      es: '/consultores/auth/registro',
+      en: '/consultants/auth/register',
+    },
 
     // Platform
-    '/platform/calculator': {
-      es: '/plataforma/calculadora',
-      en: '/platform/calculator'
-    },
     '/platform': {
       es: '/plataforma',
       en: '/platform'
@@ -69,8 +69,12 @@ export const routing = defineRouting({
     '/platform/auth/register': {
       es: '/plataforma/auth/registro',
       en: '/platform/auth/register'
-    }
-
+    },
+    '/platform/calculator': {
+      es: '/plataforma/calculadora',
+      en: '/platform/calculator'
+    },
+    
   }
 });
 

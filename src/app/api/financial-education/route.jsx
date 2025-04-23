@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 export async function GET() {
     try {
         const response = await axios.get(
-            'https://propensionesabogados.com/api/v1/financial-education/'
+            'http://localhost:8000/api/v1/financial-education/'
         );
 
         if (!response.data) {
