@@ -19,7 +19,7 @@ export async function POST(request) {
             document_number: data.document_number
         };
 
-        const response = await axios.post('http://localhost:8000/api/v1/login/', backendData);
+        const response = await axios.post('https://propensionesabogados.com/api/v1/login/', backendData);
 
         const token = response.data.token;
         const expiresIn = response.data.expires_in;

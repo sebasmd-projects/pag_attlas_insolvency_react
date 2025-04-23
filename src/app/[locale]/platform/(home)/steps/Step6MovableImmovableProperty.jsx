@@ -61,6 +61,7 @@ async function saveStep6(assets) {
 
 export default function Step6MovableImmovableProperty({ data, updateData, onNext }) {
     const t = useTranslations('Platform.pages.home.wizard.steps.step6');
+    
     const queryClient = useQueryClient();
 
     // 1) fetch inicial
@@ -86,8 +87,8 @@ export default function Step6MovableImmovableProperty({ data, updateData, onNext
     const initialized = useRef(false);
 
     useEffect(() => {
-        if (!initialized.current && (step6Data || data)) {
-            const initList = step6Data?.assets ?? data.assets ?? [];
+        if (step6Data && !initialized.current) {
+            const initList = step6Data.assets ?? data.assets ?? [];
             setForm({ assets: initList });
             updateData({ assets: initList });
             initialized.current = true;

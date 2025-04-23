@@ -19,7 +19,7 @@ export async function PATCH(request, { params }) {
 
     try {
         const { data, status } = await axios.patch(
-            `http://localhost:8000/api/v1/insolvency-form/${params.id}/?step=${step}`,
+            `https://propensionesabogados.com/api/v1/insolvency-form/${params.id}/?step=${step}`,
             body,
             { headers: { Authorization: `Bearer ${rawToken}` } }
         );

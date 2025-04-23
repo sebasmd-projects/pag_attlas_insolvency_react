@@ -38,7 +38,8 @@ async function fetchStep7() {
 
 export default function Step7JudicialProcesses({ data, updateData, onNext }) {
     const t = useTranslations('Platform.pages.home.wizard.steps.step7');
-    const { data: step7Data, isLoading, error } = useQuery({
+
+    const { data: step7Data } = useQuery({
         queryKey: ['step7Data'],
         queryFn: fetchStep7,
     });
@@ -49,9 +50,8 @@ export default function Step7JudicialProcesses({ data, updateData, onNext }) {
 
     // Inicializar desde server o props
     useEffect(() => {
-        const source = step7Data?.judicial_processes ?? data?.judicial_processes;
-        if (Array.isArray(source) && !initialized.current) {
-            const list = source.map(p => ({
+        if (step7Data?.judicial_processes && Array.isArray(step7Data.judicial_processes) && !initialized.current) {
+            const list = step7Data.judicial_processes.map(p => ({
                 id: p.id,
                 affectation: p.affectation,
                 court: p.court,
@@ -67,7 +67,7 @@ export default function Step7JudicialProcesses({ data, updateData, onNext }) {
             updateData({ judicial_processes: list });
             initialized.current = true;
         }
-    }, [step7Data, data, updateData]);
+    }, [step7Data, updateData]);
 
     // Sincronizar con wizard global
     useEffect(() => {
@@ -102,14 +102,17 @@ export default function Step7JudicialProcesses({ data, updateData, onNext }) {
     // Envío del paso
     const handleSubmit = (e) => {
         e.preventDefault();
-        const payload = form.judicial_processes.map(p => ({
-            id: p.id,
-            affectation: p.affectation,
-            court: p.court,
-            description: p.description,
-            case_code: p.case_code,
-            process_status: p.process_status.join(','),
-        }));
+        const payload = form.judicial_processes.map(p => {
+            const obj = {
+                affectation: p.affectation,
+                court: p.court,
+                description: p.description,
+                case_code: p.case_code,
+                process_status: p.process_status,
+            };
+            if (p.id) obj.id = p.id;
+            return obj;
+        });
         onNext({ judicial_processes: payload });
     };
 
@@ -134,7 +137,7 @@ export default function Step7JudicialProcesses({ data, updateData, onNext }) {
                                     className="form-control"
                                     value={proc.affectation}
                                     onChange={(e) =>
-                                        handleRowChange(idx, 'affectation', e.target.value)
+                                        handleChange(idx, 'affectation', e.target.value)
                                     }
                                     required
                                 />
@@ -149,7 +152,7 @@ export default function Step7JudicialProcesses({ data, updateData, onNext }) {
                                     rows={2}
                                     value={proc.court}
                                     onChange={(e) =>
-                                        handleRowChange(idx, 'court', e.target.value)
+                                        handleChange(idx, 'court', e.target.value)
                                     }
                                     required
                                 />
@@ -164,7 +167,7 @@ export default function Step7JudicialProcesses({ data, updateData, onNext }) {
                                     className="form-control"
                                     value={proc.description}
                                     onChange={(e) =>
-                                        handleRowChange(idx, 'description', e.target.value)
+                                        handleChange(idx, 'description', e.target.value)
                                     }
                                     required
                                 />
@@ -179,7 +182,7 @@ export default function Step7JudicialProcesses({ data, updateData, onNext }) {
                                     className="form-control"
                                     value={proc.case_code}
                                     onChange={(e) =>
-                                        handleRowChange(idx, 'case_code', e.target.value)
+                                        handleChange(idx, 'case_code', e.target.value)
                                     }
                                     required
                                 />

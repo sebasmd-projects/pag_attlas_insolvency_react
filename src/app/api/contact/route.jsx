@@ -8,7 +8,7 @@ export async function POST(request) {
         const data = await request.json();
 
         const response = await axios.post(
-            'http://localhost:8000/api/v1/contact/',
+            'https://propensionesabogados.com/api/v1/contact/',
             data
         );
 
