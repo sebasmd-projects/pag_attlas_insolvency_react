@@ -100,6 +100,19 @@
           },
           "onu_desa": "<p>The Attlas Org Foundation, REGISTERED in the database of the United Nations Department of Economic and Social Affairs (UN DESA - ONU), promotes the project \"Colombia Debt Relief: A New Beginning\", an initiative supported by the law firm <link>Propensiones Internacional</link>.</p> <p>This program represents an innovative model of economic justice, designed to strengthen asset recovery and financial stability for vulnerable sectors through advanced legal mechanisms and specialized financial strategies. Based on the principles of international cooperation and sustainable development, this project not only seeks to alleviate the economic burdens of thousands of families, but also to establish a legal framework that guarantees their social inclusion and long-term stability.</p>"
         },
+        "footPrintSection": {
+          "title": "Pulmón verde",
+          "subTitle": "Carbono Verde <span>Internacional - Conectando</span> Bosques y Mercados",
+          "card": {
+            "title1": "Objetivos del Proyecto",
+            "description1": "Implementar sistemas de medición, verificación y certificación de captura de carbono con estándares internacionales (VERRA, Gold Standard).",
+            "description2": "Promover el pago por servicios ambientales (PSA) a comunidades rurales que protejan bosques nativos.",
+            "description3": "Fortalecer la resiliencia climática mediante reforestación, regeneración natural y buenas prácticas agroforestales.",
+            "description4": "Crear un portafolio robusto de bonos de carbono voluntarios, con impacto ambiental, social y económico.",
+            "title2": "Oportunidad para Inversionistas:",
+            "description5": "PULMÓN VERDE abre una puerta real a la inversión responsable con impacto global. El proyecto ofrece a empresas, gobiernos y fondos climáticos la posibilidad de compensar su huella de carbono mediante bonos certificados, alineados con los Objetivos de Desarrollo Sostenible (ODS), en territorios que combinan alto valor ambiental y fuerte tejido social."
+          }
+        },
         "mainTeamSection": {
           "title_h1": "EXPERIENCE AND HUMAN QUALITY",
           "title_h2": "Our <span>Team</span>"
@@ -313,10 +326,29 @@
       }
     }
   },
+  "Consultants": {
+    "pages": {
+      "auth": {
+        "register": {
+          "title": "Registro",
+          "errorRegister": "Datos incorrectos, por favor verifica tu información.",
+          "successRegister": "Registro exitoso",
+          "generalError": "Ocurrió un error, por favor intenta más tarde.",
+          "form": {
+            "first_name": "Nombres Completos",
+            "last_name": "Apellidos",
+            "password": "Contraseña"
+          }
+        }
+      }
+    }
+  },
   "Platform": {
     "calculator": {
       "title": "Calcula tu insolvencia",
       "subTitle": "¿Cuánto tiempo te tomará <span>pagar tus deudas?</span>",
+      "caseOfInsolvency": "Supuesto de insolvencia",
+      "becomeInsolvent": "¿Me puedo <span>insolventar?</span>",
       "description": "Conoce cuánto tiempo te tomará pagar tus deudas con la calculadora de deudas de ATTLAS",
       "form": {
         "inputs": {
@@ -330,7 +362,7 @@
             "item5": "Seguridad social integral",
             "item6": "Transporte",
             "item7": "Vestuario y calzado (3 mudas por año)",
-            "item8": "Educación",
+            "item8": "Educación (Mensualidad)",
             "item9": "Impuestos",
             "item10": "Recreación y deporte",
             "item11": "Administración",
@@ -365,6 +397,7 @@
       "home": {
         "wizard": {
           "buttons": {
+            "step": "Paso",
             "next": "Siguiente",
             "back": "Atrás",
             "send": "Enviar",
@@ -372,7 +405,8 @@
             "processing": "Procesando..."
           },
           "steps": {
-            "step0": {
+            "stepTest": {},
+            "step1": {
               "title": "Inicia tu Proceso de Insolvencia",
               "subTitle": "Insolvencia <span>Económica</span> para Personas Naturales",
               "description": "<link>Asesoría</link> y <link>Acompañamiento</link> disponibles siempre",
@@ -517,17 +551,21 @@
                   "description": "“Artículo 539 #9 Una discriminación de las obligaciones alimentarias a su cargo, indicando cuantía y beneficiarios y anexando certificado del Registro de Deudores Alimenticios Morosos REDAM”"
                 }
               },
-              "accept_terms": "Acepto que he leído y entendido los requisitos legales para iniciar el trámite de insolvencia económica."
+              "accept_terms": "Acepto que he leído y entendido los requisitos legales para iniciar el trámite de insolvencia económica.",
+              "accept_terms_and_conditions": "Acepto los <termsLink>términos y condiciones</termsLink> y la <privacyLink>política de tratamiento de datos personales</privacyLink>."
             },
-            "step1": {
+            "step2": {
               "title": "Información Personal",
               "subTitle": "Por favor completa la siguiente información",
+              "errorGetDocument": "Error al obtener la información del documento",
               "form": {
                 "first_name": "Nombres",
                 "last_name": "Apellidos",
                 "document_number": "Número de documento",
                 "expedition_city": "Lugar de expedición",
                 "documentIssueDate": "Fecha de expedición",
+                "debtor_address": "Dirección de residencia",
+                "gender": "Género",
                 "is_merchant": {
                   "title": "¿Es comerciante?",
                   "options": {
@@ -535,49 +573,88 @@
                     "no": "No"
                   }
                 },
+                "debtor_age": "Edad",
                 "email": "Correo electrónico",
                 "cell_phone": "Número celular o telefónico"
               },
               "exampleTitle": "Ejemplo de solicitud",
               "example": "Yo, <firstName>{firstName}</firstName> <lastName>{lastName}</lastName>, mayor de edad, identificado con la Cédula de Ciudadanía No. <documentNumber>{documentNumber}</documentNumber> de <expeditionCity>{expeditionCity}</expeditionCity>, me encuentro en condición de persona natural <isMerchant>{isMerchant}</isMerchant> comerciante, con fundamento en lo dispuesto en el Título IV de la Ley 1564 de 2012, especialmente en el Artículo 531 y siguientes, modificada por la ley 2445 del 11 de febrero del 2025, así como en su desarrollo reglamentario contenido en el Decreto 2677 de 2012, por medio del presente escrito, comparezco ante su despacho con el fin de SOLICITAR A TÍTULO DIRECTO LA APERTURA FORMAL DEL TRÁMITE DE NEGOCIACIÓN DE DEUDAS. Para contacto, mi teléfono es <cellPhone>{cellPhone}</cellPhone> y mi correo es <email>{email}</email>."
             },
-            "step2": {
+            "step3": {
               "title": "Declaración de cesación de pagos",
-              "declarationLabel": "Acepta voluntariamente que cumple con la declaración de cesación de pagos.",
+              "subTitle": "Por favor <span>lea</span> la siguiente <span>declaración</span>",
+              "declarationLabel": "Acepto de forma voluntaria que cumplo con la declaración de cesación de pagos.",
               "declarationText": "Declaro, bajo la gravedad de juramento, que ostento la calidad de persona natural <u>NO</u> comerciante y me encuentro en estado de cesación de pagos, cumpliendo con los presupuestos normativos exigidos en el Artículo 539 de la Ley 1564 de 2012 modificada por la ley 2445 del 11 de febrero 2025, toda vez que registro dos o más obligaciones vencidas por un término superior a noventa (90) días, y el monto de mis obligaciones incumplidas representa no menos del treinta por ciento (30%) del total del pasivo a mi cargo. En virtud de lo anterior, es procedente la apertura del trámite de negociación de deudas, conforme a lo dispuesto en el Título IV del Código General del Proceso, garantizando la observancia de los principios de buena fe, equilibrio, transparencia y preservación del mínimo vital, que rigen el régimen de insolvencia de la persona natural <u>NO</u> comerciante.",
               "declarationNote": "Si no cumple con esta declaración, por favor comuniquese con uno de nuestros asesores jurídicos, para que le ayuden a determinar si es posible iniciar el trámite de insolvencia."
             },
-            "step3": {
+            "step4": {
               "title": "Informe de cesación de pagos",
               "subTitle": "Por favor completa la siguiente información",
               "form": {
                 "terminationReport": "Detalle acá las causas que lo llevaron a la situación de cesación de pagos",
-                "error": "Por favor completa el informe de cesación de pagos"
+                "error": "Por favor completa el informe de cesación de pagos",
+                "useAI": "Usar IA para mejorar el informe de cesación de pagos"
               },
-              "exampleTitle": "Ejemplo del informe de cesación de pagos",
-              "example": "Durante el periodo comprendido entre marzo y junio de 2023, la cancelación de mi contrato laboral con la empresa XYZ, sumada a la reducción drástica de horas y al cierre de proyectos clave, provocó la pérdida de ingresos estables. Además, la crisis derivada de la pandemia de COVID-19 agravó mi situación, dejando en riesgo la estabilidad financiera tanto personal como familiar. Por ello, solicito la apertura del trámite de insolvencia para reestructurar mis deudas y proteger el patrimonio mínimo vital, permitiéndome recuperar la estabilidad económica y garantizar el bienestar de mi núcleo familiar."
+              "exampleTitle": "Ejemplos del informe de cesación de pagos",
+              "example1": "Durante el periodo comprendido entre marzo y junio de 2023, la cancelación de mi contrato laboral con la empresa XYZ, sumada a la reducción drástica de horas y al cierre de proyectos clave, provocó la pérdida de ingresos estables. Además, la crisis derivada de la pandemia de COVID-19 agravó mi situación, dejando en riesgo la estabilidad financiera tanto personal como familiar. Por ello, solicito la apertura del trámite de insolvencia para reestructurar mis deudas y proteger el patrimonio mínimo vital, permitiéndome recuperar la estabilidad económica y garantizar el bienestar de mi núcleo familiar.",
+              "example2": "Desde el año 2022 he tenido bajo mi cuidado a dos adultos mayores con condiciones médicas crónicas, lo que ha generado una dependencia económica completa de mi ingreso. Los costos elevados en medicamentos, terapias y cuidados especiales han absorbido la mayor parte de mis recursos, llevándome a incumplir con obligaciones financieras adquiridas. Solicito la apertura del trámite de insolvencia para lograr una reestructuración viable que garantice el bienestar familiar.",
+              "example3": "En agosto de 2023 enfrenté una ruptura conyugal que implicó la separación del hogar y la asunción de gastos que anteriormente eran compartidos, incluyendo arriendo, servicios y educación de mis hijos. Esta situación provocó un desbalance severo en mis finanzas personales, afectando mi capacidad de cumplir con obligaciones de crédito previamente adquiridas. En razón de lo anterior, solicito acogerme al régimen de insolvencia de persona natural.",
+              "example4": "Durante el segundo semestre de 2023, la institución educativa donde laboraba redujo mi jornada laboral en un 50% debido a disminución en la matrícula escolar. Esto generó una caída drástica en mis ingresos, impidiéndome cubrir obligaciones financieras como créditos educativos, tarjetas de crédito y gastos de manutención. Adicionalmente, el incremento en el costo de vida profundizó mi desequilibrio económico. Por estas razones, solicito formalmente la apertura del trámite de insolvencia para proteger mi patrimonio mínimo vital y estabilizar mis finanzas.",
+              "example5": "Desde noviembre de 2022 enfrenté un diagnóstico de enfermedad grave que afectó mi capacidad laboral, obligándome a asumir tratamientos médicos costosos no cubiertos en su totalidad por la EPS. Paralelamente, los descuentos automáticos por libranzas adquiridas sobrepasaron el 50% de mi salario neto, comprometiendo mis recursos para necesidades básicas. Debido a esta situación de sobreendeudamiento e incapacidad financiera, solicito la apertura del trámite de insolvencia para reestructurar mis obligaciones y garantizar mi bienestar y el de mi familia.",
+              "legalCausesTitle": "Causas Legales",
+              "legalCauses": "<li>Pérdida de empleo o disminución sustancial de ingresos</li><li>Enfermedades graves, tratamientos médicos costosos o discapacidad</li><li>Dependencia económica de familiares o personas a cargo</li><li>Endeudamiento excesivo por crédito de consumo, libranzas o tarjetas</li><li>Eventos fortuitos o de fuerza mayor (desastres naturales, robos, pandemias)</li><li>Negocios fallidos o pérdidas patrimoniales</li><li>Embargos, secuestros de cuentas o descuentos por libranza desproporcionados</li><li>Fallecimiento de un aportante del hogar</li><li>Desempleo prolongado del deudor o del cónyuge</li><li>Alteración severa en la economía del país o del sector donde trabaja</li><li>Pérdida o reducción del contrato de prestación de servicios</li><li>Incremento desproporcionado en el costo de vida (inflación, servicios, arriendo)</li><li>Errores en la estructuración de los créditos otorgados (sobreendeudamiento inducido)</li><li>Separación o ruptura conyugal que afectó la economía del hogar</li><li>Pago simultáneo de cuotas hipotecarias y otras obligaciones conyugales</li><li>Carga financiera por estudios o educación de hijos</li><li>Incumplimientos contractuales de terceros que afectaron el flujo de caja del deudor</li>"
             },
-            "step4": {
+            "step5": {
               "title": "Relación de Acreedores",
               "subTitle": "Por favor completa la siguiente información",
+              "errors": {
+                "minSevereCount": "Debes tener al menos 2 deudas en mora (>= 90 días)",
+                "minSeverePct": "El porcentaje de cumplimiento debe ser mayor a 30%"
+              },
               "form": {
                 "minTwoCreditorsError": "Debes completar al menos dos acreedores",
                 "error": "Debes completar al menos el nombre, la naturaleza, el capital y los días en mora de cada acreedor",
                 "addCreditor": "+ Agregar Acreedor",
                 "headers": {
                   "creditor": "Acreedor",
+                  "nit": "NIT",
+                  "contact": "Contacto",
                   "nature": "Naturaleza",
+                  "otherNature": "Otra naturaleza",
+                  "consanguinity": "Consanguinidad",
                   "supportGuarantee": "Soporte Garantía",
+                  "interestRate": "Tasa de interés (% mensual)",
                   "capital": "Capital",
-                  "daysInArrears": "Días en mora",
+                  "daysOverdue": "Días en mora",
                   "actions": {
                     "title": "Acciones",
                     "delete": "Eliminar"
                   }
+                },
+                "placeholders": {
+                  "select": "Naturaleza de la obligación",
+                  "consanguinity": "Seleccione el grado consanguineo",
+                  "interestRate": "Tasa de interés (% mensual)",
+                  "otherNature": "Especifique ¿cuál?"
                 }
+              },
+              "validation": {
+                "doesNotMeetRequirements": "No cumple con los requisitos para iniciar el trámite de insolvencia económica",
+                "meetsRequirements": "Cumple con los requisitos para el trámite de insolvencia económica"
+              },
+              "totals": {
+                "title": "Totales",
+                "includingExcluded": "Incluyendo libranza / nómina",
+                "excludingExcluded": "Excluyendo libranza / nómina",
+                "totalDebt": "Total deudas",
+                "arrears": "Total actual en mora",
+                "current": "Total actual al día",
+                "severeArrears": "Total actual en mora (>= 90)",
+                "severeCount": "Número de deudas en mora (>= 90)",
+                "compliancePercentage": "Porcentaje de cumplimiento"
               }
             },
-            "step5": {
+            "step6": {
               "title": "Relación de Bienes",
               "subTitle": "Por favor completa la siguiente información",
               "form": {
@@ -637,10 +714,10 @@
                 },
                 "error": "Por favor completa la relación de bienes para cada campo requerido"
               },
-              "exampleTitle": "Ejemplo del informe de cesación de pagos",
+              "exampleTitle": "Ejemplos del informe de cesación de pagos",
               "example": "Durante el periodo comprendido entre marzo y junio de 2023, la cancelación de mi contrato laboral con la empresa XYZ, sumada a la reducción drástica de horas y al cierre de proyectos clave, provocó la pérdida de ingresos estables. Además, la crisis derivada de la pandemia de COVID-19 agravó mi situación, dejando en riesgo la estabilidad financiera tanto personal como familiar. Por ello, solicito la apertura del trámite de insolvencia para reestructurar mis deudas y proteger el patrimonio mínimo vital, permitiéndome recuperar la estabilidad económica y garantizar el bienestar de mi núcleo familiar."
             },
-            "step6": {
+            "step7": {
               "title": "Relación de Procesos Judiciales",
               "subTitle": "Por favor completa la siguiente información",
               "form": {
@@ -664,10 +741,10 @@
                 },
                 "error": "Por favor completa los campos obligatorios"
               },
-              "exampleTitle": "Ejemplo del informe de cesación de pagos",
+              "exampleTitle": "Ejemplos del informe de cesación de pagos",
               "example": "Durante el periodo comprendido entre marzo y junio de 2023, la cancelación de mi contrato laboral con la empresa XYZ, sumada a la reducción drástica de horas y al cierre de proyectos clave, provocó la pérdida de ingresos estables. Además, la crisis derivada de la pandemia de COVID-19 agravó mi situación, dejando en riesgo la estabilidad financiera tanto personal como familiar. Por ello, solicito la apertura del trámite de insolvencia para reestructurar mis deudas y proteger el patrimonio mínimo vital, permitiéndome recuperar la estabilidad económica y garantizar el bienestar de mi núcleo familiar."
             },
-            "step7": {
+            "step8": {
               "title": "Relación de Ingresos",
               "subTitle": "Por favor completa la siguiente información",
               "form": {
@@ -692,11 +769,32 @@
                 }
               }
             },
-            "step8": {
+            "step9": {
+              "title": "Sociedad Conyugal / Patrimonial",
+              "subTitle": "Por favor completa la siguiente información",
+              "maritalSocietyQuestion": "Tipo de sociedad conyugal o patrimonial",
+              "maritalStatus": {
+                "single": "Soltero/a",
+                "married": "Casado/a",
+                "divorced": "Divorciado/a",
+                "widowed": "Viudo/a",
+                "freeUnion": "Unión libre",
+                "maritalDeclaration": "Declaración Marital de hecho",
+                "notApplicable": "No aplica"
+              },
+              "partnerDocument": "Cédula de la pareja",
+              "partnerName": "Nombres",
+              "partnerLastname": "Apellidos",
+              "partnerEmail": "Correo",
+              "partnerPhone": "Celular",
+              "relationshipDuration": "¿Desde hace cuánto? (meses)"
+            },
+            "step10": {
               "title": "Recursos disponibles y gastos esenciales",
-              "addSubsistenceTable": "Agregar tabla de subsistencia",
+              "subTitle": "Por favor completa la siguiente información",
+              "addSubsistenceTable": "Agregar tabla de dependientes",
               "removeSubsistenceTable": "Eliminar tabla de subsistencia",
-              "proposedMonthlyValueLabel": "Valor mensual propuesto",
+              "proposedMonthlyValueLabel": "Propuesta de <span>pago mensual</span> del deudor",
               "table": {
                 "defaults": {
                   "debtorTitle": "Deudor",
@@ -763,7 +861,7 @@
                         "legalSupport": "C.C. art. 411"
                       },
                       "item11": {
-                        "label": "Educación",
+                        "label": "Educación (Mensualidad)",
                         "legalSupport": "C.P.C. art. 67, Ley 115 1994 (L.G.E.)"
                       },
                       "item12": {
@@ -795,18 +893,26 @@
               },
               "addTableForm": {
                 "title": "Añadir dependiente",
+                "name": {
+                  "label": "Nombre del dependiente",
+                  "placeholder": "Ej: María Pérez"
+                },
                 "relationShip": {
                   "label": "Relación con el deudor",
                   "placeholder": "Selecciona la relación con el deudor",
                   "options": {
-                    "spouse": "Cónyuge",
-                    "partner": "Compañero(a) permanente",
-                    "child": "Hijo(a)",
-                    "other": "Otro"
+                    "husband": "ESPOSO",
+                    "wife": "ESPOSA",
+                    "permanentPartner": "PAREJA PERMANENTE",
+                    "son": "HIJO",
+                    "daughter": "HIJA",
+                    "mother": "MADRE",
+                    "father": "PADRE",
+                    "other": "OTRO"
                   }
                 },
                 "disability": {
-                  "label": "¿Tiene alguna discapacidad?",
+                  "label": "¿Tiene discapacidad?",
                   "options": {
                     "yes": "Sí",
                     "no": "No"
@@ -828,23 +934,7 @@
                 }
               }
             },
-            "step9": {
-              "title": "Sociedad Conyugal / Patrimonial",
-              "maritalSocietyQuestion": "Tipo de sociedad conyugal o patrimonial",
-              "maritalStatus": {
-                "spouse": "Cónyuge",
-                "maritalDeclaration": "Declaración Marital de hecho",
-                "freeUnion": "Unión libre",
-                "notApplicable": "No aplica"
-              },
-              "partnerDocument": "Cédula de la pareja",
-              "partnerName": "Nombres",
-              "partnerLastname": "Apellidos",
-              "partnerEmail": "Correo",
-              "partnerPhone": "Celular",
-              "relationshipDuration": "¿Desde hace cuánto? (años)"
-            },
-            "step10": {
+            "step11": {
               "title": "Documentos Legales",
               "fields": {
                 "cedulaFront": {
@@ -886,15 +976,15 @@
           "generalError": "Ocurrió un error, por favor intenta más tarde.",
           "form": {
             "documentNumber": "Número de documento",
-            "documentIssueDate": "Fecha de expedición",
+            "password": "Asesor autorizado",
             "birthDate": "Fecha de nacimiento"
           },
           "registerLink": "¿No tienes cuenta? Regístrate aquí"
         },
         "register": {
           "title": "Registro",
-          "errorLogin": "Datos incorrectos, por favor verifica tu información.",
-          "successLogin": "Registro exitoso",
+          "errorRegister": "Datos incorrectos, por favor verifica tu información.",
+          "successRegister": "Registro exitoso",
           "generalError": "Ocurrió un error, por favor intenta más tarde.",
           "form": {
             "documentNumber": "Número de documento",

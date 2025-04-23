@@ -6,6 +6,7 @@ import SolutionsSection from './components/sections/SolutionsSection';
 import StepByStepSection from './components/sections/StepByStepSection';
 import WhyUsSection from './components/sections/WhyUsSection';
 import ContactSection from './components/sections/ContactSection';
+import FootPrintSection from './components/sections/FootPrintSection';
 
 
 export async function generateMetadata({ params: { locale } }) {
@@ -65,6 +66,7 @@ export default function HomePage({ params: { locale } }) {
     <>
       <HeroSection />
       <SolutionsSection />
+      <FootPrintSection />
       <MainTeamSection />
       <WhyUsSection />
       <StepByStepSection />

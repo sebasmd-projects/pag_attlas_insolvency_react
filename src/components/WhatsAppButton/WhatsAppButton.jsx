@@ -24,7 +24,7 @@ export default function WhatsAppButton() {
                 rel="noopener noreferrer"
                 className={`${styles.whatsappButton} ${isScrolled ? styles.scrolled : ''}`}
             >
-                <span>Asesoría gratuita</span>
+                <span>Línea salvavidas</span>
                 <BsWhatsapp className={styles.whatsappIcon} />
             </a>
         </div>
