@@ -3,12 +3,13 @@
 'use client';
 import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
-
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { ReactSVG } from 'react-svg';
+import { toast } from 'react-toastify';
+import { MdSaveAs } from "react-icons/md";
 
 import SubTitleComponent from '@/components/micro-components/sub_title';
 import TitleComponent from '@/components/micro-components/title';
@@ -19,21 +20,23 @@ async function GetStep1() {
 }
 
 export default function Step1LegalRequirements({ data, updateData, onNext }) {
-
     const t = useTranslations('Platform.pages.home.wizard.steps.step1');
+    const queryClient = useQueryClient();
 
+    // 1) Fetch DB data on every mount
     const { data: step1Data } = useQuery({
         queryKey: ['step1Data'],
-        queryFn: () => GetStep1()
+        queryFn: GetStep1,
+        refetchOnMount: true,
     });
 
-    // 1) Estado local, sin lazy-init de data, valores por defecto:
+    // 2) Local form state
     const [form, setForm] = useState({
         accept_legal_requirements: false,
         accept_terms_and_conditions: false,
     });
 
-    // 2) Ref para inicializar sólo la primera vez que data llega poblado:
+    // 3) Init only once per mount
     const initialized = useRef(false);
     useEffect(() => {
         if (step1Data && !initialized.current) {
@@ -42,25 +45,37 @@ export default function Step1LegalRequirements({ data, updateData, onNext }) {
                 accept_terms_and_conditions: !!step1Data.accept_terms_and_conditions,
             };
             setForm(init);
-            updateData(init);               // opcional: sincronizar el contexto
+            updateData(init);
             initialized.current = true;
         }
     }, [step1Data, updateData]);
 
+    // 4) PATCH step 1 without advancing
+    const saveMutation = useMutation({
+        mutationFn: () =>
+            axios.patch('/api/platform/insolvency-form/?step=1', form),
+        onSuccess: () => {
+            toast.success(t('messages.saveSuccess'));
+            queryClient.invalidateQueries(['step1Data']);
+        },
+        onError: () => toast.error(t('messages.saveError'))
+    });
 
-    // 3) handleChange sincroniza sólo el campo que cambió:
+    const handleSave = () => saveMutation.mutate();
+
+    // 5) Submit form and advance to next step
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        onNext(form);
+    };
+
+    // 6) Handle checkbox changes
     const handleChange = ({ target: { name, checked } }) => {
         setForm((prev) => {
             const next = { ...prev, [name]: checked };
             updateData(next);
             return next;
         });
-    };
-
-    // 4) envío del paso:
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        onNext(form);
     };
 
     function commonText({ articleTitle, articleDescription }) {
@@ -210,6 +225,17 @@ export default function Step1LegalRequirements({ data, updateData, onNext }) {
                     </div>
                 </div>
             </form>
+
+            <div className="my-3">
+                <button
+                    type="button"
+                    className="btn btn-outline-info"
+                    onClick={handleSave}
+                    disabled={saveMutation.isLoading}
+                >
+                    <MdSaveAs /> {saveMutation.isLoading ? t('messages.saving') : t('messages.save')}
+                </button>
+            </div>
         </>
     );
 }

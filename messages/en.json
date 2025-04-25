@@ -411,6 +411,12 @@
               "subTitle": "Insolvencia <span>Económica</span> para Personas Naturales",
               "description": "<link>Asesoría</link> y <link>Acompañamiento</link> disponibles siempre",
               "advisor": "La recopilación y uso de los datos en este formulario son para dar cumplimiento con los siguientes <u>Requisitos Legales</u>:",
+              "messages": {
+                "saving": "Guardando...",
+                "save": "Guardar",
+                "saveSuccess": "Guardado con éxito",
+                "saveError": "Error al guardar los datos"
+              },
               "articles": {
                 "1": {
                   "title": "CUMPLIMIENTO AL ARTÍCULO No.10 DE LA LEY 2445 DEL 11 DE FEBRERO DEL 2025.",
@@ -558,6 +564,12 @@
               "title": "Información Personal",
               "subTitle": "Por favor completa la siguiente información",
               "errorGetDocument": "Error al obtener la información del documento",
+              "messages": {
+                "saving": "Guardando...",
+                "save": "Guardar",
+                "saveSuccess": "Información personal guardada con éxito",
+                "saveError": "Error al guardar los datos"
+              },
               "form": {
                 "first_name": "Nombres",
                 "last_name": "Apellidos",
@@ -584,8 +596,14 @@
               "title": "Declaración de cesación de pagos",
               "subTitle": "Por favor <span>lea</span> la siguiente <span>declaración</span>",
               "declarationLabel": "Acepto de forma voluntaria que cumplo con la declaración de cesación de pagos.",
-              "declarationText": "Declaro, bajo la gravedad de juramento, que ostento la calidad de persona natural <u>NO</u> comerciante y me encuentro en estado de cesación de pagos, cumpliendo con los presupuestos normativos exigidos en el Artículo 539 de la Ley 1564 de 2012 modificada por la ley 2445 del 11 de febrero 2025, toda vez que registro dos o más obligaciones vencidas por un término superior a noventa (90) días, y el monto de mis obligaciones incumplidas representa no menos del treinta por ciento (30%) del total del pasivo a mi cargo. En virtud de lo anterior, es procedente la apertura del trámite de negociación de deudas, conforme a lo dispuesto en el Título IV del Código General del Proceso, garantizando la observancia de los principios de buena fe, equilibrio, transparencia y preservación del mínimo vital, que rigen el régimen de insolvencia de la persona natural <u>NO</u> comerciante.",
-              "declarationNote": "Si no cumple con esta declaración, por favor comuniquese con uno de nuestros asesores jurídicos, para que le ayuden a determinar si es posible iniciar el trámite de insolvencia."
+              "declarationText": "Declaro, bajo la gravedad de juramento, que ostento la calidad de persona natural <u>NO</u> comerciante y me encuentro en <b>estado de cesación de pagos</b>, cumpliendo con los presupuestos normativos exigidos en el Artículo 539 de la Ley 1564 de 2012 modificada por la ley 2445 del 11 de febrero 2025, toda vez que registro <b>dos (2) o más</b> obligaciones <b>vencidas</b> por un término <b>superior a noventa (90) días</b>, y el monto de mis obligaciones incumplidas representa <b>no menos del treinta por ciento (30%) del total</b> del pasivo a mi cargo. En virtud de lo anterior, es procedente la apertura del trámite de negociación de deudas, conforme a lo dispuesto en el Título IV del Código General del Proceso, garantizando la observancia de los principios de buena fe, equilibrio, transparencia y preservación del mínimo vital, que rigen el régimen de insolvencia de la persona natural <u>NO</u> comerciante.",
+              "declarationNote": "Si no cumple con esta declaración, por favor comuniquese con uno de nuestros asesores jurídicos, para que le ayuden a determinar si es posible iniciar el trámite de insolvencia.",
+              "messages": {
+                "saving": "Guardando...",
+                "save": "Guardar",
+                "saveSuccess": "Guardado con éxito",
+                "saveError": "Error al guardar los datos"
+              }
             },
             "step4": {
               "title": "Informe de cesación de pagos",
@@ -602,11 +620,23 @@
               "example4": "Durante el segundo semestre de 2023, la institución educativa donde laboraba redujo mi jornada laboral en un 50% debido a disminución en la matrícula escolar. Esto generó una caída drástica en mis ingresos, impidiéndome cubrir obligaciones financieras como créditos educativos, tarjetas de crédito y gastos de manutención. Adicionalmente, el incremento en el costo de vida profundizó mi desequilibrio económico. Por estas razones, solicito formalmente la apertura del trámite de insolvencia para proteger mi patrimonio mínimo vital y estabilizar mis finanzas.",
               "example5": "Desde noviembre de 2022 enfrenté un diagnóstico de enfermedad grave que afectó mi capacidad laboral, obligándome a asumir tratamientos médicos costosos no cubiertos en su totalidad por la EPS. Paralelamente, los descuentos automáticos por libranzas adquiridas sobrepasaron el 50% de mi salario neto, comprometiendo mis recursos para necesidades básicas. Debido a esta situación de sobreendeudamiento e incapacidad financiera, solicito la apertura del trámite de insolvencia para reestructurar mis obligaciones y garantizar mi bienestar y el de mi familia.",
               "legalCausesTitle": "Causas Legales",
-              "legalCauses": "<li>Pérdida de empleo o disminución sustancial de ingresos</li><li>Enfermedades graves, tratamientos médicos costosos o discapacidad</li><li>Dependencia económica de familiares o personas a cargo</li><li>Endeudamiento excesivo por crédito de consumo, libranzas o tarjetas</li><li>Eventos fortuitos o de fuerza mayor (desastres naturales, robos, pandemias)</li><li>Negocios fallidos o pérdidas patrimoniales</li><li>Embargos, secuestros de cuentas o descuentos por libranza desproporcionados</li><li>Fallecimiento de un aportante del hogar</li><li>Desempleo prolongado del deudor o del cónyuge</li><li>Alteración severa en la economía del país o del sector donde trabaja</li><li>Pérdida o reducción del contrato de prestación de servicios</li><li>Incremento desproporcionado en el costo de vida (inflación, servicios, arriendo)</li><li>Errores en la estructuración de los créditos otorgados (sobreendeudamiento inducido)</li><li>Separación o ruptura conyugal que afectó la economía del hogar</li><li>Pago simultáneo de cuotas hipotecarias y otras obligaciones conyugales</li><li>Carga financiera por estudios o educación de hijos</li><li>Incumplimientos contractuales de terceros que afectaron el flujo de caja del deudor</li>"
+              "legalCauses": "<li>Pérdida de empleo o disminución sustancial de ingresos</li><li>Enfermedades graves, tratamientos médicos costosos o discapacidad</li><li>Dependencia económica de familiares o personas a cargo</li><li>Endeudamiento excesivo por crédito de consumo, libranzas o tarjetas</li><li>Eventos fortuitos o de fuerza mayor (desastres naturales, robos, pandemias)</li><li>Negocios fallidos o pérdidas patrimoniales</li><li>Embargos, secuestros de cuentas o descuentos por libranza desproporcionados</li><li>Fallecimiento de un aportante del hogar</li><li>Desempleo prolongado del deudor o del cónyuge</li><li>Alteración severa en la economía del país o del sector donde trabaja</li><li>Pérdida o reducción del contrato de prestación de servicios</li><li>Incremento desproporcionado en el costo de vida (inflación, servicios, arriendo)</li><li>Errores en la estructuración de los créditos otorgados (sobreendeudamiento inducido)</li><li>Separación o ruptura conyugal que afectó la economía del hogar</li><li>Pago simultáneo de cuotas hipotecarias y otras obligaciones conyugales</li><li>Carga financiera por estudios o educación de hijos</li><li>Incumplimientos contractuales de terceros que afectaron el flujo de caja del deudor</li>",
+              "messages": {
+                "saving": "Guardando...",
+                "save": "Guardar",
+                "saveSuccess": "Guardado con éxito",
+                "saveError": "Error al guardar los datos"
+              }
             },
             "step5": {
               "title": "Relación de Acreedores",
               "subTitle": "Por favor completa la siguiente información",
+              "messages": {
+                "saving": "Guardando...",
+                "save": "Guardar",
+                "saveSuccess": "Acreedores guardados correctamente",
+                "saveError": "Error al guardar los acreedores, por favor intenta nuevamente"
+              },
               "errors": {
                 "minSevereCount": "Debes tener al menos 2 deudas en mora (>= 90 días)",
                 "minSeverePct": "El porcentaje de cumplimiento debe ser mayor a 30%"
@@ -615,6 +645,7 @@
                 "minTwoCreditorsError": "Debes completar al menos dos acreedores",
                 "error": "Debes completar al menos el nombre, la naturaleza, el capital y los días en mora de cada acreedor",
                 "addCreditor": "+ Agregar Acreedor",
+                "save": "Guardar",
                 "headers": {
                   "creditor": "Acreedor",
                   "nit": "NIT",
@@ -657,10 +688,17 @@
             "step6": {
               "title": "Relación de Bienes",
               "subTitle": "Por favor completa la siguiente información",
+              "messages": {
+                "saving": "Guardando...",
+                "save": "Guardar",
+                "saveSuccess": "Bienes guardados correctamente",
+                "saveError": "Error al guardar los bienes, por favor intenta nuevamente"
+              },
               "form": {
                 "actions": {
                   "delete": "Eliminar",
-                  "addAsset": "+ Agregar Bien"
+                  "addAsset": "+ Agregar Bien",
+                  "save": "Guardar"
                 },
                 "assetType": {
                   "label": "Tipo de bien",
@@ -720,6 +758,12 @@
             "step7": {
               "title": "Relación de Procesos Judiciales",
               "subTitle": "Por favor completa la siguiente información",
+              "messages": {
+                "saving": "Guardando...",
+                "save": "Guardar",
+                "saveSuccess": "Procesos judiciales guardados con éxito",
+                "saveError": "Error al guardar los datos"
+              },
               "form": {
                 "delete": "Eliminar",
                 "addProcess": "+ Agregar Proceso",
@@ -767,6 +811,12 @@
                     "otherAmountPlaceholder": "Monto del ingreso"
                   }
                 }
+              },
+              "messages": {
+                "saving": "Guardando...",
+                "save": "Guardar",
+                "saveSuccess": "Relación de ingresos guardados con éxito",
+                "saveError": "Error al guardar los datos"
               }
             },
             "step9": {
@@ -787,7 +837,13 @@
               "partnerLastname": "Apellidos",
               "partnerEmail": "Correo",
               "partnerPhone": "Celular",
-              "relationshipDuration": "¿Desde hace cuánto? (meses)"
+              "relationshipDuration": "¿Desde hace cuánto? (años)",
+              "messages": {
+                "saving": "Guardando...",
+                "save": "Guardar",
+                "saveSuccess": "Sociedad conyugal guardada con éxito",
+                "saveError": "Error al guardar los datos"
+              }
             },
             "step10": {
               "title": "Recursos disponibles y gastos esenciales",
@@ -932,6 +988,12 @@
                   "add": "Agregar",
                   "cancel": "Cancelar"
                 }
+              },
+              "messages": {
+                "saving": "Guardando...",
+                "save": "Guardar",
+                "saveSuccess": "Gastos/Egresos guardados con éxito",
+                "saveError": "Error al guardar los datos"
               }
             },
             "step11": {

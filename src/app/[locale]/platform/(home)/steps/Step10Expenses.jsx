@@ -9,6 +9,10 @@ import { FaMinus, FaPlus } from 'react-icons/fa';
 import SubTitleComponent from '@/components/micro-components/sub_title';
 import TitleComponent from '@/components/micro-components/title';
 import { ReactSVG } from 'react-svg';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import axios from 'axios';
+import { MdSaveAs } from 'react-icons/md';
+import { toast } from 'react-toastify';
 
 // ---------- Constantes ----------
 const BASE_EXPENSES = [
@@ -27,17 +31,23 @@ const BASE_EXPENSES = [
   { labelKey: 'table.defaults.items.baseExpenses.item13', legalKey: 'table.defaults.items.baseExpenses.item13.legalSupport', id: 13, editable: false, dependent: true },
   { labelKey: 'table.defaults.items.baseExpenses.item14', legalKey: 'table.defaults.items.baseExpenses.item14.legalSupport', id: 14, editable: true, dependent: false },
 ];
-const FOOD_OBLIGATION = { labelKey: 'table.defaults.items.baseExpenses.item15', legalKey: 'table.defaults.items.baseExpenses.item15.legalSupport', id: 15, editable: true, dependent: false };
+const FOOD_OBLIGATION = {
+  labelKey: 'table.defaults.items.baseExpenses.item15',
+  legalKey: 'table.defaults.items.baseExpenses.item15.legalSupport',
+  id: 15,
+  editable: true,
+  dependent: false
+};
 
 // ---------- Funciones auxiliares ----------
 const parseCurrency = v =>
   typeof v === 'number'
     ? v
-    : parseFloat((v || '').toString().replace(/\./g, '').replace(',', '.')) || 0;
+    : parseFloat(String(v || '0').replace(/,/g, '')) || 0;
 
 const formatCurrency = v =>
-  new Intl.NumberFormat('es-CO', { minimumFractionDigits: 0, maximumFractionDigits: 3 }).format(parseCurrency(v));
-
+  new Intl.NumberFormat('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 })
+    .format(parseCurrency(v));
 
 const calculateTableTotal = items =>
   items.reduce((sum, it) => sum + parseCurrency(it.value), 0);
@@ -53,66 +63,111 @@ const getDefaultFoodValue = (age, gender) => {
   return 625000;
 };
 const getDefaultVestuarioValue = () => 68333;
-const getDefaultRecreacionValue = (age) => (parseInt(age, 10) || 0) < 18 ? 40000 : 30000;
+const getDefaultRecreacionValue = age =>
+  (parseInt(age, 10) || 0) < 18 ? 40000 : 30000;
 
-export default function Step10Expenses({ data, updateData, onNext, onBack, isSubmitting }) {
+// ---------- Llamados a API ----------
+async function GetStep10() {
+  const { data } = await axios.get('/api/platform/insolvency-form/get-data/?step=10');
+  return data;
+}
+async function SaveStep10(resourcesPayload) {
+  return axios.patch('/api/platform/insolvency-form/?step=10', {
+    resources: [resourcesPayload],
+  });
+}
+
+const countChildren = (tables) => tables.filter(tbl => tbl.relationship === 'HIJO' || tbl.relationship === 'HIJA').length;
+
+export default function Step10Expenses({ data, updateData, onNext }) {
   const t = useTranslations('Platform.pages.home.wizard.steps.step10');
+  const queryClient = useQueryClient();
   const initialized = useRef(false);
 
-  // ---------- Estado ----------
+  const { data: step10Data } = useQuery({
+    queryKey: ['step10Data'],
+    queryFn: GetStep10,
+    refetchOnMount: true,
+  });
+
+  // ---------- Estado inicializado ----------
   const buildInitial = () => {
+    const base = step10Data ?? data;
+    const res = base?.resources?.[0] ?? {};
     const debtorAge = data.debtor_age;
     const debtorSex = data.debtor_sex;
-    const res = Array.isArray(data.resources) && data.resources.length > 0
-      ? data.resources[0]
-      : {};
 
-    const tables = Array.isArray(res.tables) && res.tables.length > 0
-      ? res.tables.map((tbl, ti) => ({
-        title: tbl.title,
-        relationship: tbl.relationship,
-        disability: tbl.disability,
-        age: tbl.age,
-        gender: tbl.gender,
-        items: tbl.items.map((it, idx) => ({
-          id: `table${ti}-item${idx}-${Date.now()}`,
-          label: it.label,
-          legal_support: it.legal_support,
-          value: formatCurrency(it.value),
-          editable: it.editable,
-          dependent: it.dependent,
-        })),
-      }))
-      : [{
-        title: t('table.defaults.debtorTitle'),
-        relationship: 'DEUDOR',
-        disability: false,
-        age: debtorAge,
-        gender: debtorSex,
-        items: BASE_EXPENSES.map((be, idx) => {
-          let computed = '';
-          if (be.id === 4) computed = getDefaultFoodValue(debtorAge, debtorSex);
-          else if (be.id === 10) computed = getDefaultVestuarioValue();
-          else if (be.id === 13) computed = getDefaultRecreacionValue(debtorAge);
-
+    // 1) Si ya hay tablas guardadas, reaplicar editable/dependent desde nuestras constantes
+    let tables = Array.isArray(res.tables) && res.tables.length > 0
+      ? res.tables.map((tbl, ti) => {
+        const items = tbl.items.map((it, idx) => {
+          // buscar en BASE_EXPENSES o FOOD_OBLIGATION por etiqueta
+          const label = it.label;
+          const defBase = BASE_EXPENSES.find(be =>
+            t(`${be.labelKey}.label`) === label
+          );
+          const defFood = t(`${FOOD_OBLIGATION.labelKey}.label`) === label
+            ? FOOD_OBLIGATION
+            : null;
+          const def = defBase || defFood;
           return {
-            id: `table0-item${idx}-${Date.now()}`,
-            label: t(`${be.labelKey}.label`),
-            legal_support: t(`${be.legalKey}`),
-            value: formatCurrency(computed),
-            editable: be.editable,
-            dependent: be.dependent,
+            id: `table${ti}-item${idx}-${Date.now()}`,
+            label,
+            legal_support: it.legal_support,
+            value: formatCurrency(it.value),
+            editable: def ? def.editable : true,
+            dependent: def ? def.dependent : false,
           };
-        }),
-      }];
+        });
+        return {
+          title: tbl.title,
+          relationship: tbl.relationship,
+          disability: tbl.disability,
+          age: tbl.age,
+          gender: tbl.gender,
+          items,
+        };
+      })
+      : [
+        // 2) Si no hay nada guardado, inicializamos solo al deudor
+        {
+          title: t('table.defaults.debtorTitle'),
+          relationship: 'DEUDOR',
+          disability: false,
+          age: debtorAge,
+          gender: debtorSex,
+          items: BASE_EXPENSES.map((be, idx) => {
+            let computed = '';
+            if (be.id === 4) computed = getDefaultFoodValue(debtorAge, debtorSex);
+            else if (be.id === 10) computed = getDefaultVestuarioValue();
+            else if (be.id === 13) computed = getDefaultRecreacionValue(debtorAge);
+            return {
+              id: `table0-item${idx}-${Date.now()}`,
+              label: t(`${be.labelKey}.label`),
+              legal_support: t(`${be.legalKey}`),
+              value: formatCurrency(computed),
+              editable: be.editable,
+              dependent: be.dependent,
+            };
+          }),
+        },
+      ];
+
+    // 3) Asegurar que el deudor esté en primer lugar y no pueda moverse
+    const idxD = tables.findIndex(tbl => tbl.relationship === 'DEUDOR');
+    if (idxD > 0) {
+      const [debtorTbl] = tables.splice(idxD, 1);
+      tables.unshift(debtorTbl);
+    }
 
     return {
       tables,
       hasFoodObligation: !!res.has_food_obligation,
-      proposedMonthlyValue: res.has_food_obligation != null
-        ? formatCurrency(res.proposed_monthly_value)
-        : '',
-      childrenCount: res.children_count || 0,
+      proposedMonthlyValue:
+        res.has_food_obligation != null
+          ? formatCurrency(res.proposed_monthly_value)
+          : '',
+      childrenCount: countChildren(tables),
     };
   };
 
@@ -125,17 +180,16 @@ export default function Step10Expenses({ data, updateData, onNext, onBack, isSub
   const [newRel, setNewRel] = useState('');
   const [showAdd, setShowAdd] = useState(false);
 
-  // Inicializar
   useEffect(() => {
-    if (!initialized.current) {
+    if (step10Data && !initialized.current) {
       const init = buildInitial();
       setForm(init);
       setChildCount(init.childrenCount);
       initialized.current = true;
     }
-  }, [data.resources]);
+  }, [step10Data, data]);
 
-  // Sincronizar con wizard
+  // Sincronizar cambios con el wizard global
   useEffect(() => {
     const payload = {
       has_food_obligation: form.hasFoodObligation,
@@ -156,6 +210,36 @@ export default function Step10Expenses({ data, updateData, onNext, onBack, isSub
     };
     updateData({ resources: [payload] });
   }, [form, childCount, updateData]);
+
+  // Mutación de guardado
+  const saveMutation = useMutation({
+    mutationFn: () => {
+      const payload = {
+        has_food_obligation: form.hasFoodObligation,
+        proposed_monthly_value: parseCurrency(form.proposedMonthlyValue),
+        children_count: childCount,
+        tables: form.tables.map(tbl => ({
+          title: tbl.title,
+          relationship: tbl.relationship,
+          disability: tbl.disability,
+          age: tbl.age,
+          gender: tbl.gender,
+          items: tbl.items.map(it => ({
+            label: it.label,
+            legal_support: it.legal_support,
+            value: parseCurrency(it.value),
+          })),
+        })),
+      };
+      return SaveStep10(payload);
+    },
+    onSuccess: () => {
+      toast.success(t('messages.saveSuccess'));
+      queryClient.invalidateQueries(['step10Data']);
+    },
+    onError: () => toast.error(t('messages.saveError')),
+  });
+  const handleSave = () => saveMutation.mutate();
 
   const grandTotal = useMemo(
     () => form.tables.reduce((sum, tbl) => sum + calculateTableTotal(tbl.items), 0),
@@ -515,7 +599,7 @@ export default function Step10Expenses({ data, updateData, onNext, onBack, isSub
             )}
             <p className="fw-bold">
               {t('table.defaults.tableTotalLabel')}:&nbsp;
-              {new Intl.NumberFormat('es-CO').format(total)}
+              {new Intl.NumberFormat('en-US').format(total)}
             </p>
 
             {ti > 0 && <button type="button" className="btn btn-outline-danger" onClick={() => removeSubsistenceTable(ti)}><FaMinus className="me-1" />{t('removeSubsistenceTable')}</button>}
@@ -523,7 +607,7 @@ export default function Step10Expenses({ data, updateData, onNext, onBack, isSub
         );
       })}
 
-      <h5 className="fw-bold">{t('table.defaults.globalTotalLabel')}: {new Intl.NumberFormat('es-CO').format(grandTotal)}</h5>
+      <h5 className="fw-bold">{t('table.defaults.globalTotalLabel')}: {new Intl.NumberFormat('en-US').format(grandTotal)}</h5>
 
       <div className="mb-3">
         <button
@@ -595,6 +679,7 @@ export default function Step10Expenses({ data, updateData, onNext, onBack, isSub
           </div>
         </div>
       )}
+
       <div className="card mb-4">
         <div className="row gx-3 align-items-center card-body">
           <div className="col-5 d-flex align-items-center">
@@ -621,6 +706,18 @@ export default function Step10Expenses({ data, updateData, onNext, onBack, isSub
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="my-3">
+        <button
+          type="button"
+          className="btn btn-outline-info"
+          onClick={handleSave}
+          disabled={saveMutation.isLoading}
+        >
+          <MdSaveAs className="me-1" />
+          {saveMutation.isLoading ? t('messages.saving') : t('messages.save')}
+        </button>
       </div>
     </form>
   );

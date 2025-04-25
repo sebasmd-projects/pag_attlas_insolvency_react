@@ -1,13 +1,14 @@
 // src/app/[locale]/platform/(home)/steps/Step4CessationReport.jsx
 
 'use client';
-
 import PropTypes from 'prop-types';
-import { useState, useEffect, useRef, useCallback } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { useTranslations } from 'next-intl';
+import { toast } from 'react-toastify';
 import { BsRobot } from 'react-icons/bs';
+import { MdSaveAs } from "react-icons/md";
 
 import TitleComponent from '@/components/micro-components/title';
 import SubTitleComponent from '@/components/micro-components/sub_title';
@@ -19,20 +20,21 @@ async function GetStep4() {
 
 export default function Step4CessationReport({ data, updateData, onNext }) {
     const t = useTranslations('Platform.pages.home.wizard.steps.step4');
+    const queryClient = useQueryClient();
 
     const { data: step4Data } = useQuery({
         queryKey: ['step4Data'],
-        queryFn: GetStep4
+        queryFn: GetStep4,
+        refetchOnMount: true,
     });
 
-    // 1) Estado local con claves alineadas al backend
     const [form, setForm] = useState({
         debtor_cessation_report: '',
         use_ai: false,
     });
 
-    // 2) Inicializar solo una vez desde `data`
     const initialized = useRef(false);
+
     useEffect(() => {
         if (step4Data && !initialized.current) {
             const init = {
@@ -45,7 +47,17 @@ export default function Step4CessationReport({ data, updateData, onNext }) {
         }
     }, [step4Data, data, updateData]);
 
-    // 3) handleChange unificado para textarea y checkbox
+    const saveMutation = useMutation({
+        mutationFn: () =>
+            axios.patch('/api/platform/insolvency-form/?step=4', form),
+        onSuccess: () => {
+            toast.success(t('messages.saveSuccess'));
+            queryClient.invalidateQueries(['step4Data']);
+        },
+        onError: () => toast.error(t('messages.saveError'))
+    });
+    const handleSave = () => saveMutation.mutate();
+
     const handleChange = useCallback((e) => {
         const { name, type, checked, value } = e.target;
         const nextValue = type === 'checkbox' ? checked : value;
@@ -56,7 +68,6 @@ export default function Step4CessationReport({ data, updateData, onNext }) {
         });
     }, [updateData]);
 
-    // 4) handleSubmit avanza con el objeto completo
     const handleSubmit = useCallback((e) => {
         e.preventDefault();
         onNext(form);
@@ -111,6 +122,17 @@ export default function Step4CessationReport({ data, updateData, onNext }) {
                     </div>
                 </div>
             </form>
+
+            <div className="my-3">
+                <button
+                    type="button"
+                    className="btn btn-outline-info"
+                    onClick={handleSave}
+                    disabled={saveMutation.isLoading}
+                >
+                    <MdSaveAs /> {saveMutation.isLoading ? t('messages.saving') : t('messages.save')}
+                </button>
+            </div>
 
             <div className="card my-3">
                 <div className="card-body">

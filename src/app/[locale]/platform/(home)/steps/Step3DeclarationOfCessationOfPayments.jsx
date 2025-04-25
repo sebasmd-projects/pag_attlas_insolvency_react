@@ -1,12 +1,13 @@
 // src/app/[locale]/platform/(home)/steps/Step3DeclarationOfCessationOfPayments.jsx
 
-'use client'
-
+'use client';
 import PropTypes from 'prop-types';
-import { useEffect, useRef, useState, useCallback } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { useTranslations } from 'next-intl';
+import { toast } from 'react-toastify';
+import { MdSaveAs } from "react-icons/md";
 
 import SubTitleComponent from '@/components/micro-components/sub_title';
 import TitleComponent from '@/components/micro-components/title';
@@ -18,38 +19,46 @@ async function GetStep3() {
 
 export default function Step3DeclarationOfCessationOfPayments({ data, updateData, onNext }) {
     const t = useTranslations('Platform.pages.home.wizard.steps.step3');
+    const queryClient = useQueryClient();
 
     const { data: step3Data } = useQuery({
         queryKey: ['step3Data'],
-        queryFn: GetStep3
+        queryFn: GetStep3,
+        refetchOnMount: true,
     });
 
-    // 1) Estado local
     const [form, setForm] = useState({
         debtor_statement_accepted: false
     });
 
-    // 2) Inicialización sólo la primera vez que llegue step3Data
     const initialized = useRef(false);
     useEffect(() => {
         if (step3Data && !initialized.current) {
-            const init = {
-                debtor_statement_accepted: step3Data.debtor_statement_accepted ?? false
-            };
+            const init = { debtor_statement_accepted: !!step3Data.debtor_statement_accepted };
             setForm(init);
             updateData(init);
             initialized.current = true;
         }
     }, [step3Data, updateData]);
 
-    // 3) Manejo de cambios
+    const saveMutation = useMutation({
+        mutationFn: () =>
+            axios.patch('/api/platform/insolvency-form/?step=3', form),
+        onSuccess: () => {
+            toast.success(t('messages.saveSuccess'));
+            queryClient.invalidateQueries(['step3Data']);
+        },
+        onError: () => toast.error(t('messages.saveError'))
+    });
+
+    const handleSave = () => saveMutation.mutate();
+
     const handleChange = useCallback((e) => {
         const next = { debtor_statement_accepted: e.target.checked };
         setForm(next);
         updateData(next);
     }, [updateData]);
 
-    // 4) Envío del paso
     const handleSubmit = useCallback((e) => {
         e.preventDefault();
         onNext(form);
@@ -106,6 +115,17 @@ export default function Step3DeclarationOfCessationOfPayments({ data, updateData
                     </div>
                 </div>
             </form>
+
+            <div className="my-3">
+                <button
+                    type="button"
+                    className="btn btn-outline-info"
+                    onClick={handleSave}
+                    disabled={saveMutation.isLoading}
+                >
+                    <MdSaveAs /> {saveMutation.isLoading ? t('messages.saving') : t('messages.save')}
+                </button>
+            </div>
         </>
     );
 }

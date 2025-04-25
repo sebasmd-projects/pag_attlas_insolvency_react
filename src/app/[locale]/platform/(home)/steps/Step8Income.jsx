@@ -1,12 +1,19 @@
+// src/app/[locale]/platform/(home)/steps/Step8Income.jsx
+
 'use client';
 
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import axios from 'axios';
 import { useTranslations } from 'next-intl';
 import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
-import { FaPlus, FaMinus } from 'react-icons/fa';
+import { FaMinus, FaPlus } from 'react-icons/fa';
+import { MdSaveAs } from 'react-icons/md';
+import { toast } from 'react-toastify';
 
 import SubTitleComponent from '@/components/micro-components/sub_title';
 import TitleComponent from '@/components/micro-components/title';
+
 
 const INCOME_TYPE = [
     { label: 'salary', value: 'SALARIO' },
@@ -16,126 +23,191 @@ const INCOME_TYPE = [
     { label: 'other', value: 'OTRO' },
 ];
 
-const parseCurrencyInput = (value) =>
-    parseFloat(value.replace(/\./g, '').replace(',', '.')) || 0;
+const parseCurrencyInput = (v) =>
+    parseFloat(String(v || '0').replace(/,/g, '')) || 0;
 
-const formatToLocaleNumber = (value) => {
-    if (value === '' || value === null || value === undefined) return '';
-    const numericValue = typeof value === 'number' ? value : parseCurrencyInput(value);
-    return new Intl.NumberFormat('es-CO', {
+const formatToLocaleNumber = (v) => {
+    if (v === '' || v == null) return '';
+    const n = typeof v === 'number' ? v : parseCurrencyInput(v);
+    return new Intl.NumberFormat('en-US', {
         minimumFractionDigits: 0,
         maximumFractionDigits: 3,
-    }).format(numericValue);
+    }).format(n);
 };
+
+async function GetStep8() {
+    const { data } = await axios.get('/api/platform/insolvency-form/get-data/?step=8');
+    return data;
+}
+
+async function SaveStep8(incomes) {
+    return axios.patch('/api/platform/insolvency-form/?step=8', { incomes });
+}
 
 export default function Step8Income({ data, updateData, onNext }) {
     const t = useTranslations('Platform.pages.home.wizard.steps.step8');
+    const queryClient = useQueryClient();
+
+    const { data: step8Data } = useQuery({
+        queryKey: ['step8Data'],
+        queryFn: GetStep8,
+        refetchOnMount: true,
+    });
 
     const buildInitialState = () => {
-        const inc = Array.isArray(data?.incomes) && data.incomes.length > 0
-            ? data.incomes[0]
-            : {};
+        const inc =
+            step8Data?.incomes?.length > 0
+                ? step8Data.incomes[0]
+                : data?.incomes?.[0] ?? {};
+
         return {
-            type: inc.type || '',
-            amount: inc.amount != null ? formatToLocaleNumber(inc.amount) : '',
-            others: Array.isArray(inc.others) && inc.others.length > 0
-                ? inc.others.map(o => ({
-                    detail: o.detail || '',
-                    amount: formatToLocaleNumber(o.amount),
-                }))
-                : [{ detail: '', amount: '' }],
+            type: inc.type ?? '',
+            amount:
+                inc.amount != null ? formatToLocaleNumber(inc.amount) : '',
+            others:
+                inc.others?.length > 0
+                    ? inc.others.map((o) => ({
+                        detail: o.detail ?? '',
+                        amount: formatToLocaleNumber(o.amount),
+                    }))
+                    : [{ detail: '', amount: '' }],
         };
     };
 
     const [form, setForm] = useState(buildInitialState);
-    const initialized = useRef(false);
 
+    const initialized = useRef(false);
     useEffect(() => {
-        if (!initialized.current) {
-            setForm(buildInitialState());
+        if (!initialized.current && step8Data) {
+            const initState = buildInitialState();
+            setForm(initState);
+            updateData({ incomes: [initState] });
             initialized.current = true;
         }
-    }, [data.incomes]);
+    }, [step8Data, data, updateData]);
 
     useEffect(() => {
         const payload = {
             type: form.type,
-            amount: ['SALARIO', 'INDEPENDIENTE', 'PENSIONADO'].includes(form.type)
-                ? parseCurrencyInput(form.amount)
-                : null,
+            amount:
+                ['SALARIO', 'INDEPENDIENTE', 'PENSIONADO'].includes(form.type)
+                    ? parseCurrencyInput(form.amount)
+                    : null,
+            others:
+                form.type === 'OTRO'
+                    ? form.others.map((o) => ({
+                        detail: o.detail,
+                        amount: parseCurrencyInput(o.amount),
+                    }))
+                    : [],
         };
-        if (form.type === 'OTRO') {
-            payload.others = form.others.map(o => ({
-                detail: o.detail,
-                amount: parseCurrencyInput(o.amount),
-            }));
-        }
         updateData({ incomes: [payload] });
     }, [form, updateData]);
+
+    const saveMutation = useMutation({
+        mutationFn: () => {
+            const toSend = {
+                type: form.type,
+                amount:
+                    ['SALARIO', 'INDEPENDIENTE', 'PENSIONADO'].includes(form.type)
+                        ? parseCurrencyInput(form.amount)
+                        : null,
+                others:
+                    form.type === 'OTRO'
+                        ? form.others.map((o) => ({
+                            detail: o.detail,
+                            amount: parseCurrencyInput(o.amount),
+                        }))
+                        : [],
+            };
+            return SaveStep8([toSend]);
+        },
+        onSuccess: () => {
+            toast.success(t('messages.saveSuccess'));
+            queryClient.invalidateQueries(['step8Data']);
+        },
+        onError: () => toast.error(t('messages.saveError')),
+    });
+
+    const handleSave = () => saveMutation.mutate();
 
     const handleTypeChange = (e) => {
         const type = e.target.value;
         setForm({
             type,
-            amount: ['SALARIO', 'INDEPENDIENTE', 'PENSIONADO'].includes(type)
-                ? form.amount
-                : '',
-            others: type === 'OTRO'
-                ? (form.others.length ? form.others : [{ detail: '', amount: '' }])
-                : [{ detail: '', amount: '' }],
+            amount:
+                ['SALARIO', 'INDEPENDIENTE', 'PENSIONADO'].includes(type)
+                    ? form.amount
+                    : '',
+            others:
+                type === 'OTRO'
+                    ? form.others.length
+                        ? form.others
+                        : [{ detail: '', amount: '' }]
+                    : [{ detail: '', amount: '' }],
         });
     };
 
     const handleAmountChange = (e) => {
         const amount = e.target.value.replace(/[^0-9.,]/g, '');
-        setForm(prev => ({ ...prev, amount }));
+        setForm((prev) => ({ ...prev, amount }));
     };
 
-    const handleAmountBlur = () => {
-        setForm(prev => ({ ...prev, amount: formatToLocaleNumber(prev.amount) }));
-    };
+    const handleAmountBlur = () =>
+        setForm((prev) => ({
+            ...prev,
+            amount: formatToLocaleNumber(prev.amount),
+        }));
 
-    const handleOthersDetailChange = (i, value) => {
-        setForm(prev => {
+    const handleOthersDetailChange = (i, value) =>
+        setForm((prev) => {
             const others = [...prev.others];
             others[i].detail = value;
             return { ...prev, others };
         });
-    };
 
-    const handleOthersAmountChange = (i, value) => {
-        setForm(prev => {
+    const handleOthersAmountChange = (i, value) =>
+        setForm((prev) => {
             const others = [...prev.others];
             others[i].amount = value.replace(/[^0-9.,]/g, '');
             return { ...prev, others };
         });
-    };
 
-    const handleOthersAmountBlur = (i) => {
-        setForm(prev => {
+    const handleOthersAmountBlur = (i) =>
+        setForm((prev) => {
             const others = [...prev.others];
             others[i].amount = formatToLocaleNumber(others[i].amount);
             return { ...prev, others };
         });
-    };
 
-    const addOther = () => setForm(prev => ({ ...prev, others: [...prev.others, { detail: '', amount: '' }] }));
-    const removeOther = (i) => setForm(prev => ({ ...prev, others: prev.others.filter((_, idx) => idx !== i) }));
+    const addOther = () =>
+        setForm((prev) => ({
+            ...prev,
+            others: [...prev.others, { detail: '', amount: '' }],
+        }));
+
+    const removeOther = (i) =>
+        setForm((prev) => ({
+            ...prev,
+            others: prev.others.filter((_, idx) => idx !== i),
+        }));
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const payload = {
             type: form.type,
-            amount: ['SALARIO', 'INDEPENDIENTE', 'PENSIONADO'].includes(form.type)
-                ? parseCurrencyInput(form.amount)
-                : null,
+            amount:
+                ['SALARIO', 'INDEPENDIENTE', 'PENSIONADO'].includes(form.type)
+                    ? parseCurrencyInput(form.amount)
+                    : null,
+            others:
+                form.type === 'OTRO'
+                    ? form.others.map((o) => ({
+                        detail: o.detail,
+                        amount: parseCurrencyInput(o.amount),
+                    }))
+                    : [],
         };
-        if (form.type === 'OTRO') {
-            payload.others = form.others.map(o => ({
-                detail: o.detail,
-                amount: parseCurrencyInput(o.amount),
-            }));
-        }
         onNext({ incomes: [payload] });
     };
 
@@ -171,6 +243,17 @@ export default function Step8Income({ data, updateData, onNext }) {
                     </div>
                 ))}
             </form>
+
+            <div className="my-3">
+                <button
+                    type="button"
+                    className="btn btn-outline-info"
+                    onClick={handleSave}
+                    disabled={saveMutation.isLoading}
+                >
+                    <MdSaveAs /> {saveMutation.isLoading ? t('messages.saving') : t('messages.save')}
+                </button>
+            </div>
         </>
     );
 }

@@ -1,101 +1,160 @@
+// src/app/[locale]/platform/(home)/steps/Step9PermanentPartner.jsx
+
 'use client';
 
 import { useTranslations } from 'next-intl';
 import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import axios from 'axios';
+import { MdSaveAs } from 'react-icons/md';
+import { toast } from 'react-toastify';
 
 import SubTitleComponent from '@/components/micro-components/sub_title';
 import TitleComponent from '@/components/micro-components/title';
 
-// Valores según MARITAL_STATUS_OPTIONS en el modelo
+/* ──────────── Constantes ──────────── */
+const SKIP_STATES = ['No aplica', 'Soltero/a', 'Viudo/a', 'Divorciado/a'];
+
 const MARITAL_OPTIONS = (t) => [
+    { value: 'No aplica', label: t('maritalStatus.notApplicable') },
     { value: 'Soltero/a', label: t('maritalStatus.single') },
     { value: 'Casado/a', label: t('maritalStatus.married') },
     { value: 'Divorciado/a', label: t('maritalStatus.divorced') },
     { value: 'Viudo/a', label: t('maritalStatus.widowed') },
     { value: 'Unión Libre', label: t('maritalStatus.freeUnion') },
     { value: 'Declaración Marital', label: t('maritalStatus.maritalDeclaration') },
-    { value: 'No aplica', label: t('maritalStatus.notApplicable') },
 ];
 
+/* ──────────── Endpoints ──────────── */
+async function GetStep9() {
+    const { data } = await axios.get(
+        '/api/platform/insolvency-form/get-data/?step=9'
+    );
+    return data;
+}
+
+async function SaveStep9(payload) {
+    return axios.patch('/api/platform/insolvency-form/?step=9', payload);
+}
+
+/* ──────────── Componente ──────────── */
 export default function Step9PermanentPartner({ data, updateData, onNext }) {
     const t = useTranslations('Platform.pages.home.wizard.steps.step9');
-    const initialized = useRef(false);
+    const queryClient = useQueryClient();
 
-    const buildInitialState = () => ({
-        marital_status: data.partner_marital_status || 'No aplica',
-        document: data.partner_document_number || '',
-        name: data.partner_name || '',
-        lastname: data.partner_last_name || '',
-        email: data.partner_email || '',
-        phone: data.partner_cell_phone || '',
-        relationship_duration: data.partner_relationship_duration?.toString() || '',
+    /* ---- Query inicial ---- */
+    const { data: step9Data } = useQuery({
+        queryKey: ['step9Data'],
+        queryFn: GetStep9,
+        refetchOnMount: true,
     });
 
-    const [form, setForm] = useState(buildInitialState);
+    /* ---- Estado local ---- */
+    const buildInitialState = (source) => ({
+        marital_status: source?.partner_marital_status ?? 'No aplica',
+        document: source?.partner_document_number ?? '',
+        name: source?.partner_name ?? '',
+        lastname: source?.partner_last_name ?? '',
+        email: source?.partner_email ?? '',
+        phone: source?.partner_cell_phone ?? '',
+        relationship_duration:
+            source?.partner_relationship_duration?.toString() ?? '',
+    });
 
+    const [form, setForm] = useState(buildInitialState(data));
+    const initialized = useRef(false);
+
+    /* ---- hidratar del servidor ---- */
     useEffect(() => {
-        if (!initialized.current) {
-            setForm(buildInitialState());
+        if (step9Data && !initialized.current) {
+            const init = buildInitialState(step9Data);
+            setForm(init);
             initialized.current = true;
         }
-    }, [
-        data.partner_marital_status,
-        data.partner_document_number,
-        data.partner_name,
-        data.partner_last_name,
-        data.partner_email,
-        data.partner_cell_phone,
-        data.partner_relationship_duration,
-    ]);
+    }, [step9Data]);
 
+    /* ---- sincronizar con wizard ---- */
     useEffect(() => {
         const payload = { partner_marital_status: form.marital_status };
-        if (form.marital_status !== 'No aplica') {
+        if (!SKIP_STATES.includes(form.marital_status)) {
             payload.partner_document_number = form.document;
             payload.partner_name = form.name;
             payload.partner_last_name = form.lastname;
             payload.partner_email = form.email;
             payload.partner_cell_phone = form.phone;
-            payload.partner_relationship_duration = parseInt(form.relationship_duration, 10) || 0;
+            payload.partner_relationship_duration =
+                parseInt(form.relationship_duration, 10) || 0;
         }
         updateData(payload);
     }, [form, updateData]);
 
+    /* ---- Mutación Guardar ---- */
+    const saveMutation = useMutation({
+        mutationFn: () => {
+            const toSend = { partner_marital_status: form.marital_status };
+            if (!SKIP_STATES.includes(form.marital_status)) {
+                toSend.partner_document_number = form.document;
+                toSend.partner_name = form.name;
+                toSend.partner_last_name = form.lastname;
+                toSend.partner_email = form.email;
+                toSend.partner_cell_phone = form.phone;
+                toSend.partner_relationship_duration =
+                    parseInt(form.relationship_duration, 10) || 0;
+            }
+            return SaveStep9(toSend);
+        },
+        onSuccess: () => {
+            toast.success(t('messages.saveSuccess'));
+            queryClient.invalidateQueries(['step9Data']);
+        },
+        onError: () => toast.error(t('messages.saveError')),
+    });
+
+    const handleSave = () => saveMutation.mutate();
+
+    /* ---- Handlers ---- */
     const handleEstadoChange = (e) => {
         const marital_status = e.target.value;
-        setForm(prev => {
-            const next = { ...prev, marital_status };
-            if (marital_status === 'No aplica') {
-                next.document = '';
-                next.name = '';
-                next.lastname = '';
-                next.email = '';
-                next.phone = '';
-                next.relationship_duration = '';
+        setForm((prev) => {
+            if (SKIP_STATES.includes(marital_status)) {
+                return {
+                    ...prev,
+                    marital_status,
+                    document: '',
+                    name: '',
+                    lastname: '',
+                    email: '',
+                    phone: '',
+                    relationship_duration: '',
+                };
             }
-            return next;
+            return { ...prev, marital_status };
         });
     };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setForm(prev => ({ ...prev, [name]: value }));
+        setForm((prev) => ({ ...prev, [name]: value }));
     };
 
+    /* ---- Submit Avanzar ---- */
     const handleSubmit = (e) => {
         e.preventDefault();
         const payload = { partner_marital_status: form.marital_status };
-        if (form.marital_status !== 'No aplica') {
+        if (!SKIP_STATES.includes(form.marital_status)) {
             payload.partner_document_number = form.document;
             payload.partner_name = form.name;
             payload.partner_last_name = form.lastname;
             payload.partner_email = form.email;
             payload.partner_cell_phone = form.phone;
-            payload.partner_relationship_duration = parseInt(form.relationship_duration, 10) || 0;
+            payload.partner_relationship_duration =
+                parseInt(form.relationship_duration, 10) || 0;
         }
         onNext(payload);
     };
+
+    const showPartnerFields = !SKIP_STATES.includes(form.marital_status);
 
     return (
         <>
@@ -103,15 +162,18 @@ export default function Step9PermanentPartner({ data, updateData, onNext }) {
             <SubTitleComponent t={t} sub_title="subTitle" />
 
             <form onSubmit={handleSubmit} className="row" id="wizard-step-form">
+                {/* Estado civil */}
                 <div className="mb-3">
-                    <label className="form-label">{t('maritalSocietyQuestion')}</label>
+                    <label className="form-label">
+                        {t('maritalSocietyQuestion')}
+                    </label>
                     <select
                         className="form-select"
                         value={form.marital_status}
                         onChange={handleEstadoChange}
                         required
                     >
-                        {MARITAL_OPTIONS(t).map(opt => (
+                        {MARITAL_OPTIONS(t).map((opt) => (
                             <option key={opt.value} value={opt.value}>
                                 {opt.label}
                             </option>
@@ -119,7 +181,8 @@ export default function Step9PermanentPartner({ data, updateData, onNext }) {
                     </select>
                 </div>
 
-                {form.marital_status !== 'No aplica' && (
+                {/* Datos del compañero permanente */}
+                {showPartnerFields && (
                     <div className="row g-3">
                         <div className="col-md-4">
                             <label className="form-label">{t('partnerDocument')}</label>
@@ -182,7 +245,9 @@ export default function Step9PermanentPartner({ data, updateData, onNext }) {
                         </div>
 
                         <div className="col-md-12">
-                            <label className="form-label">{t('relationshipDuration')}</label>
+                            <label className="form-label">
+                                {t('relationshipDuration')}
+                            </label>
                             <input
                                 type="number"
                                 className="form-control"
@@ -190,13 +255,28 @@ export default function Step9PermanentPartner({ data, updateData, onNext }) {
                                 value={form.relationship_duration}
                                 onChange={handleChange}
                                 min={1}
-                                max={100}
+                                max={50000}
                                 required
                                 onWheel={(e) => e.target.blur()}
                             />
                         </div>
                     </div>
                 )}
+
+                {/* Guardar sin avanzar */}
+                <div className="my-3">
+                    <button
+                        type="button"
+                        className="btn btn-outline-info"
+                        onClick={handleSave}
+                        disabled={saveMutation.isLoading}
+                    >
+                        <MdSaveAs className="me-1" />
+                        {saveMutation.isLoading
+                            ? t('messages.saving')
+                            : t('messages.save')}
+                    </button>
+                </div>
             </form>
         </>
     );
@@ -210,7 +290,10 @@ Step9PermanentPartner.propTypes = {
         partner_last_name: PropTypes.string,
         partner_email: PropTypes.string,
         partner_cell_phone: PropTypes.string,
-        partner_relationship_duration: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        partner_relationship_duration: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.number,
+        ]),
     }),
     updateData: PropTypes.func.isRequired,
     onNext: PropTypes.func.isRequired,

@@ -110,12 +110,12 @@ async function saveStep5(creditors) {
 
 export default function Step5Creditors({ data, updateData, onNext }) {
     const t = useTranslations('Platform.pages.home.wizard.steps.step5');
-
     const queryClient = useQueryClient();
 
     const { data: step5Data } = useQuery({
         queryKey: ['step5Data'],
-        queryFn: fetchStep5
+        queryFn: fetchStep5,
+        refetchOnMount: true,
     });
 
     const saveMutation = useMutation({
@@ -124,15 +124,11 @@ export default function Step5Creditors({ data, updateData, onNext }) {
             toast.success(t('messages.saveSuccess'));
             queryClient.invalidateQueries(['step5Data']);
         },
-        onError: () => {
-            toast.error(t('messages.saveError'));
-        }
+        onError: () => toast.error(t('messages.saveError'))
     });
 
-    // 1) Inicializamos SOLO UNA VEZ el estado local
     const [form, setForm] = useState({ creditors: [EMPTY_CREDITOR] });
 
-    // 2) Inicializar solo una vez desde `data`
     const initialized = useRef(false);
     useEffect(() => {
         if (step5Data && !initialized.current) {
@@ -143,12 +139,10 @@ export default function Step5Creditors({ data, updateData, onNext }) {
         }
     }, [step5Data, data, updateData]);
 
-    // 2) Calculamos métricas y totales en cada render
     const metrics = useMetrics(form.creditors);
     const { withEx: withExcluded, noEx: withoutExcluded } = metrics;
     const compliancePct = withoutExcluded.pct;
 
-    // 3) Sincronizamos con el wizard *solo* cuando cambia la lista
     useEffect(() => updateData({ creditors: form.creditors }), [form.creditors, updateData]);
 
 
@@ -187,27 +181,26 @@ export default function Step5Creditors({ data, updateData, onNext }) {
         return true;
     };
 
-    const handleSave = () => {
-        saveMutation.mutate(form.creditors);
-    };
+    const handleSave = () => saveMutation.mutate(form.creditors);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!isLegal()) return;
-        const payloadList = form.creditors.map(c => ({
-            id: c.id,
-            creditor: c.creditor,
-            nit: c.nit,
-            creditor_contact: c.creditor_contact,
-            nature_type: c.nature_type,
-            other_nature: c.other_nature,
-            personal_credit_interest_rate: c.personal_credit_interest_rate,
-            personal_consanguinity: c.personal_consanguinity,
-            guarantee: c.guarantee,
-            capital_value: toNum(c.capital_value),
-            days_overdue: parseInt(c.days_overdue, 10) || 0,
-        }));
-        onNext({ creditors: payloadList });
+        onNext({
+            creditors: form.creditors.map(c => ({
+                id: c.id,
+                creditor: c.creditor,
+                nit: c.nit,
+                creditor_contact: c.creditor_contact,
+                nature_type: c.nature_type,
+                other_nature: c.other_nature,
+                personal_credit_interest_rate: c.personal_credit_interest_rate,
+                personal_consanguinity: c.personal_consanguinity,
+                guarantee: c.guarantee,
+                capital_value: toNum(c.capital_value),
+                days_overdue: parseInt(c.days_overdue, 10) || 0,
+            }))
+        });
     };
 
     return (
@@ -372,19 +365,19 @@ export default function Step5Creditors({ data, updateData, onNext }) {
                         {t('form.addCreditor')}
                     </button>
                 </div>
-
-                <div className='my-5'>
-                    <button
-                        type="button"
-                        className="btn btn-info me-2"
-                        onClick={handleSave}
-                        disabled={saveMutation.isLoading}
-                    >
-                        <MdSaveAs className="me-1" /> {t('form.save')}
-                    </button>
-                </div>
             </form>
 
+            <div className="my-3">
+                <button
+                    type="button"
+                    className="btn btn-outline-info"
+                    onClick={handleSave}
+                    disabled={saveMutation.isLoading}
+                >
+                    <MdSaveAs /> {saveMutation.isLoading ? t('messages.saving') : t('messages.save')}
+                </button>
+            </div>
+            
             {/* Totales y validación */}
             <div className="card mb-4">
                 <div className="card-body">

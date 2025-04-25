@@ -2,11 +2,13 @@
 
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import { useTranslations } from 'next-intl';
 import PropTypes from 'prop-types';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import axios from 'axios';
+import { useTranslations } from 'next-intl';
+import { toast } from 'react-toastify';
+import { MdSaveAs } from "react-icons/md";
 
 import SubTitleComponent from '@/components/micro-components/sub_title';
 import TitleComponent from '@/components/micro-components/title';
@@ -17,15 +19,15 @@ async function GetStep2() {
 }
 
 export default function Step2PersonalData({ data, updateData, onNext }) {
-
     const t = useTranslations('Platform.pages.home.wizard.steps.step2');
+    const queryClient = useQueryClient();
 
     const { data: step2Data } = useQuery({
         queryKey: ['step2Data'],
-        queryFn: () => GetStep2()
+        queryFn: GetStep2,
+        refetchOnMount: true,
     });
 
-    // 1) Estado local, arranca vacío; lo rellenaremos en el useEffect
     const [form, setForm] = useState({
         debtor_document_number: '',
         debtor_expedition_city: '',
@@ -43,7 +45,6 @@ export default function Step2PersonalData({ data, updateData, onNext }) {
     const initialized = useRef(false);
     useEffect(() => {
         if (step2Data && !initialized.current) {
-            // 2) Construimos el objeto inicial combinando step2Data > props.data > string vacío
             const init = {
                 debtor_document_number: step2Data.debtor_document_number ?? data.debtor_document_number ?? '',
                 debtor_expedition_city: step2Data.debtor_expedition_city ?? data.debtor_expedition_city ?? '',
@@ -63,24 +64,25 @@ export default function Step2PersonalData({ data, updateData, onNext }) {
         }
     }, [step2Data, data, updateData]);
 
-    // 3) Normalización de texto para ciertos campos
-    const normalizeText = (str) =>
-        str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase();
+    const saveMutation = useMutation({
+        mutationFn: () =>
+            axios.patch('/api/platform/insolvency-form/?step=2', form),
+        onSuccess: () => {
+            toast.success(t('messages.saveSuccess'));
+            queryClient.invalidateQueries(['step2Data']);
+        },
+        onError: () => toast.error(t('messages.saveError'))
+    });
 
-    // 4) handleChange persiste inmediatamente y actualiza solo el campo cambiado
+    const handleSave = () => saveMutation.mutate();
+
     const handleChange = useCallback(
         (e) => {
             const { name, type, checked, value } = e.target;
             let newValue = type === 'checkbox' ? checked : value;
-
-            if (
-                ['debtor_expedition_city', 'debtor_first_name', 'debtor_last_name'].includes(
-                    name
-                )
-            ) {
-                newValue = normalizeText(newValue);
+            if (['debtor_expedition_city', 'debtor_first_name', 'debtor_last_name'].includes(name)) {
+                newValue = newValue.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase();
             }
-
             setForm((prev) => {
                 const next = { ...prev, [name]: newValue };
                 updateData(next);
@@ -90,7 +92,6 @@ export default function Step2PersonalData({ data, updateData, onNext }) {
         [updateData]
     );
 
-    // 5) handleSubmit avanza al siguiente paso
     const handleSubmit = useCallback(
         (e) => {
             e.preventDefault();
@@ -267,6 +268,17 @@ export default function Step2PersonalData({ data, updateData, onNext }) {
                     </div>
                 </div>
             </form>
+
+            <div className="my-3">
+                <button
+                    type="button"
+                    className="btn btn-outline-info"
+                    onClick={handleSave}
+                    disabled={saveMutation.isLoading}
+                >
+                    <MdSaveAs /> {saveMutation.isLoading ? t('messages.saving') : t('messages.save')}
+                </button>
+            </div>
 
             <div className="card my-3">
                 <div className="card-body">

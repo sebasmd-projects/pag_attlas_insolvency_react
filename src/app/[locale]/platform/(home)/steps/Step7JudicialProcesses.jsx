@@ -5,9 +5,10 @@
 import { useTranslations } from 'next-intl';
 import PropTypes from 'prop-types';
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
-import { FaInfoCircle } from 'react-icons/fa';
+import { MdSaveAs } from 'react-icons/md';
+import { toast } from 'react-toastify';
 
 import TitleComponent from '@/components/micro-components/title';
 import SubTitleComponent from '@/components/micro-components/sub_title';
@@ -31,27 +32,49 @@ const STATUS_OPTIONS = (t) => [
     t('form.processStatus.options.processCompleted'),
 ];
 
-async function fetchStep7() {
+async function GetStep7() {
     const { data } = await axios.get('/api/platform/insolvency-form/get-data/?step=7');
     return data;
 }
 
+async function SaveStep7(processes) {
+    // 1) limpiamos ids nulos  –  2) convertimos los estados a string
+    const body = {
+        judicial_processes: processes.map((p) => {
+            const payload = {
+                affectation: p.affectation,
+                court: p.court,
+                description: p.description,
+                case_code: p.case_code,
+                process_status: Array.isArray(p.process_status)
+                    ? p.process_status.join(',')          // <-- “SEIZURE,AUCTION”
+                    : p.process_status || '',
+            };
+            if (p.id) payload.id = p.id;              // solo incluir si existe
+            return payload;
+        }),
+    };
+
+    return axios.patch('/api/platform/insolvency-form/?step=7', body);
+}
+
 export default function Step7JudicialProcesses({ data, updateData, onNext }) {
     const t = useTranslations('Platform.pages.home.wizard.steps.step7');
+    const queryClient = useQueryClient();
 
     const { data: step7Data } = useQuery({
         queryKey: ['step7Data'],
-        queryFn: fetchStep7,
+        queryFn: GetStep7,
+        refetchOnMount: true,
     });
 
     // Estado local
     const [form, setForm] = useState({ judicial_processes: [] });
-    const initialized = useRef(false);
 
-    // Inicializar desde server o props
+    const initialized = useRef(false);
     useEffect(() => {
-        if (step7Data?.judicial_processes && Array.isArray(step7Data.judicial_processes) && !initialized.current) {
-            const list = step7Data.judicial_processes.map(p => ({
+        if (step7Data?.judicial_processes && !initialized.current) {
+            const initList = step7Data.judicial_processes.map(p => ({
                 id: p.id,
                 affectation: p.affectation,
                 court: p.court,
@@ -63,16 +86,31 @@ export default function Step7JudicialProcesses({ data, updateData, onNext }) {
                         ? p.process_status.split(',').map(s => s.trim())
                         : [],
             }));
-            setForm({ judicial_processes: list });
-            updateData({ judicial_processes: list });
+            setForm({ judicial_processes: initList });
+            updateData({ judicial_processes: initList });
             initialized.current = true;
         }
-    }, [step7Data, updateData]);
+    }, [step7Data, data, updateData]);
 
     // Sincronizar con wizard global
     useEffect(() => {
         updateData({ judicial_processes: form.judicial_processes });
     }, [form.judicial_processes, updateData]);
+
+    const saveMutation = useMutation({
+        mutationFn: () => SaveStep7(form.judicial_processes),
+        onSuccess: () => {
+            toast.success(t('messages.saveSuccess'));
+            queryClient.invalidateQueries(['step7Data']);
+        },
+        onError: (err) => {
+            const msg =
+                err?.response?.data?.detail || t('messages.saveError');
+            toast.error(msg);
+        },
+    });
+
+    const handleSave = () => saveMutation.mutate();
 
     // CRUD filas
     const persist = useCallback(list => setForm({ judicial_processes: list }), []);
@@ -248,6 +286,17 @@ export default function Step7JudicialProcesses({ data, updateData, onNext }) {
                     </button>
                 </div>
             </form>
+
+            <div className="my-3">
+                <button
+                    type="button"
+                    className="btn btn-outline-info"
+                    onClick={handleSave}
+                    disabled={saveMutation.isLoading}
+                >
+                    <MdSaveAs /> {saveMutation.isLoading ? t('messages.saving') : t('messages.save')}
+                </button>
+            </div>
         </>
     );
 }
