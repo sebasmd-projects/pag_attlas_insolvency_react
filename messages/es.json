@@ -997,35 +997,26 @@
               }
             },
             "step11": {
-              "title": "Documentos Legales",
-              "fields": {
-                "cedulaFront": {
-                  "label": "Cédula (frente)",
-                  "successMessage": "Imagen frontal cargada correctamente"
-                },
-                "cedulaBack": {
-                  "label": "Cédula (reverso)",
-                  "successMessage": "Imagen posterior cargada correctamente"
-                },
-                "signature": {
-                  "label": "Firma",
-                  "clear": "Limpiar",
-                  "save": "Guardar Firma",
-                  "successMessage": "Firma guardada correctamente"
-                },
-                "checkConfirmation": "Confirmo que toda la información es veraz y que he leído y entendido los requisitos legales para iniciar el trámite de insolvencia económica."
-              },
-              "validations": {
-                "cedulaFrontRequired": "Por favor cargue la cédula (frente)",
-                "cedulaBackRequired": "Por favor cargue la cédula (reverso)",
-                "signatureRequired": "Por favor firme antes de continuar",
-                "acceptRequired": "Debes confirmar que toda la información es veraz antes de continuar"
+              "title": "Firma electrónica",
+              "subTitle": "Por favor firma el documento",
+              "messages": {
+                "saving": "Guardando...",
+                "save": "Guardar",
+                "saveSuccess": "Firma guardada con éxito",
+                "saveError": "Error al guardar los datos",
+                "noSignature": "Por favor firma el documento",
+                "signatureMobile": "Para tener más espacio para firmar, por favor gira tu dispositivo a modo horizontal."
               },
               "buttons": {
-                "back": "Atrás",
-                "next": "Enviar"
+                "clear": "Limpiar",
+                "save": "Guardar"
               },
-              "spinner": "Enviando..."
+              "form": {
+                "inputs": {
+                  "documentNumberLabel": "Número de documento",
+                  "documentNumberPlaceholder": "Ingresa tu cédula"
+                }
+              }
             }
           }
         }

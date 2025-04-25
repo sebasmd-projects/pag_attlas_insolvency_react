@@ -74,7 +74,10 @@ export const routing = defineRouting({
       es: '/plataforma/calculadora',
       en: '/platform/calculator'
     },
-    
+    '/platform/signature': {
+      es: '/plataforma/firma-electronica',
+      en: '/platform/signature'
+    },
   }
 });
 
