@@ -6,6 +6,9 @@ next.zip
 public/api/*
 financial-education.json
 
+# vscode
+.vscode/*
+
 # dependencies
 /node_modules
 /.pnp
