@@ -1005,6 +1005,7 @@
                 "saveSuccess": "Firma guardada con éxito",
                 "saveError": "Error al guardar los datos",
                 "noSignature": "Por favor firma el documento",
+                "noDocumentNumber": "Por favor ingresa el número de documento",
                 "signatureMobile": "Para tener más espacio para firmar, por favor gira tu dispositivo a modo horizontal."
               },
               "buttons": {

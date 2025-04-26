@@ -1,4 +1,4 @@
-// src/app/api/platform/signature/route.jsx
+// src/app/api/platform/insolvency-form/signature/route.jsx
 
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
