@@ -1009,7 +1009,10 @@
               },
               "buttons": {
                 "clear": "Limpiar",
-                "save": "Guardar"
+                "save": "Guardar",
+                "saving": "Guardando...",
+                "success": "Firma guardada con éxito",
+                "error": "Error al guardar la firma, por favor intenta nuevamente"
               },
               "form": {
                 "inputs": {
