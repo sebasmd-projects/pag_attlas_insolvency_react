@@ -43,20 +43,46 @@ export default function Page() {
 
   const handleSave = (e) => {
     e.preventDefault();
+    console.log('[Client] Iniciando guardado de firma...');
+
     if (!cedula.trim()) {
+      console.error('[Client] Error: Cédula vacía');
       toast.error(t('messages.noSignature'));
       return;
     }
+
     if (sigCanvasRef.current.isEmpty()) {
+      console.error('[Client] Error: Canvas vacío');
       toast.error(t('messages.noSignature'));
       return;
     }
-    const dataURL = sigCanvasRef.current
-      .getTrimmedCanvas()
-      .toDataURL('image/png');
-    const base64 = dataURL.split(',')[1];
-    setPreviewURL(dataURL);
-    saveSignature.mutate({ cedula: cedula.trim(), signature: base64 });
+
+    try {
+      const dataURL = sigCanvasRef.current
+        .getTrimmedCanvas()
+        .toDataURL('image/png');
+      console.log('[Client] DataURL generado:', dataURL?.substring(0, 50) + '...');
+
+      const base64 = dataURL.split(',')[1];
+      console.log('[Client] Base64 extraído:', base64?.substring(0, 50) + '...');
+
+      setPreviewURL(dataURL);
+      console.log('[Client] Enviando mutación...');
+
+      saveSignature.mutate(
+        { cedula: cedula.trim(), signature: base64 },
+        {
+          onError: (error) => {
+            console.error('[Client] Error en mutación:', error);
+            if (axios.isAxiosError(error)) {
+              console.error('[Client] Respuesta del servidor:', error.response);
+            }
+          }
+        }
+      );
+    } catch (error) {
+      console.error('[Client] Error en handleSave:', error);
+    }
   };
 
   return (
@@ -115,11 +141,11 @@ export default function Page() {
                 disabled={saveSignature.isLoading || saveSignature.isSuccess}
               >
                 {saveSignature.isLoading
-                  ? t('buttons.saving')
+                  ? `${t('buttons.saving')}...`
                   : saveSignature.isError
-                    ? t('buttons.error')
+                    ? `${t('buttons.error')} ❌`
                     : saveSignature.isSuccess
-                      ? t('buttons.success')
+                      ? `${t('buttons.success')} ✓`
                       : t('buttons.save')}
               </button>
             </div>

@@ -1,30 +1,34 @@
-// src/app/api/platform/insolvency-form/signature/route.jsx
-
-import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
 export async function POST(request) {
+    console.log('[API] Iniciando solicitud de firma...');
     try {
-        const { cedula, signature } = await request.json();
-        const token = cookies().get('token')?.value;
-        const res = await fetch(
-            `https://propensionesabogados.com/api/v1/insolvency-form/signature/`,
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    ...(token && { Authorization: `Bearer ${token}` }),
-                },
-                body: JSON.stringify({ cedula, signature }),
-                credentials: 'include',
-            }
-        );
+        const body = await request.json();
+        console.log('[API] Cuerpo recibido:', { cedula: body.cedula, signature: body.signature?.substring(0, 50) + '...' });
+
+        const apiUrl = 'https://propensionesabogados.com/api/v1/insolvency-form/signature/';
+        console.log('[API] Enviando a:', apiUrl);
+
+        const res = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ cedula: body.cedula, signature: body.signature }),
+        });
+
+        console.log(`[API] Respuesta externa: ${res.status} ${res.statusText}`);
         const data = await res.json();
+        console.log('[API] Datos respuesta externa:', data);
+
         if (!res.ok) {
+            console.error('[API] Error en respuesta externa:', data);
             return NextResponse.json({ error: data }, { status: res.status });
         }
+
         return NextResponse.json(data, { status: 200 });
     } catch (error) {
+        console.error('[API] Error interno:', error);
         return NextResponse.json(
             { error: 'Error interno en el servidor' },
             { status: 500 }
