@@ -3,7 +3,8 @@
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { useTranslations } from 'next-intl';
-import { useState, useRef } from 'react';
+import { useRef, useState } from 'react';
+import { TbBrush, TbBrushOff } from "react-icons/tb";
 import SignatureCanvas from "react-signature-canvas";
 import { toast } from 'react-toastify';
 
@@ -91,10 +92,10 @@ export default function SignaturePad() {
                         />
                     </div>
 
-                    <div className="border mb-3">
+                    <div className="border">
                         <SignatureCanvas
                             ref={sigPadRef}
-                            canvasProps={{ className: "border-2 border-black w-100 h-60" }}
+                            canvasProps={{ className: "border-2 border-black w-100", style: { height: '150px' } }}
                         />
                     </div>
 
@@ -102,15 +103,7 @@ export default function SignaturePad() {
                         {t('messages.signatureMobile')}
                     </p>
 
-                    <div className="mt-5 flex gap-3">
-                        <button
-                            className="mx-4 my-2 btn btn-outline-secondary rounded"
-                            onClick={clear}
-                            type="button"
-                        >
-                            {t('buttons.clear')}
-                        </button>
-
+                    <div class="d-grid gap-2">
                         <button
                             className="mx-4 my-2 btn btn-outline-success rounded"
                             onClick={save}
@@ -120,10 +113,18 @@ export default function SignaturePad() {
                             {saveSignature.isLoading
                                 ? `${t('buttons.saving')}...`
                                 : saveSignature.isError
-                                    ? `${t('buttons.error')} ❌`
+                                    ? `${t('buttons.error')}`
                                     : saveSignature.isSuccess
-                                        ? `${t('buttons.success')} ✓`
-                                        : t('buttons.save')}
+                                        ? `${t('buttons.success')}`
+                                        : t('buttons.save')} <TbBrush />
+                        </button>
+
+                        <button
+                            className="mx-4 my-2 btn btn-outline-secondary rounded"
+                            onClick={clear}
+                            type="button"
+                        >
+                            {t('buttons.clear')} <TbBrushOff />
                         </button>
                     </div>
                 </div>
