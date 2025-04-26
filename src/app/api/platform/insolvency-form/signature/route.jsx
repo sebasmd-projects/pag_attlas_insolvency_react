@@ -1,13 +1,10 @@
 import { NextResponse } from 'next/server';
 
 export async function POST(request) {
-    console.log('[API] Iniciando solicitud de firma...');
     try {
         const body = await request.json();
-        console.log('[API] Cuerpo recibido:', { cedula: body.cedula, signature: body.signature?.substring(0, 50) + '...' });
 
         const apiUrl = 'https://propensionesabogados.com/api/v1/insolvency-form/signature/';
-        console.log('[API] Enviando a:', apiUrl);
 
         const res = await fetch(apiUrl, {
             method: 'POST',
@@ -17,9 +14,7 @@ export async function POST(request) {
             body: JSON.stringify({ cedula: body.cedula, signature: body.signature }),
         });
 
-        console.log(`[API] Respuesta externa: ${res.status} ${res.statusText}`);
         const data = await res.json();
-        console.log('[API] Datos respuesta externa:', data);
 
         if (!res.ok) {
             console.error('[API] Error en respuesta externa:', data);
