@@ -2,7 +2,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import SignatureCanvas from 'react-signature-canvas';
+import dynamic from 'next/dynamic';
 import axios from 'axios';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
@@ -10,9 +10,14 @@ import { useTranslations } from 'next-intl';
 import SubTitleComponent from '@/components/micro-components/sub_title';
 import TitleComponent from '@/components/micro-components/title';
 
+// Carga dinámica en cliente para evitar SSR/minificación incorrecta:
+const SignatureCanvas = dynamic(
+  () => import('react-signature-canvas'),
+  { ssr: false }
+);
+
 export default function Page() {
   const t = useTranslations('Platform.pages.home.wizard.steps.step11');
-
   const sigCanvasRef = useRef(null);
   const [cedula, setCedula] = useState('');
   const [previewURL, setPreviewURL] = useState('');
@@ -24,9 +29,7 @@ export default function Page() {
         { cedula, signature },
         { withCredentials: true }
       ),
-    onSuccess: () => {
-      toast.success(t('messages.saveSuccess'));
-    },
+    onSuccess: () => toast.success(t('messages.saveSuccess')),
     onError: (err) => {
       const msg =
         err.response?.data?.detail ||
@@ -37,23 +40,32 @@ export default function Page() {
   });
 
   const handleClear = () => {
-    sigCanvasRef.current.clear();
+    // chequea que la referencia exista antes de clear
+    if (sigCanvasRef.current) sigCanvasRef.current.clear();
     setPreviewURL('');
   };
 
   const handleSave = (e) => {
     e.preventDefault();
+
     if (!cedula.trim()) {
       toast.error(t('messages.noSignature'));
       return;
     }
-    if (sigCanvasRef.current.isEmpty()) {
+    // valida que el método exista y esté listo
+    const canvasInstance = sigCanvasRef.current;
+    if (
+      !canvasInstance ||
+      typeof canvasInstance.getTrimmedCanvas !== 'function' ||
+      canvasInstance.isEmpty()
+    ) {
       toast.error(t('messages.noSignature'));
+      console.error('SignatureCanvas no está listo:', canvasInstance);
       return;
     }
-    const dataURL = sigCanvasRef.current
-      .getTrimmedCanvas()
-      .toDataURL('image/png');
+
+    // ahora sí generamos el dataURL
+    const dataURL = canvasInstance.getTrimmedCanvas().toDataURL('image/png');
     const base64 = dataURL.split(',')[1];
     setPreviewURL(dataURL);
     saveSignature.mutate({ cedula: cedula.trim(), signature: base64 });
