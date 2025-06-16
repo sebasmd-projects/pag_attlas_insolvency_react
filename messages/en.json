@@ -657,16 +657,24 @@
                   "interestRate": "Tasa de interés (% mensual)",
                   "capital": "Capital",
                   "daysOverdue": "Días en mora",
+                  "creditClassification": "Clase",
                   "actions": {
                     "title": "Acciones",
                     "delete": "Eliminar"
                   }
                 },
+                "creditClassificationOptions": {
+                  "1": "1. Alimentos, Impuestos y Laboral",
+                  "2": "2. Prendas y Garantías Mobiliarias",
+                  "3": "3. Hipotecas",
+                  "5": "5. Quirografarios"
+                },
                 "placeholders": {
                   "select": "Naturaleza de la obligación",
                   "consanguinity": "Seleccione el grado consanguineo",
                   "interestRate": "Tasa de interés (% mensual)",
-                  "otherNature": "Especifique ¿cuál?"
+                  "otherNature": "Especifique ¿cuál?",
+                  "selectClassification": "Clasificación de la deuda"
                 }
               },
               "validation": {
@@ -1018,7 +1026,7 @@
               "form": {
                 "inputs": {
                   "documentNumberLabel": "Número de documento",
-                  "documentNumberPlaceholder": "Ingresa tu cédula"
+                  "documentNumberPlaceholder": "Ingresa tu pasaporte"
                 }
               }
             }
@@ -1028,6 +1036,8 @@
       "auth": {
         "login": {
           "title": "Iniciar sesión",
+          "invalidCredentials": "Credenciales inválidas",
+          "timeoutError": "Tiempo de espera agotado",
           "errorLogin": "Datos incorrectos, por favor verifica tu información.",
           "successLogin": "Inicio de sesión exitoso",
           "generalError": "Ocurrió un error, por favor intenta más tarde.",
