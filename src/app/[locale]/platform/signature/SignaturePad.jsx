@@ -155,6 +155,7 @@ export default function SignaturePad() {
                             className="mx-4 my-2 btn btn-outline-secondary rounded"
                             onClick={clear}
                             type="button"
+                            disabled={saveSignature.isLoading || saveSignature.isSuccess}
                         >
                             {t('buttons.clear')} <TbBrushOff />
                         </button>
