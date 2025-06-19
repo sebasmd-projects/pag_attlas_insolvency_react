@@ -14,7 +14,20 @@ export default function MainTeamSection() {
                     <TitleComponent title={t('title_h1')} />
                     <SubTitleComponent t={t} sub_title={'title_h2'} />
                 </div>
-                <div data-aos="zoom-in" data-aos-delay="100">
+
+                <div className="position-relative d-inline-block">
+                    {/* Insignia */}
+                    <div className="position-absolute top-0 start-0 m-2" style={{ width: '200px' }}>
+                        <Image
+                            src="/assets/imgs/page/diplomado_insolvencia.png"
+                            width={200}
+                            height={200}
+                            alt="Insignia"
+                            className="img-fluid"
+                        />
+                    </div>
+
+                    {/* Imagen del equipo */}
                     <Image
                         src="/assets/imgs/page/equipo.png"
                         width={1920}
@@ -23,7 +36,6 @@ export default function MainTeamSection() {
                         className="img-fluid"
                     />
                 </div>
-
             </div>
         </section>
     );
