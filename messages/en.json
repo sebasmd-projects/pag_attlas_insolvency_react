@@ -1026,7 +1026,7 @@
               "form": {
                 "inputs": {
                   "documentNumberLabel": "Número de documento",
-                  "documentNumberPlaceholder": "Ingresa tu pasaporte"
+                  "documentNumberPlaceholder": "Ingresa tu cédula"
                 }
               }
             }

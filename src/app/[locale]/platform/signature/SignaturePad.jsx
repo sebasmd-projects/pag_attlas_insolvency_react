@@ -3,11 +3,11 @@
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { useTranslations } from 'next-intl';
+import Image from "next/image";
 import { useRef, useState } from 'react';
 import { TbBrush, TbBrushOff } from "react-icons/tb";
 import SignatureCanvas from "react-signature-canvas";
 import { toast } from 'react-toastify';
-import Image from "next/image";
 
 import SubTitleComponent from '@/components/micro-components/sub_title';
 import TitleComponent from '@/components/micro-components/title';
@@ -77,14 +77,16 @@ export default function SignaturePad() {
                 <div className="col-xs-11 col-sm-10 col-md-10 col-lg-10">
 
                     <TitleComponent title={t('title')} />
+                    <div className="text-center mb-3">
+                        <Image
+                            src="/assets/imgs/CompraSoberana/AlianzaCompra.jpeg"
+                            width={400}
+                            height={600}
+                            alt="Alianza Compra Soberana"
+                            className="img-fluid"
+                        />
+                    </div>
 
-                    <Image
-                        src="/assets/imgs/CompraSoberana/CompraSoberana.jpg"
-                        width={1200}
-                        height={600}
-                        alt="Pulmón Verde - Carbono Verde Internacional - Conectando Bosques y Mercados"
-                        className="img-fluid"
-                    />
                     <div className="mt-3">
                         <SubTitleComponent t={t} sub_title="subTitle" />
                     </div>
@@ -92,15 +94,15 @@ export default function SignaturePad() {
 
 
                     <h4>
-                        Declaración bajo gravedad de juramento para la carta de invitación
+                        DECLARACIÓN JURAMENTADA DE CONFIDENCIALIDAD INTERNACIONAL
                     </h4>
 
-                    <h5>
-                        No reproducción o utilización de información confidencial
-                    </h5>
+                    <h4>
+                        Código Único: 4NAF
+                    </h4>
 
                     <p className="text-start">
-                        Declaro, bajo la gravedad del juramento y en cumplimiento de los principios consagrados en los convenios internacionales de confidencialidad, derecho internacional privado, normas de protección de activos estratégicos y tratados multilaterales de cooperación económica y seguridad (Convención de Viena sobre Relaciones Diplomáticas de 1961; Principios de UNIDROIT sobre Contratos Comerciales Internacionales), que toda la información contenida en el presente instrumento, incluyendo sus aspectos operativos, estratégicos, financieros y de seguridad, constituye material estrictamente confidencial, reservado y sensible. Su divulgación, reproducción o utilización parcial o total queda absolutamente prohibida sin la autorización previa, escrita y formal de las partes autorizadas, obligándome a su custodia y manejo conforme a los más altos estándares de discreción, protección institucional y seguridad jurídica internacional.
+                        Bajo la gravedad de juramento, manifiesto que el presente documento, su membrete, contenido, anexos y cualquier información asociada, se encuentra protegido por los principios y obligaciones derivados del Acuerdo sobre los Aspectos de los Derechos de Propiedad Intelectual relacionados con el Comercio (ADPIC/TRIPS), la Convención de Viena sobre el Derecho de los Tratados (1969), la Convención Interamericana sobre Obligaciones de Derecho Internacional Privado (CIDIP), así como por las disposiciones del Título 18 del Código de los Estados Unidos —incluyendo, entre otras, la Sección 1905 (Divulgación No Autorizada de Información Confidencial), las Secciones 1831-1839 (Ley de Espionaje Económico y Protección de Secretos Comerciales) y la Ley de Privacidad de 1974—, quedando prohibida su reproducción, distribución o divulgación total o parcial, por cualquier medio físico, electrónico o digital, sin autorización escrita y expresa de las partes facultadas. Reconozco que toda infracción podrá generar responsabilidad civil, penal y administrativa, tanto a nivel nacional como internacional, siendo susceptible de acciones judiciales en la jurisdicción de los Estados Unidos de América, la República de Colombia y foros arbitrales internacionales conforme a la Convención de Nueva York de 1958, y que el incumplimiento de estas obligaciones conllevará las sanciones legales aplicables. Declaro que he leído, comprendo y acepto en su totalidad el contenido de la presente declaración, comprometiéndome a su estricto cumplimiento.
                     </p>
 
                     <div className="mb-3">
@@ -132,7 +134,7 @@ export default function SignaturePad() {
                     </p>
 
                     <p className='small'>Al guardar, la firma será enviada y tomada como aceptación de la declaración</p>
-                    <div class="d-grid gap-2">
+                    <div className="d-grid gap-2">
 
                         <button
                             className="mx-4 my-2 btn btn-outline-success rounded"
