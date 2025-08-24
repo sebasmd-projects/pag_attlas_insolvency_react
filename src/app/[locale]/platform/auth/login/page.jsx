@@ -85,6 +85,14 @@ export default function AuthLoginPage() {
       if (!response.ok) {
         throw new Error(result.detail || t('errorLogin'));
       }
+
+      if (!response.ok) {
+        const errorDetail = result.detail || '';
+        if (response.status === 400 && errorDetail) {
+          throw new Error(t('invalidCredentials'));
+        }
+        throw new Error(t('generalError'));
+      }
       return result;
     },
     onSuccess: () => {

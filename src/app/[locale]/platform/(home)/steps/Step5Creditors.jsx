@@ -220,6 +220,7 @@ export default function Step5Creditors({ data, updateData, onNext }) {
                                 <th>{t('form.headers.supportGuarantee')}</th>
                                 <th>{t('form.headers.capital')}</th>
                                 <th>{t('form.headers.daysOverdue')}</th>
+                                <th>{t('form.headers.creditClassification')}</th>
                                 <th>{t('form.headers.actions.title')}</th>
                             </tr>
                         </thead>
@@ -339,6 +340,20 @@ export default function Step5Creditors({ data, updateData, onNext }) {
                                             onWheel={(e) => e.target.blur()}
                                         />
                                     </td>
+                                    <td>
+                                        <select
+                                            name="credit_classification"
+                                            className="form-select"
+                                            value={c.credit_classification}
+                                            onChange={(e) => handleChange(idx, e)}
+                                        >
+                                            <option value="">{t('form.placeholders.selectClassification')}</option>
+                                            <option value="1">{t('form.creditClassificationOptions.1')}</option>
+                                            <option value="2">{t('form.creditClassificationOptions.2')}</option>
+                                            <option value="3">{t('form.creditClassificationOptions.3')}</option>
+                                            <option value="5">{t('form.creditClassificationOptions.5')}</option>
+                                        </select>
+                                    </td>
                                     <td className="text-center">
                                         <button
                                             type="button"
@@ -377,7 +392,7 @@ export default function Step5Creditors({ data, updateData, onNext }) {
                     <MdSaveAs /> {saveMutation.isLoading ? t('messages.saving') : t('messages.save')}
                 </button>
             </div>
-            
+
             {/* Totales y validación */}
             <div className="card mb-4">
                 <div className="card-body">

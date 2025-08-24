@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "devt": "next dev --turbo",
+    "devt": "next dev -p 3000 -H 0.0.0.0 --turbo",
     "lint": "eslint src && tsc && prettier src --check",
     "test": "pnpm run test:playwright && pnpm run test:jest",
     "test:playwright": "playwright test",

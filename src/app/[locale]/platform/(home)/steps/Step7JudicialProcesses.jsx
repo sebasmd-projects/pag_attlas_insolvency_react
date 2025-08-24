@@ -189,6 +189,7 @@ export default function Step7JudicialProcesses({ data, updateData, onNext }) {
                                     className="form-control"
                                     rows={2}
                                     value={proc.court}
+                                    placeholder='Ej: Juzgado "Y" Municipal de "X" correo@juzgado.com'
                                     onChange={(e) =>
                                         handleChange(idx, 'court', e.target.value)
                                     }
