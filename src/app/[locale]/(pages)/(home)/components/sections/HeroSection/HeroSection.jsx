@@ -40,7 +40,7 @@ export default function HeroSection() {
 
                     <div className="col-lg-5 mt-5 text-center" >
                         <div className="row">
-                            <div className="col-6" data-aos="fade-up" data-aos-delay="100">
+                            {/* <div className="col-6" data-aos="fade-up" data-aos-delay="100">
                                 <Link href="/platform/calculator"
                                     className="btn btn-outline-light btn-lg"
                                     style={{ backgroundColor: isHoveredB1 ? '#f8f9fa' : '#d5dbdb40', transition: 'background-color 0.3s ease' }}
@@ -60,7 +60,7 @@ export default function HeroSection() {
                                 >
                                     {t('platform')} <LuLayoutDashboard />
                                 </Link>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
