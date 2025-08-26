@@ -17,10 +17,11 @@ export default function HeroSection() {
     return (
         <section id="hero" className={style.hero}>
             <div className={style.heroVideoWrapper}>
-                <video autoPlay muted loop playsInline className={style.heroVideo}>
-                    <source src="/assets/videos/hero-bg-video.mp4" type="video/mp4" />
-                    {t('video_tag')}
-                </video>
+                <img
+                    src="/assets/videos/hero-bg-video.gif"
+                    alt="Hero background animation"
+                    className={style.heroVideo}
+                />
             </div>
 
             <div className="container">

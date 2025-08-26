@@ -100,6 +100,22 @@
           },
           "onu_desa": "<p>La Fundación Attlas Org, ESTA  INSCRITA en la base de datos del United Nations Department of Economic and Social Affairs (UN DESA - ONU), impulsa el proyecto \"Alivio de Deuda Colombia: Un Nuevo Comienzo\", una iniciativa respaldada por la firma de abogados <link>Propensiones Internacional</link>.</p> <p>Este programa representa un modelo innovador de justicia económica, diseñado para fortalecer la recuperación patrimonial y la estabilidad financiera de sectores vulnerables mediante mecanismos jurídicos avanzados y estrategias financieras especializadas. Basado en los principios de cooperación internacional y desarrollo sostenible, este proyecto no solo busca aliviar las cargas económicas de miles de familias, sino también establecer un marco legal que garantice su inclusión social y estabilidad a largo plazo.</p>"
         },
+        "socialProjectsSection": {
+          "csr": {
+            "title": "Responsabilidad <span>Social</span> Corporativa",
+            "p1": "Creemos firmemente en retribuir a la sociedad y en apoyar causas que reflejan nuestros principios.",
+            "p2": "Con recursos propios destinamos parte de nuestros ingresos al rescate y protección de animales como seres sintientes, convencidos de la importancia de brindarles cuidado, dignidad y una nueva oportunidad de vida.",
+            "p3": "De igual manera, desarrollamos programas orientados al adulto mayor, a la niñez y a las personas habitantes de calle, poblaciones que merecen una protección especial y acciones concretas que les devuelvan esperanza y bienestar.",
+            "p4": "Para nosotros, este compromiso no es solo social, sino también una obligación con Dios, quien nos recuerda el deber de servir, proteger y dignificar a los más vulnerables.",
+            "p5": "Cada una de estas iniciativas se materializa en hechos, no en promesas. Nuestro compromiso se cumple directamente, sin intermediarios."
+          },
+          "gallery":{
+            "alt1": "Comedores comunitarios para personas en situación de calle",
+            "alt2": "Entrega de canasta familiar a niños de bajos recursos",
+            "alt3": "Apoyo y acompañamiento a adultos mayores en hogares de ancianos",
+            "alt4": "Campañas de adopción y cuidado de mascotas"
+          }
+        },
         "footPrintSection": {
           "title": "Pulmón verde",
           "subTitle": "Carbono Verde <span>Internacional - Conectando</span> Bosques y Mercados",

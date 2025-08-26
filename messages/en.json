@@ -100,6 +100,22 @@
           },
           "onu_desa": "<p>The Attlas Org Foundation, REGISTERED in the database of the United Nations Department of Economic and Social Affairs (UN DESA - ONU), promotes the project \"Colombia Debt Relief: A New Beginning\", an initiative supported by the law firm <link>Propensiones Internacional</link>.</p> <p>This program represents an innovative model of economic justice, designed to strengthen asset recovery and financial stability for vulnerable sectors through advanced legal mechanisms and specialized financial strategies. Based on the principles of international cooperation and sustainable development, this project not only seeks to alleviate the economic burdens of thousands of families, but also to establish a legal framework that guarantees their social inclusion and long-term stability.</p>"
         },
+        "socialProjectsSection": {
+          "csr": {
+            "title": "Corporate <span>Social</span> Responsibility",
+            "p1": "We firmly believe in giving back to society and supporting causes that reflect our principles.",
+            "p2": "With our own resources, we allocate part of our income to the rescue and protection of animals as sentient beings, convinced of the importance of providing them with care, dignity, and a new chance at life.",
+            "p3": "Similarly, we develop programs aimed at the elderly, children, and homeless people—populations that deserve special protection and concrete actions that restore hope and well-being.",
+            "p4": "For us, this commitment is not only social, but also an obligation to God, who reminds us of the duty to serve, protect, and dignify the most vulnerable.",
+            "p5": "Each of these initiatives is realized in actions, not promises. Our commitment is fulfilled directly, without intermediaries."
+          },
+          "gallery":{
+            "alt1": "Soup kitchens for homeless",
+            "alt2": "Delivery of school kits to low-income children",
+            "alt3": "Support and companionship for the elderly in nursing homes",
+            "alt4": "Adoption campaigns and pet care"
+          }
+        },
         "footPrintSection": {
           "title": "Green Lung",
           "subTitle": "Green Carbon <span>International - Connecting</span> Forests and Markets",

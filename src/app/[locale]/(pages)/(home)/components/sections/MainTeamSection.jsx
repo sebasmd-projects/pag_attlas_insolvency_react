@@ -20,8 +20,8 @@ export default function MainTeamSection() {
                     <div className="position-absolute top-0 start-0 m-2" style={{ width: '200px' }}>
                         <Image
                             src="/assets/imgs/page/diplomado_insolvencia.png"
-                            width={200}
-                            height={200}
+                            width={100}
+                            height={100}
                             alt="Insignia"
                             className="img-fluid"
                         />
