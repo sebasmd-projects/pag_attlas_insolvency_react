@@ -11,9 +11,6 @@ export default function HeroSection() {
 
     const t = useTranslations('Pages.homePage.sections.heroSection');
 
-    const [isHoveredB1, setIsHoveredB1] = useState(false);
-    const [isHoveredB2, setIsHoveredB2] = useState(false);
-
     return (
         <section id="hero" className={style.hero}>
             <div className={style.heroVideoWrapper}>
@@ -33,9 +30,6 @@ export default function HeroSection() {
                         <h2 data-aos="fade-right" data-aos-delay="100" className="mt-3">
                             {t('title_h2')}
                         </h2>
-                        <h1 data-aos="fade-right" data-aos-delay="100" className="mt-3">
-                            {t('description_p')}
-                        </h1>
                     </div>
 
                     <div className="col-lg-5 mt-5 text-center" >
