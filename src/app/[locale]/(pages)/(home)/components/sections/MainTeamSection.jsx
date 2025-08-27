@@ -17,13 +17,13 @@ export default function MainTeamSection() {
 
                 <div className="position-relative d-inline-block">
                     {/* Insignia */}
-                    <div className="position-absolute top-0 start-0 m-2" style={{ width: '200px' }}>
+                    <div className="position-absolute top-0 start-0 m-2">
                         <Image
                             src="/assets/imgs/page/diplomado_insolvencia.png"
                             width={100}
                             height={100}
                             alt="Insignia"
-                            className="img-fluid"
+                            className="img-fluid d-none d-md-block"
                         />
                     </div>
 
