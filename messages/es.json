@@ -78,36 +78,37 @@
         },
         "solutionsSection": {
           "title_h1": "SOLUCIONES Y BENEFICIOS PENSADOS PARA TI",
-          "title_h2": "Cambiemos la economía de Colombia <span>juntos</span>",
-          "description_p": "La insolvencia económica no es un delito, es una realidad que puede afectar a cualquiera. En ATTLAS, protegemos tu derecho a la dignidad, la igualdad y la justicia financiera, conforme a los principios de los Derechos Humanos Internacionales. Porque empezar de nuevo no es un privilegio, es un derecho fundamental.",
+          "title_h2": "Justicia Económica con <span>Impacto Social</span>",
+          "description_p": "En la Fundación ATTLAS, trabajamos por la dignidad y el bienestar de los más vulnerables: adultos mayores, niños, personas en situación de calle y animales sin hogar. Nuestra misión es brindar apoyo integral que transforme vidas y comunidades. Reorientamos la justicia económica hacia proyectos que promueven la equidad y el desarrollo social. Nuestros programas buscan empoderar a las comunidades mediante iniciativas sostenibles y solidarias.",
           "features": {
             "feature1": {
-              "title": "Asesoría Gratuita",
-              "description": "Regístrate y recibe tu primera asesoría sin costo."
+              "title": "Refugio y Cuidado para Animales",
+              "description": "Apoyamos el rescate, rehabilitación y promovemos la adopción de animales en situación de calle, proporcionándoles amor, atención veterinaria y un entorno seguro."
             },
             "feature2": {
-              "title": "Centro de Conciliación",
-              "description": "Centro de conciliación para insolvencia económica y negociación de deudas."
+              "title": "Alimentación Solidaria",
+              "description": "Fortalecemos iniciativas que brinden comidas nutritivas a adultos mayores y niños en situación de vulnerabilidad, asegurando su bienestar físico y emocional."
             },
             "feature3": {
-              "title": "Centro de Educación B-Learning",
-              "description": "Plataforma B-Learning para un nuevo comienzo personal y financiero."
+              "title": "Hogar para Adultos Mayores",
+              "description": "Apoyamos iniciativas de refugio para los adultos mayores sin apoyo familiar, garantizando una vejez digna y acompañada."
             },
             "feature4": {
-              "title": "Impacto Social",
-              "description": "Pro-bono y voluntariado para personas en estado de vulnerabilidad."
+              "title": "Centro de Conciliación",
+              "description": "Centro de conciliación para insolvencia económica y negociación de deudas."
             }
           },
           "onu_desa": "<p>La Fundación Attlas Org, ESTA  INSCRITA en la base de datos del United Nations Department of Economic and Social Affairs (UN DESA - ONU), impulsa el proyecto \"Alivio de Deuda Colombia: Un Nuevo Comienzo\", una iniciativa respaldada por la firma de abogados <link>Propensiones Internacional</link>.</p> <p>Este programa representa un modelo innovador de justicia económica, diseñado para fortalecer la recuperación patrimonial y la estabilidad financiera de sectores vulnerables mediante mecanismos jurídicos avanzados y estrategias financieras especializadas. Basado en los principios de cooperación internacional y desarrollo sostenible, este proyecto no solo busca aliviar las cargas económicas de miles de familias, sino también establecer un marco legal que garantice su inclusión social y estabilidad a largo plazo.</p>"
         },
         "socialProjectsSection": {
           "csr": {
-            "title": "Responsabilidad <span>Social</span> Corporativa",
-            "p1": "Creemos firmemente en retribuir a la sociedad y en apoyar causas que reflejan nuestros principios.",
-            "p2": "Con recursos propios destinamos parte de nuestros ingresos al rescate y protección de animales como seres sintientes, convencidos de la importancia de brindarles cuidado, dignidad y una nueva oportunidad de vida.",
-            "p3": "De igual manera, desarrollamos programas orientados al adulto mayor, a la niñez y a las personas habitantes de calle, poblaciones que merecen una protección especial y acciones concretas que les devuelvan esperanza y bienestar.",
-            "p4": "Para nosotros, este compromiso no es solo social, sino también una obligación con Dios, quien nos recuerda el deber de servir, proteger y dignificar a los más vulnerables.",
-            "p5": "Cada una de estas iniciativas se materializa en hechos, no en promesas. Nuestro compromiso se cumple directamente, sin intermediarios."
+            "title": "Justicia Económica con <span>Corazón Humano</span>",
+            "p1": "La Justicia Económica no es una teoría: es la esperanza que transformamos en acción. En el Quindío, tierra de café, de montañas y de gente cálida, creemos que cada adulto mayor merece una comida caliente, cada niño una infancia llena de nutrición y cariño, y cada animal de calle un refugio y cuidado digno. Aquí no hablamos de cifras; hablamos de dignidad, de vida, de oportunidad.",
+            "p2": "Inspirados en los principios de la economía solidaria —esa que prioriza la equidad, la cooperación y el bien común sobre el lucro individual— nos comprometemos ante Dios a construir una justicia económica real, profundamente humana. Creemos que:",
+            "p3": "La solidaridad es la mejor moneda: cuando compartimos recursos, generamos confianza y construimos redes de apoyo que sostienen nuestras comunidades.",
+            "p4": "Redistribuir no se trata de restar: se trata de sumar vida al ofrecer acceso a alimentos, refugio y cuidado a quienes más lo necesitan. ¿Por qué es vital en el Quindío?",
+            "p5": "En nuestro departamento, donde muchas familias viven al filo de la incertidumbre, la justicia económica crea puentes entre la fragilidad y la fortaleza. A través de la alimentación para adultos mayores y niños, abrimos puertas a la salud y la estabilidad. Al brindar refugios amorosos, recuperamos la dignidad de quienes han sido olvidados: los mayores y nuestras mascotas más vulnerables.",
+            "p6": "Porque cuando alimentamos cuerpos, confortamos almas; cuando protegemos vida, sembramos esperanza; y cuando empoderamos a comunidades, construimos un Quindío más justo, solidario y humano."
           },
           "gallery":{
             "alt1": "Comedores comunitarios para personas en situación de calle",

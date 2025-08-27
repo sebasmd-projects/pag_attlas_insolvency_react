@@ -7,13 +7,15 @@ import { useTranslations } from 'next-intl';
 import Image from "next/image";
 import { ReactSVG } from 'react-svg';
 import Link from 'next/link';
+import { FaHome } from "react-icons/fa";
+import { MdOutlinePets } from "react-icons/md";
 
 export default function SolutionsSection() {
     const t = useTranslations('Pages.homePage.sections.solutionsSection');
 
     const features = [
         {
-            icon: <ReactSVG src="/assets/imgs/icons/contact.svg" />,
+            icon: <MdOutlinePets size={40}/>,
             title: t('features.feature1.title'),
             description: t('features.feature1.description'),
             aosDelay: 50
@@ -25,7 +27,7 @@ export default function SolutionsSection() {
             aosDelay: 60
         },
         {
-            icon: <ReactSVG src="/assets/imgs/icons/blearning.svg" />,
+            icon: <FaHome size={40}/>,
             title: t('features.feature3.title'),
             description: t('features.feature3.description'),
             aosDelay: 70

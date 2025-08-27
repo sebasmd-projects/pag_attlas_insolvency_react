@@ -14,7 +14,7 @@ export default function SocialProjectsSection() {
       <div className="container d-flex align-items-center justify-content-center">
         <div className="row gy-4">
           {/* Corporate Social Responsibility - Text */}
-          <div className="col-lg-8" data-aos="fade-up">
+          <div className="col-md-8" data-aos="fade-up">
             <div className="content px-xl-5">
               <h3 className="d-flex align-items-center gap-2">
                 <span className="d-inline-flex align-items-center gap-2">
@@ -27,10 +27,11 @@ export default function SocialProjectsSection() {
               <p>{t("csr.p3")}</p>
               <p>{t("csr.p4")}</p>
               <p>{t("csr.p5")}</p>
+              <p>{t("csr.p6")}</p>
             </div>
           </div>
 
-          <div className="col-lg-4">
+          <div className="col-md-4 d-flex align-items-center justify-content-center">
             <Image
                 src="/assets/imgs/page/responsabilidad_corporativa.webp"
                 className="img-fluid rounded mx-auto d-block m-1"
