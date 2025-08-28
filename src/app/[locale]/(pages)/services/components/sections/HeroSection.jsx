@@ -66,7 +66,7 @@ export default function ServicesHeroSection() {
                                     <div className="col-lg-12 col-md-12 mt-4 pt-2">
                                         <div className="card work-desk rounded border-0 shadow-lg overflow-hidden" data-aos="fade-right" data-aos-delay="100">
                                             <Image
-                                                src="/assets/imgs/page/306x241.jpg" className="img-fluid"
+                                                src="/assets/imgs/page/306x241.webp" className="img-fluid"
                                                 alt="Image"
                                                 width={306}
                                                 height={241}
@@ -94,7 +94,7 @@ export default function ServicesHeroSection() {
                                     <div className="col-lg-12 col-md-12 mt-4 pt-2">
                                         <div className="card work-desk rounded border-0 shadow-lg overflow-hidden" data-aos="fade-up" data-aos-delay="100">
                                             <Image
-                                                src="/assets/imgs/page/600x400.jpg" className="img-fluid"
+                                                src="/assets/imgs/page/600x400.webp" className="img-fluid"
                                                 alt="Image"
                                                 width={600}
                                                 height={400}

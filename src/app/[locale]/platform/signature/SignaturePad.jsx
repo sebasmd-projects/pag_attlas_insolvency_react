@@ -79,7 +79,7 @@ export default function SignaturePad() {
                     <TitleComponent title={t('title')} />
                     <div className="text-center mb-3">
                         <Image
-                            src="/assets/imgs/CompraSoberana/AlianzaCompra.jpeg"
+                            src="/assets/imgs/CompraSoberana/AlianzaCompra.webp"
                             width={400}
                             height={600}
                             alt="Alianza Compra Soberana"

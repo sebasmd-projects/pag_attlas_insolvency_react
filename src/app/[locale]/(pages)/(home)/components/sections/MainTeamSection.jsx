@@ -19,7 +19,7 @@ export default function MainTeamSection() {
                     {/* Insignia */}
                     <div className="position-absolute top-0 start-0 m-2">
                         <Image
-                            src="/assets/imgs/page/diplomado_insolvencia.png"
+                            src="/assets/imgs/page/diplomado_insolvencia.webp"
                             width={100}
                             height={100}
                             alt="Insignia"
@@ -29,7 +29,7 @@ export default function MainTeamSection() {
 
                     {/* Imagen del equipo */}
                     <Image
-                        src="/assets/imgs/page/equipo.png"
+                        src="/assets/imgs/page/equipo.webp"
                         width={1920}
                         height={750}
                         alt="Equipo de trabajo"

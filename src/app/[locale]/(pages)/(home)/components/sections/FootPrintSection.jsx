@@ -36,7 +36,7 @@ export default function FootPrintSection() {
                     <div className="col-md-6">
                         <div data-aos="zoom-in" data-aos-delay="100">
                             <Image
-                                src="/assets/imgs/page/huella de carbono.png"
+                                src="/assets/imgs/page/huella de carbono.webp"
                                 width={600}
                                 height={600}
                                 alt="Pulmón Verde - Carbono Verde Internacional - Conectando Bosques y Mercados"

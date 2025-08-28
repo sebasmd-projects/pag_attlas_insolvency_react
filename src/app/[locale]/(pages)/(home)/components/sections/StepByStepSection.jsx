@@ -43,7 +43,7 @@ export default function StepByStepSection() {
                     <div className="col-md-5 order-1 order-md-0">
                         <div className="text-end" data-aos="zoom-in" data-aos-delay="100">
                             <Image
-                                src="/assets/imgs/page/stepBYstepImg.png"
+                                src="/assets/imgs/page/stepBYstepImg.webp"
                                 alt="Pasos"
                                 loading="lazy"
                                 width={786}

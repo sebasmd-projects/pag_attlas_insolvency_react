@@ -54,7 +54,7 @@ export default function Navigation() {
             alt="LeyInsolvencia"
             className="img-fluid"
             height="40"
-            src="/assets/imgs/page/logo h fundacion attlas.png"
+            src="/assets/imgs/page/logo h fundacion attlas.webp"
             width="120"
           />
         </Navbar.Brand>

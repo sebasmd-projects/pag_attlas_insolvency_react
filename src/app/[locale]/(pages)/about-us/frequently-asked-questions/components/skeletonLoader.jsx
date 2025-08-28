@@ -25,7 +25,7 @@ export default function SkeletonLoaderComponent({ t }) {
 
                 <div className="col-md-4">
                     <Image
-                        src="/assets/imgs/page/solutions-img.png"
+                        src="/assets/imgs/page/solutions-img.webp"
                         alt="Financial solutions"
                         className="img-fluid rounded-5"
                         loading="lazy"
