@@ -41,7 +41,7 @@
     },
     "campus": "Campus B-Learning",
     "donation": "Donation",
-    "insolvency_platform": "Insolvency Platform",
+    "propensiones": "Propensionesabogados International",
     "services": {
       "menu": "Services",
       "subMenu": {
@@ -70,8 +70,10 @@
       "sections": {
         "heroSection": {
           "video_tag": "Your browser does not support the video tag.",
-          "title_h1": "Economic justice with a human heart | ATTLAS",
-          "title_h2": "Hope that we transform into action for a new beginning",
+          "title_h1": "We are the new era of investing with Economic Justice | ATTLAS",
+          "title_h2_1": "Investment that builds progress.",
+          "title_h2_2": "Infrastructure that transforms regions.",
+          "title_h2_3": "Businesses that respect human dignity.",
           "calculator": "Debt Calculator",
           "platform": "Insolvency Platform"
         },
@@ -106,7 +108,8 @@
             "p2": "With our own resources, we allocate part of our income to the rescue and protection of animals as sentient beings, convinced of the importance of providing them with care, dignity, and a new chance at life.",
             "p3": "Similarly, we develop programs aimed at the elderly, children, and homeless people—populations that deserve special protection and concrete actions that restore hope and well-being.",
             "p4": "For us, this commitment is not only social, but also an obligation to God, who reminds us of the duty to serve, protect, and dignify the most vulnerable.",
-            "p5": "Each of these initiatives is realized in actions, not promises. Our commitment is fulfilled directly, without intermediaries."
+            "p5": "Each of these initiatives is realized in actions, not promises. Our commitment is fulfilled directly, without intermediaries.",
+            "p6": "Because when we feed bodies, we comfort souls; when we protect life, we sow hope; and when we empower communities, we build a more just, supportive, and humane Quindío."
           },
           "gallery":{
             "alt1": "Soup kitchens for homeless",
@@ -116,16 +119,13 @@
           }
         },
         "footPrintSection": {
-          "title": "Green Lung",
-          "subTitle": "Green Carbon <span>International - Connecting</span> Forests and Markets",
+          "title": "Caring for Quindío",
+          "subTitle": "It is defending <span>Environmental Justice</span>",
           "card": {
-            "title1": "Project Objectives",
-            "description1": "Implement carbon capture measurement, verification, and certification systems with international standards (VERRA, Gold Standard).",
-            "description2": "Promote payment for environmental services (PES) to rural communities that protect native forests.",
-            "description3": "Strengthen climate resilience through reforestation, natural regeneration, and good agroforestry practices.",
-            "description4": "Create a robust portfolio of voluntary carbon credits, with environmental, social, and economic impact.",
-            "title2": "Investor Opportunity:",
-            "description5": "GREEN LUNG opens a real door to responsible investment with a global impact. The project offers companies, governments, and climate funds the possibility of offsetting their carbon footprint. carbon credits through certified credits, aligned with the Sustainable Development Goals (SDGs), in territories that combine high environmental value and a strong social fabric."
+            "title1": "",
+            "description1": "Protecting the environment is not only preserving nature, it is guaranteeing the dignity and well-being of the communities in the Department of Quindío that depend on it.",
+            "description2": "At the Attlas Foundation, we work on projects that unite sustainability, human development, and international cooperation, because we believe that every local action can transform our global future.",
+            "description3": "Today, humanity needs strong alliances to defend life in all its forms: our own, that of ecosystems, and that of future generations."
           }
         },
         "mainTeamSection": {

@@ -46,30 +46,6 @@ export default function WhyUsSection() {
                             </p>
                         </div>
 
-                        <div className="row g-4 mb-4" data-aos="zoom-in" data-aos-delay="100">
-                            {stats.map((stat, index) => (
-                                <div key={index} className="col-6">
-                                    <div className="h-100">
-                                        <h4 className="fw-bold" style={{
-                                            fontSize: '1.2rem',
-                                            fontWeight: 400,
-                                            color: '#0e3692',
-                                            marginBottom: '0.5rem'
-                                        }}>
-                                            {stat.value} {stat.icon}
-                                        </h4>
-                                        <p style={{
-                                            fontSize: '1rem',
-                                            lineHeight: '1.688rem',
-
-                                        }}>
-                                            {stat.label}
-                                        </p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-
                         <div data-aos="fade-right" data-aos-delay="100">
                             <p className="text-uppercase" style={{
                                 fontSize: '1rem',

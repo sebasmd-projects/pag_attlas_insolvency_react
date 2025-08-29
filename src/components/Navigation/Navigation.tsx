@@ -5,20 +5,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import Navbar from 'react-bootstrap/Navbar';
-import { BiDonateHeart } from "react-icons/bi";
-import { LuLayoutDashboard } from "react-icons/lu";
-import { MdCastForEducation } from "react-icons/md";
+import { GoLaw } from "react-icons/go";
 import LocaleSwitcher from '../LocaleSwitcher/LocaleSwitcher';
 import NavButton from './components/NavButton';
 
 export default function Navigation() {
-  const t = useTranslations('Navigation');
   const [expanded, setExpanded] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const router = useRouter();
@@ -61,14 +56,14 @@ export default function Navigation() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setExpanded(!expanded)} />
         <Navbar.Collapse className="justify-content-between" id="basic-navbar-nav">
           <Nav className="justify-content-center flex-grow-1" navbarScroll style={{ gap: "1.5rem" }}>
-            <NavDropdown id="services-nav-dropdown" title={t('services.menu')}>
+            {/* <NavDropdown id="services-nav-dropdown" title={t('services.menu')}>
               <NavDropdown.Item as={Link} href="/services" onClick={() => setExpanded(false)}>
                 {t('services.subMenu.ourServices')}
               </NavDropdown.Item>
               <NavDropdown.Item as={Link} href="/services/financial-education" onClick={() => setExpanded(false)}>
                 {t('services.subMenu.financialEducation')}
               </NavDropdown.Item>
-            </NavDropdown>
+            </NavDropdown> */}
 
             {/* <NavDropdown id="about-us-nav-dropdown" title={t('aboutUs.menu')}>
               <NavDropdown.Item as={Link} href="#" onClick={() => setExpanded(false)}>
@@ -90,7 +85,7 @@ export default function Navigation() {
               {t('contact.menu')}
             </Nav.Link> */}
 
-            <div className="d-flex gap-3 align-items-center">
+            {/* <div className="d-flex gap-3 align-items-center">
               <NavButton
                 gradient="linear-gradient(90deg, #1a4ab3 0%, #0e3692 100%)"
                 href='https://wa.me/573012283818'
@@ -109,15 +104,26 @@ export default function Navigation() {
                 label="donation"
                 setExpanded={setExpanded}
               />
-            </div>
+            </div> */}
 
-            <div className="d-flex gap-3 align-items-center">
+            {/* <div className="d-flex gap-3 align-items-center">
               <NavButton
                 color='black'
                 gradient="linear-gradient(90deg, #ffdf40 0%, #FED100 50%, #d4a900 100%)"
                 href='/platform'
                 icon={LuLayoutDashboard}
                 label="insolvency_platform"
+                setExpanded={setExpanded}
+              />
+            </div> */}
+
+            <div className="d-flex gap-3 align-items-center">
+              <NavButton
+                color='black'
+                gradient="linear-gradient(90deg, #ffdf40 0%, #FED100 50%, #d4a900 100%)"
+                href='https://propensionesabogados.com/'
+                icon={GoLaw}
+                label="propensiones"
                 setExpanded={setExpanded}
               />
             </div>

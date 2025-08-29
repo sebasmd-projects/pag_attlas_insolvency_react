@@ -41,7 +41,7 @@
     },
     "campus": "Educación B-Learning",
     "donation": "Donación",
-    "insolvency_platform": "Plataforma de Insolvencia",
+    "propensiones": "Propensionesabogados Internacional",
     "services": {
       "menu": "Servicios",
       "subMenu": {
@@ -70,8 +70,10 @@
       "sections": {
         "heroSection": {
           "video_tag": "Su navegador no soporta la etiqueta de video.",
-          "title_h1": "Justicia económica con corazón humano | ATTLAS",
-          "title_h2": "Esperanza que transformamos en acción para un nuevo comienzo",
+          "title_h1": "Somos la nueva era de inversiones con Justicia Económica | ATTLAS",
+          "title_h2_1": "Inversión que construye progreso.",
+          "title_h2_2": "Infraestructura que transforma regiones.",
+          "title_h2_3": "Negocios que respetan la dignidad humana.",
           "calculator": "Calculadora de insolvencia",
           "platform": "Plataforma de Insolvencia"
         },
@@ -117,16 +119,13 @@
           }
         },
         "footPrintSection": {
-          "title": "Pulmón verde",
-          "subTitle": "Carbono Verde <span>Internacional - Conectando</span> Bosques y Mercados",
+          "title": "Cuidar el Quindío",
+          "subTitle": "Es defender la <span>Justicia Ambiental</span>",
           "card": {
-            "title1": "Objetivos del Proyecto",
-            "description1": "Implementar sistemas de medición, verificación y certificación de captura de carbono con estándares internacionales (VERRA, Gold Standard).",
-            "description2": "Promover el pago por servicios ambientales (PSA) a comunidades rurales que protejan bosques nativos.",
-            "description3": "Fortalecer la resiliencia climática mediante reforestación, regeneración natural y buenas prácticas agroforestales.",
-            "description4": "Crear un portafolio robusto de bonos de carbono voluntarios, con impacto ambiental, social y económico.",
-            "title2": "Oportunidad para Inversionistas:",
-            "description5": "PULMÓN VERDE abre una puerta real a la inversión responsable con impacto global. El proyecto ofrece a empresas, gobiernos y fondos climáticos la posibilidad de compensar su huella de carbono mediante bonos certificados, alineados con los Objetivos de Desarrollo Sostenible (ODS), en territorios que combinan alto valor ambiental y fuerte tejido social."
+            "title1": "",
+            "description1": "Proteger el medio ambiente no es solo preservar la naturaleza, es garantizar la dignidad y el bienestar de las comunidades del Departamento del Quindío que dependen de ella.",
+            "description2": "Desde Fundación Attlas trabajamos en proyectos que unen sostenibilidad, desarrollo humano y cooperación internacional, porque creemos que cada acción local puede transformar nuestro futuro global.",
+            "description3": "Hoy la humanidad necesita alianzas sólidas para defender la vida en todas sus formas: la nuestra, la de los ecosistemas y la de las próximas generaciones."
           }
         },
         "mainTeamSection": {
@@ -134,9 +133,9 @@
           "title_h2": "Nuestro <span>equipo</span>"
         },
         "whyUsSection": {
-          "title_h1": "Justicia Financiera y Derechos Humanos",
-          "title_h2": "¿Por qué <span>ATTLAS?</span>",
-          "description_p": "Defendemos la justicia financiera con dignidad, reconociendo que la insolvencia económica no es un crimen, sino una realidad que cualquiera puede enfrentar. Su compromiso es brindar soluciones justas, sin discriminación ni estigmatización, respaldando el derecho humano a un nuevo comienzo. Basado en los principios de los Derechos Humanos Internacionales, ATTLAS protege la igualdad y la justicia financiera, asegurando que cada persona pueda recuperar su equilibrio económico con apoyo y respeto.",
+          "title_h1": "Innovación Humanitaria con Justicia Económica",
+          "title_h2": "Futuro del <span>Quindío</span>",
+          "description_p": "En la Fundación Attlas abrimos las puertas a quienes sueñan y trabajan por un mundo más justo y sostenible. Si tienes un proyecto humanitario en el Departamento del Quindío, enfocado en nuestras líneas de apoyo —medio ambiente, desarrollo comunitario, educación, inclusión y bienestar— te invitamos a inscribir tu iniciativa. Queremos unir esfuerzos para transformar realidades locales y generar un impacto global desde el corazón verde de Colombia.",
           "features": {
             "feature1": {
               "title": "Cobertura nacional",
@@ -155,7 +154,7 @@
               "description": "Protección contra la pobreza financiera y el equilibrio social"
             }
           },
-          "footer_p": "Únete a la Revolución del Equilibrio Financiero con ATTLAS"
+          "footer_p": "Únete a la Revolución de la justicia económica con ATTLAS"
         },
         "stepByStepSection": {
           "title_h1": "¿CÓMO LO LOGRAMOS?",

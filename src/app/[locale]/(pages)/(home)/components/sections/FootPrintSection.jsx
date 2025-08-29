@@ -10,12 +10,12 @@ export default function FootPrintSection() {
     return (
         <section id="main-team" className='container'>
             <div className="py-5">
-                <div className="mb-4">
+                <div className="mb-1">
                     <TitleComponent title={t('title')} />
                     <SubTitleComponent t={t} sub_title={'subTitle'} />
                 </div>
-                <div className="row">
-                    <div className="col-md-6">
+                <div className="row d-flex align-items-center justify-content-between">
+                    <div className="col-md-7">
                         <div className="card" data-aos="zoom-in">
                             <div className="card-body">
                                 <div className="mb-4">
@@ -23,28 +23,24 @@ export default function FootPrintSection() {
                                     <p className="card-text">{t('card.description1')}</p>
                                     <p className="card-text">{t('card.description2')}</p>
                                     <p className="card-text">{t('card.description3')}</p>
-                                    <p className="card-text">{t('card.description4')}</p>
-                                </div>
-                                <div className="mb-4">
-                                    <h5 className="card-title">{t('card.title2')}</h5>
-                                    <p className="card-text">{t('card.description5')}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div className="col-md-6">
+                    <div className="col-md-5">
                         <div data-aos="zoom-in" data-aos-delay="100">
                             <Image
                                 src="/assets/imgs/page/huella de carbono.webp"
-                                width={600}
-                                height={600}
+                                width={400}
+                                height={400}
                                 alt="Pulmón Verde - Carbono Verde Internacional - Conectando Bosques y Mercados"
                                 className="img-fluid"
                             />
                         </div>
                     </div>
                 </div>
+
             </div>
         </section>
     );

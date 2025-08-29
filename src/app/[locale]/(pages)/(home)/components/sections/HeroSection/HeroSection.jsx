@@ -1,11 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
-import { GiCalculator } from "react-icons/gi";
-import { LuLayoutDashboard } from "react-icons/lu";
 import style from './HeroSection.module.css';
-import Link from 'next/link';
 
 export default function HeroSection() {
 
@@ -28,7 +24,9 @@ export default function HeroSection() {
                             {t('title_h1')}
                         </h1>
                         <h2 data-aos="fade-right" data-aos-delay="100" className="mt-3">
-                            {t('title_h2')}
+                            {t('title_h2_1')}<br/>
+                            {t('title_h2_2')}<br/>
+                            {t('title_h2_3')}<br/>
                         </h2>
                     </div>
 

@@ -34,13 +34,12 @@
 
 .hero h1 {
     color: #fff;
-    font-size: 2rem;
+    font-size: 2.5rem;
 }
 
 .hero h2 {
     margin: 0;
-    font-size: 2.5rem;
-    font-weight: 700;
+    font-size: 2rem;
     color: #FED100;
 }
 
