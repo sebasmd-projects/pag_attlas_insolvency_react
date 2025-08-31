@@ -77,6 +77,10 @@
           "calculator": "Calculadora de insolvencia",
           "platform": "Plataforma de Insolvencia"
         },
+        "allies": {
+          "title": "Nuestros Aliados Estratégicos",
+          "sub_title": "Juntos por la <span>Justicia Económica</span>"
+        },
         "solutionsSection": {
           "title_h1": "SOLUCIONES Y BENEFICIOS PENSADOS PARA TI",
           "title_h2": "Justicia Económica con <span>Impacto Social</span>",
@@ -104,7 +108,7 @@
         "socialProjectsSection": {
           "csr": {
             "title": "Justicia Económica con <span>Corazón Humano</span>",
-            "p1": "La Justicia Económica no es una teoría: es la esperanza que transformamos en acción. En el Quindío, tierra de café, de montañas y de gente cálida, creemos que cada adulto mayor merece una comida caliente, cada niño una infancia llena de nutrición y cariño, y cada animal de calle un refugio y cuidado digno. Aquí no hablamos de cifras; hablamos de dignidad, de vida, de oportunidad.",
+            "p1": "La Justicia Económica no es una teoría: es la esperanza que transformamos en acción. En el Quindío, creemos que cada adulto mayor merece una comida caliente, cada niño una infancia llena de nutrición y cariño, y cada animal de calle un refugio y cuidado digno. Aquí no hablamos de cifras; hablamos de dignidad, de vida, de oportunidad.",
             "p2": "Inspirados en los principios de la economía solidaria —esa que prioriza la equidad, la cooperación y el bien común sobre el lucro individual— nos comprometemos ante Dios a construir una justicia económica real, profundamente humana. Creemos que:",
             "p3": "La solidaridad es la mejor moneda: cuando compartimos recursos, generamos confianza y construimos redes de apoyo que sostienen nuestras comunidades.",
             "p4": "Redistribuir no se trata de restar: se trata de sumar vida al ofrecer acceso a alimentos, refugio y cuidado a quienes más lo necesitan. ¿Por qué es vital en el Quindío?",
@@ -135,7 +139,7 @@
         "whyUsSection": {
           "title_h1": "Innovación Humanitaria con Justicia Económica",
           "title_h2": "Futuro del <span>Quindío</span>",
-          "description_p": "En la Fundación Attlas abrimos las puertas a quienes sueñan y trabajan por un mundo más justo y sostenible. Si tienes un proyecto humanitario en el Departamento del Quindío, enfocado en nuestras líneas de apoyo —medio ambiente, desarrollo comunitario, educación, inclusión y bienestar— te invitamos a inscribir tu iniciativa. Queremos unir esfuerzos para transformar realidades locales y generar un impacto global desde el corazón verde de Colombia.",
+          "description_p": "En la Fundación Attlas abrimos las puertas a quienes sueñan y trabajan por un mundo más justo y sostenible. Si tienes un proyecto humanitario en el Departamento del Quindío, enfocado en nuestras líneas de apoyo —medio ambiente, desarrollo comunitario, educación, inclusión y bienestar— desarrollamos iniciativas. Queremos unir esfuerzos para transformar realidades locales y generar un impacto global desde el corazón verde de Colombia.",
           "features": {
             "feature1": {
               "title": "Cobertura nacional",

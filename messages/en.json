@@ -77,6 +77,10 @@
           "calculator": "Debt Calculator",
           "platform": "Insolvency Platform"
         },
+        "allies": {
+          "title": "Our Strategic Allies",
+          "sub_title": "Together for <span>Economic Justice</span>"
+        },
         "solutionsSection": {
           "title_h1": "SOLUTIONS AND BENEFITS DESIGNED FOR YOU",
           "title_h2": "Economic Justice with <span>Social Impact</span>",
@@ -104,14 +108,14 @@
         "socialProjectsSection": {
           "csr": {
             "title": "Economic Justice with a <span>Human Heart</span>",
-            "p1": "We firmly believe in giving back to society and supporting causes that reflect our principles.",
-            "p2": "With our own resources, we allocate part of our income to the rescue and protection of animals as sentient beings, convinced of the importance of providing them with care, dignity, and a new chance at life.",
-            "p3": "Similarly, we develop programs aimed at the elderly, children, and homeless people—populations that deserve special protection and concrete actions that restore hope and well-being.",
-            "p4": "For us, this commitment is not only social, but also an obligation to God, who reminds us of the duty to serve, protect, and dignify the most vulnerable.",
-            "p5": "Each of these initiatives is realized in actions, not promises. Our commitment is fulfilled directly, without intermediaries.",
+            "p1": "Economic Justice is not a theory: it is the hope we transform into action. In Quindío, we believe that every senior citizen deserves a hot meal, every child a childhood filled with nutrition and love, and every stray animal a dignified shelter and care. Here we don't talk about numbers; we talk about dignity, life, and opportunity.",
+            "p2": "Inspired by the principles of the solidarity economy—which prioritizes equity, cooperation, and the common good over individual profit—we commit before God to building real, deeply human economic justice. We believe that:",
+            "p3": "Solidarity is the best currency: when we share resources, we generate trust and build support networks that sustain our communities.",
+            "p4": "Redistribution is not about subtracting: it is about adding life by offering access to food, shelter, and care to those who need it most. Why Is economic justice vital in Quindío?",
+            "p5": "In our department, where many families live on the edge of uncertainty, economic justice bridges the gap between fragility and strength. Through food for seniors and children, we open doors to health and stability. By providing loving shelters, we restore the dignity of those who have been forgotten: the elderly and our most vulnerable pets.",
             "p6": "Because when we feed bodies, we comfort souls; when we protect life, we sow hope; and when we empower communities, we build a more just, supportive, and humane Quindío."
           },
-          "gallery":{
+          "gallery": {
             "alt1": "Soup kitchens for homeless",
             "alt2": "Delivery of school kits to low-income children",
             "alt3": "Support and companionship for the elderly in nursing homes",
