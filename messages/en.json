@@ -188,11 +188,11 @@
         }
       },
       "metaData": {
-        "title": "Legal Solution to Your Debts - Debt Restructuring | ATTLAS",
-        "description": "At ATTLAS, we help you restructure your debts, suspend garnishments, and protect yourself legally. Receive free advice and settle your debts with the highest discounts. Contact us via WhatsApp!",
+        "title": "We are the new era of investing with Economic Justice | ATTLAS",
+        "description": "Investment that builds progress. Infrastructure that transforms regions. Businesses that respect human dignity.",
         "openGraph": {
-          "title": "ATTLAS – The Definitive Solution to Debt Problems in Colombia",
-          "description": "Immediate legal protection against garnishments and judicial actions. A personalized debt restructuring program for Colombians.",
+          "title": "We are the new era of investing with Economic Justice | ATTLAS",
+          "description": "Investment that builds progress. Infrastructure that transforms regions. Businesses that respect human dignity.",
           "images": [
             {
               "url": "/assets/imgs/favicon/favicon.png",
@@ -205,8 +205,8 @@
         "twitter": {
           "card": "summary_large_image",
           "site": "@attlas_legal",
-          "title": "Legal Debt Solution | ATTLAS Colombia",
-          "description": "Immediate protection against garnishments and debt restructuring. Get your free consultation today!",
+          "title": "We are the new era of investing with Economic Justice | ATTLAS",
+          "description": "Investment that builds progress. Infrastructure that transforms regions. Businesses that respect human dignity.",
           "images": "/assets/imgs/favicon/favicon.png"
         },
         "canonical": "https://fundacionattlas.org/",

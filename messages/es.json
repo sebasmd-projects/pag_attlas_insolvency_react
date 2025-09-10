@@ -188,11 +188,11 @@
         }
       },
       "metaData": {
-        "title": "Solución Legal a tus Deudas - Reestructuración de Deudas | ATTLAS",
-        "description": "En ATTLAS te ayudamos a reestructurar tus deudas, suspender embargos y protegerte legalmente. Recibe asesoría gratuita y liquida tus deudas con los mayores descuentos. ¡Contáctanos por WhatsApp!",
+        "title": "Somos la nueva era de inversiones con Justicia Económica | ATTLAS",
+        "description": "Inversión que construye progreso. Infraestructura que transforma regiones. Negocios que respetan la dignidad humana.",
         "openGraph": {
-          "title": "ATTLAS - Solución Definitiva a Problemas de Deudas en Colombia",
-          "description": "Protección legal inmediata contra embargos y ejecuciones judiciales. Programa de reestructuración de deudas personalizado para colombianos.",
+          "title": "Somos la nueva era de inversiones con Justicia Económica | ATTLAS",
+          "description": "Inversión que construye progreso. Infraestructura que transforma regiones. Negocios que respetan la dignidad humana.",
           "images": [
             {
               "url": "/assets/imgs/favicon/favicon.png",
@@ -205,8 +205,8 @@
         "twitter": {
           "card": "summary_large_image",
           "site": "@attlas_legal",
-          "title": "Solución Legal de Deudas | ATTLAS Colombia",
-          "description": "Protección inmediata contra embargos y reestructuración de deudas. ¡Recibe tu asesoría gratuita hoy mismo!",
+          "title": "Somos la nueva era de inversiones con Justicia Económica | ATTLAS",
+          "description": "Inversión que construye progreso. Infraestructura que transforma regiones. Negocios que respetan la dignidad humana.",
           "images": "/assets/imgs/favicon/favicon.png"
         },
         "canonical": "https://fundacionattlas.org/",
