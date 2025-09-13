@@ -69,7 +69,7 @@ export default function HomePage({ params: { locale } }) {
       <AlliesSection />
       <SocialProjectsSection />
       <FootPrintSection />
-      {/* <MainTeamSection /> */}
+      <MainTeamSection />
       <WhyUsSection />
       <ContactSection params={{ locale }} />
     </>
