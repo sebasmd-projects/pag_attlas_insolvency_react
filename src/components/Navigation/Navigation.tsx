@@ -118,14 +118,15 @@ export default function Navigation() {
             </div> */}
 
             <div className="d-flex gap-3 align-items-center">
-              <NavButton
-                color='black'
-                gradient="linear-gradient(90deg, #ffdf40 0%, #FED100 50%, #d4a900 100%)"
-                href='https://propensionesabogados.com/'
-                icon={GoLaw}
-                label="propensiones"
-                setExpanded={setExpanded}
-              />
+                <Link href="https://propensionesabogados.com" target="_blank">
+                <Image
+            alt="LeyInsolvencia"
+            className="img-fluid"
+            height="60"
+            src="/assets/imgs/page/logo-propensiones-h.webp"
+            width="120"
+          />
+                      </Link>       
             </div>
 
             {loggedIn && (

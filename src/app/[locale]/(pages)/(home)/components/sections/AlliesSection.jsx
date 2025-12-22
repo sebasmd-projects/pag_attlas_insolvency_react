@@ -11,10 +11,10 @@ export default function AlliesSection() {
 
     // Lista de imágenes de aliados
     const allies = [
-        { src: "/assets/imgs/page/brand1.webp", alt: "Aliado 1" },
-        { src: "/assets/imgs/page/brand2.webp", alt: "Aliado 2" },
-        { src: "/assets/imgs/page/brand3.webp", alt: "Aliado 3" },
-        { src: "/assets/imgs/page/brand4.webp", alt: "Aliado 4" },
+        // { src: "/assets/imgs/page/brand1.webp", alt: "Aliado 1" },
+        // { src: "/assets/imgs/page/brand2.webp", alt: "Aliado 2" },
+        { src: "/assets/imgs/page/brand3.webp", alt: "Logo de propensiones abogados" },
+        // { src: "/assets/imgs/page/brand4.webp", alt: "Aliado 4" },
     ];
 
     return (
