@@ -133,3 +133,23 @@
     display: none;
   }
 }
+
+
+/* Allies logos page */
+.allies-logo-box {
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.allies-logo {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* Bandera más pequeña */
+.allies-flag {
+  max-height: 60%;
+}

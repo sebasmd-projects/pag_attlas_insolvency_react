@@ -79,7 +79,8 @@
         },
         "allies": {
           "title": "Our Strategic Allies",
-          "sub_title": "Together for <span>Economic Justice</span>"
+          "sub_title": "Together for <span>Economic Justice</span>",
+          "sub_title_apps": "Our Platform <span>Ecosystem</span>"
         },
         "solutionsSection": {
           "title_h1": "SOLUTIONS AND BENEFITS DESIGNED FOR YOU",
