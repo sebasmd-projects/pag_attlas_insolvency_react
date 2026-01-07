@@ -2,9 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import TitleComponent from "@/components/micro-components/title";
 import SubTitleComponent from "@/components/micro-components/sub_title";
-import { BsPersonHeart } from "react-icons/bs";
 
 export default function SocialProjectsSection() {
   const t = useTranslations("Pages.homePage.sections.socialProjectsSection");

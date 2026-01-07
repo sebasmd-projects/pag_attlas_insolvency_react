@@ -1,6 +1,8 @@
 {
-  "name": "example-app-router",
+  "name": "fundacion-attlas-app-router",
   "private": true,
+  "packageManager": "pnpm@10.0.0",
+  "prettier": "eslint-config-molindo/.prettierrc.json",
   "scripts": {
     "dev": "next dev",
     "devt": "next dev -p 3000 -H 0.0.0.0 --turbo",
@@ -45,6 +47,5 @@
     "postcss": "8.5.6",
     "prettier": "3.7.4",
     "typescript": "5.9.3"
-  },
-  "prettier": "eslint-config-molindo/.prettierrc.json"
+  }
 }

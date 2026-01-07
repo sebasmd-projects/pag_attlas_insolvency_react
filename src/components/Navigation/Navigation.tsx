@@ -10,12 +10,8 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import LocaleSwitcher from '../LocaleSwitcher/LocaleSwitcher';
-import NavButton from './components/NavButton';
 import { NavDropdown } from 'react-bootstrap';
 import { useTranslations } from 'next-intl';
-import { MdCastForEducation } from 'react-icons/md';
-import { BiDonateHeart } from "react-icons/bi";
-import { LuLayoutDashboard } from "react-icons/lu";
 import { usePathname } from 'next/navigation';
 import { useLocale } from 'next-intl';
 
