@@ -3,16 +3,17 @@
 ## Getting Started - Dev
 
 ```bash
-npm i
-npm run dev
+pnpm i
+pnpm dev
 ```
 
 ## Prod
 
 ```bash
 git pull
-npm i
-npm run build
+pnpm i
+pnpm build
+pnpm start
 ```
 
 ## Repository

@@ -18,6 +18,7 @@ financial-education.json
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
+.github
 
 # testing
 /coverage

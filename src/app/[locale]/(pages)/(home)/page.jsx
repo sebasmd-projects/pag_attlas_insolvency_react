@@ -9,11 +9,13 @@ import FootPrintSection from './components/sections/FootPrintSection';
 import SocialProjectsSection from './components/sections/SocialProjectsSection';
 import AlliesSection from './components/sections/AlliesSection';
 
-export async function generateMetadata({ params: { locale } }) {
+export async function generateMetadata({ params }) {
+  const { locale } = await params;
 
   const t = await getTranslations({ locale, namespace: 'Pages.homePage.metaData' });
 
   return {
+    metadataBase: new URL('https://fundacionattlas.org'),
     title: t('title'),
     description: t('description'),
     canonical: t('canonical'),
@@ -58,10 +60,9 @@ export async function generateMetadata({ params: { locale } }) {
   }
 }
 
-export default function HomePage({ params: { locale } }) {
-
+export default async function HomePage({ params }) {
+  const { locale } = await params;
   setRequestLocale(locale);
-
   return (
     <>
       <HeroSection />

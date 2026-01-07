@@ -1,11 +1,17 @@
 'use client';
 
+import { useState } from 'react';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { GiCalculator } from 'react-icons/gi';
+import { LuLayoutDashboard } from 'react-icons/lu';
 import style from './HeroSection.module.css';
 
 export default function HeroSection() {
-
     const t = useTranslations('Pages.homePage.sections.heroSection');
+
+    const [isHoveredB1, setIsHoveredB1] = useState(false);
+    const [isHoveredB2, setIsHoveredB2] = useState(false);
 
     return (
         <section id="hero" className={style.hero}>
@@ -32,10 +38,14 @@ export default function HeroSection() {
 
                     <div className="col-lg-5 mt-5 text-center" >
                         <div className="row">
-                            {/* <div className="col-6" data-aos="fade-up" data-aos-delay="100">
-                                <Link href="/platform/calculator"
+                            <div className="col-6" data-aos="fade-up" data-aos-delay="100">
+                                <Link
+                                    href="/platform/calculator"
                                     className="btn btn-outline-light btn-lg"
-                                    style={{ backgroundColor: isHoveredB1 ? '#f8f9fa' : '#d5dbdb40', transition: 'background-color 0.3s ease' }}
+                                    style={{
+                                        backgroundColor: isHoveredB1 ? '#f8f9fa' : '#d5dbdb40',
+                                        transition: 'background-color 0.3s ease'
+                                    }}
                                     onMouseEnter={() => setIsHoveredB1(true)}
                                     onMouseLeave={() => setIsHoveredB1(false)}
                                 >
@@ -44,15 +54,19 @@ export default function HeroSection() {
                             </div>
 
                             <div className="col-6" data-aos="fade-up" data-aos-delay="100">
-                                <Link href="/platform"
+                                <Link
+                                    href="/platform"
                                     className="btn btn-outline-light btn-lg"
-                                    style={{ backgroundColor: isHoveredB2 ? '#f8f9fa' : '#d5dbdb40', transition: 'background-color 0.3s ease' }}
+                                    style={{
+                                        backgroundColor: isHoveredB2 ? '#f8f9fa' : '#d5dbdb40',
+                                        transition: 'background-color 0.3s ease'
+                                    }}
                                     onMouseEnter={() => setIsHoveredB2(true)}
                                     onMouseLeave={() => setIsHoveredB2(false)}
                                 >
                                     {t('platform')} <LuLayoutDashboard />
                                 </Link>
-                            </div> */}
+                            </div>
                         </div>
                     </div>
                 </div>

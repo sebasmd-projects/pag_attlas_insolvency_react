@@ -9,14 +9,19 @@ import { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { GoLaw } from "react-icons/go";
 import LocaleSwitcher from '../LocaleSwitcher/LocaleSwitcher';
 import NavButton from './components/NavButton';
+import { NavDropdown } from 'react-bootstrap';
+import { useTranslations } from 'next-intl';
+import { MdCastForEducation } from 'react-icons/md';
+import { BiDonateHeart } from "react-icons/bi";
+import { LuLayoutDashboard } from "react-icons/lu";
 
 export default function Navigation() {
   const [expanded, setExpanded] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const router = useRouter();
+  const t = useTranslations('Navigation');
 
   useEffect(() => {
     async function checkTokenInfo() {
@@ -56,16 +61,19 @@ export default function Navigation() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setExpanded(!expanded)} />
         <Navbar.Collapse className="justify-content-between" id="basic-navbar-nav">
           <Nav className="justify-content-center flex-grow-1" navbarScroll style={{ gap: "1.5rem" }}>
-            {/* <NavDropdown id="services-nav-dropdown" title={t('services.menu')}>
+            <NavDropdown id="services-nav-dropdown" title={t('services.menu')}>
+              <NavDropdown.Item as={Link} href="/platform" onClick={() => setExpanded(false)}>
+                {t('services.subMenu.insolvencyPlatform')}
+              </NavDropdown.Item>
               <NavDropdown.Item as={Link} href="/services" onClick={() => setExpanded(false)}>
                 {t('services.subMenu.ourServices')}
               </NavDropdown.Item>
               <NavDropdown.Item as={Link} href="/services/financial-education" onClick={() => setExpanded(false)}>
                 {t('services.subMenu.financialEducation')}
               </NavDropdown.Item>
-            </NavDropdown> */}
+            </NavDropdown>
 
-            {/* <NavDropdown id="about-us-nav-dropdown" title={t('aboutUs.menu')}>
+            <NavDropdown id="about-us-nav-dropdown" title={t('aboutUs.menu')}>
               <NavDropdown.Item as={Link} href="#" onClick={() => setExpanded(false)}>
                 {t('aboutUs.subMenu.getToKnowUs')}
               </NavDropdown.Item>
@@ -79,54 +87,24 @@ export default function Navigation() {
               <NavDropdown.Item as={Link} href="/about-us/frequently-asked-questions" onClick={() => setExpanded(false)}>
                 {t('aboutUs.subMenu.faq')}
               </NavDropdown.Item>
-            </NavDropdown> */}
+            </NavDropdown>
 
-            {/* <Nav.Link as={Link} href="/about-us/contact" onClick={() => setExpanded(false)}>
+            <Nav.Link as={Link} href="/about-us/contact" onClick={() => setExpanded(false)}>
               {t('contact.menu')}
-            </Nav.Link> */}
+            </Nav.Link>
 
-            {/* <div className="d-flex gap-3 align-items-center">
-              <NavButton
-                gradient="linear-gradient(90deg, #1a4ab3 0%, #0e3692 100%)"
-                href='https://wa.me/573012283818'
-                icon={MdCastForEducation}
-                label="campus"
-                setExpanded={setExpanded}
-              />
-            </div>
+            
 
             <div className="d-flex gap-3 align-items-center">
-              <NavButton
-                color='black'
-                gradient="linear-gradient(90deg, #7fd2cb 0%, #5ab8b0 100%)"
-                href='https://wa.me/573012283818'
-                icon={BiDonateHeart}
-                label="donation"
-                setExpanded={setExpanded}
-              />
-            </div> */}
-
-            {/* <div className="d-flex gap-3 align-items-center">
-              <NavButton
-                color='black'
-                gradient="linear-gradient(90deg, #ffdf40 0%, #FED100 50%, #d4a900 100%)"
-                href='/platform'
-                icon={LuLayoutDashboard}
-                label="insolvency_platform"
-                setExpanded={setExpanded}
-              />
-            </div> */}
-
-            <div className="d-flex gap-3 align-items-center">
-                <Link href="https://propensionesabogados.com" target="_blank">
+              <Link href="https://propensionesabogados.com" target="_blank">
                 <Image
-            alt="LeyInsolvencia"
-            className="img-fluid"
-            height="60"
-            src="/assets/imgs/page/logo-propensiones-h.webp"
-            width="120"
-          />
-                      </Link>       
+                  alt="LeyInsolvencia"
+                  className="img-fluid"
+                  height="60"
+                  src="/assets/imgs/page/logo-propensiones-h.webp"
+                  width="120"
+                />
+              </Link>
             </div>
 
             {loggedIn && (

@@ -45,6 +45,7 @@
     "services": {
       "menu": "Services",
       "subMenu": {
+        "insolvencyPlatform": "Insolvency Platform",
         "ourServices": "Our Services",
         "financialEducation": "Financial Education"
       }

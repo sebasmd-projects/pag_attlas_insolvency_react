@@ -5,7 +5,9 @@ import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
 export async function GET(request) {
-    const rawToken = cookies().get('auth_token')?.value;
+    const cookieStore = await cookies();
+    const rawToken = cookieStore.get('auth_token')?.value;
+
     if (!rawToken) {
         return NextResponse.json({ detail: 'Token no encontrado' }, { status: 401 });
     }

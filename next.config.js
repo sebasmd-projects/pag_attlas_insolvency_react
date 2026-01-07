@@ -4,30 +4,36 @@ const withNextIntl = require('next-intl/plugin')();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    allowedDevOrigins: [
+        '192.168.101.11',
+        'localhost',
+    ],
+
     images: {
         remotePatterns: [
-            {
-                protocol: 'https',
-                hostname: 'propensionesabogados.com',
+            { 
+                protocol: 'https', 
+                hostname: 'propensionesabogados.com' 
             },
-            {
-                protocol: 'https',
-                hostname: 'fundacionattlas.com',
+            { 
+                protocol: 'https', 
+                hostname: 'fundacionattlas.com' 
             },
-            {
-                protocol: 'https',
-                hostname: 'fundacionattlas.org',
+            { 
+                protocol: 'https', 
+                hostname: 'fundacionattlas.org' 
             },
-        ]
+        ],
     },
+
     webpack(config) {
         config.module.rules.push({
             test: /\.svg$/,
-            use: ["@svgr/webpack"]
+            use: ['@svgr/webpack'],
         });
 
         return config;
-    }
+    },
 };
 
 module.exports = withNextIntl(nextConfig);
