@@ -19,6 +19,7 @@ financial-education.json
 !.yarn/releases
 !.yarn/versions
 .github
+pnpm-workspace.yaml
 
 # testing
 /coverage
