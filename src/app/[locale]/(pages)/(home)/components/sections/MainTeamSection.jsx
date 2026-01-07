@@ -11,22 +11,11 @@ export default function MainTeamSection() {
         <section id="main-team">
             <div className="text-center py-5">
                 <div className="mb-4 container-lg">
-                    <TitleComponent title={t('title_h1')} />
-                    <SubTitleComponent t={t} sub_title={'title_h2'} />
+                    <TitleComponent title={t('title_h1')} aos="fade-right" />
+                    <SubTitleComponent t={t} sub_title={'title_h2'} aos="fade-right" aosDelay="100" />
                 </div>
 
                 <div className="position-relative d-inline-block">
-                    {/* Insignia */}
-                    <div className="position-absolute top-0 start-0 m-2">
-                        <Image
-                            src="/assets/imgs/page/diplomado_insolvencia.webp"
-                            width={100}
-                            height={100}
-                            alt="Insignia"
-                            className="img-fluid d-none d-md-block"
-                        />
-                    </div>
-
                     {/* Imagen del equipo */}
                     <Image
                         src="/assets/imgs/page/equipo.webp"
@@ -34,6 +23,7 @@ export default function MainTeamSection() {
                         height={750}
                         alt="Equipo de trabajo"
                         className="img-fluid"
+                        data-aos="zoom-in"
                     />
                 </div>
             </div>

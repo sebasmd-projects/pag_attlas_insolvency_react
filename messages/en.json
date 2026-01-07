@@ -22,10 +22,13 @@
     "aboutUs": {
       "menu": "About Us",
       "subMenu": {
-        "getToKnowUs": "Get to Know Us",
-        "culture": "Culture",
-        "faq": "Frequently Asked Questions",
-        "history": "History"
+        "solutions": "Our Solutions",
+        "allies": "Strategic Allies",
+        "socialResponsibility": "Social Responsibility",
+        "footPrint": "Environmental Footprint",
+        "mainTeam": "Main Team",
+        "whyUs": "Why Us?",
+        "faq": "Frequently Asked Questions"
       }
     },
     "contact": {

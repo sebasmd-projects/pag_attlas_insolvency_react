@@ -22,10 +22,13 @@
     "aboutUs": {
       "menu": "Nosotros",
       "subMenu": {
-        "getToKnowUs": "Conócenos",
-        "culture": "Cultura",
-        "faq": "Preguntas frecuentes",
-        "history": "Historia"
+        "solutions": "Nuestras Soluciones",
+        "allies": "Aliados Estratégicos",
+        "socialResponsibility": "Responsabilidad Social",
+        "footPrint": "Huella Ambiental",
+        "mainTeam": "Equipo Principal",
+        "whyUs": "¿Por qué Nosotros?",
+        "faq": "Preguntas frecuentes"
       }
     },
     "contact": {

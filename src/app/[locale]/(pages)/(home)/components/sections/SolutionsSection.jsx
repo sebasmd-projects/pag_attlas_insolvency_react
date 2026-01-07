@@ -15,7 +15,7 @@ export default function SolutionsSection() {
 
     const features = [
         {
-            icon: <MdOutlinePets size={40}/>,
+            icon: <MdOutlinePets size={40} />,
             title: t('features.feature1.title'),
             description: t('features.feature1.description'),
             aosDelay: 50
@@ -27,7 +27,7 @@ export default function SolutionsSection() {
             aosDelay: 60
         },
         {
-            icon: <FaHome size={40}/>,
+            icon: <FaHome size={40} />,
             title: t('features.feature3.title'),
             description: t('features.feature3.description'),
             aosDelay: 70
@@ -46,9 +46,11 @@ export default function SolutionsSection() {
                 <div className="row g-4 align-items-center d-flex">
                     <div className="col-md-7">
                         <div className="mb-4">
-                            <TitleComponent title={t('title_h1')} />
-                            <SubTitleComponent t={t} sub_title={'title_h2'} />
+                            <TitleComponent title={t('title_h1')} aos="fade-right" />
+                            <SubTitleComponent t={t} sub_title={'title_h2'} aos="fade-right" aosDelay="100" />
                             <p
+                                data-aos="fade-right"
+                                data-aos-delay="200"
                                 className="mb-4"
                                 style={{
                                     fontSize: '1rem',

@@ -16,12 +16,33 @@ import { useTranslations } from 'next-intl';
 import { MdCastForEducation } from 'react-icons/md';
 import { BiDonateHeart } from "react-icons/bi";
 import { LuLayoutDashboard } from "react-icons/lu";
+import { usePathname } from 'next/navigation';
+import { useLocale } from 'next-intl';
+
 
 export default function Navigation() {
   const [expanded, setExpanded] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const router = useRouter();
   const t = useTranslations('Navigation');
+
+  const pathname = usePathname();
+  const locale = useLocale();
+
+  const homePath = `/${locale}`;
+
+  const navigateToSection = (id: string) => {
+    setExpanded(false);
+
+    const isHome = pathname === homePath || pathname === `${homePath}/`;
+
+    if (isHome) {
+      const el = document.getElementById(id);
+      el?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      router.push(`${homePath}#${id}`);
+    }
+  };
 
   useEffect(() => {
     async function checkTokenInfo() {
@@ -45,6 +66,40 @@ export default function Navigation() {
     }
     checkTokenInfo();
   }, [router]);
+
+  const aboutUsItems = [
+    {
+      key: 'solutions',
+      sectionId: 'solutions',
+      label: t('aboutUs.subMenu.solutions'),
+    },
+    {
+      key: 'allies',
+      sectionId: 'allies',
+      label: t('aboutUs.subMenu.allies'),
+    },
+    {
+      key: 'social-responsibility',
+      sectionId: 'social-responsibility',
+      label: t('aboutUs.subMenu.socialResponsibility'),
+    },
+    {
+      key: 'foot-print',
+      sectionId: 'foot-print',
+      label: t('aboutUs.subMenu.footPrint'),
+    },
+    {
+      key: 'main-team',
+      sectionId: 'main-team',
+      label: t('aboutUs.subMenu.mainTeam'),
+    },
+    {
+      key: 'why-us',
+      sectionId: 'why-us',
+      label: t('aboutUs.subMenu.whyUs'),
+    },
+  ];
+
 
   return (
     <Navbar className="bg-body-tertiary" expand="lg" expanded={expanded} sticky="top">
@@ -74,26 +129,31 @@ export default function Navigation() {
             </NavDropdown>
 
             <NavDropdown id="about-us-nav-dropdown" title={t('aboutUs.menu')}>
-              <NavDropdown.Item as={Link} href="#" onClick={() => setExpanded(false)}>
-                {t('aboutUs.subMenu.getToKnowUs')}
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} href="#" onClick={() => setExpanded(false)}>
-                {t('aboutUs.subMenu.culture')}
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} href="#" onClick={() => setExpanded(false)}>
-                {t('aboutUs.subMenu.history')}
-              </NavDropdown.Item>
+
+              {aboutUsItems.map((item) => (
+                <NavDropdown.Item
+                  key={item.key}
+                  as="button"
+                  onClick={() => navigateToSection(item.sectionId)}
+                >
+                  {item.label}
+                </NavDropdown.Item>
+              ))}
+
               <NavDropdown.Divider />
-              <NavDropdown.Item as={Link} href="/about-us/frequently-asked-questions" onClick={() => setExpanded(false)}>
+
+              <NavDropdown.Item as="button" onClick={() => {
+                setExpanded(false);
+                router.push(`/${locale}/about-us/frequently-asked-questions`);
+              }} >
                 {t('aboutUs.subMenu.faq')}
               </NavDropdown.Item>
+
             </NavDropdown>
 
-            <Nav.Link as={Link} href="/about-us/contact" onClick={() => setExpanded(false)}>
+            <Nav.Link as="button" href="/#contact" onClick={() => setExpanded(false)}>
               {t('contact.menu')}
             </Nav.Link>
-
-            
 
             <div className="d-flex gap-3 align-items-center">
               <Link href="https://propensionesabogados.com" target="_blank">

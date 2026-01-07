@@ -8,11 +8,11 @@ export default function FootPrintSection() {
     const t = useTranslations('Pages.homePage.sections.footPrintSection');
 
     return (
-        <section id="main-team" className='container'>
+        <section id="foot-print" className='container'>
             <div className="py-5">
                 <div className="mb-1">
-                    <TitleComponent title={t('title')} />
-                    <SubTitleComponent t={t} sub_title={'subTitle'} />
+                    <TitleComponent title={t('title')} aos="fade-right" />
+                    <SubTitleComponent t={t} sub_title={'subTitle'} aos="fade-right" aosDelay="100" />
                 </div>
                 <div className="row d-flex align-items-center justify-content-between">
                     <div className="col-md-7">

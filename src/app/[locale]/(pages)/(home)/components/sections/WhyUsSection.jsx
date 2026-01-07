@@ -35,13 +35,17 @@ export default function WhyUsSection() {
 
                     <div className="col-md-6" >
                         <div className="mb-4">
-                            <TitleComponent title={t('title_h1')} />
-                            <SubTitleComponent t={t} sub_title={'title_h2'} />
+                            <TitleComponent title={t('title_h1')} aos="fade-right" />
+                            <SubTitleComponent t={t} sub_title={'title_h2'} aos="fade-right" aosDelay="100" />
 
-                            <p className="mb-4" style={{
-                                fontSize: '1rem',
-                                lineHeight: '1.688rem',
-                            }}>
+                            <p className="mb-4"
+                                data-aos="fade-right"
+                                data-aos-delay="200"
+                                style={{
+                                    fontSize: '1rem',
+                                    lineHeight: '1.688rem',
+                                }}
+                            >
                                 {t('description_p')}
                             </p>
                         </div>

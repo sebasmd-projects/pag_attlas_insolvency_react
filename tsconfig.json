@@ -1,7 +1,6 @@
 {
-  "extends": "eslint-config-molindo/tsconfig.json",
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES2020",
     "lib": [
       "dom",
       "dom.iterable",
@@ -12,10 +11,10 @@
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "Bundler",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
     "plugins": [
       {
@@ -32,14 +31,17 @@
       "@messages/*": [
         "./messages/*"
       ]
-    }
+    },
+    "strict": false
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
-, "src/components/LocaleSwitcher/LocaleSwitcher.jsx", "src/providers/AOSProvider.jsx", "src/app/[locale]/(pages)/(home)/page.jsx", "src/app/[locale]/(pages)/services/financial-education/page.jsx"  ],
+    ".next/types/**/*.ts",
+    "src/**/*.jsx",
+    ".next/dev/types/**/*.ts"
+  ],
   "exclude": [
     "node_modules"
   ]

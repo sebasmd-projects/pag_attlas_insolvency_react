@@ -26,10 +26,10 @@ export default function HeroSection() {
             <div className="container">
                 <div className="row">
                     <div className="col-lg-10">
-                        <h1 data-aos="fade-right" data-aos-delay="100">
+                        <h1 data-aos="fade-right">
                             {t('title_h1')}
                         </h1>
-                        <h2 data-aos="fade-right" data-aos-delay="100" className="mt-3">
+                        <h2 data-aos="fade-right" data-aos-delay="200" className="mt-3">
                             {t('title_h2_1')}<br/>
                             {t('title_h2_2')}<br/>
                             {t('title_h2_3')}<br/>

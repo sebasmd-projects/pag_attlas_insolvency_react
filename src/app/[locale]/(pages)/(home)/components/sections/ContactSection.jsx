@@ -91,8 +91,8 @@ export default function ContactSection({ params }) {
         <section id="contact">
             <div className="container py-5">
 
-                <TitleComponent title={t('title')} />
-                <SubTitleComponent t={t} sub_title={'subTitle'} />
+                <TitleComponent title={t('title')} aos="fade-right" />
+                <SubTitleComponent t={t} sub_title={'subTitle'} aos="fade-right" aosDelay="100" />
 
                 <form onSubmit={handleSubmit} className="row g-3">
                     {/* Nombre */}
