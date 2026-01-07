@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { FaArrowCircleLeft, FaPlus, FaMinus } from 'react-icons/fa';
 import { LuSend } from 'react-icons/lu';
 import { useTranslations } from 'next-intl';

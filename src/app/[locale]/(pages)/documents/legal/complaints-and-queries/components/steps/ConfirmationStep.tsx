@@ -34,7 +34,7 @@ const labels: Record<string, string> = {
     terms_accepted: 'Términos y condiciones aceptados'
 };
 
-function ConfirmationStep({ errors, formData, setFormData }: ConfirmationStepProps): JSX.Element {
+function ConfirmationStep({ errors, formData, setFormData }: ConfirmationStepProps) {
     return (
         <Card className="mb-4 p-3">
             <Card.Body>
