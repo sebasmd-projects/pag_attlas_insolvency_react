@@ -9,10 +9,17 @@ const intlMiddleware = createMiddleware(routing);
 const AUTH_COOKIE_NAME = 'auth_token';
 
 export default function middleware(request: NextRequest) {
-  const token = request.cookies.get(AUTH_COOKIE_NAME)?.value;
   const { pathname } = request.nextUrl;
-
+  const token = request.cookies.get(AUTH_COOKIE_NAME)?.value;
   const isAuth = !!token;
+
+  if (pathname.startsWith('/api')) {
+    return NextResponse.next();
+  }
+
+  if (pathname.startsWith('/_next') || pathname.startsWith('/__nextjs_font') || pathname.startsWith('/_vercel')) {
+    return NextResponse.next();
+  }
 
   const publicPlatformRoutes = [
     '/platform/calculator',
@@ -55,8 +62,7 @@ export default function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/((?!api|_vercel|_next|.*\\..*).*)',
-    '/platform/:path*',
+    '/((?!api|_next|_vercel|__nextjs_font|.*\\..*).*)',
   ],
 };
 

@@ -1,13 +1,11 @@
-// src/app/api/platform/insolvency-form/[id]/route.jsx
-// ------------------------------------------------------
-// src/app/api/platform/insolvency-form/[id]/route.js
-// PATCH  /api/platform/insolvency-form/<uuid>?step=N
-// ------------------------------------------------------
 import axios from 'axios';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
-export async function PATCH(request, { params }) {
+export async function PATCH(request, context) {
+
+    const { params } = context;
+    const { id } = await params;
 
     const cookieStore = await cookies();
     const rawToken = cookieStore.get('auth_token')?.value;
@@ -22,11 +20,17 @@ export async function PATCH(request, { params }) {
 
     try {
         const { data, status } = await axios.patch(
-            `https://propensionesabogados.com/api/v1/insolvency-form/${params.id}/?step=${step}`,
+            `https://propensionesabogados.com/api/v1/insolvency-form/${id}/?step=${step}`,
             body,
-            { headers: { Authorization: `Bearer ${rawToken}` } }
+            {
+                headers: {
+                    Authorization: `Bearer ${rawToken}`,
+                },
+            }
         );
+
         return NextResponse.json(data, { status });
+
     } catch (err) {
         const msg = err.response?.data || err.message || 'Error';
         const code = err.response?.status || 500;

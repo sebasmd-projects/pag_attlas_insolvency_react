@@ -6,7 +6,9 @@ import { useCallback } from 'react';
 export default function useSessionGuard() {
     const router = useRouter();
     const isSessionValid = useCallback(async () => {
-        const res = await fetch('/api/platform/auth/token-info');
+        const res = await fetch('/api/platform/auth/token-info', {
+            credentials: 'include',
+        });
         if (!res.ok) {
             router.push('/platform/auth/login');
             return false;
