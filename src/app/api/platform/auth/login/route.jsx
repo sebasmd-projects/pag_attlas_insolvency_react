@@ -11,7 +11,8 @@ const limiter = rateLimit({
     uniqueTokenPerInterval: 500,
 });
 
-// Error codes mapping from backend
+// Error codes mapping from backend serializer
+// Backend returns errors in format: { field_name: ['error message'] }
 const ERROR_CODES = {
     USER_NOT_FOUND: 'userNotFound',
     INVALID_BIRTH_DATE: 'invalidBirthDate',
@@ -34,37 +35,61 @@ function getClientIP(request) {
 
 /**
  * Map backend error to frontend error code
+ * Backend serializer returns errors in format:
+ * - { document_number: ['Cédula no encontrada con esa fecha de nacimiento.'] }
+ * - { user: ['Asesor inválido. No existe un asesor con las iniciales proporcionadas.'] }
+ * - { password: ['Contraseña incorrecta para el asesor indicado.'] }
  */
-function mapBackendError(errorDetail, statusCode) {
-    const detail = (errorDetail || '').toLowerCase();
-    
-    // Check for specific error patterns from the backend
-    if (detail.includes('no encontrado') || detail.includes('not found') || detail.includes('no existe')) {
-        return ERROR_CODES.USER_NOT_FOUND;
+function mapBackendError(errorData, statusCode) {
+    // Check for specific field errors from Django serializer
+    if (errorData) {
+        // Document number / birth date error
+        if (errorData.document_number) {
+            const msg = Array.isArray(errorData.document_number) 
+                ? errorData.document_number[0] 
+                : errorData.document_number;
+            if (msg.toLowerCase().includes('fecha')) {
+                return { code: ERROR_CODES.INVALID_BIRTH_DATE, detail: msg };
+            }
+            return { code: ERROR_CODES.USER_NOT_FOUND, detail: msg };
+        }
+        
+        // Advisor (user) error
+        if (errorData.user) {
+            const msg = Array.isArray(errorData.user) 
+                ? errorData.user[0] 
+                : errorData.user;
+            return { code: ERROR_CODES.INVALID_ADVISOR, detail: msg };
+        }
+        
+        // Password error
+        if (errorData.password) {
+            const msg = Array.isArray(errorData.password) 
+                ? errorData.password[0] 
+                : errorData.password;
+            return { code: ERROR_CODES.INVALID_CREDENTIALS, detail: msg };
+        }
+        
+        // Non-field errors
+        if (errorData.non_field_errors) {
+            const msg = Array.isArray(errorData.non_field_errors) 
+                ? errorData.non_field_errors[0] 
+                : errorData.non_field_errors;
+            return { code: 'generalError', detail: msg };
+        }
+
+        // Detail message (generic)
+        if (errorData.detail) {
+            return { code: 'generalError', detail: errorData.detail };
+        }
     }
     
-    if (detail.includes('fecha') || detail.includes('birth') || detail.includes('nacimiento')) {
-        return ERROR_CODES.INVALID_BIRTH_DATE;
-    }
-    
-    if (detail.includes('asesor') || detail.includes('advisor') || detail.includes('consultor')) {
-        return ERROR_CODES.INVALID_ADVISOR;
-    }
-    
-    if (detail.includes('bloqueada') || detail.includes('locked') || detail.includes('suspendida')) {
-        return ERROR_CODES.ACCOUNT_LOCKED;
-    }
-    
-    if (detail.includes('deshabilitada') || detail.includes('disabled') || detail.includes('inactiva')) {
-        return ERROR_CODES.ACCOUNT_DISABLED;
-    }
-    
-    // Default to invalid credentials for 400/401 errors
+    // Default for 400/401 errors
     if (statusCode === 400 || statusCode === 401) {
-        return ERROR_CODES.INVALID_CREDENTIALS;
+        return { code: ERROR_CODES.INVALID_CREDENTIALS, detail: 'Credenciales inválidas' };
     }
     
-    return 'generalError';
+    return { code: 'generalError', detail: 'Error de autenticación' };
 }
 
 export async function POST(request) {
@@ -101,6 +126,7 @@ export async function POST(request) {
             );
         }
 
+        // Parse password format: USER-PASSWORD
         const [user, password] = data.password.split('-');
         
         // Validate password format
@@ -116,11 +142,12 @@ export async function POST(request) {
             );
         }
 
+        // Build backend request data matching AttlasInsolvencyAuthSerializer
         const backendData = {
-            user: user.toUpperCase(),
-            password,
-            birth_date: data.birth_date,
             document_number: data.document_number,
+            birth_date: data.birth_date,
+            user: user.toUpperCase(), // Asesor initials in uppercase
+            password: password,
         };
 
         const response = await axios.post(
@@ -152,15 +179,15 @@ export async function POST(request) {
         // Handle axios errors
         if (axios.isAxiosError(error)) {
             const statusCode = error.response?.status || 500;
-            const errorDetail = error.response?.data?.detail || error.message;
-            const errorCode = mapBackendError(errorDetail, statusCode);
+            const errorData = error.response?.data;
+            const { code: errorCode, detail } = mapBackendError(errorData, statusCode);
             
             return NextResponse.json(
                 { 
                     success: false,
                     error: 'AUTH_ERROR',
                     errorCode,
-                    detail: errorDetail,
+                    detail,
                 },
                 { status: statusCode === 500 ? 500 : 400 }
             );
