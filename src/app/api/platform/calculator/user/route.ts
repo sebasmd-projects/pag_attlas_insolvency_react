@@ -4,10 +4,11 @@ import axios from 'axios';
 import { NextResponse } from 'next/server';
 import { userIdentificationSchema, userRegistrationSchema } from '@/lib/validation/schemas';
 
-const BACKEND_URL = 'https://propensionesabogados.com/api/v1';
+const BACKEND_URL = 'https://propensionesabogados.com/api/v1/calculator';
 
 /**
  * POST - Buscar usuario por cedula y fecha de nacimiento
+ * Backend endpoint: GET /clients/search/?documentNumber=xxx&birthDate=yyyy-mm-dd
  */
 export async function POST(request: Request) {
     try {
@@ -28,13 +29,13 @@ export async function POST(request: Request) {
 
         const { cedula, birthDate } = validation.data;
 
-        // Buscar usuario en el backend
+        // Buscar usuario en el backend - GET /clients/search/
         const response = await axios.get(
             `${BACKEND_URL}/clients/search/`,
             {
                 params: {
-                    document_number: cedula,
-                    birth_date: birthDate,
+                    documentNumber: cedula,
+                    birthDate: birthDate,
                 },
                 timeout: 10000,
             }
@@ -47,20 +48,20 @@ export async function POST(request: Request) {
             found: true,
             user: {
                 id: userData.id,
-                cedula: userData.document_number,
-                firstName: userData.first_name,
-                lastName: userData.last_name,
-                email: userData.email,
-                phone: userData.phone,
-                address: userData.address,
-                birthDate: userData.birth_date,
+                cedula: userData.documentNumber,
+                firstName: userData.firstName,
+                lastName: userData.lastName,
+                email: userData.email || '',
+                phone: userData.phone || '',
+                address: userData.address || '',
+                birthDate: userData.birthDate,
             },
         });
 
     } catch (error) {
         if (axios.isAxiosError(error)) {
-            // Usuario no encontrado
-            if (error.response?.status === 404) {
+            // Usuario no encontrado (404 o error de validacion del serializer)
+            if (error.response?.status === 404 || error.response?.status === 400) {
                 return NextResponse.json({
                     success: true,
                     found: false,
@@ -105,7 +106,8 @@ export async function POST(request: Request) {
 }
 
 /**
- * PUT - Crear o actualizar usuario
+ * PUT - Crear nuevo usuario/cliente
+ * Backend endpoint: POST /clients/
  */
 export async function PUT(request: Request) {
     try {
@@ -126,16 +128,17 @@ export async function PUT(request: Request) {
 
         const userData = validation.data;
 
-        // Crear usuario en el backend
+        // Crear usuario en el backend - POST /clients/
+        // El serializer ClientCreateSerializer espera estos campos en camelCase
         const response = await axios.post(
             `${BACKEND_URL}/clients/`,
             {
-                document_number: userData.cedula,
-                birth_date: userData.birthDate,
-                first_name: userData.firstName,
-                last_name: userData.lastName,
-                email: userData.email,
-                phone: userData.phone,
+                documentNumber: userData.cedula,
+                birthDate: userData.birthDate,
+                firstName: userData.firstName,
+                lastName: userData.lastName,
+                email: userData.email || '',
+                phone: userData.phone || '',
                 address: userData.address || '',
             },
             { timeout: 10000 }
@@ -147,37 +150,40 @@ export async function PUT(request: Request) {
             success: true,
             user: {
                 id: createdUser.id,
-                cedula: createdUser.document_number,
-                firstName: createdUser.first_name,
-                lastName: createdUser.last_name,
-                email: createdUser.email,
-                phone: createdUser.phone,
-                address: createdUser.address,
-                birthDate: createdUser.birth_date,
+                cedula: createdUser.documentNumber,
+                firstName: createdUser.firstName,
+                lastName: createdUser.lastName,
+                email: createdUser.email || '',
+                phone: createdUser.phone || '',
+                address: createdUser.address || '',
+                birthDate: createdUser.birthDate,
             },
         });
 
     } catch (error) {
         if (axios.isAxiosError(error)) {
-            // Usuario ya existe
-            if (error.response?.status === 409) {
-                return NextResponse.json(
-                    { 
-                        success: false, 
-                        error: 'USER_EXISTS',
-                        detail: 'El usuario ya existe'
-                    },
-                    { status: 409 }
-                );
-            }
-
-            // Error de validacion del backend
+            // Usuario ya existe (el serializer devuelve 400 con error en documentNumber)
             if (error.response?.status === 400) {
+                const errorData = error.response?.data;
+                
+                // Verificar si es error de usuario existente
+                if (errorData?.documentNumber) {
+                    return NextResponse.json(
+                        { 
+                            success: false, 
+                            error: 'USER_EXISTS',
+                            detail: errorData.documentNumber[0] || 'El usuario ya existe'
+                        },
+                        { status: 409 }
+                    );
+                }
+                
+                // Otros errores de validacion
                 return NextResponse.json(
                     { 
                         success: false, 
                         error: 'VALIDATION_ERROR',
-                        detail: error.response?.data?.detail || 'Datos invalidos'
+                        detail: errorData?.detail || errorData?.non_field_errors?.[0] || 'Datos invalidos'
                     },
                     { status: 400 }
                 );

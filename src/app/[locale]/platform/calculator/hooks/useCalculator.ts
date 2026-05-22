@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import {
   calculateDebtPayment,
   DEFAULT_USURA_RATE,
@@ -83,6 +83,10 @@ export interface UseCalculatorReturn {
 
   // Computed values
   parsedUsuraRate: number;
+  
+  // Loading state for interest rate
+  isLoadingRate: boolean;
+  rateSource: 'backend' | 'default' | 'manual';
 }
 
 /**
@@ -114,9 +118,37 @@ export function useCalculator(): UseCalculatorReturn {
   const [hasPayrollDiscount, setHasPayrollDiscount] = useState<'yes' | 'no'>('no');
   const [usuraRate, setUsuraRate] = useState<string>(DEFAULT_USURA_RATE.toString());
   const [interestType, setInterestType] = useState<InterestType>('simple');
+  
+  // Interest rate loading state
+  const [isLoadingRate, setIsLoadingRate] = useState<boolean>(true);
+  const [rateSource, setRateSource] = useState<'backend' | 'default' | 'manual'>('default');
 
   // Result state
   const [result, setResult] = useState<CalculatorResult | null>(null);
+  
+  // Fetch interest rate from backend on mount
+  useEffect(() => {
+    async function fetchInterestRate() {
+      try {
+        setIsLoadingRate(true);
+        const response = await fetch('/api/platform/calculator/interest-rate');
+        const data = await response.json();
+        
+        if (data.success && typeof data.rate === 'number') {
+          setUsuraRate(data.rate.toString());
+          setRateSource(data.source === 'backend' ? 'backend' : 'default');
+        }
+      } catch (error) {
+        console.error('Error fetching interest rate:', error);
+        // Keep default rate on error
+        setRateSource('default');
+      } finally {
+        setIsLoadingRate(false);
+      }
+    }
+    
+    fetchInterestRate();
+  }, []);
 
   // Parsed usura rate
   const parsedUsuraRate = useMemo(() => {
@@ -206,6 +238,12 @@ export function useCalculator(): UseCalculatorReturn {
     setResult(null);
   }, []);
 
+  // Custom setUsuraRate that marks source as manual
+  const handleSetUsuraRate = useCallback((value: string) => {
+    setUsuraRate(value);
+    setRateSource('manual');
+  }, []);
+
   return {
     essentialExpenses,
     totalDebt,
@@ -214,7 +252,7 @@ export function useCalculator(): UseCalculatorReturn {
     hasPayrollDiscount,
     setHasPayrollDiscount,
     usuraRate,
-    setUsuraRate,
+    setUsuraRate: handleSetUsuraRate,
     interestType,
     setInterestType,
     result,
@@ -222,5 +260,7 @@ export function useCalculator(): UseCalculatorReturn {
     calculate,
     reset,
     parsedUsuraRate,
+    isLoadingRate,
+    rateSource,
   };
 }
