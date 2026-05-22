@@ -369,11 +369,72 @@
   },
   "Platform": {
     "calculator": {
-      "title": "Calcula tu insolvencia",
+      "title": "Asesoría Preliminar",
       "subTitle": "¿Cuánto tiempo te tomará <span>pagar tus deudas?</span>",
       "caseOfInsolvency": "Supuesto de insolvencia",
       "becomeInsolvent": "¿Me puedo <span>insolventar?</span>",
       "description": "Conoce cuánto tiempo te tomará pagar tus deudas con la calculadora de deudas de ATTLAS",
+      "steps": {
+        "identification": "Identificación",
+        "calculator": "Calculadora"
+      },
+      "userIdentification": {
+        "title": "Identifícate",
+        "description": "Ingresa tu cédula y fecha de nacimiento para continuar.",
+        "cedula": "Número de cédula",
+        "cedulaPlaceholder": "Ej: 1234567890",
+        "birthDate": "Fecha de nacimiento",
+        "continue": "Continuar",
+        "searching": "Buscando...",
+        "errors": {
+          "searchFailed": "Error al buscar usuario. Por favor intente nuevamente.",
+          "networkError": "Error de conexión. Por favor intente nuevamente."
+        }
+      },
+      "userRegistration": {
+        "title": "Registro de usuario",
+        "description": "No encontramos tus datos. Por favor completa el formulario para continuar.",
+        "cedulaLabel": "Cédula",
+        "birthDateLabel": "Fecha de nacimiento",
+        "firstName": "Nombres",
+        "firstNamePlaceholder": "Ej: Juan Carlos",
+        "lastName": "Apellidos",
+        "lastNamePlaceholder": "Ej: Pérez García",
+        "email": "Correo electrónico",
+        "emailPlaceholder": "Ej: correo@ejemplo.com",
+        "phone": "Teléfono",
+        "phonePlaceholder": "Ej: 3001234567",
+        "address": "Dirección",
+        "addressPlaceholder": "Ej: Calle 123 #45-67",
+        "optional": "Opcional",
+        "register": "Registrarme",
+        "registering": "Registrando...",
+        "cancel": "Cancelar",
+        "errors": {
+          "registrationFailed": "Error al registrar usuario. Por favor intente nuevamente.",
+          "networkError": "Error de conexión. Por favor intente nuevamente."
+        }
+      },
+      "userData": {
+        "title": "Datos verificados",
+        "description": "Hemos verificado tu identidad.",
+        "welcome": "Bienvenido/a",
+        "verifiedUser": "Usuario verificado exitosamente",
+        "cedula": "Cédula",
+        "birthDate": "Fecha de nacimiento",
+        "email": "Correo",
+        "phone": "Teléfono",
+        "address": "Dirección",
+        "changeUser": "Cambiar usuario",
+        "continue": "Continuar a la calculadora",
+        "calculatingFor": "Calculando para"
+      },
+      "error": {
+        "title": "Error en la calculadora",
+        "description": "Ocurrió un error al cargar la calculadora. Por favor intente nuevamente.",
+        "retry": "Intentar de nuevo",
+        "goHome": "Ir al inicio"
+      },
       "form": {
         "inputs": {
           "essentialExpenses": "Gastos esenciales",
@@ -396,25 +457,43 @@
           "totalDebt": "Total de deudas",
           "currentDebtPayment": "Pago actual a deudas",
           "payrollDiscount": "¿Tiene descuentos por nómina?",
+          "payrollBonusInfo": "Este valor se suma a su capacidad de pago, ya que es dinero que va directamente a pagar sus deudas.",
           "discountAmount": "Monto de descuentos por nómina",
-          "income": "Total de ingresos"
+          "income": "Total de ingresos",
+          "usuraRate": "Tasa de interés de usura",
+          "usuraRateHelpText": "Tasa máxima legal vigente. Por defecto se usa 27.14% anual. Puede modificarla según la tasa actual.",
+          "annual": "anual",
+          "interestType": "Tipo de interés",
+          "interestTypeHelpText": "Seleccione cómo desea calcular los intereses sobre su deuda.",
+          "simpleInterest": "Interés Simple",
+          "compoundInterest": "Interés Compuesto"
         },
         "yes": "Sí",
         "no": "No",
         "optional": "Opcional",
         "calculate": "Calcular",
         "validation": {
-          "debtZero": "El total de deudas debe ser mayor a cero"
+          "debtZero": "El total de deudas debe ser mayor a cero",
+          "incomeZero": "Los ingresos deben ser mayores a cero",
+          "expensesNegative": "Los gastos no pueden ser negativos",
+          "payrollNegative": "El descuento de nómina no puede ser negativo",
+          "rateInvalid": "La tasa de interés debe estar entre 0 y 100"
         }
       },
       "result": {
         "title": "Resultado",
-        "cantPay": "No tiene capacidad de pago.",
-        "success": "Te demorarías {time} pagando tu deuda.",
+        "cantPay": "No tiene capacidad de pago. <link1>Contáctanos</link1> o escríbenos por <link2>WhatsApp</link2> para asesoría.",
+        "success": "Te demorarías {time} pagando tu deuda. <link1>Contáctanos</link1> o escríbenos por <link2>WhatsApp</link2> para más información.",
         "title_insolvency": "Insolvéntate",
         "contact": "Inicia tu trámite de insolvencia. <link1>Contáctanos</link1> o escríbenos por <link2>WhatsApp</link2>.",
         "years": "años",
-        "months": "meses"
+        "months": "meses",
+        "details": "Detalles del cálculo",
+        "estimatedInterest": "Intereses estimados",
+        "totalPayment": "Pago total (deuda + intereses)",
+        "monthlyCapacity": "Capacidad de pago mensual",
+        "usedRate": "Tasa aplicada",
+        "interestTypeUsed": "Tipo de interés"
       }
     },
     "pages": {
@@ -1068,7 +1147,30 @@
           "form": {
             "documentNumber": "Número de documento",
             "password": "Asesor autorizado",
-            "birthDate": "Fecha de nacimiento"
+            "birthDate": "Fecha de nacimiento",
+            "passwordHint": "Formato: USUARIO-CONTRASEÑA",
+            "validating": "Validando información...",
+            "entering": "Ingresando...",
+            "submit": "Ingresar"
+          },
+          "errors": {
+            "errorTitle": "Error de autenticación",
+            "rateLimitTitle": "Demasiados intentos",
+            "userNotFound": "No se encontró un usuario con ese número de documento.",
+            "userNotFoundHint": "Verifica que el número de documento sea correcto.",
+            "invalidBirthDate": "La fecha de nacimiento no coincide con nuestros registros.",
+            "invalidBirthDateHint": "Verifica que la fecha de nacimiento sea correcta.",
+            "invalidCredentials": "Las credenciales del asesor son incorrectas.",
+            "invalidCredentialsHint": "Verifica el usuario y contraseña del asesor.",
+            "invalidAdvisor": "El asesor ingresado no es válido o no está autorizado.",
+            "accountLocked": "Tu cuenta ha sido bloqueada temporalmente. Por favor contacta soporte.",
+            "accountDisabled": "Tu cuenta está deshabilitada. Por favor contacta soporte.",
+            "tooManyAttempts": "Has excedido el número de intentos permitidos. Por favor espera 15 minutos antes de intentar nuevamente.",
+            "timeoutError": "El servidor tardó demasiado en responder. Por favor intenta nuevamente.",
+            "networkError": "Error de conexión. Verifica tu conexión a internet e intenta nuevamente.",
+            "missingFields": "Todos los campos son obligatorios.",
+            "invalidPasswordFormat": "El formato de la contraseña es incorrecto. Usa el formato: USUARIO-CONTRASEÑA",
+            "generalError": "Ocurrió un error inesperado. Por favor intenta más tarde."
           },
           "registerLink": "¿No tienes cuenta? Regístrate aquí"
         },

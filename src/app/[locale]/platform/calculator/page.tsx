@@ -1,264 +1,159 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
-import { Alert, Button, Form } from 'react-bootstrap';
-import { RiAlarmWarningLine } from 'react-icons/ri';
-import { ReactSVG } from 'react-svg';
+import { useState, useCallback } from 'react';
 import SubTitleComponent from '@/components/micro-components/sub_title';
 import TitleComponent from '@/components/micro-components/title';
+import type { UserData } from '@/lib/calculator/types';
 
+// Dynamic imports for code splitting
+const UserIdentification = dynamic(() => import('./components/UserIdentification'));
+const UserRegistrationForm = dynamic(() => import('./components/UserRegistrationForm'));
+const UserDataDisplay = dynamic(() => import('./components/UserDataDisplay'));
+const CalculatorForm = dynamic(() => import('./components/CalculatorForm'));
+const VerifyCompliment = dynamic(() => import('./components/VerifyCompliment'));
 
-const DebtGauge = dynamic(() => import('./components/DebtGauge'));
-const VerifyCompliment = dynamic(() => import('./components/VerifyCompliment'))
+type Step = 'identification' | 'registration' | 'userData' | 'calculator';
 
 export default function CalculatorPage() {
     const t = useTranslations('Platform.calculator');
 
-    function parseLocaleNumber(value: string): number {
-        const cleaned = value.replace(/\./g, '').replace(',', '.');
-        return Number(cleaned);
-    }
+    // State for the multi-step flow
+    const [step, setStep] = useState<Step>('identification');
+    const [user, setUser] = useState<UserData | null>(null);
+    const [pendingCedula, setPendingCedula] = useState<string>('');
+    const [pendingBirthDate, setPendingBirthDate] = useState<string>('');
 
-    function formatToLocale(value: string): string {
-        const numeric = parseLocaleNumber(value);
-        if (isNaN(numeric)) return value;
-        return new Intl.NumberFormat('es-CO', {
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 2,
-        }).format(numeric);
-    }
+    // Handlers
+    const handleUserFound = useCallback((foundUser: UserData) => {
+        setUser(foundUser);
+        setStep('userData');
+    }, []);
 
-    function useCurrencyInput(initial = '') {
-        const [display, setDisplay] = useState(initial);
-        const [numeric, setNumeric] = useState<number | undefined>();
+    const handleUserNotFound = useCallback((cedula: string, birthDate: string) => {
+        setPendingCedula(cedula);
+        setPendingBirthDate(birthDate);
+        setStep('registration');
+    }, []);
 
-        function handleChange(value: string) {
-            setDisplay(value);
-            setNumeric(parseLocaleNumber(value));
-        }
+    const handleUserRegistered = useCallback((registeredUser: UserData) => {
+        setUser(registeredUser);
+        setStep('calculator');
+    }, []);
 
-        function onBlur() {
-            setDisplay(formatToLocale(display));
-        }
+    const handleContinueToCalculator = useCallback(() => {
+        setStep('calculator');
+    }, []);
 
-        return { display, numeric, handleChange, onBlur };
-    }
+    const handleChangeUser = useCallback(() => {
+        setUser(null);
+        setPendingCedula('');
+        setPendingBirthDate('');
+        setStep('identification');
+    }, []);
 
-    const essentialExpenses = useCurrencyInput();
-    const totalDebt = useCurrencyInput();
-    const payrollDiscount = useCurrencyInput();
-    const income = useCurrencyInput();
+    const handleCancelRegistration = useCallback(() => {
+        setPendingCedula('');
+        setPendingBirthDate('');
+        setStep('identification');
+    }, []);
 
-    const [hasPayrollDiscount, setHasPayrollDiscount] = useState<'yes' | 'no'>('no');
-    const [result, setResult] = useState<{ isError?: boolean; time?: string }>({});
+    // Render step indicator
+    const renderStepIndicator = () => {
+        const steps = [
+            { key: 'identification', label: t('steps.identification') },
+            { key: 'calculator', label: t('steps.calculator') },
+        ];
 
-    function convertYearsToYearsAndMonths(years: number): string {
-        const fullYears = Math.floor(years);
-        const remainingMonths = Math.round((years - fullYears) * 12);
-        if (fullYears === 0) return `${remainingMonths} ${t('result.months')}`;
-        return `${fullYears} ${t('result.years')} ${remainingMonths} ${t('result.months')}`;
-    }
+        const currentIndex = step === 'identification' || step === 'registration' || step === 'userData' ? 0 : 1;
 
-    function parseTimeToYears(timeStr: string): number {
-        const yearsMatch = timeStr.match(/(\d+)\s+años?/);
-        const monthsMatch = timeStr.match(/(\d+)\s+meses?/);
-        const years = yearsMatch ? parseInt(yearsMatch[1]) : 0;
-        const months = monthsMatch ? parseInt(monthsMatch[1]) : 0;
-        return years + months / 12;
-    }
-
-    function calculate(e: React.FormEvent): void {
-        e.preventDefault();
-
-        const payroll = hasPayrollDiscount === 'yes' ? payrollDiscount.numeric || 0 : 0;
-        const availableMonthly = (income.numeric || 0) - (payroll + (essentialExpenses.numeric || 0));
-
-        if (!totalDebt.numeric || totalDebt.numeric <= 0) {
-            setResult({ isError: true });
-            return;
-        }
-
-        if (availableMonthly <= 0) {
-            setResult({ isError: true });
-            return;
-        }
-
-        const yearsNeeded = totalDebt.numeric / (availableMonthly * 12);
-        const formattedTime = convertYearsToYearsAndMonths(yearsNeeded);
-        setResult({ isError: false, time: formattedTime });
-    }
-
-    const inputProps = {
-        inputMode: 'decimal' as const,
-        onWheel: (e: React.WheelEvent<HTMLInputElement>) => e.currentTarget.blur(),
+        return (
+            <div className="d-flex justify-content-center mb-4">
+                {steps.map((s, index) => (
+                    <div key={s.key} className="d-flex align-items-center">
+                        <div
+                            className={`rounded-circle d-flex align-items-center justify-content-center ${
+                                index <= currentIndex ? 'bg-primary text-white' : 'bg-light text-muted'
+                            }`}
+                            style={{ width: 32, height: 32 }}
+                        >
+                            {index + 1}
+                        </div>
+                        <span className={`ms-2 ${index <= currentIndex ? 'fw-bold' : 'text-muted'}`}>
+                            {s.label}
+                        </span>
+                        {index < steps.length - 1 && (
+                            <div
+                                className={`mx-3 ${index < currentIndex ? 'bg-primary' : 'bg-light'}`}
+                                style={{ width: 40, height: 2 }}
+                            />
+                        )}
+                    </div>
+                ))}
+            </div>
+        );
     };
-
-    function translateRaw(key: string) {
-        return t.raw(key as any);
-    }
-
-    const itemKeys = [
-        'item1', 'item2', 'item3', 'item4', 'item5',
-        'item6', 'item7', 'item8', 'item9', 'item10',
-        'item11', 'item12', 'item13',
-    ] as const satisfies ReadonlyArray<string>;
 
     return (
         <div className="container my-5">
-            {/* Calculadora */}
+            {/* Title */}
             <div className="mb-4 container-lg">
                 <TitleComponent title={t('title')} />
                 <SubTitleComponent sub_title="subTitle" t={t} />
             </div>
 
-            <div className="row">
-                <div className="col-md-6">
-                    <Form onSubmit={calculate}>
-                        <Form.Group className="mb-3">
-                            <Form.Label className='fw-bold'>{t('form.inputs.essentialExpenses')}</Form.Label>
+            {/* Step indicator */}
+            {renderStepIndicator()}
 
-                            <Form.Text className="text-muted">
-                                <div className="mb-2 d-flex align-items-start">
-                                    <RiAlarmWarningLine className="me-2 mt-1" />
-                                    <span>{t('form.inputs.essentialExpensesHelpText')}</span>
-                                </div>
+            {/* Content based on current step */}
+            <div className="row justify-content-center">
+                {step === 'identification' && (
+                    <div className="col-md-6">
+                        <UserIdentification
+                            onUserFound={handleUserFound}
+                            onUserNotFound={handleUserNotFound}
+                        />
+                    </div>
+                )}
 
-                                <div className="row">
-                                    <div className="col-md-6">
-                                        <ul className="list-unstyled">
-                                            {itemKeys.slice(0, Math.ceil(itemKeys.length / 2)).map((key) => {
-                                                const fullKey = `form.inputs.essentialExpensesItems.${key}`;
-                                                return <li key={key}>{translateRaw(fullKey)}</li>;
-                                            })}
-                                        </ul>
-                                    </div>
-                                    <div className="col-md-6">
-                                        <ul className="list-unstyled">
-                                            {itemKeys.slice(Math.ceil(itemKeys.length / 2)).map((key) => {
-                                                const fullKey = `form.inputs.essentialExpensesItems.${key}`;
-                                                return <li key={key}>{translateRaw(fullKey)}</li>;
-                                            })}
-                                        </ul>
-                                    </div>
-                                </div>
-                            </Form.Text>
+                {step === 'registration' && (
+                    <div className="col-md-8">
+                        <UserRegistrationForm
+                            cedula={pendingCedula}
+                            birthDate={pendingBirthDate}
+                            onUserRegistered={handleUserRegistered}
+                            onCancel={handleCancelRegistration}
+                        />
+                    </div>
+                )}
 
-                            <Form.Control
-                                {...inputProps}
-                                onBlur={essentialExpenses.onBlur}
-                                onChange={(e) => essentialExpenses.handleChange(e.target.value)}
-                                placeholder={t('form.inputs.essentialExpenses')}
-                                required
-                                value={essentialExpenses.display}
-                            />
-                        </Form.Group>
+                {step === 'userData' && user && (
+                    <div className="col-md-6">
+                        <UserDataDisplay
+                            user={user}
+                            onContinue={handleContinueToCalculator}
+                            onChangeUser={handleChangeUser}
+                        />
+                    </div>
+                )}
 
-                        <Form.Group className="mb-3">
-                            <Form.Label className='fw-bold'>{t('form.inputs.totalDebt')}</Form.Label>
-                            <Form.Control
-                                {...inputProps}
-                                onBlur={totalDebt.onBlur}
-                                onChange={(e) => totalDebt.handleChange(e.target.value)}
-                                placeholder={t('form.inputs.totalDebt')}
-                                required
-                                value={totalDebt.display}
-                            />
-                        </Form.Group>
-
-                        <Form.Group className="mb-3">
-                            <Form.Label className='fw-bold'>{t('form.inputs.payrollDiscount')}</Form.Label>
-                            <Form.Select
-                                onChange={(e) => setHasPayrollDiscount(e.target.value as 'yes' | 'no')}
-                                value={hasPayrollDiscount}
-                            >
-                                <option value="yes">{t('form.yes')}</option>
-                                <option value="no">{t('form.no')}</option>
-                            </Form.Select>
-                        </Form.Group>
-
-                        {hasPayrollDiscount === 'yes' && (
-                            <Form.Group className="mb-3">
-                                <Form.Label className='fw-bold'>{t('form.inputs.discountAmount')}</Form.Label>
-                                <Form.Control
-                                    {...inputProps}
-                                    onBlur={payrollDiscount.onBlur}
-                                    onChange={(e) => payrollDiscount.handleChange(e.target.value)}
-                                    required
-                                    value={payrollDiscount.display}
-                                />
-                            </Form.Group>
-                        )}
-
-                        <Form.Group className="mb-4">
-                            <Form.Label className='fw-bold'>{t('form.inputs.income')}</Form.Label>
-                            <Form.Control
-                                {...inputProps}
-                                onBlur={income.onBlur}
-                                onChange={(e) => income.handleChange(e.target.value)}
-                                placeholder={t('form.inputs.income')}
-                                required
-                                value={income.display}
-                            />
-                        </Form.Group>
-
-                        <div className="d-grid gap-2">
-                            <Button type="submit" variant="outline-success">
-                                {t('form.calculate')}
-                            </Button>
-                        </div>
-                    </Form>
-                </div>
-
-                <div className="col-md-6 d-flex justify-content-center align-items-center" style={{ minHeight: '100%' }}>
-                    {(result.time || result.isError) ? (
-                        <div className="w-100">
-                            <Alert className="text-center" variant={result.isError ? 'danger' : 'success'}>
-                                <h4 className="mb-3">{t('result.title')}</h4>
-                                <p className="mb-0">
-                                    {result.isError
-                                        ? t.rich('result.cantPay', {
-                                            link1: (chunks) => <Link href="/#contact">{chunks}</Link>,
-                                            link2: (chunks) => (
-                                                <a href="https://wa.me/573012283818" rel="noopener noreferrer" target="_blank">{chunks}</a>
-                                            ),
-                                        })
-                                        : t.rich('result.success', {
-                                            time: result.time ?? '',
-                                            link1: (chunks) => <Link href="/#contact">{chunks}</Link>,
-                                            link2: (chunks) => (
-                                                <a href="https://wa.me/573012283818" rel="noopener noreferrer" target="_blank">{chunks}</a>
-                                            ),
-                                        })}
-                                    <DebtGauge
-                                        isInsolvent={!!result.isError}
-                                        years={result.time ? parseTimeToYears(result.time) : undefined}
-                                    />
-                                </p>
-                            </Alert>
-                        </div>
-                    ) : (
-                        <div className='mt-4' style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} >
-                            <ReactSVG
-                                beforeInjection={(svg) => {
-                                    svg.setAttribute('width', '600px');
-                                    svg.setAttribute('height', '600px');
-                                }}
-                                src="/assets/imgs/icons/calculadora.svg"
-                            />
-                        </div>
-                    )}
-                </div>
+                {step === 'calculator' && (
+                    <div className="col-12">
+                        <CalculatorForm
+                            user={user ?? undefined}
+                            onBack={handleChangeUser}
+                        />
+                    </div>
+                )}
             </div>
 
-            <hr className='my-2' />
+            <hr className="my-4" />
 
             {/* Supuesto de insolvencia */}
             <div className="mt-4 container-lg">
-                <TitleComponent title={t('caseOfInsolvency')} /> {/* Supuesto de insolvencia */}
-                <SubTitleComponent sub_title="becomeInsolvent" t={t} /> {/* ¿Me puedo insolventar? */}
+                <TitleComponent title={t('caseOfInsolvency')} />
+                <SubTitleComponent sub_title="becomeInsolvent" t={t} />
             </div>
 
             <div className="row">

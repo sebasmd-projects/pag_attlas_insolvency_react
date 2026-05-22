@@ -283,7 +283,7 @@
           "features": {
             "feature1": {
               "title": "Who does it apply to?",
-              "description": "• Natural Persons\n• Merchants\n• Workers and Employers\n• Families\n• Property Owners and Tenants\n• Public and Private Entities\n• Debtors and Creditors\n• Victims of Rights Violations\n• Community and Social Organizations\n• People in a Situation of Insolvency"
+              "description": "• Natural Persons\n• Merchants\n• Workers and Employers\n��� Families\n• Property Owners and Tenants\n• Public and Private Entities\n• Debtors and Creditors\n• Victims of Rights Violations\n• Community and Social Organizations\n• People in a Situation of Insolvency"
             },
             "feature2": {
               "title": "Requirements",
@@ -369,52 +369,131 @@
   },
   "Platform": {
     "calculator": {
-      "title": "Calcula tu insolvencia",
-      "subTitle": "¿Cuánto tiempo te tomará <span>pagar tus deudas?</span>",
-      "caseOfInsolvency": "Supuesto de insolvencia",
-      "becomeInsolvent": "¿Me puedo <span>insolventar?</span>",
-      "description": "Conoce cuánto tiempo te tomará pagar tus deudas con la calculadora de deudas de ATTLAS",
+      "title": "Preliminary Advice",
+      "subTitle": "How long will it take you to <span>pay off your debts?</span>",
+      "caseOfInsolvency": "Insolvency Assumption",
+      "becomeInsolvent": "Can I become <span>insolvent?</span>",
+      "description": "Find out how long it will take you to pay off your debts with the ATTLAS debt calculator",
+      "steps": {
+        "identification": "Identification",
+        "calculator": "Calculator"
+      },
+      "userIdentification": {
+        "title": "Identify Yourself",
+        "description": "Enter your ID number and date of birth to continue.",
+        "cedula": "ID Number",
+        "cedulaPlaceholder": "E.g.: 1234567890",
+        "birthDate": "Date of Birth",
+        "continue": "Continue",
+        "searching": "Searching...",
+        "errors": {
+          "searchFailed": "Error searching for user. Please try again.",
+          "networkError": "Connection error. Please try again."
+        }
+      },
+      "userRegistration": {
+        "title": "User Registration",
+        "description": "We couldn't find your data. Please fill out the form to continue.",
+        "cedulaLabel": "ID Number",
+        "birthDateLabel": "Date of Birth",
+        "firstName": "First Name",
+        "firstNamePlaceholder": "E.g.: John",
+        "lastName": "Last Name",
+        "lastNamePlaceholder": "E.g.: Doe",
+        "email": "Email",
+        "emailPlaceholder": "E.g.: email@example.com",
+        "phone": "Phone",
+        "phonePlaceholder": "E.g.: 3001234567",
+        "address": "Address",
+        "addressPlaceholder": "E.g.: 123 Main St",
+        "optional": "Optional",
+        "register": "Register",
+        "registering": "Registering...",
+        "cancel": "Cancel",
+        "errors": {
+          "registrationFailed": "Error registering user. Please try again.",
+          "networkError": "Connection error. Please try again."
+        }
+      },
+      "userData": {
+        "title": "Verified Data",
+        "description": "We have verified your identity.",
+        "welcome": "Welcome",
+        "verifiedUser": "User verified successfully",
+        "cedula": "ID Number",
+        "birthDate": "Date of Birth",
+        "email": "Email",
+        "phone": "Phone",
+        "address": "Address",
+        "changeUser": "Change User",
+        "continue": "Continue to Calculator",
+        "calculatingFor": "Calculating for"
+      },
+      "error": {
+        "title": "Calculator Error",
+        "description": "An error occurred while loading the calculator. Please try again.",
+        "retry": "Try Again",
+        "goHome": "Go Home"
+      },
       "form": {
         "inputs": {
-          "essentialExpenses": "Gastos esenciales",
-          "essentialExpensesHelpText": "Por favor ingrese el totalizado de:",
+          "essentialExpenses": "Essential Expenses",
+          "essentialExpensesHelpText": "Please enter the total of:",
           "essentialExpensesItems": {
-            "item1": "Arriendo",
-            "item2": "Seguro (muebles/inmuebles)",
-            "item3": "Alimentación",
-            "item4": "Servicios públicos",
-            "item5": "Seguridad social integral",
-            "item6": "Transporte",
-            "item7": "Vestuario y calzado (3 mudas por año)",
-            "item8": "Educación (Mensualidad)",
-            "item9": "Impuestos",
-            "item10": "Recreación y deporte",
-            "item11": "Administración",
-            "item12": "Comunicaciones",
-            "item13": "Obligación alimentaria (REDAM)"
+            "item1": "Rent",
+            "item2": "Insurance (furniture/real estate)",
+            "item3": "Food",
+            "item4": "Utilities",
+            "item5": "Social Security",
+            "item6": "Transportation",
+            "item7": "Clothing and footwear (3 sets per year)",
+            "item8": "Education (Monthly)",
+            "item9": "Taxes",
+            "item10": "Recreation and sports",
+            "item11": "Administration fees",
+            "item12": "Communications",
+            "item13": "Child support obligation (REDAM)"
           },
-          "totalDebt": "Total de deudas",
-          "currentDebtPayment": "Pago actual a deudas",
-          "payrollDiscount": "¿Tiene descuentos por nómina?",
-          "discountAmount": "Monto de descuentos por nómina",
-          "income": "Total de ingresos"
+          "totalDebt": "Total Debt",
+          "currentDebtPayment": "Current Debt Payment",
+          "payrollDiscount": "Do you have payroll deductions?",
+          "payrollBonusInfo": "This amount is added to your payment capacity, as it is money that goes directly to paying your debts.",
+          "discountAmount": "Payroll deduction amount",
+          "income": "Total Income",
+          "usuraRate": "Usury Interest Rate",
+          "usuraRateHelpText": "Current maximum legal rate. Default is 27.14% annual. You can modify it according to the current rate.",
+          "annual": "annual",
+          "interestType": "Interest Type",
+          "interestTypeHelpText": "Select how you want to calculate interest on your debt.",
+          "simpleInterest": "Simple Interest",
+          "compoundInterest": "Compound Interest"
         },
-        "yes": "Sí",
+        "yes": "Yes",
         "no": "No",
-        "optional": "Opcional",
-        "calculate": "Calcular",
+        "optional": "Optional",
+        "calculate": "Calculate",
         "validation": {
-          "debtZero": "El total de deudas debe ser mayor a cero"
+          "debtZero": "Total debt must be greater than zero",
+          "incomeZero": "Income must be greater than zero",
+          "expensesNegative": "Expenses cannot be negative",
+          "payrollNegative": "Payroll deduction cannot be negative",
+          "rateInvalid": "Interest rate must be between 0 and 100"
         }
       },
       "result": {
-        "title": "Resultado",
-        "cantPay": "No tiene capacidad de pago.",
-        "success": "Te demorarías {time} pagando tu deuda.",
-        "title_insolvency": "Insolvéntate",
-        "contact": "Inicia tu trámite de insolvencia. <link1>Contáctanos</link1> o escríbenos por <link2>WhatsApp</link2>.",
-        "years": "años",
-        "months": "meses"
+        "title": "Result",
+        "cantPay": "You do not have payment capacity. <link1>Contact us</link1> or write us on <link2>WhatsApp</link2> for advice.",
+        "success": "It would take you {time} to pay off your debt. <link1>Contact us</link1> or write us on <link2>WhatsApp</link2> for more information.",
+        "title_insolvency": "Become Insolvent",
+        "contact": "Start your insolvency process. <link1>Contact us</link1> or write us on <link2>WhatsApp</link2>.",
+        "years": "years",
+        "months": "months",
+        "details": "Calculation Details",
+        "estimatedInterest": "Estimated Interest",
+        "totalPayment": "Total Payment (debt + interest)",
+        "monthlyCapacity": "Monthly Payment Capacity",
+        "usedRate": "Rate Applied",
+        "interestTypeUsed": "Interest Type"
       }
     },
     "pages": {
@@ -1010,7 +1089,7 @@
                   "label": "Edad"
                 },
                 "gender": {
-                  "label": "Género (sexo de nacimiento)",
+                  "label": "G��nero (sexo de nacimiento)",
                   "options": {
                     "male": "Masculino",
                     "female": "Femenino"
@@ -1059,18 +1138,41 @@
       },
       "auth": {
         "login": {
-          "title": "Iniciar sesión",
-          "invalidCredentials": "Credenciales inválidas",
-          "timeoutError": "Tiempo de espera agotado",
-          "errorLogin": "Datos incorrectos, por favor verifica tu información.",
-          "successLogin": "Inicio de sesión exitoso",
-          "generalError": "Ocurrió un error, por favor intenta más tarde.",
+          "title": "Log In",
+          "invalidCredentials": "Invalid credentials",
+          "timeoutError": "Request timed out",
+          "errorLogin": "Incorrect data, please verify your information.",
+          "successLogin": "Login successful",
+          "generalError": "An error occurred, please try again later.",
           "form": {
-            "documentNumber": "Número de documento",
-            "password": "Asesor autorizado",
-            "birthDate": "Fecha de nacimiento"
+            "documentNumber": "Document Number",
+            "password": "Authorized Advisor",
+            "birthDate": "Date of Birth",
+            "passwordHint": "Format: USER-PASSWORD",
+            "validating": "Validating information...",
+            "entering": "Logging in...",
+            "submit": "Log In"
           },
-          "registerLink": "¿No tienes cuenta? Regístrate aquí"
+          "errors": {
+            "errorTitle": "Authentication Error",
+            "rateLimitTitle": "Too Many Attempts",
+            "userNotFound": "No user found with that document number.",
+            "userNotFoundHint": "Verify that the document number is correct.",
+            "invalidBirthDate": "The date of birth does not match our records.",
+            "invalidBirthDateHint": "Verify that the date of birth is correct.",
+            "invalidCredentials": "The advisor credentials are incorrect.",
+            "invalidCredentialsHint": "Verify the advisor username and password.",
+            "invalidAdvisor": "The advisor entered is not valid or not authorized.",
+            "accountLocked": "Your account has been temporarily locked. Please contact support.",
+            "accountDisabled": "Your account is disabled. Please contact support.",
+            "tooManyAttempts": "You have exceeded the number of allowed attempts. Please wait 15 minutes before trying again.",
+            "timeoutError": "The server took too long to respond. Please try again.",
+            "networkError": "Connection error. Check your internet connection and try again.",
+            "missingFields": "All fields are required.",
+            "invalidPasswordFormat": "The password format is incorrect. Use the format: USER-PASSWORD",
+            "generalError": "An unexpected error occurred. Please try again later."
+          },
+          "registerLink": "Don't have an account? Register here"
         },
         "register": {
           "title": "Registro",

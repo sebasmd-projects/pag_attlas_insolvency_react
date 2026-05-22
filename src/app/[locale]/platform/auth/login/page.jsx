@@ -8,13 +8,13 @@ import DOMPurify from 'dompurify';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
-import { FaUserPlus } from 'react-icons/fa';
+import { useEffect, useRef, useState, useCallback, useMemo } from 'react';
+import { FaUserPlus, FaExclamationTriangle } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 
 const MAX_RETRIES = 3;
-const RETRY_DELAY = 1000; // 1 segundo entre reintentos
-const FETCH_TIMEOUT = 60000; // 60 segundos de timeout
+const RETRY_DELAY = 1000;
+const FETCH_TIMEOUT = 60000;
 
 async function fetchWithTimeoutAndRetry(url, options, retries = MAX_RETRIES) {
   try {
@@ -27,13 +27,11 @@ async function fetchWithTimeoutAndRetry(url, options, retries = MAX_RETRIES) {
     });
 
     clearTimeout(timeoutId);
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
     return response;
   } catch (error) {
+    if (error.name === 'AbortError') {
+      throw error;
+    }
     if (retries > 0) {
       await new Promise(resolve => setTimeout(resolve, RETRY_DELAY));
       return fetchWithTimeoutAndRetry(url, options, retries - 1);
@@ -54,7 +52,17 @@ export default function AuthLoginPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [errorCode, setErrorCode] = useState(null);
   const timerRef = useRef(null);
+
+  // Clear error when user types
+  const clearError = useCallback(() => {
+    if (errorMessage) {
+      setErrorMessage(null);
+      setErrorCode(null);
+    }
+  }, [errorMessage]);
 
   useEffect(() => {
     return () => {
@@ -70,6 +78,26 @@ export default function AuthLoginPage() {
     }
   }, [isSubmitting, isSuccess, router]);
 
+  // Get translated error message based on error code
+  const getErrorMessage = useCallback((code, fallbackDetail) => {
+    const errorMessages = {
+      userNotFound: t('errors.userNotFound'),
+      invalidBirthDate: t('errors.invalidBirthDate'),
+      invalidCredentials: t('errors.invalidCredentials'),
+      invalidAdvisor: t('errors.invalidAdvisor'),
+      accountLocked: t('errors.accountLocked'),
+      accountDisabled: t('errors.accountDisabled'),
+      tooManyAttempts: t('errors.tooManyAttempts'),
+      timeoutError: t('errors.timeoutError'),
+      networkError: t('errors.networkError'),
+      missingFields: t('errors.missingFields'),
+      invalidPasswordFormat: t('errors.invalidPasswordFormat'),
+      generalError: t('errors.generalError'),
+    };
+    
+    return errorMessages[code] || fallbackDetail || t('errors.generalError');
+  }, [t]);
+
   const { mutate } = useMutation({
     mutationKey: ['loginUser'],
     mutationFn: async (data) => {
@@ -82,29 +110,37 @@ export default function AuthLoginPage() {
       });
 
       const result = await response.json();
+      
       if (!response.ok) {
-        throw new Error(result.detail || t('errorLogin'));
+        const error = new Error(result.detail || t('errors.generalError'));
+        error.errorCode = result.errorCode;
+        error.status = response.status;
+        throw error;
       }
-
-      if (!response.ok) {
-        const errorDetail = result.detail || '';
-        if (response.status === 400 && errorDetail) {
-          throw new Error(t('invalidCredentials'));
-        }
-        throw new Error(t('generalError'));
-      }
+      
       return result;
     },
     onSuccess: () => {
       setIsSuccess(true);
-      window.location.href = '/platform';
+      setErrorMessage(null);
+      setErrorCode(null);
       toast.success(t('successLogin'));
+      window.location.href = '/platform';
     },
     onError: (error) => {
-      const errorMessage = error.name === 'AbortError'
-        ? t('timeoutError')
-        : error.message || t('generalError');
-      toast.error(errorMessage);
+      const code = error.errorCode || 'generalError';
+      const message = error.name === 'AbortError'
+        ? getErrorMessage('timeoutError')
+        : getErrorMessage(code, error.message);
+      
+      setErrorCode(code);
+      setErrorMessage(message);
+      
+      // Only show toast for certain errors
+      if (code !== 'tooManyAttempts') {
+        toast.error(message);
+      }
+      
       setIsSubmitting(false);
     },
     onSettled: () => {
@@ -116,19 +152,23 @@ export default function AuthLoginPage() {
     },
   });
 
-  const handleChange = (e) => {
+  const handleChange = useCallback((e) => {
     const { name, value } = e.target;
+    clearError();
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
-  };
+  }, [clearError]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = useCallback((e) => {
     e.preventDefault();
     if (isSubmitting) return;
 
     setIsSubmitting(true);
+    setErrorMessage(null);
+    setErrorCode(null);
+    
     timerRef.current = setTimeout(() => {
       setShowSpinner(true);
     }, 1000);
@@ -139,11 +179,30 @@ export default function AuthLoginPage() {
     }, {});
 
     mutate(sanitizedData);
-  };
+  }, [isSubmitting, formData, mutate]);
+
+  // Get appropriate error icon and styling
+  const errorAlertVariant = useMemo(() => {
+    if (!errorCode) return 'danger';
+    if (errorCode === 'tooManyAttempts') return 'warning';
+    return 'danger';
+  }, [errorCode]);
 
   return (
     <div className="container my-5 align-content-center" style={{ minHeight: '60vh' }}>
       <SubTitleComponent t={t} sub_title={'title'} />
+      
+      {/* Error Alert */}
+      {errorMessage && (
+        <div className={`alert alert-${errorAlertVariant} d-flex align-items-center mb-4`} role="alert">
+          <FaExclamationTriangle className="me-2 flex-shrink-0" />
+          <div>
+            <strong>{errorCode === 'tooManyAttempts' ? t('errors.rateLimitTitle') : t('errors.errorTitle')}</strong>
+            <p className="mb-0 mt-1">{errorMessage}</p>
+          </div>
+        </div>
+      )}
+      
       <form onSubmit={handleSubmit} className="row g-3 my-5">
         <div className="col-md-4 mt-5">
           <label htmlFor="document_number" className="form-label">
@@ -151,14 +210,21 @@ export default function AuthLoginPage() {
           </label>
           <input
             type="text"
-            className="form-control"
+            className={`form-control ${errorCode === 'userNotFound' ? 'is-invalid' : ''}`}
             name="document_number"
             id="document_number"
             required
             value={formData.document_number}
             onChange={handleChange}
             autoComplete="off"
+            disabled={isSubmitting}
+            aria-describedby={errorCode === 'userNotFound' ? 'document-error' : undefined}
           />
+          {errorCode === 'userNotFound' && (
+            <div id="document-error" className="invalid-feedback">
+              {t('errors.userNotFoundHint')}
+            </div>
+          )}
         </div>
 
         <div className="col-md-4 mt-5">
@@ -167,13 +233,21 @@ export default function AuthLoginPage() {
           </label>
           <input
             type="date"
-            className="form-control"
+            className={`form-control ${errorCode === 'invalidBirthDate' ? 'is-invalid' : ''}`}
             name="birth_date"
             id="birth_date"
             required
             value={formData.birth_date}
             onChange={handleChange}
+            disabled={isSubmitting}
+            max={new Date().toISOString().split('T')[0]}
+            aria-describedby={errorCode === 'invalidBirthDate' ? 'birthdate-error' : undefined}
           />
+          {errorCode === 'invalidBirthDate' && (
+            <div id="birthdate-error" className="invalid-feedback">
+              {t('errors.invalidBirthDateHint')}
+            </div>
+          )}
         </div>
 
         <div className="col-md-4 mt-5">
@@ -182,33 +256,43 @@ export default function AuthLoginPage() {
           </label>
           <input
             type="password"
-            className="form-control"
+            className={`form-control ${(errorCode === 'invalidCredentials' || errorCode === 'invalidAdvisor') ? 'is-invalid' : ''}`}
             name="password"
             id="password"
-            placeholder='ABCD-****'
+            placeholder="ABCD-****"
             required
             value={formData.password}
             onChange={handleChange}
+            disabled={isSubmitting}
+            aria-describedby={errorCode === 'invalidCredentials' ? 'password-error' : undefined}
           />
+          {(errorCode === 'invalidCredentials' || errorCode === 'invalidAdvisor') && (
+            <div id="password-error" className="invalid-feedback">
+              {t('errors.invalidCredentialsHint')}
+            </div>
+          )}
+          <small className="form-text text-muted">
+            {t('form.passwordHint')}
+          </small>
         </div>
 
         <div className="col-12 mt-5">
           <button
             type="submit"
             className="btn btn-outline-success w-100"
-            disabled={isSubmitting}
+            disabled={isSubmitting || errorCode === 'tooManyAttempts'}
           >
             {isSubmitting ? (
               showSpinner ? (
                 <>
                   <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true" />
-                  Validando información...
+                  {t('form.validating')}
                 </>
               ) : (
-                'Ingresando...'
+                t('form.entering')
               )
             ) : (
-              'Ingresar'
+              t('form.submit')
             )}
           </button>
 
