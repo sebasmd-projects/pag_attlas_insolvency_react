@@ -50,7 +50,7 @@ export default function VerifyCompliment({ user }: VerifyComplimentProps) {
             try {
                 setIsLoading(true);
                 const response = await fetch(
-                    `/api/platform/calculator/creditors?documentNumber=${encodeURIComponent(user.documentNumber)}&birthDate=${encodeURIComponent(user.birthDate)}`
+                    `/api/platform/calculator/creditors?documentNumber=${encodeURIComponent(user.cedula)}&birthDate=${encodeURIComponent(user.birthDate || '')}`
                 );
                 
                 if (response.ok) {
@@ -67,7 +67,7 @@ export default function VerifyCompliment({ user }: VerifyComplimentProps) {
         }
         
         loadCreditors();
-    }, [user.documentNumber, user.birthDate]);
+    }, [user.cedula, user.birthDate]);
 
     // Save creditors when they change (debounced)
     const saveCreditors = useCallback(async (creditorsToSave: Creditor[]) => {
@@ -77,8 +77,8 @@ export default function VerifyCompliment({ user }: VerifyComplimentProps) {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    documentNumber: user.documentNumber,
-                    birthDate: user.birthDate,
+                    documentNumber: user.cedula,
+                    birthDate: user.birthDate || '',
                     creditors: creditorsToSave,
                 }),
             });
@@ -87,7 +87,7 @@ export default function VerifyCompliment({ user }: VerifyComplimentProps) {
         } finally {
             setIsSaving(false);
         }
-    }, [user.documentNumber, user.birthDate]);
+    }, [user.cedula, user.birthDate]);
 
     // Calculate totals when creditors change
     useEffect(() => {
@@ -246,7 +246,7 @@ export default function VerifyCompliment({ user }: VerifyComplimentProps) {
             </div>
             
             <Alert variant="info" className="mb-4">
-                <strong>{t('calculatingFor')}:</strong> {user.firstName} {user.lastName} ({user.documentNumber})
+                <strong>{t('calculatingFor')}:</strong> {user.firstName} {user.lastName} ({user.cedula})
             </Alert>
 
             <div className="table-responsive mb-4">
