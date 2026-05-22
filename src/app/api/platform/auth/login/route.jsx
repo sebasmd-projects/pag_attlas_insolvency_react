@@ -1,8 +1,9 @@
 // src/app/api/platform/auth/login/route.jsx
 
+import rateLimit from '@/components/lib/rate-limit';
 import axios from 'axios';
 import { NextResponse } from 'next/server';
-import rateLimit from '@/components/lib/rate-limit';
+import {apiBaseUrl} from '@/config';
 
 // Rate limiter: 5 attempts per 15 minutes per IP
 const limiter = rateLimit({
@@ -150,7 +151,7 @@ export async function POST(request) {
         };
 
         const response = await axios.post(
-            'https://propensionesabogados.com/api/v1/login/',
+            `${apiBaseUrl}/login/`,
             backendData,
             { timeout: 30000 }
         );

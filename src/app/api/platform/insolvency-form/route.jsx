@@ -6,6 +6,7 @@
 import axios from 'axios';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
+import {apiBaseUrl} from '@/config';
 
 export async function PATCH(request) {
 
@@ -22,7 +23,7 @@ export async function PATCH(request) {
 
     try {
         const { data, status } = await axios.patch(
-            `https://propensionesabogados.com/api/v1/insolvency-form/?step=${step}`,
+            `${apiBaseUrl}/insolvency-form/?step=${step}`,
             body,
             { headers: { Authorization: `Bearer ${rawToken}` } }
         );
