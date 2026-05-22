@@ -83,7 +83,7 @@ export async function POST(request: NextRequest) {
         const validation = saveCreditorSchema.safeParse(body);
         if (!validation.success) {
             return NextResponse.json(
-                { success: false, error: 'Invalid data', details: validation.error.errors },
+                { success: false, error: 'Invalid data', details: validation.error.issues },
                 { status: 400 }
             );
         }
