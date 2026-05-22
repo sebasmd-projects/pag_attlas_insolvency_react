@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { NextResponse } from 'next/server';
+import {apiBaseUrl} from '@/config';
 
 export async function GET() {
     try {
         const response = await axios.get(
-            'https://propensionesabogados.com/api/v1/other-faq/'
+            `${apiBaseUrl}/other-faq/`
         );
 
         if (!response.data) {

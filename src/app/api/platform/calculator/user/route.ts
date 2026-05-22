@@ -1,10 +1,9 @@
 // src/app/api/platform/calculator/user/route.ts
 
+import { userIdentificationSchema, userRegistrationSchema } from '@/lib/validation/schemas';
 import axios from 'axios';
 import { NextResponse } from 'next/server';
-import { userIdentificationSchema, userRegistrationSchema } from '@/lib/validation/schemas';
-
-const BACKEND_URL = 'https://propensionesabogados.com/api/v1';
+import {apiBaseUrl} from '@/config';
 
 /**
  * POST - Buscar usuario por cedula y fecha de nacimiento
@@ -30,7 +29,7 @@ export async function POST(request: Request) {
 
         // Buscar usuario en el backend
         const response = await axios.get(
-            `${BACKEND_URL}/clients/search/`,
+            `${apiBaseUrl}/clients/search/`,
             {
                 params: {
                     document_number: cedula,
@@ -128,7 +127,7 @@ export async function PUT(request: Request) {
 
         // Crear usuario en el backend
         const response = await axios.post(
-            `${BACKEND_URL}/clients/`,
+            `${apiBaseUrl}/clients/`,
             {
                 document_number: userData.cedula,
                 birth_date: userData.birthDate,

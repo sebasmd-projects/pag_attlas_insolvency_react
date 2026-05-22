@@ -1,10 +1,11 @@
 import { NextResponse } from 'next/server';
+import {apiBaseUrl} from '@/config';
 
 export async function POST(request) {
     try {
         const body = await request.json();
 
-        const apiUrl = 'https://propensionesabogados.com/api/v1/insolvency-form/signature/';
+        const apiUrl = `${apiBaseUrl}/insolvency-form/signature/`;
 
         const res = await fetch(apiUrl, {
             method: 'POST',
