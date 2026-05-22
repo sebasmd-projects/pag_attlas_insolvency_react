@@ -427,6 +427,7 @@
         "address": "Address",
         "changeUser": "Change User",
         "continue": "Continue to Calculator",
+        "continueToInsolvency": "Verify Insolvency Assumption",
         "calculatingFor": "Calculating for"
       },
       "error": {
@@ -494,6 +495,57 @@
         "monthlyCapacity": "Monthly Payment Capacity",
         "usedRate": "Rate Applied",
         "interestTypeUsed": "Interest Type"
+      },
+      "sectionSelector": "Select section",
+      "insolvency": {
+        "title": "Insolvency Compliance Verification",
+        "loading": "Loading...",
+        "loadingData": "Loading information...",
+        "saving": "Saving...",
+        "calculatingFor": "Calculating for",
+        "addCreditor": "Add creditor",
+        "verifyCompliance": "Verify Compliance",
+        "table": {
+          "creditor": "Creditor",
+          "nature": "Nature",
+          "capital": "Capital",
+          "daysOverdue": "Days Overdue",
+          "actions": "Actions",
+          "selectNature": "Select...",
+          "specifyOther": "Specify which",
+          "remove": "Remove"
+        },
+        "natures": {
+          "libranza": "Payroll Deduction Loan",
+          "mortgage": "Mortgage Loan",
+          "movableGuarantee": "Movable Guarantee Loan",
+          "fiscal": "Fiscal or Tax Loan",
+          "freeInvestment": "Free Investment Loan",
+          "payroll": "Payroll Loan",
+          "personal": "Personal Loan",
+          "commercial": "Commercial Loan",
+          "rotary": "Revolving Credit",
+          "educational": "Educational Loan",
+          "consumer": "Consumer Loan",
+          "other": "Other"
+        },
+        "summary": {
+          "overdueCapital": "Total overdue capital",
+          "onTimeCapital": "Total on-time capital",
+          "totalDebts": "Total debts"
+        },
+        "result": {
+          "complies": "You comply!",
+          "compliesDetail": "You have {count} overdue debts and {percentage}% of overdue capital.",
+          "notComplies": "You do not comply.",
+          "notEnoughDebts": "You only have {count} debt(s) overdue for more than 90 days.",
+          "notEnoughPercentage": "The overdue percentage is {percentage}% and must be at least 30%.",
+          "overdueCapitalExcluding": "Total overdue capital (excluding Payroll Loans)",
+          "totalDebtsExcluding": "Total debts (excluding Payroll Loans)"
+        },
+        "errors": {
+          "incompleteFields": "Please fill in all fields before verifying compliance."
+        }
       }
     },
     "pages": {

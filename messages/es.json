@@ -427,6 +427,7 @@
         "address": "Dirección",
         "changeUser": "Cambiar usuario",
         "continue": "Continuar a la calculadora",
+        "continueToInsolvency": "Verificar supuesto de insolvencia",
         "calculatingFor": "Calculando para"
       },
       "error": {
@@ -494,6 +495,57 @@
         "monthlyCapacity": "Capacidad de pago mensual",
         "usedRate": "Tasa aplicada",
         "interestTypeUsed": "Tipo de interés"
+      },
+      "sectionSelector": "Seleccionar sección",
+      "insolvency": {
+        "title": "Verificación de cumplimiento para insolvencia",
+        "loading": "Cargando...",
+        "loadingData": "Cargando información...",
+        "saving": "Guardando...",
+        "calculatingFor": "Calculando para",
+        "addCreditor": "Agregar acreedor",
+        "verifyCompliance": "Verificar cumplimiento",
+        "table": {
+          "creditor": "Acreedor",
+          "nature": "Naturaleza",
+          "capital": "Capital",
+          "daysOverdue": "Días en mora",
+          "actions": "Acciones",
+          "selectNature": "Seleccione...",
+          "specifyOther": "Especifique cuál",
+          "remove": "Eliminar"
+        },
+        "natures": {
+          "libranza": "Crédito de Libranza",
+          "mortgage": "Crédito Hipotecario",
+          "movableGuarantee": "Crédito con Garantía Mobiliaria",
+          "fiscal": "Crédito Fiscal o Tributario",
+          "freeInvestment": "Crédito de Libre Inversión",
+          "payroll": "Crédito de Nómina",
+          "personal": "Crédito Personal",
+          "commercial": "Crédito Comercial",
+          "rotary": "Crédito Rotativo",
+          "educational": "Crédito Educativo o de Estudio",
+          "consumer": "Crédito de Consumo",
+          "other": "Otro"
+        },
+        "summary": {
+          "overdueCapital": "Total capital en mora",
+          "onTimeCapital": "Total capital al día",
+          "totalDebts": "Total deudas"
+        },
+        "result": {
+          "complies": "¡Cumples!",
+          "compliesDetail": "Tienes {count} deudas vencidas y el {percentage}% del capital vencido.",
+          "notComplies": "No cumples.",
+          "notEnoughDebts": "Solo tienes {count} deuda(s) vencida(s) por más de 90 días.",
+          "notEnoughPercentage": "El porcentaje de mora es {percentage}% y debe ser al menos 30%.",
+          "overdueCapitalExcluding": "Total capital en mora (sin Libranza/Nómina)",
+          "totalDebtsExcluding": "Total deudas (sin Libranza/Nómina)"
+        },
+        "errors": {
+          "incompleteFields": "Por favor llena todos los campos antes de validar cumplimiento."
+        }
       }
     },
     "pages": {

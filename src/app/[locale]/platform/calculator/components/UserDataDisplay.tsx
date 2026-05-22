@@ -8,10 +8,11 @@ import type { UserData } from '@/lib/calculator/types';
 interface UserDataDisplayProps {
     user: UserData;
     onContinue: () => void;
+    onContinueToInsolvency: () => void;
     onChangeUser: () => void;
 }
 
-function UserDataDisplayComponent({ user, onContinue, onChangeUser }: UserDataDisplayProps) {
+function UserDataDisplayComponent({ user, onContinue, onContinueToInsolvency, onChangeUser }: UserDataDisplayProps) {
     const t = useTranslations('Platform.calculator.userData');
 
     return (
@@ -68,21 +69,30 @@ function UserDataDisplayComponent({ user, onContinue, onChangeUser }: UserDataDi
                     </div>
                 </div>
 
-                <div className="d-flex gap-2">
-                    <Button
-                        type="button"
-                        variant="outline-secondary"
-                        onClick={onChangeUser}
-                    >
-                        {t('changeUser')}
-                    </Button>
+                <div className="d-flex flex-column gap-2">
                     <Button
                         type="button"
                         variant="primary"
                         onClick={onContinue}
-                        className="flex-grow-1"
+                        className="w-100"
                     >
                         {t('continue')}
+                    </Button>
+                    <Button
+                        type="button"
+                        variant="outline-primary"
+                        onClick={onContinueToInsolvency}
+                        className="w-100"
+                    >
+                        {t('continueToInsolvency')}
+                    </Button>
+                    <Button
+                        type="button"
+                        variant="outline-secondary"
+                        onClick={onChangeUser}
+                        className="w-100"
+                    >
+                        {t('changeUser')}
                     </Button>
                 </div>
             </div>

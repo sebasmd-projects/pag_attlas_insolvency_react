@@ -15,6 +15,7 @@ const CalculatorForm = dynamic(() => import('./components/CalculatorForm'));
 const VerifyCompliment = dynamic(() => import('./components/VerifyCompliment'));
 
 type Step = 'identification' | 'registration' | 'userData' | 'calculator';
+type ActiveSection = 'calculator' | 'insolvency';
 
 export default function CalculatorPage() {
     const t = useTranslations('Platform.calculator');
@@ -24,6 +25,7 @@ export default function CalculatorPage() {
     const [user, setUser] = useState<UserData | null>(null);
     const [pendingCedula, setPendingCedula] = useState<string>('');
     const [pendingBirthDate, setPendingBirthDate] = useState<string>('');
+    const [activeSection, setActiveSection] = useState<ActiveSection>('calculator');
 
     // Handlers
     const handleUserFound = useCallback((foundUser: UserData) => {
@@ -44,6 +46,12 @@ export default function CalculatorPage() {
 
     const handleContinueToCalculator = useCallback(() => {
         setStep('calculator');
+        setActiveSection('calculator');
+    }, []);
+
+    const handleContinueToInsolvency = useCallback(() => {
+        setStep('calculator');
+        setActiveSection('insolvency');
     }, []);
 
     const handleChangeUser = useCallback(() => {
@@ -129,10 +137,11 @@ export default function CalculatorPage() {
                 )}
 
                 {step === 'userData' && user && (
-                    <div className="col-md-6">
+                    <div className="col-md-8">
                         <UserDataDisplay
                             user={user}
                             onContinue={handleContinueToCalculator}
+                            onContinueToInsolvency={handleContinueToInsolvency}
                             onChangeUser={handleChangeUser}
                         />
                     </div>
@@ -140,24 +149,46 @@ export default function CalculatorPage() {
 
                 {step === 'calculator' && (
                     <div className="col-12">
-                        <CalculatorForm
-                            user={user ?? undefined}
-                            onBack={handleChangeUser}
-                        />
+                        {/* Section tabs */}
+                        <div className="d-flex justify-content-center mb-4">
+                            <div className="btn-group" role="group" aria-label={t('sectionSelector')}>
+                                <button
+                                    type="button"
+                                    className={`btn ${activeSection === 'calculator' ? 'btn-primary' : 'btn-outline-primary'}`}
+                                    onClick={() => setActiveSection('calculator')}
+                                >
+                                    {t('title')}
+                                </button>
+                                <button
+                                    type="button"
+                                    className={`btn ${activeSection === 'insolvency' ? 'btn-primary' : 'btn-outline-primary'}`}
+                                    onClick={() => setActiveSection('insolvency')}
+                                >
+                                    {t('caseOfInsolvency')}
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Calculator section */}
+                        {activeSection === 'calculator' && (
+                            <CalculatorForm
+                                user={user ?? undefined}
+                                onBack={handleChangeUser}
+                            />
+                        )}
+
+                        {/* Insolvency section */}
+                        {activeSection === 'insolvency' && user && (
+                            <>
+                                <div className="mb-4 container-lg text-center">
+                                    <TitleComponent title={t('caseOfInsolvency')} />
+                                    <SubTitleComponent sub_title="becomeInsolvent" t={t} />
+                                </div>
+                                <VerifyCompliment user={user} />
+                            </>
+                        )}
                     </div>
                 )}
-            </div>
-
-            <hr className="my-4" />
-
-            {/* Supuesto de insolvencia */}
-            <div className="mt-4 container-lg">
-                <TitleComponent title={t('caseOfInsolvency')} />
-                <SubTitleComponent sub_title="becomeInsolvent" t={t} />
-            </div>
-
-            <div className="row">
-                <VerifyCompliment />
             </div>
         </div>
     );
