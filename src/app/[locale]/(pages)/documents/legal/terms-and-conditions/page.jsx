@@ -1,8 +1,6 @@
-import { getTranslations, setRequestLocale } from 'next-intl/server';
-
 export async function generateMetadata({ params }) {
     const { locale } = await params;
-    
+
     return {
         metadataBase: new URL('https://fundacionattlas.org'),
         title: 'Terminos y Condiciones | ATTLAS',

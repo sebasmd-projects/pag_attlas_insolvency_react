@@ -14,6 +14,7 @@ import ContactMethodsStep from './components/steps/ContactMethodsStep';
 import DescriptionStep from './components/steps/DescriptionStep';
 import PrivateDataStep from './components/steps/PrivateDataStep';
 import RequestTypeStep from './components/steps/RequestTypeStep';
+import {apiBaseUrl} from '@/config';
 
 export default function ComplaintFormWizard() {
 
@@ -89,7 +90,7 @@ export default function ComplaintFormWizard() {
             });
 
             const response = await axios.post(
-                'https://your-django-api-endpoint.com/complaints/',
+                `${apiBaseUrl}/complaints/`,
                 formDataToSend,
                 {
                     headers: { 'Content-Type': 'multipart/form-data' }

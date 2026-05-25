@@ -3,15 +3,15 @@
 import { useTranslations } from 'next-intl';
 
 export default function PrivacyClient() {
-    const t = useTranslations('Pages.documents.legal');
+    const t = useTranslations('Pages.documents.legal.privacyNotice');
 
     return (
         <div className="container py-5">
             <embed 
-                src={t('termsAndConditions')} 
+                src={t('document')} 
                 type="application/pdf" 
                 className="vh-100 d-inline-block w-100"
-                title="Aviso de Privacidad"
+                title={t('title')}
             />
         </div>
     );

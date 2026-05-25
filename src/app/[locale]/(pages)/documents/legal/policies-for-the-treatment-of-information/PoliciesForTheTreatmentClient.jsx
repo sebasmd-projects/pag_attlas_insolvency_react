@@ -2,16 +2,16 @@
 
 import { useTranslations } from 'next-intl';
 
-export default function TermsClient() {
-    const t = useTranslations('Pages.documents.legal');
+export default function PoliciesForTheTreatmentOfInformationClient() {
+    const t = useTranslations('Pages.documents.legal.policiesForTheTreatmentOfInformation');
 
     return (
         <div className="container py-5">
             <embed 
-                src={t('termsAndConditionsDocument')} 
+                src={t('document')} 
                 type="application/pdf" 
                 className="vh-100 d-inline-block w-100"
-                title={t('termsAndConditionsTitle')}
+                title={t('title')}
             />
         </div>
     );

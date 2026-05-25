@@ -1,12 +1,10 @@
-import { getTranslations, setRequestLocale } from 'next-intl/server';
-
 export async function generateMetadata({ params }) {
     const { locale } = await params;
     
     return {
         metadataBase: new URL('https://fundacionattlas.org'),
-        title: 'Politica de Cookies | ATTLAS',
-        description: 'Conozca nuestra politica de cookies y como utilizamos las cookies en nuestro sitio web.',
+        title: locale === 'es' ? 'Politica de Cookies | ATTLAS' : 'Cookie Policy | ATTLAS',
+        description: locale === 'es' ? 'Conozca nuestra politica de cookies y como utilizamos las cookies en nuestro sitio web.' : 'Learn about our cookie policy and how we use cookies on our website.',
         alternates: {
             canonical: `https://fundacionattlas.org/${locale}/documents/legal/cookies`,
             languages: {
@@ -15,8 +13,8 @@ export async function generateMetadata({ params }) {
             },
         },
         openGraph: {
-            title: 'Politica de Cookies | ATTLAS',
-            description: 'Conozca nuestra politica de cookies y como utilizamos las cookies en nuestro sitio web.',
+            title: locale === 'es' ? 'Politica de Cookies | ATTLAS' : 'Cookie Policy | ATTLAS',
+            description: locale === 'es' ? 'Conozca nuestra politica de cookies y como utilizamos las cookies en nuestro sitio web.' : 'Learn about our cookie policy and how we use cookies on our website.',
             type: 'website',
             url: `https://fundacionattlas.org/${locale}/documents/legal/cookies`,
             siteName: 'Fundacion ATTLAS',

@@ -340,9 +340,26 @@
     },
     "documents": {
       "legal": {
-        "termsAndConditions": "/assets/documents/legal/terms-and-conditions.pdf",
-        "cookies": "/assets/documents/legal/cookies.pdf",
-        "policyPersonalData": "/assets/documents/legal/policy-for-the-treatment-of-personal-data.pdf"
+        "cookies": {
+          "title": "Cookie Policy",
+          "document": "/assets/documents/legal/en-cookies.pdf"
+        },
+        "policiesForTheTreatmentOfInformation": {
+          "title": "Policies for the processing of information",
+          "document": "/assets/documents/legal/en-policy-for-the-treatment-of-personal-data.pdf"
+        },
+        "privacyNotice": {
+          "title": "Privacy Notice",
+          "document": "/assets/documents/legal/en-privacy-notice.pdf"
+        },
+        "processingOfPersonalData": {
+          "title": "Processing of Personal Data",
+          "document": "/assets/documents/legal/en-processing-of-personal-data.pdf"
+        },
+        "termsAndConditions": {
+          "title": "Terms and Conditions",
+          "document": "/assets/documents/legal/en-terms-and-conditions.pdf"
+        }
       },
       "complaintsAndQueries": {
         "title_h1": "Complaints, Claims, and Suggestions (PQRS)",
@@ -354,14 +371,14 @@
     "pages": {
       "auth": {
         "register": {
-          "title": "Registro",
-          "errorRegister": "Datos incorrectos, por favor verifica tu información.",
-          "successRegister": "Registro exitoso",
-          "generalError": "Ocurrió un error, por favor intenta más tarde.",
+          "title": "Registration",
+          "errorRegister": "Incorrect data, please verify your information.",
+          "successRegister": "Registration successful",
+          "generalError": "An error occurred, please try again later.",
           "form": {
-            "first_name": "Nombres Completos",
-            "last_name": "Apellidos",
-            "password": "Contraseña"
+            "first_name": "Full Names",
+            "last_name": "Last Names",
+            "password": "Password"
           }
         }
       }
@@ -552,636 +569,636 @@
       "home": {
         "wizard": {
           "buttons": {
-            "step": "Paso",
-            "next": "Siguiente",
-            "back": "Atrás",
-            "send": "Enviar",
-            "cancel": "Cancelar",
-            "processing": "Procesando..."
+            "step": "Step",
+            "next": "Next",
+            "back": "Back",
+            "send": "Send",
+            "cancel": "Cancel",
+            "processing": "Processing..."
           },
           "steps": {
             "stepTest": {},
             "step1": {
-              "title": "Inicia tu Proceso de Insolvencia",
-              "subTitle": "Insolvencia <span>Económica</span> para Personas Naturales",
-              "description": "<link>Asesoría</link> y <link>Acompañamiento</link> disponibles siempre",
-              "advisor": "La recopilación y uso de los datos en este formulario son para dar cumplimiento con los siguientes <u>Requisitos Legales</u>:",
+              "title": "Start Your Insolvency Process",
+              "subTitle": "Economic <span>Insolvency</span> for Natural Persons",
+              "description": "<link>Counseling</link> and <link>Support</link> always available",
+              "advisor": "The collection and use of data in this form are to comply with the following <u>Legal Requirements</u>:",
               "messages": {
-                "saving": "Guardando...",
-                "save": "Guardar",
-                "saveSuccess": "Guardado con éxito",
-                "saveError": "Error al guardar los datos"
+                "saving": "Saving...",
+                "save": "Save",
+                "saveSuccess": "Saved successfully",
+                "saveError": "Error saving data"
               },
               "articles": {
                 "1": {
-                  "title": "CUMPLIMIENTO AL ARTÍCULO No.10 DE LA LEY 2445 DEL 11 DE FEBRERO DEL 2025.",
-                  "description": "Que Modifico el ARTÍCULO 539 DE LA LEY 1564 DE 2012, “Artículo 539. Requisitos de la solicitud de trámite de negociación de deudas. La solicitud de trámite de negociación de deudas <bold>deberá ser presentada directamente por el deudor</bold>, quien podrá comparecer al trámite acompañado o representado por apoderado judicial. <bold>Será obligatoria su asistencia con o a través de apoderado judicial en los casos en que sea superada la mínima cuantía.</bold>”",
-                  "example": "Yo, ____________, mayor de edad, identificado con la Cédula de Ciudadanía No. ____________ de ____________, me encuentro en condición de persona natural ___ comerciante, con fundamento en lo dispuesto en el Título IV de la Ley 1564 de 2012, especialmente en el Artículo 531 y siguientes, modificada por la ley 2445 del 11 de febrero 2025, así como en su desarrollo reglamentario contenido en el Decreto 2677 de 2012, por medio del presente escrito, comparezco ante su despacho con el fin de SOLICITAR A TITULO DIRECTO LA APERTURA FORMAL DEL TRÁMITE DE NEGOCIACIÓN DE DEUDAS, en los términos establecidos por la normatividad vigente, en razón de la cesación de pagos y los principios constitucionales consagrados en el artículos 1, 13, 25, 29, 53 y 332 de la Constitución Política de Colombia y los artículos Declaración Universal de Derechos Humanos (DUDH, 1948), asigno como apoderado judicial al abogado titulado, el Dotor JORGE URIEL VEGA LONDOÑO, mayor de edad, identificado con la Cédula de Ciudadanía No. ____________ de ____________, abogado en ejercicio, portador de la Tarjeta Profesional No. ____________ del Honorable Consejo Superior de la Judicatura, con correo electrónico inscrito ____________."
+                  "title": "COMPLIANCE WITH ARTICLE No. 10 OF LAW 2445 OF FEBRUARY 11, 2025.",
+                  "description": "Which amended ARTICLE 539 OF LAW 1564 OF 2012, “Article 539. Requirements for the debt negotiation request. The debt negotiation request <bold>must be filed directly by the debtor</bold>, who may appear in the proceeding accompanied or represented by legal counsel. <bold>Their attendance with or through legal counsel shall be mandatory when the minimum amount is exceeded.</bold>”",
+                  "example": "I, ____________, of legal age, identified with Citizen ID No. ____________ of ____________, am a natural person ___ merchant, based on the provisions of Title IV of Law 1564 of 2012, especially Article 531 et seq., as amended by Law 2445 of February 11, 2025, as well as its regulatory development contained in Decree 2677 of 2012, through this document I appear before your office for the purpose of REQUESTING DIRECTLY THE FORMAL OPENING OF THE DEBT NEGOTIATION PROCESS, under the terms established by current regulations, due to cessation of payments and the constitutional principles enshrined in articles 1, 13, 25, 29, 53 and 332 of the Political Constitution of Colombia and the articles of the Universal Declaration of Human Rights (UDHR, 1948), I appoint as legal counsel the licensed attorney, Dr. JORGE URIEL VEGA LONDOÑO, of legal age, identified with Citizen ID No. ____________ of ____________, practicing attorney, holder of Professional Card No. ____________ of the Honorable Superior Council of the Judiciary, with registered email ____________."
                 },
                 "2": {
-                  "title": "CUMPLIMIENTO AL ARTÍCULO No. 9 DE LA LEY 2445 DEL 11 DE FEBRERO DEL 2025. Que Modifico el ARTÍCULO 8 DE LA LEY 1564 DE 2012.",
-                  "description": "“Artículo 538. <bold>Supuestos de insolvencia</bold>. Para los fines previstos en este título, se entenderá que la persona natural <bold>podrá acogerse a los procedimientos de insolvencia</bold> cuando se encuentre en cesación de pagos.”"
+                  "title": "COMPLIANCE WITH ARTICLE No. 9 OF LAW 2445 OF FEBRUARY 11, 2025. Which amended ARTICLE 8 OF LAW 1564 OF 2012.",
+                  "description": "“Article 538. <bold>Insolvency assumptions</bold>. For the purposes set forth in this title, it shall be understood that the natural person <bold>may avail themselves of insolvency proceedings</bold> when they are in a state of cessation of payments.”"
                 },
                 "3": {
-                  "title": "CUMPLIMIENTO AL ARTÍCULO No.10 DE LA LEY 2445 DEL 11 DE FEBRERO DEL 2025.  Que Modifico el ARTÍCULO 539 DE LA LEY 1564 DE 2012.",
-                  "description": "“Artículo 539 #1 Un <bold>informe</bold> que indique de manera <bold>precisa las causas que lo llevaron a la situación de cesación de pagos</bold>.” ",
-                  "accompaniment": "Para redactar el siguiente texto, obten acompañamineto con uno de nuestros asesores jurídicos, quienes te ayudarán a identificar las causas de tu insolvencia y a redactar el texto de manera adecuada."
+                  "title": "COMPLIANCE WITH ARTICLE No. 10 OF LAW 2445 OF FEBRUARY 11, 2025. Which amended ARTICLE 539 OF LAW 1564 OF 2012.",
+                  "description": "“Article 539 #1 A <bold>report</bold> that indicates in a <bold>precise manner the causes that led to the cessation of payments</bold>.”",
+                  "accompaniment": "To draft the following text, get support from one of our legal advisors, who will help you identify the causes of your insolvency and draft the text appropriately."
                 },
                 "4": {
-                  "title": "CUMPLIMIENTO AL ARTÍCULO No.10 DE LA LEY 2445 DEL 11 DE FEBRERO DEL 2025.  Que Modifico el ARTÍCULO 539 DE LA LEY 1564 DE 2012.",
-                  "description": "“Artículo 539 #2 La <bold>propuesta</bold> para la <bold>negociación de deudas</bold>, que debe ser clara, expresa y objetiva.”",
-                  "accompaniment": "Para redactar el siguiente texto, obten acompañamineto con uno de nuestros asesores jurídicos, quienes te ayudarán a identificar las causas de tu insolvencia y a redactar el texto de manera adecuada.",
-                  "example": "<p>Con fundamento en los principios de buena fe, transparencia, capacidad real de pago y progresividad en la recuperación económica, el suscrito propone a sus acreedores el siguiente plan de pago, que refleja su disposición voluntaria y honesta de cumplir sus obligaciones conforme a su situación económica actual y proyecciones razonables de mejora:</p><p>PRIMERA: Se propone la posibilidad de entregar en dación en pago aquellos bienes que puedan contribuir a reducir el saldo adeudado, considerando el valor comercial de los mismos y las disposiciones legales aplicables para salvaguardar los derechos de todas las partes.</p><p>SEGUNDA: Se plantea la compensación de recursos retenidos o depositados a favor de los acreedores, a fin de saldar parcial o totalmente las obligaciones respectivas, de acuerdo con la normativa vigente y garantizando la equidad entre los diferentes acreedores.</p><p>TERCERA: Se establece una cuota mensual de recuperación, calculada con base en la capacidad de pago actual del deudor, cuya distribución se hará conforme a la prelación legal y las pautas acordadas en el proceso de insolvencia.</p><p>CUARTA: Una vez concluido el periodo de reorganización pactado, el deudor continuará con el pago de las obligaciones que tengan un plazo mayor, manteniendo su compromiso de cumplir con los acuerdos y ajustando las cuotas en la medida en que su situación económica evolucione favorablemente.</p><p>QUINTA: Cuando existan fondos solidarios o aportes especiales retenidos por las entidades acreedoras, se solicita que dichos recursos sean aplicados como abono o compensación directa a la deuda, evitando la duplicidad de retenciones y contribuyendo al fortalecimiento de la masa pasiva.</p><p>Nota 1: Se solicita a los acreedores la consideración de una condonación parcial de intereses, tanto corrientes como de mora, como muestra de buena fe y para facilitar el cumplimiento efectivo del plan de pagos.</p><p>Nota 2: Esta propuesta se realiza bajo el principio de transparencia y voluntad de pago. El deudor deja constancia de su intención de aumentar los aportes en la medida en que su situación económica mejore, a fin de promover una solución integral y equitativa.</p><p>Salvedad sobre el sacrificio de bienes esenciales: Se reconoce que este plan implica un esfuerzo significativo por parte del deudor, quien en algunos casos podría verse obligado a reducir gastos destinados a necesidades básicas. No obstante, se mantiene el compromiso de priorizar sus obligaciones sin renunciar a los derechos fundamentales ni al sustento mínimo vital.</p>"
+                  "title": "COMPLIANCE WITH ARTICLE No. 10 OF LAW 2445 OF FEBRUARY 11, 2025. Which amended ARTICLE 539 OF LAW 1564 OF 2012.",
+                  "description": "“Article 539 #2 The <bold>proposal</bold> for <bold>debt negotiation</bold>, which must be clear, express and objective.”",
+                  "accompaniment": "To draft the following text, get support from one of our legal advisors, who will help you identify the causes of your insolvency and draft the text appropriately.",
+                  "example": "<p>Based on the principles of good faith, transparency, actual payment capacity and progressivity in economic recovery, the undersigned proposes to his creditors the following payment plan, which reflects his voluntary and honest willingness to fulfill his obligations according to his current economic situation and reasonable improvement projections:</p><p>FIRST: It is proposed to deliver assets in payment in kind that may help reduce the outstanding balance, considering their commercial value and applicable legal provisions to safeguard the rights of all parties.</p><p>SECOND: The offsetting of retained or deposited funds in favor of creditors is proposed, in order to partially or fully settle the respective obligations, in accordance with current regulations and guaranteeing equity among the different creditors.</p><p>THIRD: A monthly recovery installment is established, calculated based on the debtor's current payment capacity, which shall be distributed according to legal priority and the guidelines agreed upon in the insolvency process.</p><p>FOURTH: Once the agreed reorganization period ends, the debtor shall continue paying obligations with longer terms, maintaining their commitment to comply with the agreements and adjusting installments as their economic situation evolves favorably.</p><p>FIFTH: When there are solidarity funds or special contributions withheld by creditor entities, it is requested that such resources be applied as a direct payment or offset to the debt, avoiding duplicate withholdings and contributing to the strengthening of the liability pool.</p><p>Note 1: Creditors are requested to consider a partial waiver of interest, both current and default, as a sign of good faith and to facilitate effective compliance with the payment plan.</p><p>Note 2: This proposal is made under the principle of transparency and willingness to pay. The debtor states his intention to increase contributions as his economic situation improves, in order to promote an integral and equitable solution.</p><p>Qualification regarding the sacrifice of essential assets: It is recognized that this plan implies a significant effort by the debtor, who in some cases might be forced to reduce expenses intended for basic needs. Nevertheless, the commitment to prioritize his obligations without renouncing fundamental rights or the minimum subsistence is maintained.</p>"
                 },
                 "5": {
-                  "title": "CUMPLIMIENTO AL ARTÍCULO No.10 DE LA LEY 2445 DEL 11 DE FEBRERO DEL 2025. Que Modificó el ARTÍCULO 539 DE LA LEY 1564 DE 2012.",
-                  "description": "“Artículo 539 #3: Una <bold>relación completa</bold> y actualizada de <bold>todos los acreedores</bold>, en el <bold>orden de prelación de créditos</bold> que señalan los artículos 2488 y siguientes del Código Civil.”",
+                  "title": "COMPLIANCE WITH ARTICLE No. 10 OF LAW 2445 OF FEBRUARY 11, 2025. Which amended ARTICLE 539 OF LAW 1564 OF 2012.",
+                  "description": "“Article 539 #3: A <bold>complete and updated list</bold> of <bold>all creditors</bold>, in the <bold>order of credit priority</bold> set forth in articles 2488 et seq. of the Civil Code.”",
                   "exampleHeaders": [
-                    "ACREEDOR",
-                    "NIT",
+                    "CREDITOR",
+                    "TAX ID",
                     "EMAIL",
-                    "NATURALEZA",
-                    "GARANTÍA",
-                    "SOPORTE GARANTÍA",
-                    "CAPITAL",
-                    "DÍAS MORA",
-                    "CLASE"
+                    "NATURE",
+                    "GUARANTEE",
+                    "GUARANTEE SUPPORT",
+                    "PRINCIPAL",
+                    "DAYS IN DEFAULT",
+                    "CLASS"
                   ],
                   "exampleItems": [
                     [
-                      "Entidad Financiera A",
+                      "Financial Institution A",
                       "900000000-0",
-                      "notificaciones@entidada.com",
-                      "CRÉDITO HIPOTECARIO",
-                      "HIPOTECA",
-                      "ESCR. PÚBLICA BIEN 001",
-                      "$130.000.000",
+                      "notifications@entidada.com",
+                      "MORTGAGE CREDIT",
+                      "MORTGAGE",
+                      "PUBLIC DEED ASSET 001",
+                      "$130,000,000",
                       "120",
                       "3"
                     ],
                     [
-                      "Entidad Cooperativa B",
+                      "Cooperative Entity B",
                       "800000000-1",
-                      "notificaciones@cooperativab.com",
-                      "CRÉDITO NRO. 00XXXX",
-                      "PAGARÉ",
-                      "DOC. GARANTÍA 002",
-                      "$50.000.000",
+                      "notifications@cooperativab.com",
+                      "CREDIT NO. 00XXXX",
+                      "PROMISSORY NOTE",
+                      "GUARANTEE DOC. 002",
+                      "$50,000,000",
                       "90",
                       "3"
                     ],
                     [
-                      "Entidad Financiera C",
+                      "Financial Institution C",
                       "900000000-2",
                       "info@entidadc.com",
-                      "LIBRE INVERSIÓN",
+                      "FREE INVESTMENT",
                       "N/A",
-                      "PAGARÉ",
-                      "$18.000.000",
+                      "PROMISSORY NOTE",
+                      "$18,000,000",
                       "60",
                       "5"
                     ],
                     [
-                      "Entidad Financiera D",
+                      "Financial Institution D",
                       "900000000-3",
                       "contacto@entidadd.com",
-                      "TARJETA CRÉDITO MASTERCARD",
+                      "MASTERCARD CREDIT CARD",
                       "N/A",
-                      "PAGARÉ",
-                      "$5.000.000",
+                      "PROMISSORY NOTE",
+                      "$5,000,000",
                       "45",
                       "5"
                     ],
                     [
-                      "Entidad Financiera E",
+                      "Financial Institution E",
                       "900000000-4",
                       "soporte@entidade.com",
-                      "TARJETA CRÉDITO VISA",
+                      "VISA CREDIT CARD",
                       "N/A",
-                      "PAGARÉ",
-                      "$2.400.000",
+                      "PROMISSORY NOTE",
+                      "$2,400,000",
                       "30",
                       "5"
                     ],
                     [
-                      "Entidad Financiera F",
+                      "Financial Institution F",
                       "900000000-5",
                       "servicio@entidadf.com",
-                      "ALIVIOS FINANCIEROS",
+                      "FINANCIAL RELIEF",
                       "N/A",
-                      "PAGARÉ",
-                      "$800.000",
+                      "PROMISSORY NOTE",
+                      "$800,000",
                       "30",
                       "5"
                     ],
                     [
-                      "Entidad Financiera G",
+                      "Financial Institution G",
                       "900000000-6",
                       "finanzas@entidadg.com",
-                      "ALIVIOS FINANCIEROS",
+                      "FINANCIAL RELIEF",
                       "N/A",
-                      "PAGARÉ",
-                      "$1.900.000",
+                      "PROMISSORY NOTE",
+                      "$1,900,000",
                       "30",
                       "5"
                     ]
                   ]
                 },
                 "6": {
-                  "title": "CUMPLIMIENTO AL ARTÍCULO No.10 DE LA LEY 2445 DEL 11 DE FEBRERO DEL 2025.  Que Modifico el ARTÍCULO 539 DE LA LEY 1564 DE 2012.",
-                  "description": "“Artículo 539 #4 Una <bold>relación completa</bold> y detallada de sus <bold>bienes</bold>, si los hubiere, incluidos los que posea en el exterior. Deberán indicarse los valores estimados y los datos necesarios para su identificación, así como la información detallada de los <bold>gravámenes, afectaciones y medidas cautelares</bold> que pesen sobre ellos, y deberá indicarse cuáles de ellos tienen <bold>afectación a vivienda familiar y cuáles son objeto de patrimonio de familia inembargable</bold>.” "
+                  "title": "COMPLIANCE WITH ARTICLE No. 10 OF LAW 2445 OF FEBRUARY 11, 2025. Which amended ARTICLE 539 OF LAW 1564 OF 2012.",
+                  "description": "“Article 539 #4 A <bold>complete and detailed list</bold> of his/her <bold>assets</bold>, if any, including those held abroad. Estimated values and data necessary for their identification must be indicated, as well as detailed information on <bold>liens, encumbrances and precautionary measures</bold> affecting them, and it must be indicated which of them are <bold>subject to family housing and which are unseizable family assets</bold>.”"
                 },
                 "7": {
-                  "title": "CUMPLIMIENTO AL ARTÍCULO No.10 DE LA LEY 2445 DEL 11 DE FEBRERO DEL 2025.  Que Modifico el ARTÍCULO 539 DE LA LEY 1564 DE 2012.",
-                  "description": "“Artículo 539 #5 Una <bold>relación</bold> de los <bold>procesos judiciales</bold> y de cualquier procedimiento o actuación administrativa o privada de carácter patrimonial que adelante el deudor o que curse contra él, <bold>indicando el juzgado</bold> o la <bold>oficina donde están radicados</bold> y <bold>su estado actual</bold>”"
+                  "title": "COMPLIANCE WITH ARTICLE No. 10 OF LAW 2445 OF FEBRUARY 11, 2025. Which amended ARTICLE 539 OF LAW 1564 OF 2012.",
+                  "description": "“Article 539 #5 A <bold>list</bold> of <bold>judicial proceedings</bold> and any administrative or private proceedings of a patrimonial nature carried out by the debtor or pending against him, <bold>indicating the court</bold> or the <bold>office where they are filed</bold> and <bold>their current status</bold>”"
                 },
                 "8": {
-                  "title": "CUMPLIMIENTO AL ARTÍCULO No.10 DE LA LEY 2445 DEL 11 DE FEBRERO DEL 2025.  Que Modifico el ARTÍCULO 539 DE LA LEY 1564 DE 2012.",
-                  "description": "“Artículo 539 #6 <bold>Certificación de los ingresos del deudor</bold> expedida por su empleador o fondo de pensiones o, en caso de que sea trabajador independiente, una declaración de los mismos”"
+                  "title": "COMPLIANCE WITH ARTICLE No. 10 OF LAW 2445 OF FEBRUARY 11, 2025. Which amended ARTICLE 539 OF LAW 1564 OF 2012.",
+                  "description": "“Article 539 #6 <bold>Certification of the debtor's income</bold> issued by his employer or pension fund or, if self-employed, a declaration thereof”"
                 },
                 "9": {
-                  "title": "CUMPLIMIENTO AL ARTÍCULO No.10 DE LA LEY 2445 DEL 11 DE FEBRERO DEL 2025.  Que Modifico el ARTÍCULO 539 DE LA LEY 1564 DE 2012.",
-                  "description": "“Artículo 539 #7 Monto al que ascienden los <bold>recursos disponibles para el pago de las obligaciones descontados los gastos necesarios para la subsistencia del deudor y de las personas a su cargo</bold> si los hubiese, los de conservación de los bienes y de los del procedimiento.”"
+                  "title": "COMPLIANCE WITH ARTICLE No. 10 OF LAW 2445 OF FEBRUARY 11, 2025. Which amended ARTICLE 539 OF LAW 1564 OF 2012.",
+                  "description": "“Article 539 #7 Amount of <bold>available resources for payment of obligations after deducting necessary expenses for the subsistence of the debtor and dependents</bold> if any, expenses for asset preservation and those of the proceeding.”"
                 },
                 "10": {
-                  "title": "CUMPLIMIENTO AL ARTÍCULO No.10 DE LA LEY 2445 DEL 11 DE FEBRERO DEL 2025.  Que Modifico el ARTÍCULO 539 DE LA LEY 1564 DE 2012.",
-                  "description": "“Artículo 539 #8 Información relativa a si tiene o no <bold>sociedad conyugal o patrimonial vigente</bold>.”"
+                  "title": "COMPLIANCE WITH ARTICLE No. 10 OF LAW 2445 OF FEBRUARY 11, 2025. Which amended ARTICLE 539 OF LAW 1564 OF 2012.",
+                  "description": "“Article 539 #8 Information regarding whether or not there is a <bold>current marital or patrimonial partnership</bold>.”"
                 },
                 "11": {
-                  "title": "CUMPLIMIENTO AL ARTÍCULO No.10 DE LA LEY 2445 DEL 11 DE FEBRERO DEL 2025.  Que Modifico el ARTÍCULO 539 DE LA LEY 1564 DE 2012.",
-                  "description": "“Artículo 539 #9 Una discriminación de las obligaciones alimentarias a su cargo, indicando cuantía y beneficiarios y anexando certificado del Registro de Deudores Alimenticios Morosos REDAM”"
+                  "title": "COMPLIANCE WITH ARTICLE No. 10 OF LAW 2445 OF FEBRUARY 11, 2025. Which amended ARTICLE 539 OF LAW 1564 OF 2012.",
+                  "description": "“Article 539 #9 A breakdown of alimony obligations in charge, indicating amount and beneficiaries and attaching the certificate from the Registry of Delinquent Alimony Debtors REDAM”"
                 }
               },
-              "accept_terms": "Acepto que he leído y entendido los requisitos legales para iniciar el trámite de insolvencia económica.",
-              "accept_terms_and_conditions": "Acepto los <termsLink>términos y condiciones</termsLink> y la <privacyLink>política de tratamiento de datos personales</privacyLink>."
+              "accept_terms": "I acknowledge that I have read and understood the legal requirements to start the economic insolvency process.",
+              "accept_terms_and_conditions": "I accept the <termsLink>terms and conditions</termsLink> and the <privacyLink>personal data processing policy</privacyLink>."
             },
             "step2": {
-              "title": "Información Personal",
-              "subTitle": "Por favor completa la siguiente información",
-              "errorGetDocument": "Error al obtener la información del documento",
+              "title": "Personal Information",
+              "subTitle": "Please complete the following information",
+              "errorGetDocument": "Error obtaining document information",
               "messages": {
-                "saving": "Guardando...",
-                "save": "Guardar",
-                "saveSuccess": "Información personal guardada con éxito",
-                "saveError": "Error al guardar los datos"
+                "saving": "Saving...",
+                "save": "Save",
+                "saveSuccess": "Personal information saved successfully",
+                "saveError": "Error saving data"
               },
               "form": {
-                "first_name": "Nombres",
-                "last_name": "Apellidos",
-                "document_number": "Número de documento",
-                "expedition_city": "Lugar de expedición",
-                "documentIssueDate": "Fecha de expedición",
-                "debtor_address": "Dirección de residencia",
-                "gender": "Género",
+                "first_name": "First Name(s)",
+                "last_name": "Last Name(s)",
+                "document_number": "Document Number",
+                "expedition_city": "Place of Issue",
+                "documentIssueDate": "Issue Date",
+                "debtor_address": "Residence Address",
+                "gender": "Gender",
                 "is_merchant": {
-                  "title": "¿Es comerciante?",
+                  "title": "Are you a merchant?",
                   "options": {
-                    "yes": "Sí",
+                    "yes": "Yes",
                     "no": "No"
                   }
                 },
-                "debtor_age": "Edad",
-                "email": "Correo electrónico",
-                "cell_phone": "Número celular o telefónico"
+                "debtor_age": "Age",
+                "email": "Email",
+                "cell_phone": "Cell or phone number"
               },
-              "exampleTitle": "Ejemplo de solicitud",
-              "example": "Yo, <firstName>{firstName}</firstName> <lastName>{lastName}</lastName>, mayor de edad, identificado con la Cédula de Ciudadanía No. <documentNumber>{documentNumber}</documentNumber> de <expeditionCity>{expeditionCity}</expeditionCity>, me encuentro en condición de persona natural <isMerchant>{isMerchant}</isMerchant> comerciante, con fundamento en lo dispuesto en el Título IV de la Ley 1564 de 2012, especialmente en el Artículo 531 y siguientes, modificada por la ley 2445 del 11 de febrero del 2025, así como en su desarrollo reglamentario contenido en el Decreto 2677 de 2012, por medio del presente escrito, comparezco ante su despacho con el fin de SOLICITAR A TÍTULO DIRECTO LA APERTURA FORMAL DEL TRÁMITE DE NEGOCIACIÓN DE DEUDAS. Para contacto, mi teléfono es <cellPhone>{cellPhone}</cellPhone> y mi correo es <email>{email}</email>."
+              "exampleTitle": "Example request",
+              "example": "I, <firstName>{firstName}</firstName> <lastName>{lastName}</lastName>, of legal age, identified with Citizen ID No. <documentNumber>{documentNumber}</documentNumber> of <expeditionCity>{expeditionCity}</expeditionCity>, am a natural person <isMerchant>{isMerchant}</isMerchant> merchant, based on the provisions of Title IV of Law 1564 of 2012, especially Article 531 et seq., as amended by Law 2445 of February 11, 2025, as well as its regulatory development contained in Decree 2677 of 2012, through this document I appear before your office for the purpose of REQUESTING DIRECTLY THE FORMAL OPENING OF THE DEBT NEGOTIATION PROCESS. For contact, my phone is <cellPhone>{cellPhone}</cellPhone> and my email is <email>{email}</email>."
             },
             "step3": {
-              "title": "Declaración de cesación de pagos",
-              "subTitle": "Por favor <span>lea</span> la siguiente <span>declaración</span>",
-              "declarationLabel": "Acepto de forma voluntaria que cumplo con la declaración de cesación de pagos.",
-              "declarationText": "Declaro, bajo la gravedad de juramento, que ostento la calidad de persona natural <u>NO</u> comerciante y me encuentro en <b>estado de cesación de pagos</b>, cumpliendo con los presupuestos normativos exigidos en el Artículo 539 de la Ley 1564 de 2012 modificada por la ley 2445 del 11 de febrero 2025, toda vez que registro <b>dos (2) o más</b> obligaciones <b>vencidas</b> por un término <b>superior a noventa (90) días</b>, y el monto de mis obligaciones incumplidas representa <b>no menos del treinta por ciento (30%) del total</b> del pasivo a mi cargo. En virtud de lo anterior, es procedente la apertura del trámite de negociación de deudas, conforme a lo dispuesto en el Título IV del Código General del Proceso, garantizando la observancia de los principios de buena fe, equilibrio, transparencia y preservación del mínimo vital, que rigen el régimen de insolvencia de la persona natural <u>NO</u> comerciante.",
-              "declarationNote": "Si no cumple con esta declaración, por favor comuniquese con uno de nuestros asesores jurídicos, para que le ayuden a determinar si es posible iniciar el trámite de insolvencia.",
+              "title": "Declaration of Cessation of Payments",
+              "subTitle": "Please <span>read</span> the following <span>declaration</span>",
+              "declarationLabel": "I voluntarily accept that I comply with the declaration of cessation of payments.",
+              "declarationText": "I declare, under oath, that I hold the status of a natural person <u>NON</u> merchant and that I am in a <b>state of cessation of payments</b>, complying with the regulatory requirements set forth in Article 539 of Law 1564 of 2012 amended by Law 2445 of February 11, 2025, since I have <b>two (2) or more</b> <b>overdue</b> obligations for a period <b>exceeding ninety (90) days</b>, and the amount of my unpaid obligations represents <b>no less than thirty percent (30%) of the total</b> liabilities in my charge. Consequently, the opening of the debt negotiation proceeding is appropriate, in accordance with Title IV of the General Procedure Code, guaranteeing compliance with the principles of good faith, balance, transparency and preservation of the minimum subsistence, which govern the insolvency regime for the natural person <u>NON</u> merchant.",
+              "declarationNote": "If you do not comply with this declaration, please contact one of our legal advisors to help you determine if it is possible to start the insolvency process.",
               "messages": {
-                "saving": "Guardando...",
-                "save": "Guardar",
-                "saveSuccess": "Guardado con éxito",
-                "saveError": "Error al guardar los datos"
+                "saving": "Saving...",
+                "save": "Save",
+                "saveSuccess": "Saved successfully",
+                "saveError": "Error saving data"
               }
             },
             "step4": {
-              "title": "Informe de cesación de pagos",
-              "subTitle": "Por favor completa la siguiente información",
+              "title": "Cessation of Payments Report",
+              "subTitle": "Please complete the following information",
               "form": {
-                "terminationReport": "Detalle acá las causas que lo llevaron a la situación de cesación de pagos",
-                "error": "Por favor completa el informe de cesación de pagos",
-                "useAI": "Usar IA para mejorar el informe de cesación de pagos"
+                "terminationReport": "Detail here the causes that led you to the cessation of payments situation",
+                "error": "Please complete the cessation of payments report",
+                "useAI": "Use AI to improve the cessation of payments report"
               },
-              "exampleTitle": "Ejemplos del informe de cesación de pagos",
-              "example1": "Durante el periodo comprendido entre marzo y junio de 2023, la cancelación de mi contrato laboral con la empresa XYZ, sumada a la reducción drástica de horas y al cierre de proyectos clave, provocó la pérdida de ingresos estables. Además, la crisis derivada de la pandemia de COVID-19 agravó mi situación, dejando en riesgo la estabilidad financiera tanto personal como familiar. Por ello, solicito la apertura del trámite de insolvencia para reestructurar mis deudas y proteger el patrimonio mínimo vital, permitiéndome recuperar la estabilidad económica y garantizar el bienestar de mi núcleo familiar.",
-              "example2": "Desde el año 2022 he tenido bajo mi cuidado a dos adultos mayores con condiciones médicas crónicas, lo que ha generado una dependencia económica completa de mi ingreso. Los costos elevados en medicamentos, terapias y cuidados especiales han absorbido la mayor parte de mis recursos, llevándome a incumplir con obligaciones financieras adquiridas. Solicito la apertura del trámite de insolvencia para lograr una reestructuración viable que garantice el bienestar familiar.",
-              "example3": "En agosto de 2023 enfrenté una ruptura conyugal que implicó la separación del hogar y la asunción de gastos que anteriormente eran compartidos, incluyendo arriendo, servicios y educación de mis hijos. Esta situación provocó un desbalance severo en mis finanzas personales, afectando mi capacidad de cumplir con obligaciones de crédito previamente adquiridas. En razón de lo anterior, solicito acogerme al régimen de insolvencia de persona natural.",
-              "example4": "Durante el segundo semestre de 2023, la institución educativa donde laboraba redujo mi jornada laboral en un 50% debido a disminución en la matrícula escolar. Esto generó una caída drástica en mis ingresos, impidiéndome cubrir obligaciones financieras como créditos educativos, tarjetas de crédito y gastos de manutención. Adicionalmente, el incremento en el costo de vida profundizó mi desequilibrio económico. Por estas razones, solicito formalmente la apertura del trámite de insolvencia para proteger mi patrimonio mínimo vital y estabilizar mis finanzas.",
-              "example5": "Desde noviembre de 2022 enfrenté un diagnóstico de enfermedad grave que afectó mi capacidad laboral, obligándome a asumir tratamientos médicos costosos no cubiertos en su totalidad por la EPS. Paralelamente, los descuentos automáticos por libranzas adquiridas sobrepasaron el 50% de mi salario neto, comprometiendo mis recursos para necesidades básicas. Debido a esta situación de sobreendeudamiento e incapacidad financiera, solicito la apertura del trámite de insolvencia para reestructurar mis obligaciones y garantizar mi bienestar y el de mi familia.",
-              "legalCausesTitle": "Causas Legales",
-              "legalCauses": "<li>Pérdida de empleo o disminución sustancial de ingresos</li><li>Enfermedades graves, tratamientos médicos costosos o discapacidad</li><li>Dependencia económica de familiares o personas a cargo</li><li>Endeudamiento excesivo por crédito de consumo, libranzas o tarjetas</li><li>Eventos fortuitos o de fuerza mayor (desastres naturales, robos, pandemias)</li><li>Negocios fallidos o pérdidas patrimoniales</li><li>Embargos, secuestros de cuentas o descuentos por libranza desproporcionados</li><li>Fallecimiento de un aportante del hogar</li><li>Desempleo prolongado del deudor o del cónyuge</li><li>Alteración severa en la economía del país o del sector donde trabaja</li><li>Pérdida o reducción del contrato de prestación de servicios</li><li>Incremento desproporcionado en el costo de vida (inflación, servicios, arriendo)</li><li>Errores en la estructuración de los créditos otorgados (sobreendeudamiento inducido)</li><li>Separación o ruptura conyugal que afectó la economía del hogar</li><li>Pago simultáneo de cuotas hipotecarias y otras obligaciones conyugales</li><li>Carga financiera por estudios o educación de hijos</li><li>Incumplimientos contractuales de terceros que afectaron el flujo de caja del deudor</li>",
+              "exampleTitle": "Examples of cessation of payments report",
+              "example1": "During the period between March and June 2023, the termination of my employment contract with company XYZ, together with a drastic reduction in hours and the closure of key projects, led to the loss of stable income. In addition, the crisis resulting from the COVID-19 pandemic worsened my situation, putting both personal and family financial stability at risk. Therefore, I request the opening of the insolvency proceeding to restructure my debts and protect the minimum vital assets, allowing me to recover economic stability and guarantee the well-being of my family nucleus.",
+              "example2": "Since 2022 I have been taking care of two elderly adults with chronic medical conditions, which has created a complete economic dependency on my income. High costs for medications, therapies and special care have absorbed most of my resources, leading me to default on financial obligations. I request the opening of the insolvency proceeding to achieve a viable restructuring that guarantees family well-being.",
+              "example3": "In August 2023 I experienced a marital breakup that involved separation from the household and assuming expenses that were previously shared, including rent, utilities and my children's education. This situation caused a severe imbalance in my personal finances, affecting my ability to meet previously acquired credit obligations. Therefore, I request to be covered by the natural person insolvency regime.",
+              "example4": "During the second half of 2023, the educational institution where I worked reduced my working hours by 50% due to a decrease in school enrollment. This generated a drastic drop in my income, preventing me from covering financial obligations such as educational loans, credit cards and maintenance expenses. Additionally, the increase in the cost of living deepened my economic imbalance. For these reasons, I formally request the opening of the insolvency proceeding to protect my minimum vital assets and stabilize my finances.",
+              "example5": "Since November 2022 I faced a diagnosis of a serious illness that affected my ability to work, forcing me to assume expensive medical treatments not fully covered by the EPS. At the same time, automatic deductions for wage garnishments exceeded 50% of my net salary, compromising my resources for basic needs. Due to this situation of over-indebtedness and financial inability, I request the opening of the insolvency proceeding to restructure my obligations and guarantee my well-being and that of my family.",
+              "legalCausesTitle": "Legal Causes",
+              "legalCauses": "<li>Loss of employment or substantial decrease in income</li><li>Serious illnesses, costly medical treatments or disability</li><li>Economic dependency of family members or dependents</li><li>Excessive indebtedness from consumer credit, wage garnishments or credit cards</li><li>Fortuitous events or force majeure (natural disasters, theft, pandemics)</li><li>Failed businesses or asset losses</li><li>Garnishments, account freezes or disproportionate wage deduction orders</li><li>Death of a household contributor</li><li>Prolonged unemployment of the debtor or spouse</li><li>Severe alteration in the country's economy or the sector where he/she works</li><li>Loss or reduction of the service contract</li><li>Disproportionate increase in the cost of living (inflation, utilities, rent)</li><li>Errors in the structuring of granted credits (induced over-indebtedness)</li><li>Separation or marital breakup that affected household economy</li><li>Simultaneous payment of mortgage installments and other marital obligations</li><li>Financial burden due to children's studies or education</li><li>Contractual breaches by third parties that affected the debtor's cash flow</li>",
               "messages": {
-                "saving": "Guardando...",
-                "save": "Guardar",
-                "saveSuccess": "Guardado con éxito",
-                "saveError": "Error al guardar los datos"
+                "saving": "Saving...",
+                "save": "Save",
+                "saveSuccess": "Saved successfully",
+                "saveError": "Error saving data"
               }
             },
             "step5": {
-              "title": "Relación de Acreedores",
-              "subTitle": "Por favor completa la siguiente información",
+              "title": "List of Creditors",
+              "subTitle": "Please complete the following information",
               "messages": {
-                "saving": "Guardando...",
-                "save": "Guardar",
-                "saveSuccess": "Acreedores guardados correctamente",
-                "saveError": "Error al guardar los acreedores, por favor intenta nuevamente"
+                "saving": "Saving...",
+                "save": "Save",
+                "saveSuccess": "Creditors saved successfully",
+                "saveError": "Error saving creditors, please try again"
               },
               "errors": {
-                "minSevereCount": "Debes tener al menos 2 deudas en mora (>= 90 días)",
-                "minSeverePct": "El porcentaje de cumplimiento debe ser mayor a 30%"
+                "minSevereCount": "You must have at least 2 debts in default (>= 90 days)",
+                "minSeverePct": "The compliance percentage must be greater than 30%"
               },
               "form": {
-                "minTwoCreditorsError": "Debes completar al menos dos acreedores",
-                "error": "Debes completar al menos el nombre, la naturaleza, el capital y los días en mora de cada acreedor",
-                "addCreditor": "+ Agregar Acreedor",
-                "save": "Guardar",
+                "minTwoCreditorsError": "You must complete at least two creditors",
+                "error": "You must complete at least the name, nature, principal and days in default for each creditor",
+                "addCreditor": "+ Add Creditor",
+                "save": "Save",
                 "headers": {
-                  "creditor": "Acreedor",
-                  "nit": "NIT",
-                  "contact": "Contacto",
-                  "nature": "Naturaleza",
-                  "otherNature": "Otra naturaleza",
-                  "consanguinity": "Consanguinidad",
-                  "supportGuarantee": "Soporte Garantía",
-                  "interestRate": "Tasa de interés (% mensual)",
-                  "capital": "Capital",
-                  "daysOverdue": "Días en mora",
-                  "creditClassification": "Clase",
+                  "creditor": "Creditor",
+                  "nit": "Tax ID",
+                  "contact": "Contact",
+                  "nature": "Nature",
+                  "otherNature": "Other nature",
+                  "consanguinity": "Consanguinity",
+                  "supportGuarantee": "Guarantee Support",
+                  "interestRate": "Interest rate (% monthly)",
+                  "capital": "Principal",
+                  "daysOverdue": "Days in default",
+                  "creditClassification": "Class",
                   "actions": {
-                    "title": "Acciones",
-                    "delete": "Eliminar"
+                    "title": "Actions",
+                    "delete": "Delete"
                   }
                 },
                 "creditClassificationOptions": {
-                  "1": "1. Alimentos, Impuestos y Laboral",
-                  "2": "2. Prendas y Garantías Mobiliarias",
-                  "3": "3. Hipotecas",
-                  "5": "5. Quirografarios"
+                  "1": "1. Alimony, Taxes and Labor",
+                  "2": "2. Pledges and Security Interests",
+                  "3": "3. Mortgages",
+                  "5": "5. Unsecured"
                 },
                 "placeholders": {
-                  "select": "Naturaleza de la obligación",
-                  "consanguinity": "Seleccione el grado consanguineo",
-                  "interestRate": "Tasa de interés (% mensual)",
-                  "otherNature": "Especifique ¿cuál?",
-                  "selectClassification": "Clasificación de la deuda"
+                  "select": "Nature of the obligation",
+                  "consanguinity": "Select the consanguinity degree",
+                  "interestRate": "Interest rate (% monthly)",
+                  "otherNature": "Specify which?",
+                  "selectClassification": "Debt classification"
                 }
               },
               "validation": {
-                "doesNotMeetRequirements": "No cumple con los requisitos para iniciar el trámite de insolvencia económica",
-                "meetsRequirements": "Cumple con los requisitos para el trámite de insolvencia económica"
+                "doesNotMeetRequirements": "Does not meet the requirements to start the economic insolvency process",
+                "meetsRequirements": "Meets the requirements for the economic insolvency process"
               },
               "totals": {
-                "title": "Totales",
-                "includingExcluded": "Incluyendo libranza / nómina",
-                "excludingExcluded": "Excluyendo libranza / nómina",
-                "totalDebt": "Total deudas",
-                "arrears": "Total actual en mora",
-                "current": "Total actual al día",
-                "severeArrears": "Total actual en mora (>= 90)",
-                "severeCount": "Número de deudas en mora (>= 90)",
-                "compliancePercentage": "Porcentaje de cumplimiento"
+                "title": "Totals",
+                "includingExcluded": "Including wage/payroll deduction",
+                "excludingExcluded": "Excluding wage/payroll deduction",
+                "totalDebt": "Total debt",
+                "arrears": "Total current in default",
+                "current": "Total current up to date",
+                "severeArrears": "Total current in default (>= 90)",
+                "severeCount": "Number of debts in default (>= 90)",
+                "compliancePercentage": "Compliance percentage"
               }
             },
             "step6": {
-              "title": "Relación de Bienes",
-              "subTitle": "Por favor completa la siguiente información",
+              "title": "List of Assets",
+              "subTitle": "Please complete the following information",
               "messages": {
-                "saving": "Guardando...",
-                "save": "Guardar",
-                "saveSuccess": "Bienes guardados correctamente",
-                "saveError": "Error al guardar los bienes, por favor intenta nuevamente"
+                "saving": "Saving...",
+                "save": "Save",
+                "saveSuccess": "Assets saved successfully",
+                "saveError": "Error saving assets, please try again"
               },
               "form": {
                 "actions": {
-                  "delete": "Eliminar",
-                  "addAsset": "+ Agregar Bien",
-                  "save": "Guardar"
+                  "delete": "Delete",
+                  "addAsset": "+ Add Asset",
+                  "save": "Save"
                 },
                 "assetType": {
-                  "label": "Tipo de bien",
-                  "placeholder": "Selecciona el tipo de bien",
+                  "label": "Asset type",
+                  "placeholder": "Select the asset type",
                   "options": {
-                    "furniture": "Mueble",
-                    "realEstate": "Inmueble"
+                    "furniture": "Personal Property",
+                    "realEstate": "Real Estate"
                   }
                 },
                 "description": {
-                  "label": "Nombre o descripción del bien"
+                  "label": "Asset name or description"
                 },
                 "identification": {
-                  "label": "Registro / Matrícula / Serial"
+                  "label": "Registration / Title / Serial"
                 },
                 "lien": {
-                  "label": "Gravamen",
-                  "placeholder": "Opcional, ejm: Hipoteca, Prenda..."
+                  "label": "Lien",
+                  "placeholder": "Optional, e.g.: Mortgage, Pledge..."
                 },
                 "affectation": {
-                  "label": "Afectación",
-                  "placeholder": "Selecciona uno",
+                  "label": "Encumbrance",
+                  "placeholder": "Select one",
                   "options": {
-                    "family_heritage": "Patrimonio familiar",
-                    "family_home": "Vivienda familiar",
-                    "decent_housing": "Única vivienda digna",
-                    "not_apply": "No aplica"
+                    "family_heritage": "Family heritage",
+                    "family_home": "Family home",
+                    "decent_housing": "Only decent housing",
+                    "not_apply": "Not applicable"
                   }
                 },
                 "measure": {
-                  "label": "Medidas cautelares",
+                  "label": "Precautionary measures",
                   "options": {
-                    "seizure": "Embargo",
-                    "confiscation": "Secuestre",
-                    "auction": "Remate",
-                    "none": "No tiene"
+                    "seizure": "Seizure",
+                    "confiscation": "Sequestration",
+                    "auction": "Auction",
+                    "none": "None"
                   }
                 },
                 "commercialValue": {
-                  "label": "Valor comercial"
+                  "label": "Commercial value"
                 },
                 "patrimonialSociety": {
-                  "label": "Sociedad conyugal / patrimonial",
-                  "placeholder": "Opcional, ejm: Sociedad patrimonial por existencia de unión libre desde hace x años..."
+                  "label": "Marital / Patrimonial partnership",
+                  "placeholder": "Optional, e.g.: Patrimonial partnership due to existence of common-law union for x years..."
                 },
                 "exclusion": {
-                  "label": "Excluir el bien",
-                  "legalReferencesTitle": "Fundamento legal",
-                  "legalReferencesDescription": "El patrimonio mínimo vital está constituido por los bienes que son necesarios para la subsistencia del deudor y su familia, y no pueden ser embargados ni objeto de medidas cautelares. Esto incluye bienes como la vivienda familiar, los muebles y enseres necesarios para el hogar, y otros bienes que garanticen el sustento básico.",
-                  "legalReferences": "<li>Art. 1, 42, 44 y 51 C.P.C.</li><li>Art. 25.1 Declaración Universal de los Derechos Humanos</li><li>Art. 11 Pacto Internacional de Derechos Económicos, Sociales y Culturales</li><li>Sentencia t-785 del 2006</li><li>Sentencia: t-583/13, t-585/06, t-239/13, t-043/17, SU-111/18, C-599/10, C-747/12, C-555/21</li>"
+                  "label": "Exclude the asset",
+                  "legalReferencesTitle": "Legal basis",
+                  "legalReferencesDescription": "The minimum vital assets are those necessary for the subsistence of the debtor and his family, and cannot be seized or subject to precautionary measures. This includes assets such as the family home, furniture and fixtures necessary for the household, and other assets that guarantee basic sustenance.",
+                  "legalReferences": "<li>Art. 1, 42, 44 and 51 C.P.C.</li><li>Art. 25.1 Universal Declaration of Human Rights</li><li>Art. 11 International Covenant on Economic, Social and Cultural Rights</li><li>Ruling t-785 of 2006</li><li>Rulings: t-583/13, t-585/06, t-239/13, t-043/17, SU-111/18, C-599/10, C-747/12, C-555/21</li>"
                 },
-                "error": "Por favor completa la relación de bienes para cada campo requerido"
+                "error": "Please complete the asset list for each required field"
               },
-              "exampleTitle": "Ejemplos del informe de cesación de pagos",
-              "example": "Durante el periodo comprendido entre marzo y junio de 2023, la cancelación de mi contrato laboral con la empresa XYZ, sumada a la reducción drástica de horas y al cierre de proyectos clave, provocó la pérdida de ingresos estables. Además, la crisis derivada de la pandemia de COVID-19 agravó mi situación, dejando en riesgo la estabilidad financiera tanto personal como familiar. Por ello, solicito la apertura del trámite de insolvencia para reestructurar mis deudas y proteger el patrimonio mínimo vital, permitiéndome recuperar la estabilidad económica y garantizar el bienestar de mi núcleo familiar."
+              "exampleTitle": "Examples of cessation of payments report",
+              "example": "During the period between March and June 2023, the termination of my employment contract with company XYZ, together with a drastic reduction in hours and the closure of key projects, led to the loss of stable income. In addition, the crisis resulting from the COVID-19 pandemic worsened my situation, putting both personal and family financial stability at risk. Therefore, I request the opening of the insolvency proceeding to restructure my debts and protect the minimum vital assets, allowing me to recover economic stability and guarantee the well-being of my family nucleus."
             },
             "step7": {
-              "title": "Relación de Procesos Judiciales",
-              "subTitle": "Por favor completa la siguiente información",
+              "title": "List of Judicial Proceedings",
+              "subTitle": "Please complete the following information",
               "messages": {
-                "saving": "Guardando...",
-                "save": "Guardar",
-                "saveSuccess": "Procesos judiciales guardados con éxito",
-                "saveError": "Error al guardar los datos"
+                "saving": "Saving...",
+                "save": "Save",
+                "saveSuccess": "Judicial proceedings saved successfully",
+                "saveError": "Error saving data"
               },
               "form": {
-                "delete": "Eliminar",
-                "addProcess": "+ Agregar Proceso",
-                "affectation": "Afectación",
-                "court": "Juzgado",
-                "description": "Descripción",
-                "caseCode": "Radicado",
+                "delete": "Delete",
+                "addProcess": "+ Add Proceeding",
+                "affectation": "Encumbrance",
+                "court": "Court",
+                "description": "Description",
+                "caseCode": "Case number",
                 "processStatus": {
-                  "label": "Estado del proceso",
-                  "placeholder": "Selecciona el estado del proceso",
+                  "label": "Process status",
+                  "placeholder": "Select the process status",
                   "options": {
-                    "seizure": "Embargo",
-                    "auction": "Remate",
-                    "sequesteredPending": "Secuestre pendiente",
-                    "lawsuitInProgress": "Demanda en curso",
-                    "admissionOrder": "Auto admisorio",
-                    "processCompleted": "Proceso terminado"
+                    "seizure": "Seizure",
+                    "auction": "Auction",
+                    "sequesteredPending": "Sequestration pending",
+                    "lawsuitInProgress": "Lawsuit in progress",
+                    "admissionOrder": "Admission order",
+                    "processCompleted": "Process completed"
                   }
                 },
-                "error": "Por favor completa los campos obligatorios"
+                "error": "Please complete the mandatory fields"
               },
-              "exampleTitle": "Ejemplos del informe de cesación de pagos",
-              "example": "Durante el periodo comprendido entre marzo y junio de 2023, la cancelación de mi contrato laboral con la empresa XYZ, sumada a la reducción drástica de horas y al cierre de proyectos clave, provocó la pérdida de ingresos estables. Además, la crisis derivada de la pandemia de COVID-19 agravó mi situación, dejando en riesgo la estabilidad financiera tanto personal como familiar. Por ello, solicito la apertura del trámite de insolvencia para reestructurar mis deudas y proteger el patrimonio mínimo vital, permitiéndome recuperar la estabilidad económica y garantizar el bienestar de mi núcleo familiar."
+              "exampleTitle": "Examples of cessation of payments report",
+              "example": "During the period between March and June 2023, the termination of my employment contract with company XYZ, together with a drastic reduction in hours and the closure of key projects, led to the loss of stable income. In addition, the crisis resulting from the COVID-19 pandemic worsened my situation, putting both personal and family financial stability at risk. Therefore, I request the opening of the insolvency proceeding to restructure my debts and protect the minimum vital assets, allowing me to recover economic stability and guarantee the well-being of my family nucleus."
             },
             "step8": {
-              "title": "Relación de Ingresos",
-              "subTitle": "Por favor completa la siguiente información",
+              "title": "Income Statement",
+              "subTitle": "Please complete the following information",
               "form": {
-                "errorType": "Debes seleccionar el tipo de ingreso",
-                "errorAmount": "Debes ingresar el monto del ingreso",
-                "errorOther": "Debes especificar al menos una fuente de ingreso y su monto",
-                "typeLabel": "Tipo de ingreso, para múltiples ingresos por favor seleccione “Otro”",
-                "amountLabel": "Monto del ingreso",
-                "typePlaceholder": "Selecciona el tipo de ingreso",
+                "errorType": "You must select the income type",
+                "errorAmount": "You must enter the income amount",
+                "errorOther": "You must specify at least one income source and its amount",
+                "typeLabel": "Income type, for multiple incomes please select “Other”",
+                "amountLabel": "Income amount",
+                "typePlaceholder": "Select the income type",
                 "typeOptions": {
-                  "selectPlaceholder": "Selecciona el tipo de ingreso",
-                  "salary": "Salario",
-                  "independent": "Independiente",
-                  "pensioner": "Pensión",
-                  "unemployed": "Desempleado",
-                  "other": "Otro",
+                  "selectPlaceholder": "Select the income type",
+                  "salary": "Salary",
+                  "independent": "Self-employed",
+                  "pensioner": "Pension",
+                  "unemployed": "Unemployed",
+                  "other": "Other",
                   "otherOptions": {
-                    "otherLabel": "¿Cuál?",
-                    "otherDetailPlaceholder": "Fuente de ingreso",
-                    "otherAmountPlaceholder": "Monto del ingreso"
+                    "otherLabel": "Which?",
+                    "otherDetailPlaceholder": "Income source",
+                    "otherAmountPlaceholder": "Income amount"
                   }
                 }
               },
               "messages": {
-                "saving": "Guardando...",
-                "save": "Guardar",
-                "saveSuccess": "Relación de ingresos guardados con éxito",
-                "saveError": "Error al guardar los datos"
+                "saving": "Saving...",
+                "save": "Save",
+                "saveSuccess": "Income statement saved successfully",
+                "saveError": "Error saving data"
               }
             },
             "step9": {
-              "title": "Sociedad Conyugal / Patrimonial",
-              "subTitle": "Por favor completa la siguiente información",
-              "maritalSocietyQuestion": "Tipo de sociedad conyugal o patrimonial",
+              "title": "Marital / Patrimonial Partnership",
+              "subTitle": "Please complete the following information",
+              "maritalSocietyQuestion": "Type of marital or patrimonial partnership",
               "maritalStatus": {
-                "single": "Soltero/a",
-                "married": "Casado/a",
-                "divorced": "Divorciado/a",
-                "widowed": "Viudo/a",
-                "freeUnion": "Unión libre",
-                "maritalDeclaration": "Declaración Marital de hecho",
-                "notApplicable": "No aplica"
+                "single": "Single",
+                "married": "Married",
+                "divorced": "Divorced",
+                "widowed": "Widowed",
+                "freeUnion": "Common-law union",
+                "maritalDeclaration": "De facto marital declaration",
+                "notApplicable": "Not applicable"
               },
-              "partnerDocument": "Cédula de la pareja",
-              "partnerName": "Nombres",
-              "partnerLastname": "Apellidos",
-              "partnerEmail": "Correo",
-              "partnerPhone": "Celular",
-              "relationshipDuration": "¿Desde hace cuánto? (años)",
+              "partnerDocument": "Partner's ID",
+              "partnerName": "First Name(s)",
+              "partnerLastname": "Last Name(s)",
+              "partnerEmail": "Email",
+              "partnerPhone": "Cell phone",
+              "relationshipDuration": "For how long? (years)",
               "messages": {
-                "saving": "Guardando...",
-                "save": "Guardar",
-                "saveSuccess": "Sociedad conyugal guardada con éxito",
-                "saveError": "Error al guardar los datos"
+                "saving": "Saving...",
+                "save": "Save",
+                "saveSuccess": "Marital partnership saved successfully",
+                "saveError": "Error saving data"
               }
             },
             "step10": {
-              "title": "Recursos disponibles y gastos esenciales",
-              "subTitle": "Por favor completa la siguiente información",
-              "addSubsistenceTable": "Agregar tabla de dependientes",
-              "removeSubsistenceTable": "Eliminar tabla de subsistencia",
-              "proposedMonthlyValueLabel": "Propuesta de <span>pago mensual</span> del deudor",
+              "title": "Available resources and essential expenses",
+              "subTitle": "Please complete the following information",
+              "addSubsistenceTable": "Add dependents table",
+              "removeSubsistenceTable": "Remove subsistence table",
+              "proposedMonthlyValueLabel": "Debtor's proposed <span>monthly payment</span>",
               "table": {
                 "defaults": {
-                  "debtorTitle": "Deudor",
-                  "childTitle": "Hijos",
-                  "spouseTitle": "Cónyuge",
-                  "partnerTitle": "Compañero(a) permanente",
-                  "otherTitle": "Otro",
-                  "title": "Gastos esenciales",
-                  "description": "Por favor ingresa el totalizado de:",
-                  "addCustomExpense": "Agregar gasto esencial",
-                  "removeCustomExpense": "Eliminar gasto esencial",
-                  "tableTotalLabel": "Total de gastos esenciales",
-                  "globalTotalLabel": "Total global",
+                  "debtorTitle": "Debtor",
+                  "childTitle": "Children",
+                  "spouseTitle": "Spouse",
+                  "partnerTitle": "Permanent partner",
+                  "otherTitle": "Other",
+                  "title": "Essential expenses",
+                  "description": "Please enter the total for:",
+                  "addCustomExpense": "Add essential expense",
+                  "removeCustomExpense": "Remove essential expense",
+                  "tableTotalLabel": "Total essential expenses",
+                  "globalTotalLabel": "Global total",
                   "headers": {
-                    "expense": "Gasto",
-                    "legalSupport": "Soporte legal",
-                    "value": "Valor",
+                    "expense": "Expense",
+                    "legalSupport": "Legal support",
+                    "value": "Value",
                     "actions": {
-                      "title": "Acciones",
-                      "delete": "Eliminar",
-                      "add": "Agregar"
+                      "title": "Actions",
+                      "delete": "Delete",
+                      "add": "Add"
                     }
                   },
                   "items": {
                     "baseExpenses": {
                       "item1": {
-                        "label": "Arriendo o Pago cuota de vivienda",
+                        "label": "Rental or Housing Installment Payment",
                         "legalSupport": "C.P.C. art. 51"
                       },
                       "item2": {
-                        "label": "Seguro Muebles",
-                        "legalSupport": "P.H. Art. 15 Ley 675"
+                        "label": "Personal Property Insurance",
+                        "legalSupport": "P.H. Art. 15 Law 675"
                       },
                       "item3": {
-                        "label": "Seguro Inmuebles",
-                        "legalSupport": "P.H. Art. 15 Ley 675"
+                        "label": "Property Insurance",
+                        "legalSupport": "P.H. Art. 15 Law 675"
                       },
                       "item4": {
-                        "label": "Alimentación",
+                        "label": "Feeding and Nutrition",
                         "legalSupport": "C.I.A. art. 24. Cod. Civil art. 411. I.C.B.F"
                       },
                       "item5": {
-                        "label": "Servicios Públicos (Agua)",
+                        "label": "Public Utilities (Water)",
                         "legalSupport": "C.P.C. art. 365"
                       },
                       "item6": {
-                        "label": "Servicios Públicos (Luz/Energía)",
+                        "label": "Public Utilities (Light/Energy)",
                         "legalSupport": "C.P.C. art. 365"
                       },
                       "item7": {
-                        "label": "Servicios Públicos (Gas)",
+                        "label": "Public Utilities (Gas)",
                         "legalSupport": "C.P.C. art. 365"
                       },
                       "item8": {
-                        "label": "Seguridad social integral",
-                        "legalSupport": "Ley 100 de 1993 S.S.S."
+                        "label": "Comprehensive social security",
+                        "legalSupport": "Law 100 of 1993 S.S.S."
                       },
                       "item9": {
-                        "label": "Transporte",
-                        "legalSupport": "Ley 336 de 1996 I.N.T"
+                        "label": "Transport",
+                        "legalSupport": "Law 336 of 1996 I.N.T"
                       },
                       "item10": {
-                        "label": "Vestuario y Calzado (máx 3 mudas por año)",
+                        "label": "Clothing and Footwear (max 3 changes per year)",
                         "legalSupport": "C.C. art. 411"
                       },
                       "item11": {
-                        "label": "Educación (Mensualidad)",
-                        "legalSupport": "C.P.C. art. 67, Ley 115 1994 (L.G.E.)"
+                        "label": "Education (Monthly)",
+                        "legalSupport": "C.P.C. art. 67, Law 115 1994 (L.G.E.)"
                       },
                       "item12": {
-                        "label": "Impuestos",
-                        "legalSupport": "E.T.N. Dcto. 624 de 1989"
+                        "label": "Taxes",
+                        "legalSupport": "E.T.N. Dcto. 624 of 1989"
                       },
                       "item13": {
-                        "label": "Recreación y deporte",
-                        "legalSupport": "C.P.C. art. 52, Ley 1098 de 2006. C.I.A. art. 30. C.D.N art 31. PIDESC. General 14 comite DESC."
+                        "label": "Recreation and sport",
+                        "legalSupport": "C.P.C. art. 52, Law 1098 of 2006. C.I.A. art. 30. C.D.N art 31. ICESCR. General 14 committee DESC."
                       },
                       "item14": {
-                        "label": "Comunicaciones",
-                        "legalSupport": "MinTIC Ley 1341 de 2009"
+                        "label": "Communications",
+                        "legalSupport": "MinTIC Law 1341 of 2009"
                       },
                       "item15": {
-                        "label": "Obligación alimentaria (REDAM)",
-                        "legalSupport": "Ley 2097 del 2 de julio de 2021"
+                        "label": "Child support obligation (REDAM)",
+                        "legalSupport": "Law 2097 of July 2, 2021"
                       }
                     }
                   }
                 }
               },
               "foodObligationQuestion": {
-                "label": "¿Tiene obligación alimentaria?",
+                "label": "Does the dependent have an alimentary obligation?",
                 "options": {
-                  "yes": "Sí",
+                  "yes": "Yes",
                   "no": "No"
                 }
               },
               "addTableForm": {
-                "title": "Añadir dependiente",
+                "title": "Add Dependent",
                 "name": {
-                  "label": "Nombre del dependiente",
-                  "placeholder": "Ej: María Pérez"
+                  "label": "Dependent's name",
+                  "placeholder": "Ex: María Pérez"
                 },
                 "relationShip": {
-                  "label": "Relación con el deudor",
-                  "placeholder": "Selecciona la relación con el deudor",
+                  "label": "Relationship with the debtor",
+                  "placeholder": "Select the relationship with the debtor",
                   "options": {
-                    "husband": "ESPOSO",
-                    "wife": "ESPOSA",
-                    "permanentPartner": "PAREJA PERMANENTE",
-                    "son": "HIJO",
-                    "daughter": "HIJA",
-                    "mother": "MADRE",
-                    "father": "PADRE",
-                    "other": "OTRO"
+                    "husband": "HUSBAND",
+                    "wife": "WIFE",
+                    "permanentPartner": "PERMANENT PARTNER",
+                    "son": "SON",
+                    "daughter": "DAUGHTER",
+                    "mother": "MOTHER",
+                    "father": "FATHER",
+                    "other": "OTHER"
                   }
                 },
                 "disability": {
-                  "label": "¿Tiene discapacidad?",
+                  "label": "Has disability?",
                   "options": {
-                    "yes": "Sí",
+                    "yes": "Yes",
                     "no": "No"
                   }
                 },
                 "age": {
-                  "label": "Edad"
+                  "label": "Age"
                 },
                 "gender": {
-                  "label": "G��nero (sexo de nacimiento)",
+                  "label": "Gender (sex at birth)",
                   "options": {
-                    "male": "Masculino",
-                    "female": "Femenino"
+                    "male": "Male",
+                    "female": "Female"
                   }
                 },
                 "buttons": {
-                  "add": "Agregar",
-                  "cancel": "Cancelar"
+                  "add": "Add",
+                  "cancel": "Cancel"
                 }
               },
               "messages": {
-                "saving": "Guardando...",
-                "save": "Guardar",
-                "saveSuccess": "Gastos/Egresos guardados con éxito",
-                "saveError": "Error al guardar los datos"
+                "saving": "Saving...",
+                "save": "Save",
+                "saveSuccess": "Signature saved successfully",
+                "saveError": "Error saving signature, please try again"
               }
             },
             "step11": {
-              "title": "Firma electrónica",
-              "subTitle": "Por favor firma el documento",
+              "title": "Electronic Signature",
+              "subTitle": "Please sign the document",
               "messages": {
-                "saving": "Guardando...",
-                "save": "Guardar",
-                "saveSuccess": "Firma guardada con éxito",
-                "saveError": "Error al guardar los datos",
-                "noSignature": "Por favor firma el documento",
-                "noDocumentNumber": "Por favor ingresa el número de documento",
-                "signatureMobile": "Para tener más espacio para firmar, por favor gira tu dispositivo a modo horizontal."
+                "saving": "Saving...",
+                "save": "Save",
+                "saveSuccess": "Signature saved successfully",
+                "saveError": "Error saving signature, please try again",
+                "noSignature": "Please sign the document",
+                "noDocumentNumber": "Please enter the document number",
+                "signatureMobile": "To have more space for signing, please rotate your device to landscape mode."
               },
               "buttons": {
-                "clear": "Limpiar",
-                "save": "Guardar",
-                "saving": "Guardando...",
-                "success": "Firma guardada con éxito",
-                "error": "Error al guardar la firma, por favor intenta nuevamente"
+                "clear": "Clear",
+                "save": "Save",
+                "saving": "Saving...",
+                "success": "Signature saved successfully",
+                "error": "Error saving signature, please try again"
               },
               "form": {
                 "inputs": {
-                  "documentNumberLabel": "Número de documento",
-                  "documentNumberPlaceholder": "Ingresa tu cédula"
+                  "documentNumberLabel": "Document Number",
+                  "documentNumberPlaceholder": "Enter your ID"
                 }
               }
             }
@@ -1227,16 +1244,16 @@
           "registerLink": "Don't have an account? Register here"
         },
         "register": {
-          "title": "Registro",
-          "errorRegister": "Datos incorrectos, por favor verifica tu información.",
-          "successRegister": "Registro exitoso",
-          "generalError": "Ocurrió un error, por favor intenta más tarde.",
+          "title": "Registration",
+          "errorRegister": "Incorrect data, please verify your information.",
+          "successRegister": "Registration successful",
+          "generalError": "An error occurred, please try again later.",
           "form": {
-            "documentNumber": "Número de documento",
-            "documentIssueDate": "Fecha de expedición",
-            "birthDate": "Fecha de nacimiento"
+            "documentNumber": "Document Number",
+            "documentIssueDate": "Date of Issue",
+            "birthDate": "Date of Birth"
           },
-          "loginLink": "¿Ya tienes cuenta? Inicia sesión aquí"
+          "loginLink": "Already have an account? Log in here."
         }
       }
     }

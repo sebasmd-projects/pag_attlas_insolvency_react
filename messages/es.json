@@ -340,9 +340,26 @@
     },
     "documents": {
       "legal": {
-        "termsAndConditions": "/assets/documents/legal/terms-and-conditions.pdf",
-        "cookies": "/assets/documents/legal/cookies.pdf",
-        "policyPersonalData": "/assets/documents/legal/policy-for-the-treatment-of-personal-data.pdf"
+        "cookies": {
+          "title": "Política de Cookies",
+          "document": "/assets/documents/legal/es-cookies.pdf"
+        },
+        "policiesForTheTreatmentOfInformation": {
+          "title": "Políticas para el tratamiento de la información",
+          "document": "/assets/documents/legal/es-policy-for-the-treatment-of-personal-data.pdf"
+        },
+        "privacyNotice": {
+          "title": "Aviso de Privacidad",
+          "document": "/assets/documents/legal/privacy-notice.pdf"
+        },
+        "processingOfPersonalData": {
+          "title": "Tratamiento de datos personales",
+          "document": "/assets/documents/legal/processing-of-personal-data.pdf"
+        },
+        "termsAndConditions": {
+          "title": "Términos y condiciones",
+          "document": "/assets/documents/legal/es-terms-and-conditions.pdf"
+        }
       },
       "complaintsAndQueries": {
         "title_h1": "Reclamos, quejas y sugerencias (PQRS)",
