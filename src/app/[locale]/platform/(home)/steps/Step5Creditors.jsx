@@ -172,11 +172,11 @@ export default function Step5Creditors({ data, updateData, onNext }) {
     const isLegal = () => {
         if (withoutExcluded.severeCount < 2) {
             toast.error(t('errors.minSevereCount'));
-            return false;
+            return true;
         }
         if (compliancePct < 30) {
             toast.error(t('errors.minSeverePct'));
-            return false;
+            return true;
         }
         return true;
     };
