@@ -51,13 +51,13 @@ export default function Navigation() {
           try {
             await fetch('/api/platform/auth/logout', { method: 'POST', credentials: 'include' });
           }
-          catch (logoutError) {
-            console.error('Error during automatic logout:', logoutError);
+          catch {
+            // Silent fail for automatic logout
           }
           setLoggedIn(false);
         }
-      } catch (error) {
-        console.error('Error validating token:', error);
+      } catch {
+        // Silent fail for token validation
       }
     }
     checkTokenInfo();
@@ -172,8 +172,8 @@ export default function Navigation() {
                     await fetch('/api/platform/auth/logout', { method: 'POST' });
                     setLoggedIn(false);
                     router.push('/platform/auth/login');
-                  } catch (error) {
-                    console.error('Error logging out:', error);
+                  } catch {
+                    // Silent fail for logout
                   }
                 }}
               >

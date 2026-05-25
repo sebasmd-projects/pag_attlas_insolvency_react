@@ -1,30 +1,37 @@
+// src/app/api/pqrs/route.jsx
+
 import axios from 'axios';
 import { NextResponse } from 'next/server';
-import {apiBaseUrl} from '@/config';
+import { apiBaseUrl } from '@/config';
+import { validateOrigin, corsErrorResponse } from '@/lib/cors';
+import { serverLogger } from '@/lib/logger';
 
 export async function POST(request) {
+    // CORS validation
+    const { isValid } = validateOrigin(request);
+    if (!isValid) {
+        return corsErrorResponse();
+    }
+
     try {
         const data = await request.json();
 
         const response = await axios.post(
             `${apiBaseUrl}/pqrs/`,
-            data
+            data,
+            { timeout: 10000 }
         );
 
-        return NextResponse.json(response.data, {
-            status: 200,
-        });
+        return NextResponse.json(response.data, { status: 200 });
     } catch (error) {
-        console.error('Error en contact route:', error?.message);
+        serverLogger.error('Error in PQRS route', {
+            error: error?.message,
+            status: error?.response?.status,
+        });
+        
         return NextResponse.json(
-            {
-                detail:
-                    error?.response?.data?.detail ||
-                    'Error al enviar el formulario de contacto',
-            },
-            {
-                status: 400,
-            }
+            { detail: error?.response?.data?.detail || 'Error al enviar el formulario PQRS' },
+            { status: 400 }
         );
     }
 }

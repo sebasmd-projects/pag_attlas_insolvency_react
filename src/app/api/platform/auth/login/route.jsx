@@ -1,6 +1,8 @@
 // src/app/api/platform/auth/login/route.jsx
 
 import rateLimit from '@/components/lib/rate-limit';
+import { validateOrigin, corsErrorResponse } from '@/lib/cors';
+import { serverLogger } from '@/lib/logger';
 import axios from 'axios';
 import { NextResponse } from 'next/server';
 import {apiBaseUrl} from '@/config';
@@ -12,7 +14,6 @@ const limiter = rateLimit({
 });
 
 // Error codes mapping from backend serializer
-// Backend returns errors in format: { field_name: ['error message'] }
 const ERROR_CODES = {
     USER_NOT_FOUND: 'userNotFound',
     INVALID_BIRTH_DATE: 'invalidBirthDate',
@@ -35,15 +36,9 @@ function getClientIP(request) {
 
 /**
  * Map backend error to frontend error code
- * Backend serializer returns errors in format:
- * - { document_number: ['Cédula no encontrada con esa fecha de nacimiento.'] }
- * - { user: ['Asesor inválido. No existe un asesor con las iniciales proporcionadas.'] }
- * - { password: ['Contraseña incorrecta para el asesor indicado.'] }
  */
 function mapBackendError(errorData, statusCode) {
-    // Check for specific field errors from Django serializer
     if (errorData) {
-        // Document number / birth date error
         if (errorData.document_number) {
             const msg = Array.isArray(errorData.document_number) 
                 ? errorData.document_number[0] 
@@ -54,7 +49,6 @@ function mapBackendError(errorData, statusCode) {
             return { code: ERROR_CODES.USER_NOT_FOUND, detail: msg };
         }
         
-        // Advisor (user) error
         if (errorData.user) {
             const msg = Array.isArray(errorData.user) 
                 ? errorData.user[0] 
@@ -62,7 +56,6 @@ function mapBackendError(errorData, statusCode) {
             return { code: ERROR_CODES.INVALID_ADVISOR, detail: msg };
         }
         
-        // Password error
         if (errorData.password) {
             const msg = Array.isArray(errorData.password) 
                 ? errorData.password[0] 
@@ -70,7 +63,6 @@ function mapBackendError(errorData, statusCode) {
             return { code: ERROR_CODES.INVALID_CREDENTIALS, detail: msg };
         }
         
-        // Non-field errors
         if (errorData.non_field_errors) {
             const msg = Array.isArray(errorData.non_field_errors) 
                 ? errorData.non_field_errors[0] 
@@ -78,27 +70,32 @@ function mapBackendError(errorData, statusCode) {
             return { code: 'generalError', detail: msg };
         }
 
-        // Detail message (generic)
         if (errorData.detail) {
             return { code: 'generalError', detail: errorData.detail };
         }
     }
     
-    // Default for 400/401 errors
     if (statusCode === 400 || statusCode === 401) {
-        return { code: ERROR_CODES.INVALID_CREDENTIALS, detail: 'Credenciales inválidas' };
+        return { code: ERROR_CODES.INVALID_CREDENTIALS, detail: 'Credenciales invalidas' };
     }
     
-    return { code: 'generalError', detail: 'Error de autenticación' };
+    return { code: 'generalError', detail: 'Error de autenticacion' };
 }
 
 export async function POST(request) {
+    // CORS validation
+    const { isValid } = validateOrigin(request);
+    if (!isValid) {
+        return corsErrorResponse();
+    }
+
     const clientIP = getClientIP(request);
     
     // Check rate limit
     try {
-        await limiter.check(5, clientIP); // 5 requests per interval
+        await limiter.check(5, clientIP);
     } catch {
+        serverLogger.warn('Rate limit exceeded', { ip: clientIP });
         return NextResponse.json(
             { 
                 success: false,
@@ -136,7 +133,7 @@ export async function POST(request) {
                     success: false,
                     error: 'VALIDATION_ERROR',
                     errorCode: 'invalidPasswordFormat',
-                    detail: 'Formato de contraseña inválido. Use el formato: USUARIO-CLAVE',
+                    detail: 'Formato de contrasena invalido. Use el formato: USUARIO-CLAVE',
                 },
                 { status: 400 }
             );
@@ -146,7 +143,7 @@ export async function POST(request) {
         const backendData = {
             document_number: data.document_number,
             birth_date: data.birth_date,
-            user: user.toUpperCase(), // Asesor initials in uppercase
+            user: user.toUpperCase(),
             password: password,
         };
 
@@ -173,6 +170,8 @@ export async function POST(request) {
             maxAge: expires_in,
         });
 
+        serverLogger.info('User login successful', { ip: clientIP });
+
         return res;
 
     } catch (error) {
@@ -181,6 +180,12 @@ export async function POST(request) {
             const statusCode = error.response?.status || 500;
             const errorData = error.response?.data;
             const { code: errorCode, detail } = mapBackendError(errorData, statusCode);
+            
+            serverLogger.warn('Login failed', { 
+                ip: clientIP, 
+                errorCode,
+                statusCode 
+            });
             
             return NextResponse.json(
                 { 
@@ -195,12 +200,13 @@ export async function POST(request) {
         
         // Handle timeout
         if (error.code === 'ECONNABORTED' || error.message?.includes('timeout')) {
+            serverLogger.error('Login timeout', { ip: clientIP });
             return NextResponse.json(
                 { 
                     success: false,
                     error: 'TIMEOUT',
                     errorCode: 'timeoutError',
-                    detail: 'El servidor tardó demasiado en responder',
+                    detail: 'El servidor tardo demasiado en responder',
                 },
                 { status: 504 }
             );
@@ -208,19 +214,26 @@ export async function POST(request) {
         
         // Handle network errors
         if (error.code === 'ENOTFOUND' || error.code === 'ECONNREFUSED') {
+            serverLogger.error('Network error during login', { 
+                ip: clientIP,
+                errorCode: error.code 
+            });
             return NextResponse.json(
                 { 
                     success: false,
                     error: 'NETWORK_ERROR',
                     errorCode: 'networkError',
-                    detail: 'Error de conexión con el servidor',
+                    detail: 'Error de conexion con el servidor',
                 },
                 { status: 503 }
             );
         }
         
         // Generic error
-        console.error('Login error:', error);
+        serverLogger.error('Login internal error', { 
+            ip: clientIP,
+            error: error.message 
+        });
         return NextResponse.json(
             { 
                 success: false,

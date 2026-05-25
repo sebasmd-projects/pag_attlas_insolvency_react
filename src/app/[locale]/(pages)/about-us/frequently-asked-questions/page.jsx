@@ -1,72 +1,39 @@
-'use client'
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 
-import CardComponent from '@/components/micro-components/card';
-import SubTitleComponent from '@/components/micro-components/sub_title';
-import TitleComponent from '@/components/micro-components/title';
-import { useQuery } from '@tanstack/react-query';
-import { useLocale, useTranslations } from 'next-intl';
-import Image from "next/image";
-import { useState } from "react";
-import { MdQuestionAnswer } from "react-icons/md";
-import OtherFAQComponent from './components/otherFAQContent';
-import InputSearchComponent from './components/searchInput';
-import SkeletonLoaderComponent from './components/skeletonLoader';
-import { GetMainFAQ, GetOtherFAQ } from './fetchFAQ';
+export async function generateMetadata({ params }) {
+    const { locale } = await params;
+    const t = await getTranslations({ locale, namespace: 'Pages.aboutUs.pages.faq.sections.heroSection' });
 
-export default function FAQPage() {
-    const t = useTranslations('Pages.aboutUs.pages.faq.sections');
-    const locale = useLocale();
-    const [searchTerm, setSearchTerm] = useState("");
-    const [openItems, setOpenItems] = useState([]);
-    const { data: mainData, isLoading: mainLoading, error: mainError } = useQuery({ queryKey: ['mainFAQ', locale], queryFn: () => GetMainFAQ() });
-    const { data: otherData, isLoading: otherLoading, error: otherError } = useQuery({ queryKey: ['otherFAQ', locale], queryFn: () => GetOtherFAQ() });
-    const filterFAQs = (data) => data?.filter(faq => faq.language === locale && (faq.question.toLowerCase().includes(searchTerm.toLowerCase()) || faq.answer.toLowerCase().includes(searchTerm.toLowerCase()))) || [];
-    const filteredOtherFAQs = filterFAQs(otherData);
-    const toggleItem = (id) => setOpenItems(openItems.includes(id) ? openItems.filter(item => item !== id) : [...openItems, id]);
-
-    if (mainLoading || otherLoading) {
-        return <SkeletonLoaderComponent t={t} />;
-    }
-
-    if (mainError || otherError) {
-        return <SkeletonLoaderComponent t={t} />;
-    }
-
-    return (
-        <section className="container-lg py-5">
-            <div className="row g-4 align-items-center">
-                <div className="col-md-7">
-                    <div className="mb-4">
-                        <TitleComponent title={t('heroSection.title_h1')} />
-                        <SubTitleComponent t={t} sub_title={'heroSection.title_h2'} />
-                    </div>
-                    <div className="row g-4">
-                        {mainData.map((faq) => (
-                            <div key={faq.id} className="col-12 col-md-6">
-                                <CardComponent icon={<MdQuestionAnswer />} title={faq.question} description={faq.answer} />
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                <div className="col-md-4">
-                    <Image
-                        src="/assets/imgs/page/solutions-img.webp"
-                        alt="Financial solutions"
-                        className="img-fluid rounded-5"
-                        loading="lazy"
-                        width={300}
-                        height={300}
-                    />
-                </div>
-            </div>
-
-            <div className="row g-4 pt-5">
-                <div className="col-12">
-                    <InputSearchComponent t={t} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-                    <OtherFAQComponent t={t} filteredOtherFAQs={filteredOtherFAQs} openItems={openItems} toggleItem={toggleItem} />
-                </div>
-            </div>
-        </section>
-    );
+    return {
+        metadataBase: new URL('https://fundacionattlas.org'),
+        title: t('title_h1') + ' | ATTLAS',
+        description: 'Encuentra respuestas a las preguntas mas frecuentes sobre nuestros servicios de insolvencia economica y conciliacion.',
+        alternates: {
+            canonical: `https://fundacionattlas.org/${locale}/about-us/frequently-asked-questions`,
+            languages: {
+                es: '/es/about-us/frequently-asked-questions',
+                en: '/en/about-us/frequently-asked-questions',
+            },
+        },
+        openGraph: {
+            title: t('title_h1') + ' | ATTLAS',
+            description: 'Encuentra respuestas a las preguntas mas frecuentes sobre nuestros servicios de insolvencia economica y conciliacion.',
+            type: 'website',
+            url: `https://fundacionattlas.org/${locale}/about-us/frequently-asked-questions`,
+            images: [{ url: '/assets/imgs/favicon/favicon.png', alt: 'ATTLAS FAQ' }],
+            siteName: 'Fundacion ATTLAS',
+            locale: locale === 'es' ? 'es_CO' : 'en_US',
+        },
+        twitter: {
+            card: 'summary_large_image',
+            site: '@attlas_legal',
+            title: t('title_h1') + ' | ATTLAS',
+            description: 'Encuentra respuestas a las preguntas mas frecuentes sobre nuestros servicios.',
+        },
+    };
 }
+
+// Enable ISR - revalidate every 30 minutes for FAQ content
+export const revalidate = 1800;
+
+export { default } from './FAQClient';

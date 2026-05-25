@@ -1,5 +1,9 @@
+// src/app/api/platform/calculator/creditors/route.ts
+
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
+import { validateOrigin, corsErrorResponse } from '@/lib/cors';
+import { serverLogger } from '@/lib/logger';
 
 const BACKEND_URL = process.env.BACKEND_URL || 'https://propensionesabogados.com';
 
@@ -25,6 +29,12 @@ const saveCreditorSchema = z.object({
 
 // GET - Fetch creditors for a user
 export async function GET(request: NextRequest) {
+    // CORS validation
+    const { isValid } = validateOrigin(request);
+    if (!isValid) {
+        return corsErrorResponse();
+    }
+
     try {
         const { searchParams } = new URL(request.url);
         const documentNumber = searchParams.get('documentNumber');
@@ -59,13 +69,15 @@ export async function GET(request: NextRequest) {
         }
 
         // If endpoint doesn't exist or returns error, return empty array
-        // This allows the feature to work even if backend doesn't have creditors endpoint yet
         return NextResponse.json({
             success: true,
             creditors: [],
         });
     } catch (error) {
-        console.error('Error fetching creditors:', error);
+        serverLogger.error('Error fetching creditors', {
+            error: error instanceof Error ? error.message : 'Unknown error',
+        });
+        
         // Return empty array on error to allow local usage
         return NextResponse.json({
             success: true,
@@ -76,6 +88,12 @@ export async function GET(request: NextRequest) {
 
 // POST - Save creditors for a user
 export async function POST(request: NextRequest) {
+    // CORS validation
+    const { isValid } = validateOrigin(request);
+    if (!isValid) {
+        return corsErrorResponse();
+    }
+
     try {
         const body = await request.json();
 
@@ -116,13 +134,15 @@ export async function POST(request: NextRequest) {
         }
 
         // If backend doesn't support this endpoint yet, still return success
-        // This allows local testing without backend support
         return NextResponse.json({
             success: true,
             message: 'Creditors saved (local only)',
         });
     } catch (error) {
-        console.error('Error saving creditors:', error);
+        serverLogger.error('Error saving creditors', {
+            error: error instanceof Error ? error.message : 'Unknown error',
+        });
+        
         // Return success anyway to not block user experience
         return NextResponse.json({
             success: true,

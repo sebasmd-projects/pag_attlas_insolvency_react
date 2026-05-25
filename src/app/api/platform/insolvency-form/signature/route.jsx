@@ -1,7 +1,15 @@
 import { NextResponse } from 'next/server';
-import {apiBaseUrl} from '@/config';
+import { apiBaseUrl } from '@/config';
+import { validateOrigin, corsErrorResponse } from '@/lib/cors';
+import { serverLogger } from '@/lib/logger';
 
 export async function POST(request) {
+    // CORS validation
+    const { isValid } = validateOrigin(request);
+    if (!isValid) {
+        return corsErrorResponse();
+    }
+
     try {
         const body = await request.json();
 
@@ -18,13 +26,17 @@ export async function POST(request) {
         const data = await res.json();
 
         if (!res.ok) {
-            console.error('[API] Error en respuesta externa:', data);
+            serverLogger.error('Error in signature API response', {
+                status: res.status,
+            });
             return NextResponse.json({ error: data }, { status: res.status });
         }
 
         return NextResponse.json(data, { status: 200 });
     } catch (error) {
-        console.error('[API] Error interno:', error);
+        serverLogger.error('Internal error in signature route', {
+            error: error instanceof Error ? error.message : 'Unknown error',
+        });
         return NextResponse.json(
             { error: 'Error interno en el servidor' },
             { status: 500 }
