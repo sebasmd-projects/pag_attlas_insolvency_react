@@ -230,7 +230,7 @@ export default function Step5Creditors({ data, updateData, onNext }) {
                                     <td>
                                         <input
                                             name="creditor"
-                                            id='creditor'
+                                            id={`${idx}-creditor`}
                                             className="form-control"
                                             value={c.creditor}
                                             onChange={(e) => handleChange(idx, e)}
@@ -240,7 +240,7 @@ export default function Step5Creditors({ data, updateData, onNext }) {
                                     <td>
                                         <input
                                             name="nit"
-                                            id='nit'
+                                            id={`${idx}-nit`}
                                             className="form-control"
                                             value={c.nit}
                                             onChange={(e) => handleChange(idx, e)}
@@ -249,7 +249,7 @@ export default function Step5Creditors({ data, updateData, onNext }) {
                                     <td>
                                         <input
                                             name="creditor_contact"
-                                            id='creditor_contact'
+                                            id={`${idx}-creditor_contact`}
                                             className="form-control"
                                             value={c.creditor_contact}
                                             onChange={(e) => handleChange(idx, e)}
@@ -271,6 +271,7 @@ export default function Step5Creditors({ data, updateData, onNext }) {
                                         {c.nature_type === 'OTRO' && (
                                             <input
                                                 name="other_nature"
+                                                id={`${idx}-other_nature`}
                                                 className="form-control mt-1"
                                                 value={c.other_nature}
                                                 onChange={(e) => handleChange(idx, e)}
@@ -297,6 +298,7 @@ export default function Step5Creditors({ data, updateData, onNext }) {
                                                 </select>
                                                 <input
                                                     name="personal_credit_interest_rate"
+                                                    id={`${idx}-personal_credit_interest_rate`}
                                                     className="form-control mt-1"
                                                     value={c.personal_credit_interest_rate}
                                                     placeholder={t('form.placeholders.interestRate')}
