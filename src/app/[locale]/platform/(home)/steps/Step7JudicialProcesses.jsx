@@ -177,7 +177,7 @@ export default function Step7JudicialProcesses({ data, updateData, onNext }) {
                                     onChange={(e) =>
                                         handleChange(idx, 'affectation', e.target.value)
                                     }
-                                    required
+                                    
                                 />
                             </div>
 
@@ -193,7 +193,7 @@ export default function Step7JudicialProcesses({ data, updateData, onNext }) {
                                     onChange={(e) =>
                                         handleChange(idx, 'court', e.target.value)
                                     }
-                                    required
+                                    
                                 />
                             </div>
 
@@ -208,7 +208,7 @@ export default function Step7JudicialProcesses({ data, updateData, onNext }) {
                                     onChange={(e) =>
                                         handleChange(idx, 'description', e.target.value)
                                     }
-                                    required
+                                    
                                 />
                             </div>
 
@@ -223,7 +223,7 @@ export default function Step7JudicialProcesses({ data, updateData, onNext }) {
                                     onChange={(e) =>
                                         handleChange(idx, 'case_code', e.target.value)
                                     }
-                                    required
+                                    
                                 />
                             </div>
 

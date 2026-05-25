@@ -107,7 +107,7 @@ export default function Step3DeclarationOfCessationOfPayments({ data, updateData
                             id="debtor_statement_accepted"
                             checked={form.debtor_statement_accepted}
                             onChange={handleChange}
-                            required
+                            
                         />
                         <label className="form-check-label" htmlFor="debtor_statement_accepted">
                             {t('declarationLabel')}

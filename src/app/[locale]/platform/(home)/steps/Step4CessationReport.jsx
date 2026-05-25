@@ -97,7 +97,7 @@ export default function Step4CessationReport({ data, updateData, onNext }) {
                         className="form-control mb-3"
                         rows={10}
                         minLength={100}
-                        required
+                        
                         aria-label={t('form.terminationReport')}
                         placeholder={t('form.terminationReport')}
                         value={form.debtor_cessation_report}

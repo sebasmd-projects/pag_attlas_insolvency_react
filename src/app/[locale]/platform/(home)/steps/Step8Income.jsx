@@ -219,7 +219,7 @@ export default function Step8Income({ data, updateData, onNext }) {
             <form onSubmit={handleSubmit} className="row" id="wizard-step-form">
                 <div className="mb-3">
                     <label className="form-label">{t('form.typeLabel')}</label>
-                    <select className="form-select" value={form.type} onChange={handleTypeChange} required>
+                    <select className="form-select" value={form.type} onChange={handleTypeChange} >
                         <option value="">{t('form.typeOptions.selectPlaceholder')}</option>
                         {INCOME_TYPE.map(op => (
                             <option key={op.value} value={op.value}>{t(`form.typeOptions.${op.label}`)}</option>
@@ -230,14 +230,14 @@ export default function Step8Income({ data, updateData, onNext }) {
                 {['SALARIO', 'INDEPENDIENTE', 'PENSIONADO'].includes(form.type) && (
                     <div className="mb-3">
                         <label className="form-label">{t('form.amountLabel')}</label>
-                        <input type="text" className="form-control" value={form.amount} onChange={handleAmountChange} onBlur={handleAmountBlur} inputMode="decimal" required />
+                        <input type="text" className="form-control" value={form.amount} onChange={handleAmountChange} onBlur={handleAmountBlur} inputMode="decimal"  />
                     </div>
                 )}
 
                 {form.type === 'OTRO' && form.others.map((other, idx) => (
                     <div key={idx} className="input-group mb-2">
-                        <input type="text" className="form-control" placeholder={t('form.typeOptions.otherOptions.otherDetailPlaceholder')} value={other.detail} onChange={e => handleOthersDetailChange(idx, e.target.value)} required />
-                        <input type="text" className="form-control" placeholder={t('form.typeOptions.otherOptions.otherAmountPlaceholder')} value={other.amount} onChange={e => handleOthersAmountChange(idx, e.target.value)} onBlur={() => handleOthersAmountBlur(idx)} required />
+                        <input type="text" className="form-control" placeholder={t('form.typeOptions.otherOptions.otherDetailPlaceholder')} value={other.detail} onChange={e => handleOthersDetailChange(idx, e.target.value)}  />
+                        <input type="text" className="form-control" placeholder={t('form.typeOptions.otherOptions.otherAmountPlaceholder')} value={other.amount} onChange={e => handleOthersAmountChange(idx, e.target.value)} onBlur={() => handleOthersAmountBlur(idx)}  />
                         <button type="button" className="btn btn-outline-success" onClick={addOther}><FaPlus /></button>
                         {form.others.length > 1 && <button type="button" className="btn btn-outline-danger" onClick={() => removeOther(idx)}><FaMinus /></button>}
                     </div>

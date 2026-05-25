@@ -541,7 +541,7 @@ export default function Step10Expenses({ data, updateData, onNext }) {
                             value={it.label}
                             onChange={e => handleLabelChange(ti, ii, e.target.value)}
                             disabled={isBase || isFood}
-                            required
+                            
                           />
                         </td>
                         <td>
@@ -561,7 +561,7 @@ export default function Step10Expenses({ data, updateData, onNext }) {
                             onChange={e => handleValueChange(ti, ii, e.target.value)}
                             onBlur={() => handleValueBlur(ti, ii)}
                             inputMode="decimal"
-                            required
+                            
                           />
                         </td>
                         <td className="text-center">
@@ -658,7 +658,7 @@ export default function Step10Expenses({ data, updateData, onNext }) {
                   className="form-select"
                   value={newGender}
                   onChange={e => setNewGender(e.target.value)}
-                  required
+                  
                 >
                   <option value="MASCULINO">{t('addTableForm.gender.options.male')}</option>
                   <option value="FEMENINO">{t('addTableForm.gender.options.female')}</option>
@@ -700,7 +700,7 @@ export default function Step10Expenses({ data, updateData, onNext }) {
                 onChange={handleProposedMonthlyValueChange}
                 onBlur={handleProposedMonthlyValueBlur}
                 inputMode="decimal"
-                required
+                
                 min={1}
               />
             </div>

@@ -1,7 +1,5 @@
 // src/app/[locale]/platform/(home)/steps/index.jsx
 
-// import StepTest1 from './StepTest1';
-
 import Step1LegalRequirements from './Step1LegalRequirements';
 import Step2PersonalData from './Step2PersonalData';
 import Step3DeclarationOfCessationOfPayments from './Step3DeclarationOfCessationOfPayments';
@@ -24,7 +22,6 @@ const Steps = [
     Step8Income,
     Step9PermanentPartner,
     Step10Expenses,
-    // StepTest1,
 ];
 
 export default Steps;

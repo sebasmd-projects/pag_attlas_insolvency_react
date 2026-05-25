@@ -234,7 +234,7 @@ export default function Step5Creditors({ data, updateData, onNext }) {
                                             className="form-control"
                                             value={c.creditor}
                                             onChange={(e) => handleChange(idx, e)}
-                                            required
+                                            
                                         />
                                     </td>
                                     <td>
@@ -261,7 +261,7 @@ export default function Step5Creditors({ data, updateData, onNext }) {
                                             className="form-select"
                                             value={c.nature_type}
                                             onChange={(e) => handleChange(idx, e)}
-                                            required
+                                            
                                         >
                                             <option value="">{t('form.placeholders.select')}</option>
                                             {NATURE_OPTIONS.map((n) => (
@@ -275,7 +275,7 @@ export default function Step5Creditors({ data, updateData, onNext }) {
                                                 className="form-control mt-1"
                                                 value={c.other_nature}
                                                 onChange={(e) => handleChange(idx, e)}
-                                                required
+                                                
                                             />
                                         )}
                                         {c.nature_type === 'CRÉDITO PERSONAL' && (
@@ -285,7 +285,7 @@ export default function Step5Creditors({ data, updateData, onNext }) {
                                                     className="form-select mt-1"
                                                     value={c.personal_consanguinity}
                                                     onChange={(e) => handleChange(idx, e)}
-                                                    required
+                                                    
                                                 >
                                                     <option value="">
                                                         {t('form.placeholders.consanguinity')}
@@ -304,7 +304,7 @@ export default function Step5Creditors({ data, updateData, onNext }) {
                                                     placeholder={t('form.placeholders.interestRate')}
                                                     onChange={(e) => handleChange(idx, e)}
                                                     inputMode="decimal"
-                                                    required
+                                                    
                                                 />
                                             </>
                                         )}
@@ -316,7 +316,7 @@ export default function Step5Creditors({ data, updateData, onNext }) {
                                             rows={3}
                                             value={c.guarantee}
                                             onChange={(e) => handleChange(idx, e)}
-                                            required
+                                            
                                         />
                                     </td>
                                     <td>
@@ -327,7 +327,7 @@ export default function Step5Creditors({ data, updateData, onNext }) {
                                             onChange={(e) => handleChange(idx, e)}
                                             onBlur={() => handleBlurCurrency(idx)}
                                             inputMode="decimal"
-                                            required
+                                            
                                         />
                                     </td>
                                     <td>
@@ -338,7 +338,7 @@ export default function Step5Creditors({ data, updateData, onNext }) {
                                             className="form-control"
                                             value={c.days_overdue}
                                             onChange={(e) => handleChange(idx, e)}
-                                            required
+                                            
                                             onWheel={(e) => e.target.blur()}
                                         />
                                     </td>

@@ -228,7 +228,7 @@ export default function Step6MovableImmovableProperty({ data, updateData, onNext
                                     className="form-select"
                                     value={asset.asset_type}
                                     onChange={e => handleChange(i, 'asset_type', e.target.value)}
-                                    required
+                                    
                                 >
                                     <option value="">{t('form.assetType.placeholder')}</option>
                                     <option value="MUEBLE">{t('form.assetType.options.furniture')}</option>
@@ -244,7 +244,7 @@ export default function Step6MovableImmovableProperty({ data, updateData, onNext
                                     className="form-control"
                                     value={asset.name}
                                     onChange={e => handleChange(i, 'name', e.target.value)}
-                                    required
+                                    
                                 />
                             </div>
 
@@ -256,7 +256,7 @@ export default function Step6MovableImmovableProperty({ data, updateData, onNext
                                     className="form-control"
                                     value={asset.identification}
                                     onChange={e => handleChange(i, 'identification', e.target.value)}
-                                    required
+                                    
                                 />
                             </div>
 
@@ -323,7 +323,7 @@ export default function Step6MovableImmovableProperty({ data, updateData, onNext
                                     value={asset.commercial_value}
                                     onChange={e => handleCommercialValueChange(i, e.target.value)}
                                     inputMode="decimal"
-                                    required
+                                    
                                 />
                             </div>
 

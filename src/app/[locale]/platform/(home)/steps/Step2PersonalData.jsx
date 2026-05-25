@@ -117,7 +117,7 @@ export default function Step2PersonalData({ data, updateData, onNext }) {
                         name="debtor_document_number"
                         onChange={handleChange}
                         placeholder={t('form.document_number')}
-                        required
+                        
                         type='text'
                         value={form.debtor_document_number}
                     />
@@ -133,7 +133,7 @@ export default function Step2PersonalData({ data, updateData, onNext }) {
                         name="debtor_expedition_city"
                         onChange={handleChange}
                         placeholder={t('form.expedition_city')}
-                        required
+                        
                         type='text'
                         value={form.debtor_expedition_city}
                     />
@@ -149,7 +149,7 @@ export default function Step2PersonalData({ data, updateData, onNext }) {
                         name="debtor_first_name"
                         onChange={handleChange}
                         placeholder={t('form.first_name')}
-                        required
+                        
                         type='text'
                         value={form.debtor_first_name}
                     />
@@ -165,7 +165,7 @@ export default function Step2PersonalData({ data, updateData, onNext }) {
                         name="debtor_last_name"
                         onChange={handleChange}
                         placeholder={t('form.last_name')}
-                        required
+                        
                         type='text'
                         value={form.debtor_last_name}
                     />
@@ -182,7 +182,7 @@ export default function Step2PersonalData({ data, updateData, onNext }) {
                         onChange={handleChange}
                         pattern="[0-9]*"
                         placeholder={t('form.cell_phone')}
-                        required
+                        
                         type='tel'
                         value={form.debtor_cell_phone}
                     />
@@ -198,7 +198,7 @@ export default function Step2PersonalData({ data, updateData, onNext }) {
                         name="debtor_email"
                         onChange={handleChange}
                         placeholder={t('form.email')}
-                        required
+                        
                         type='email'
                         value={form.debtor_email}
                     />
@@ -213,7 +213,7 @@ export default function Step2PersonalData({ data, updateData, onNext }) {
                         name="debtor_sex"
                         value={form.debtor_sex}
                         onChange={handleChange}
-                        required
+                        
                     >
                         <option value="">Selecciona una opción</option>
                         <option value="MASCULINO">MASCULINO</option>
@@ -231,7 +231,7 @@ export default function Step2PersonalData({ data, updateData, onNext }) {
                         name="debtor_address"
                         onChange={handleChange}
                         placeholder={t('form.debtor_address')}
-                        required
+                        
                         type='text'
                         value={form.debtor_address}
                     />
@@ -248,7 +248,7 @@ export default function Step2PersonalData({ data, updateData, onNext }) {
                         name="debtor_age"
                         onChange={handleChange}
                         placeholder={t('form.debtor_age')}
-                        required
+                        
                         value={form.debtor_age}
                     />
                 </div>

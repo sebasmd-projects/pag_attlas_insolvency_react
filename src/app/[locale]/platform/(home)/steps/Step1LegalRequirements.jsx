@@ -183,7 +183,7 @@ export default function Step1LegalRequirements({ data, updateData, onNext }) {
                             className="form-check-input"
                             checked={form.accept_legal_requirements}
                             onChange={handleChange}
-                            required
+                            
                         />
                         <label className="form-check-label" htmlFor="accept_legal_requirements">
                             {t('accept_terms')}
@@ -198,7 +198,7 @@ export default function Step1LegalRequirements({ data, updateData, onNext }) {
                             className="form-check-input"
                             checked={form.accept_terms_and_conditions}
                             onChange={handleChange}
-                            required
+                            
                         />
                         <label className="form-check-label" htmlFor="accept_terms_and_conditions">
                             {t.rich('accept_terms_and_conditions', {

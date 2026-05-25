@@ -171,7 +171,7 @@ export default function Step9PermanentPartner({ data, updateData, onNext }) {
                         className="form-select"
                         value={form.marital_status}
                         onChange={handleEstadoChange}
-                        required
+                        
                     >
                         {MARITAL_OPTIONS(t).map((opt) => (
                             <option key={opt.value} value={opt.value}>
@@ -192,7 +192,7 @@ export default function Step9PermanentPartner({ data, updateData, onNext }) {
                                 name="document"
                                 value={form.document}
                                 onChange={handleChange}
-                                required
+                                
                             />
                         </div>
 
@@ -204,7 +204,7 @@ export default function Step9PermanentPartner({ data, updateData, onNext }) {
                                 name="name"
                                 value={form.name}
                                 onChange={handleChange}
-                                required
+                                
                             />
                         </div>
 
@@ -216,7 +216,7 @@ export default function Step9PermanentPartner({ data, updateData, onNext }) {
                                 name="lastname"
                                 value={form.lastname}
                                 onChange={handleChange}
-                                required
+                                
                             />
                         </div>
 
@@ -228,7 +228,7 @@ export default function Step9PermanentPartner({ data, updateData, onNext }) {
                                 name="email"
                                 value={form.email}
                                 onChange={handleChange}
-                                required
+                                
                             />
                         </div>
 
@@ -240,7 +240,7 @@ export default function Step9PermanentPartner({ data, updateData, onNext }) {
                                 name="phone"
                                 value={form.phone}
                                 onChange={handleChange}
-                                required
+                                
                             />
                         </div>
 
@@ -256,7 +256,7 @@ export default function Step9PermanentPartner({ data, updateData, onNext }) {
                                 onChange={handleChange}
                                 min={1}
                                 max={50000}
-                                required
+                                
                                 onWheel={(e) => e.target.blur()}
                             />
                         </div>
