@@ -138,8 +138,7 @@ export function useCalculator(): UseCalculatorReturn {
           setUsuraRate(data.rate.toString());
           setRateSource(data.source === 'backend' ? 'backend' : 'default');
         }
-      } catch (error) {
-        console.error('Error fetching interest rate:', error);
+      } catch {
         // Keep default rate on error
         setRateSource('default');
       } finally {

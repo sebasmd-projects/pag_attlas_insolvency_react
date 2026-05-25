@@ -1,7 +1,6 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { useEffect } from 'react';
 
 type Props = {
   error: Error;
@@ -9,10 +8,6 @@ type Props = {
 
 export default function Error({ error }: Props) {
   const t = useTranslations('Error');
-
-  useEffect(() => {
-    console.error(error);
-  }, [error]);
 
   return (
     <div className="py-5 text-center">

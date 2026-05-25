@@ -67,7 +67,7 @@ export function WizardProvider({ children }) {
     );
 
     // ────────────────────────────────────────────────────────────────────────────
-    // 3 · REHIDRATACIÓN: PRIMERO BD, SINO LOCALSTORAGE
+    // 3 · REHIDRATACION: PRIMERO BD, SINO LOCALSTORAGE
     // ────────────────────────────────────────────────────────────────────────────
     const hydratedRef = useRef(false);
     useEffect(() => {
@@ -83,14 +83,10 @@ export function WizardProvider({ children }) {
             }
 
             try {
+                // Use authenticated proxy endpoint instead of direct API call with localStorage token
                 const res = await fetch(
-                    `/api/v1/insolvency-form/${persistedState.formId}/?step=0`,
-                    {
-                        headers: {
-                            'Authorization': `Bearer ${localStorage.getItem('access_token')}`
-                        },
-                        cache: 'no-store'
-                    }
+                    `/api/platform/insolvency-form/fetch?formId=${persistedState.formId}&step=0`,
+                    { cache: 'no-store' }
                 );
 
                 if (res.status === 401) {
@@ -119,8 +115,7 @@ export function WizardProvider({ children }) {
                     data: mergedData
                 }));
 
-            } catch (error) {
-                console.error('Fetch error:', error);
+            } catch {
                 // Fallback a localStorage
                 if (persistedState?.data) {
                     dispatch({ type: 'SET_DATA', payload: persistedState.data });
@@ -160,7 +155,9 @@ export function WizardProvider({ children }) {
                     });
                 }
             })
-            .catch(() => console.warn('token-info: sin datos o token inválido'));
+            .catch(() => {
+                // Silent fail - token info not available
+            });
     }, []);
 
     // ────────────── Helpers del wizard ──────────────────────────────────────────

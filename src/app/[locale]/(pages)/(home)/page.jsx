@@ -60,6 +60,9 @@ export async function generateMetadata({ params }) {
   }
 }
 
+// Enable ISR - revalidate every hour
+export const revalidate = 3600;
+
 export default async function HomePage({ params }) {
   const { locale } = await params;
   setRequestLocale(locale);
