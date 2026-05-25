@@ -8,6 +8,7 @@ import ContactSection from './components/sections/ContactSection';
 import FootPrintSection from './components/sections/FootPrintSection';
 import SocialProjectsSection from './components/sections/SocialProjectsSection';
 import AlliesSection from './components/sections/AlliesSection';
+import StepByStepSection from './components/sections/StepByStepSection';
 
 export async function generateMetadata({ params }) {
   const { locale } = await params;
@@ -76,6 +77,7 @@ export default async function HomePage({ params }) {
       <MainTeamSection />
       <WhyUsSection />
       <ContactSection params={{ locale }} />
+      <StepByStepSection />
     </>
   );
 }
