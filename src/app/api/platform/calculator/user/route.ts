@@ -1,15 +1,23 @@
 // src/app/api/platform/calculator/user/route.ts
 
 import { userIdentificationSchema, userRegistrationSchema } from '@/lib/validation/schemas';
+import { validateOrigin, corsErrorResponse } from '@/lib/cors';
+import { serverLogger } from '@/lib/logger';
 import axios from 'axios';
 import { NextResponse } from 'next/server';
-import {apiBaseUrl} from '@/config';
+import { apiBaseUrl } from '@/config';
 
 /**
  * POST - Buscar usuario por cedula y fecha de nacimiento
  * Backend endpoint: GET /clients/search/?documentNumber=xxx&birthDate=yyyy-mm-dd
  */
 export async function POST(request: Request) {
+    // CORS validation
+    const { isValid } = validateOrigin(request);
+    if (!isValid) {
+        return corsErrorResponse();
+    }
+
     try {
         const data = await request.json();
 
@@ -20,7 +28,7 @@ export async function POST(request: Request) {
                 { 
                     success: false, 
                     error: 'VALIDATION_ERROR',
-                    detail: validation.error.errors[0]?.message || 'Datos invalidos'
+                    detail: validation.error.issues[0]?.message || 'Datos invalidos'
                 },
                 { status: 400 }
             );
@@ -81,6 +89,11 @@ export async function POST(request: Request) {
             }
 
             // Otros errores del backend
+            serverLogger.error('Error searching user', {
+                error: error.message,
+                status: error.response?.status,
+            });
+            
             return NextResponse.json(
                 { 
                     success: false, 
@@ -92,7 +105,10 @@ export async function POST(request: Request) {
         }
 
         // Error inesperado
-        console.error('Error searching user:', error);
+        serverLogger.error('Unexpected error searching user', {
+            error: error instanceof Error ? error.message : 'Unknown error',
+        });
+        
         return NextResponse.json(
             { 
                 success: false, 
@@ -109,6 +125,12 @@ export async function POST(request: Request) {
  * Backend endpoint: POST /clients/
  */
 export async function PUT(request: Request) {
+    // CORS validation
+    const { isValid } = validateOrigin(request);
+    if (!isValid) {
+        return corsErrorResponse();
+    }
+
     try {
         const data = await request.json();
 
@@ -119,7 +141,7 @@ export async function PUT(request: Request) {
                 { 
                     success: false, 
                     error: 'VALIDATION_ERROR',
-                    detail: validation.error.errors[0]?.message || 'Datos invalidos'
+                    detail: validation.error.issues[0]?.message || 'Datos invalidos'
                 },
                 { status: 400 }
             );
@@ -128,7 +150,6 @@ export async function PUT(request: Request) {
         const userData = validation.data;
 
         // Crear usuario en el backend - POST /clients/
-        // El serializer ClientCreateSerializer espera estos campos en camelCase
         const response = await axios.post(
             `${apiBaseUrl}/clients/`,
             {
@@ -189,6 +210,11 @@ export async function PUT(request: Request) {
             }
 
             // Otros errores
+            serverLogger.error('Error creating user', {
+                error: error.message,
+                status: error.response?.status,
+            });
+            
             return NextResponse.json(
                 { 
                     success: false, 
@@ -200,7 +226,10 @@ export async function PUT(request: Request) {
         }
 
         // Error inesperado
-        console.error('Error creating user:', error);
+        serverLogger.error('Unexpected error creating user', {
+            error: error instanceof Error ? error.message : 'Unknown error',
+        });
+        
         return NextResponse.json(
             { 
                 success: false, 

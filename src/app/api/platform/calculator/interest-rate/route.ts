@@ -2,6 +2,8 @@
 
 import axios from 'axios';
 import { NextResponse } from 'next/server';
+import { validateOrigin, corsErrorResponse } from '@/lib/cors';
+import { serverLogger } from '@/lib/logger';
 
 const BACKEND_URL = 'https://propensionesabogados.com/api/v1/calculator';
 
@@ -12,7 +14,13 @@ const DEFAULT_USURA_RATE = 27.14;
  * GET - Obtener la tasa de usura vigente
  * Backend endpoint: GET /interest-rate/
  */
-export async function GET() {
+export async function GET(request: Request) {
+    // CORS validation
+    const { isValid } = validateOrigin(request);
+    if (!isValid) {
+        return corsErrorResponse();
+    }
+
     try {
         const response = await axios.get(
             `${BACKEND_URL}/interest-rate/`,
@@ -38,7 +46,9 @@ export async function GET() {
         });
 
     } catch (error) {
-        console.error('Error fetching interest rate:', error);
+        serverLogger.error('Error fetching interest rate', {
+            error: error instanceof Error ? error.message : 'Unknown error',
+        });
         
         // En caso de error, devolver tasa por defecto
         return NextResponse.json({
