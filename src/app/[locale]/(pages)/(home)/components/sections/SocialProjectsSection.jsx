@@ -19,18 +19,22 @@ export default function SocialProjectsSection() {
     {
       src: "/assets/imgs/page/1-soup kitchens for homeless.webp",
       alt: "gallery.alt1",
+      animation: "zoom-in-right",
     },
     {
       src: "/assets/imgs/page/4-diaries.webp",
       alt: "gallery.alt2",
+      animation: "zoom-in-left",
     },
     {
       src: "/assets/imgs/page/3-support for the elderly.webp",
       alt: "gallery.alt3",
+      animation: "zoom-in-right",
     },
     {
       src: "/assets/imgs/page/2-pets.webp",
       alt: "gallery.alt4",
+      animation: "zoom-in-left",
     },
   ];
 
@@ -83,7 +87,7 @@ export default function SocialProjectsSection() {
                   style={{ maxHeight: 400, width: "auto", height: "auto" }}
                   width={600}
                   height={400}
-                  data-aos="fade-up"
+                  data-aos={image.animation}
                   data-aos-delay={100 + index * 50}
                 />
               </div>
