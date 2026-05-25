@@ -47,14 +47,25 @@ export function WizardProvider({ children }) {
     const { isSessionValid } = useSessionGuard();
 
     // ────────────────────────────────────────────────────────────────────────────
-    // 1 · Identificador del usuario (para localStorage)
+    // 1 · Identificador del usuario y datos del token (unificado)
     // ────────────────────────────────────────────────────────────────────────────
     const [userId, setUserId] = useState(null);
+    const [tokenData, setTokenData] = useState(null);
 
     useEffect(() => {
-        fetch('/api/platform/auth/token-info', { cache: 'no-store' })
+        fetch('/api/platform/auth/token-info', { 
+            cache: 'no-store',
+            credentials: 'include' 
+        })
             .then((r) => (r.ok ? r.json() : null))
-            .then((d) => setUserId(d?.document_number || 'anon'))
+            .then((data) => {
+                if (data) {
+                    setUserId(data.document_number || 'anon');
+                    setTokenData(data);
+                } else {
+                    setUserId('anon');
+                }
+            })
             .catch(() => setUserId('anon'));
     }, []);
 
@@ -83,10 +94,13 @@ export function WizardProvider({ children }) {
             }
 
             try {
-                // Use authenticated proxy endpoint instead of direct API call with localStorage token
+                // Use authenticated proxy endpoint with cookies
                 const res = await fetch(
                     `/api/platform/insolvency-form/fetch?formId=${persistedState.formId}&step=0`,
-                    { cache: 'no-store' }
+                    { 
+                        cache: 'no-store',
+                        credentials: 'include'
+                    }
                 );
 
                 if (res.status === 401) {
@@ -134,31 +148,26 @@ export function WizardProvider({ children }) {
         debounceRef.current = setTimeout(() => setPersistedState(state), 300);
     }, [state, userId, setPersistedState]);
 
-    // 5. Cargamos algunas variables del token-info para el paso 2 (edad, doc, etc.)
+    // ────────────────────────────────────────────────────────────────────────────
+    // 5 · Cargar datos del usuario desde tokenData (edad, doc, etc.) - sin fetch duplicado
+    // ────────────────────────────────────────────────────────────────────────────
     useEffect(() => {
-        fetch('/api/platform/auth/token-info', { cache: 'no-store' })
-            .then((res) => (res.ok ? res.json() : null))
-            .then((data) => {
-                if (data?.document_number && data?.birth_date) {
-                    const birth = new Date(data.birth_date);
-                    const today = new Date();
-                    let debtor_age = today.getFullYear() - birth.getFullYear();
-                    const m = today.getMonth() - birth.getMonth();
-                    if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) debtor_age--;
-                    dispatch({
-                        type: 'SET_DATA',
-                        payload: {
-                            debtor_document_number: data.document_number,
-                            debtor_birth_date: data.birth_date,
-                            debtor_age: debtor_age
-                        },
-                    });
-                }
-            })
-            .catch(() => {
-                // Silent fail - token info not available
+        if (tokenData?.document_number && tokenData?.birth_date) {
+            const birth = new Date(tokenData.birth_date);
+            const today = new Date();
+            let debtor_age = today.getFullYear() - birth.getFullYear();
+            const m = today.getMonth() - birth.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) debtor_age--;
+            dispatch({
+                type: 'SET_DATA',
+                payload: {
+                    debtor_document_number: tokenData.document_number,
+                    debtor_birth_date: tokenData.birth_date,
+                    debtor_age: debtor_age
+                },
             });
-    }, []);
+        }
+    }, [tokenData]);
 
     // ────────────── Helpers del wizard ──────────────────────────────────────────
     const steps = Steps;
