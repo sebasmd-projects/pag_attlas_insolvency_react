@@ -147,7 +147,11 @@ export default function Navigation() {
 
             </NavDropdown>
 
-            <Nav.Link as="button" href="/#contact" onClick={() => setExpanded(false)}>
+            <Nav.Link
+              as="button"
+              onClick={() => navigateToSection('contact')}
+              style={{ background: 'none', border: 'none', padding: 0 }}
+            >
               {t('contact.menu')}
             </Nav.Link>
 
