@@ -1,3 +1,5 @@
+// src/app/[locale]/platform/calculator/components/VerifyCompliment.tsx
+
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';

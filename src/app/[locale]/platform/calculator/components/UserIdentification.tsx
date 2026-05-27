@@ -1,3 +1,5 @@
+// src/app/[locale]/platform/calculator/components/UserIdentification.tsx
+
 'use client';
 
 import { useState, memo } from 'react';

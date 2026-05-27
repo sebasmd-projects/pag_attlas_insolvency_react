@@ -2,76 +2,28 @@
 
 'use client';
 import PropTypes from 'prop-types';
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
-import { useTranslations } from 'next-intl';
-import { toast } from 'react-toastify';
 import { BsRobot } from 'react-icons/bs';
 import { MdSaveAs } from "react-icons/md";
+
+import { useStep } from '../hooks/useStep';
+
 
 import TitleComponent from '@/components/micro-components/title';
 import SubTitleComponent from '@/components/micro-components/sub_title';
 
-async function GetStep4() {
-    const { data } = await axios.get('/api/platform/insolvency-form/get-data/?step=4');
-    return data;
-}
-
 export default function Step4CessationReport({ data, updateData, onNext }) {
-    const t = useTranslations('Platform.pages.home.wizard.steps.step4');
-    const queryClient = useQueryClient();
-
-    const { data: step4Data } = useQuery({
-        queryKey: ['step4Data'],
-        queryFn: GetStep4,
-        refetchOnMount: true,
+    
+    const buildInitial = (data) => ({
+        debtor_cessation_report: data?.debtor_cessation_report || '',
+        use_ai: data ? !!data.use_ai : false,
     });
 
-    const [form, setForm] = useState({
-        debtor_cessation_report: '',
-        use_ai: false,
+    const { form, t, handleChange, handleSubmit, handleSave, saveLoading } = useStep({
+        stepNumber: 4,
+        buildInitial,
+        updateData,
+        onNext,
     });
-
-    const initialized = useRef(false);
-
-    useEffect(() => {
-        if (step4Data && !initialized.current) {
-            const init = {
-                debtor_cessation_report: step4Data.debtor_cessation_report ?? data.debtor_cessation_report ?? '',
-                use_ai: step4Data.use_ai ?? data.use_ai ?? false,
-            };
-            setForm(init);
-            updateData(init);
-            initialized.current = true;
-        }
-    }, [step4Data, data, updateData]);
-
-    const saveMutation = useMutation({
-        mutationFn: () =>
-            axios.patch('/api/platform/insolvency-form/?step=4', form),
-        onSuccess: () => {
-            toast.success(t('messages.saveSuccess'));
-            queryClient.invalidateQueries(['step4Data']);
-        },
-        onError: () => toast.error(t('messages.saveError'))
-    });
-    const handleSave = () => saveMutation.mutate();
-
-    const handleChange = useCallback((e) => {
-        const { name, type, checked, value } = e.target;
-        const nextValue = type === 'checkbox' ? checked : value;
-        setForm(prev => {
-            const next = { ...prev, [name]: nextValue };
-            updateData(next);
-            return next;
-        });
-    }, [updateData]);
-
-    const handleSubmit = useCallback((e) => {
-        e.preventDefault();
-        onNext(form);
-    }, [form, onNext]);
 
     return (
         <>
@@ -128,9 +80,9 @@ export default function Step4CessationReport({ data, updateData, onNext }) {
                     type="button"
                     className="btn btn-outline-info"
                     onClick={handleSave}
-                    disabled={saveMutation.isLoading}
+                    disabled={saveLoading}
                 >
-                    <MdSaveAs /> {saveMutation.isLoading ? t('messages.saving') : t('messages.save')}
+                    <MdSaveAs /> {saveLoading ? t('messages.saving') : t('messages.save')}
                 </button>
             </div>
 

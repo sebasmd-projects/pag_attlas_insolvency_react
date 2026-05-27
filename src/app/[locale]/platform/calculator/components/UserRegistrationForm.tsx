@@ -1,3 +1,5 @@
+// src/app/[locale]/platform/calculator/components/UserRegistrationForm.tsx
+
 'use client';
 
 import { useState, memo } from 'react';

@@ -1,3 +1,5 @@
+// src/app/[locale]/platform/calculator/hooks/useCalculator.ts
+
 'use client';
 
 import { useState, useMemo, useCallback, useEffect } from 'react';

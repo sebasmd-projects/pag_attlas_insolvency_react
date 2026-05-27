@@ -3,78 +3,50 @@
 'use client';
 
 import PropTypes from 'prop-types';
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
-import { useTranslations } from 'next-intl';
-import { toast } from 'react-toastify';
+import { useCallback } from 'react';
 import { MdSaveAs } from "react-icons/md";
+
+import { useStep } from '../hooks/useStep';
 
 import SubTitleComponent from '@/components/micro-components/sub_title';
 import TitleComponent from '@/components/micro-components/title';
 
-async function GetStep2() {
-    const { data } = await axios.get('/api/platform/insolvency-form/get-data/?step=2');
-    return data;
-}
 
-export default function Step2PersonalData({ data, updateData, onNext }) {
-    const t = useTranslations('Platform.pages.home.wizard.steps.step2');
-    const queryClient = useQueryClient();
 
-    const { data: step2Data } = useQuery({
-        queryKey: ['step2Data'],
-        queryFn: GetStep2,
-        refetchOnMount: true,
+export default function Step2PersonalData({ updateData, onNext }) {
+
+    const buildInitial = (serverData) => ({
+        debtor_document_number: serverData?.debtor_document_number ?? '',
+        debtor_expedition_city: serverData?.debtor_expedition_city ?? '',
+        debtor_first_name: serverData?.debtor_first_name ?? '',
+        debtor_last_name: serverData?.debtor_last_name ?? '',
+        debtor_is_merchant: serverData?.debtor_is_merchant ?? false,
+        debtor_cell_phone: serverData?.debtor_cell_phone ?? '',
+        debtor_email: serverData?.debtor_email ?? '',
+        debtor_birth_date: serverData?.debtor_birth_date ?? '',
+        debtor_age: serverData?.debtor_age ?? '',
+        debtor_address: serverData?.debtor_address ?? '',
+        debtor_sex: serverData?.debtor_sex ?? '',
     });
 
-    const [form, setForm] = useState({
-        debtor_document_number: '',
-        debtor_expedition_city: '',
-        debtor_first_name: '',
-        debtor_last_name: '',
-        debtor_is_merchant: false,
-        debtor_cell_phone: '',
-        debtor_email: '',
-        debtor_birth_date: '',
-        debtor_age: '',
-        debtor_address: '',
-        debtor_sex: '',
+    const { form, setForm, t, handleSubmit, handleSave, saveLoading } = useStep({
+        stepNumber: 2,
+        buildInitial,
+        updateData,
+        onNext,
     });
 
-    const initialized = useRef(false);
-    useEffect(() => {
-        if (step2Data && !initialized.current) {
-            const init = {
-                debtor_document_number: step2Data.debtor_document_number ?? data.debtor_document_number ?? '',
-                debtor_expedition_city: step2Data.debtor_expedition_city ?? data.debtor_expedition_city ?? '',
-                debtor_first_name: step2Data.debtor_first_name ?? data.debtor_first_name ?? '',
-                debtor_last_name: step2Data.debtor_last_name ?? data.debtor_last_name ?? '',
-                debtor_is_merchant: step2Data.debtor_is_merchant ?? data.debtor_is_merchant ?? false,
-                debtor_cell_phone: step2Data.debtor_cell_phone ?? data.debtor_cell_phone ?? '',
-                debtor_email: step2Data.debtor_email ?? data.debtor_email ?? '',
-                debtor_birth_date: step2Data.debtor_birth_date ?? data.debtor_birth_date ?? '',
-                debtor_age: step2Data.debtor_age ?? data.debtor_age ?? '',
-                debtor_address: step2Data.debtor_address ?? data.debtor_address ?? '',
-                debtor_sex: step2Data.debtor_sex ?? data.debtor_sex ?? '',
-            };
-            setForm(init);
-            updateData(init);
-            initialized.current = true;
+    const calculateAge = () => {
+        const today = new Date();
+        const birth = new Date(form.debtor_birth_date);
+        let age = today.getFullYear() - birth.getFullYear();
+        const monthDiff = today.getMonth() - birth.getMonth();
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+            age--;
         }
-    }, [step2Data, data, updateData]);
+        return age;
+    };
 
-    const saveMutation = useMutation({
-        mutationFn: () =>
-            axios.patch('/api/platform/insolvency-form/?step=2', form),
-        onSuccess: () => {
-            toast.success(t('messages.saveSuccess'));
-            queryClient.invalidateQueries(['step2Data']);
-        },
-        onError: () => toast.error(t('messages.saveError'))
-    });
-
-    const handleSave = () => saveMutation.mutate();
 
     const handleChange = useCallback(
         (e) => {
@@ -83,22 +55,13 @@ export default function Step2PersonalData({ data, updateData, onNext }) {
             if (['debtor_expedition_city', 'debtor_first_name', 'debtor_last_name'].includes(name)) {
                 newValue = newValue.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase();
             }
-            setForm((prev) => {
-                const next = { ...prev, [name]: newValue };
-                updateData(next);
-                return next;
-            });
+            setForm((prev) => ({ ...prev, [name]: newValue }));
+            updateData({ [name]: newValue });
         },
-        [updateData]
+        [form, updateData]
     );
 
-    const handleSubmit = useCallback(
-        (e) => {
-            e.preventDefault();
-            onNext(form);
-        },
-        [form, onNext]
-    );
+
 
     return (
         <>
@@ -117,7 +80,7 @@ export default function Step2PersonalData({ data, updateData, onNext }) {
                         name="debtor_document_number"
                         onChange={handleChange}
                         placeholder={t('form.document_number')}
-                        
+
                         type='text'
                         value={form.debtor_document_number}
                     />
@@ -133,7 +96,7 @@ export default function Step2PersonalData({ data, updateData, onNext }) {
                         name="debtor_expedition_city"
                         onChange={handleChange}
                         placeholder={t('form.expedition_city')}
-                        
+
                         type='text'
                         value={form.debtor_expedition_city}
                     />
@@ -149,7 +112,7 @@ export default function Step2PersonalData({ data, updateData, onNext }) {
                         name="debtor_first_name"
                         onChange={handleChange}
                         placeholder={t('form.first_name')}
-                        
+
                         type='text'
                         value={form.debtor_first_name}
                     />
@@ -165,7 +128,7 @@ export default function Step2PersonalData({ data, updateData, onNext }) {
                         name="debtor_last_name"
                         onChange={handleChange}
                         placeholder={t('form.last_name')}
-                        
+
                         type='text'
                         value={form.debtor_last_name}
                     />
@@ -182,7 +145,7 @@ export default function Step2PersonalData({ data, updateData, onNext }) {
                         onChange={handleChange}
                         pattern="[0-9]*"
                         placeholder={t('form.cell_phone')}
-                        
+
                         type='tel'
                         value={form.debtor_cell_phone}
                     />
@@ -198,7 +161,7 @@ export default function Step2PersonalData({ data, updateData, onNext }) {
                         name="debtor_email"
                         onChange={handleChange}
                         placeholder={t('form.email')}
-                        
+
                         type='email'
                         value={form.debtor_email}
                     />
@@ -213,7 +176,7 @@ export default function Step2PersonalData({ data, updateData, onNext }) {
                         name="debtor_sex"
                         value={form.debtor_sex}
                         onChange={handleChange}
-                        
+
                     >
                         <option value="">Selecciona una opción</option>
                         <option value="MASCULINO">MASCULINO</option>
@@ -231,7 +194,7 @@ export default function Step2PersonalData({ data, updateData, onNext }) {
                         name="debtor_address"
                         onChange={handleChange}
                         placeholder={t('form.debtor_address')}
-                        
+
                         type='text'
                         value={form.debtor_address}
                     />
@@ -248,8 +211,8 @@ export default function Step2PersonalData({ data, updateData, onNext }) {
                         name="debtor_age"
                         onChange={handleChange}
                         placeholder={t('form.debtor_age')}
-                        
-                        value={form.debtor_age}
+
+                        value={`${calculateAge()}`}
                     />
                 </div>
 
@@ -274,9 +237,9 @@ export default function Step2PersonalData({ data, updateData, onNext }) {
                     type="button"
                     className="btn btn-outline-info"
                     onClick={handleSave}
-                    disabled={saveMutation.isLoading}
+                    disabled={saveLoading}
                 >
-                    <MdSaveAs /> {saveMutation.isLoading ? t('messages.saving') : t('messages.save')}
+                    <MdSaveAs /> {saveLoading ? t('messages.saving') : t('messages.save')}
                 </button>
             </div>
 
@@ -301,7 +264,6 @@ export default function Step2PersonalData({ data, updateData, onNext }) {
 }
 
 Step2PersonalData.propTypes = {
-    data: PropTypes.object,
     updateData: PropTypes.func.isRequired,
     onNext: PropTypes.func,
 };

@@ -1,3 +1,5 @@
+// src/app/api/platform/insolvency-form/[id]/route.jsx
+
 import axios from 'axios';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';

@@ -5,8 +5,8 @@ const withNextIntl = require('next-intl/plugin')();
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     allowedDevOrigins: [
-        '192.168.101.29',
         'localhost',
+        '127.0.0.1'
     ],
 
     images: {

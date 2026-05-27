@@ -8,6 +8,7 @@ financial-education.json
 
 # vscode
 .vscode/*
+.continue
 
 # dependencies
 /node_modules

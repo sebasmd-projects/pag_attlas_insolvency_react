@@ -1,3 +1,5 @@
+// src/app/[locale]/platform/calculator/components/UserDataDisplay.tsx
+
 'use client';
 
 import { memo } from 'react';

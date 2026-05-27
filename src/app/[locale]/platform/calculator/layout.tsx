@@ -1,3 +1,5 @@
+// src/app/[locale]/platform/calculator/layout.tsx
+
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 

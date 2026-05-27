@@ -1,3 +1,5 @@
+// src/app/[locale]/platform/calculator/CalculatorClient.tsx
+
 'use client';
 
 import dynamic from 'next/dynamic';

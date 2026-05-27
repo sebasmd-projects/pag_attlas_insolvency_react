@@ -1,3 +1,5 @@
+// src/app/[locale]/platform/calculator/components/DebtGauge.tsx
+
 interface DebtGaugeProps {
     years?: number;
     isInsolvent: boolean;

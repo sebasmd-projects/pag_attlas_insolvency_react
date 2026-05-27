@@ -1,3 +1,5 @@
+// src/app/[locale]/platform/calculator/components/CalculatorForm.tsx
+
 'use client';
 
 import { memo, useMemo } from 'react';

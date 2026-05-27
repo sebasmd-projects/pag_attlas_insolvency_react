@@ -8,234 +8,184 @@ import { NextResponse } from 'next/server';
 import { apiBaseUrl } from '@/config';
 
 /**
- * POST - Buscar usuario por cedula y fecha de nacimiento
- * Backend endpoint: GET /clients/search/?documentNumber=xxx&birthDate=yyyy-mm-dd
+ * POST — Buscar cliente existente
+ * Backend: GET /clients/search/?documentNumber=xxx&birthDate=yyyy-mm-dd
  */
 export async function POST(request: Request) {
-    // CORS validation
     const { isValid } = validateOrigin(request);
-    if (!isValid) {
-        return corsErrorResponse();
-    }
+    if (!isValid) return corsErrorResponse();
 
     try {
         const data = await request.json();
-
-        // Validar datos de entrada
         const validation = userIdentificationSchema.safeParse(data);
+
         if (!validation.success) {
             return NextResponse.json(
-                { 
-                    success: false, 
-                    error: 'VALIDATION_ERROR',
-                    detail: validation.error.issues[0]?.message || 'Datos invalidos'
-                },
+                { success: false, error: 'VALIDATION_ERROR',
+                  detail: validation.error.issues[0]?.message || 'Datos inválidos' },
                 { status: 400 }
             );
         }
 
         const { cedula, birthDate } = validation.data;
 
-        // Buscar usuario en el backend - GET /clients/search/
-        const response = await axios.get(
-            `${apiBaseUrl}/clients/search/`,
-            {
-                params: {
-                    documentNumber: cedula,
-                    birthDate: birthDate,
-                },
-                timeout: 10000,
-            }
-        );
+        const response = await axios.get(`${apiBaseUrl}/clients/search/`, {
+            params: { documentNumber: cedula, birthDate },
+            timeout: 10000,
+        });
 
-        const userData = response.data;
-
+        const u = response.data;
         return NextResponse.json({
             success: true,
             found: true,
             user: {
-                id: userData.id,
-                cedula: userData.documentNumber,
-                firstName: userData.firstName,
-                lastName: userData.lastName,
-                email: userData.email || '',
-                phone: userData.phone || '',
-                address: userData.address || '',
-                birthDate: userData.birthDate,
+                id:        u.id,
+                formId:    u.form_id  ?? null,   // <-- exponer form_id si el backend lo devuelve
+                cedula:    u.documentNumber,
+                firstName: u.firstName,
+                lastName:  u.lastName,
+                email:     u.email    ?? '',
+                phone:     u.phone    ?? '',
+                address:   u.address  ?? '',
+                birthDate: u.birthDate,
             },
         });
 
     } catch (error) {
         if (axios.isAxiosError(error)) {
-            // Usuario no encontrado (404 o error de validacion del serializer)
             if (error.response?.status === 404 || error.response?.status === 400) {
-                return NextResponse.json({
-                    success: true,
-                    found: false,
-                    user: null,
-                });
+                return NextResponse.json({ success: true, found: false, user: null });
             }
-
-            // Error de autenticacion o permisos
-            if (error.response?.status === 401 || error.response?.status === 403) {
-                return NextResponse.json(
-                    { 
-                        success: false, 
-                        error: 'AUTH_ERROR',
-                        detail: 'Error de autenticacion'
-                    },
-                    { status: error.response.status }
-                );
-            }
-
-            // Otros errores del backend
-            serverLogger.error('Error searching user', {
-                error: error.message,
-                status: error.response?.status,
-            });
-            
+            serverLogger.error('Error searching user', { error: error.message });
             return NextResponse.json(
-                { 
-                    success: false, 
-                    error: 'BACKEND_ERROR',
-                    detail: error.response?.data?.detail || 'Error al buscar usuario'
-                },
+                { success: false, error: 'BACKEND_ERROR',
+                  detail: error.response?.data?.detail || 'Error al buscar usuario' },
                 { status: error.response?.status || 500 }
             );
         }
-
-        // Error inesperado
-        serverLogger.error('Unexpected error searching user', {
-            error: error instanceof Error ? error.message : 'Unknown error',
-        });
-        
         return NextResponse.json(
-            { 
-                success: false, 
-                error: 'INTERNAL_ERROR',
-                detail: 'Error interno del servidor'
-            },
+            { success: false, error: 'INTERNAL_ERROR', detail: 'Error interno' },
             { status: 500 }
         );
     }
 }
 
 /**
- * PUT - Crear nuevo usuario/cliente
- * Backend endpoint: POST /clients/
+ * PUT — Registrar cliente nuevo (2 pasos internos):
+ *   1) POST /register/            → crea usuario, devuelve { id, form_id, token, expires_in }
+ *   2) PATCH /insolvency-form/<form_id>/?step=2  → guarda datos personales
  */
 export async function PUT(request: Request) {
-    // CORS validation
     const { isValid } = validateOrigin(request);
-    if (!isValid) {
-        return corsErrorResponse();
-    }
+    if (!isValid) return corsErrorResponse();
 
     try {
         const data = await request.json();
-
-        // Validar datos de entrada
         const validation = userRegistrationSchema.safeParse(data);
+
         if (!validation.success) {
             return NextResponse.json(
-                { 
-                    success: false, 
-                    error: 'VALIDATION_ERROR',
-                    detail: validation.error.issues[0]?.message || 'Datos invalidos'
-                },
+                { success: false, error: 'VALIDATION_ERROR',
+                  detail: validation.error.issues[0]?.message || 'Datos inválidos' },
                 { status: 400 }
             );
         }
 
-        const userData = validation.data;
+        const { cedula, birthDate, firstName, lastName, email, phone, address } = validation.data;
 
-        // Crear usuario en el backend - POST /clients/
-        const response = await axios.post(
-            `${apiBaseUrl}/clients/`,
-            {
-                documentNumber: userData.cedula,
-                birthDate: userData.birthDate,
-                firstName: userData.firstName,
-                lastName: userData.lastName,
-                email: userData.email || '',
-                phone: userData.phone || '',
-                address: userData.address || '',
-            },
+        // ── Paso 1: crear registro base ───────────────────────────────────────
+        const registerRes = await axios.post(
+            `${apiBaseUrl}/register/`,
+            { documentNumber: cedula, birthDate },
             { timeout: 10000 }
         );
 
-        const createdUser = response.data;
+        const { id, form_id, token, expires_in } = registerRes.data;
 
-        return NextResponse.json({
-            success: true,
-            user: {
-                id: createdUser.id,
-                cedula: createdUser.documentNumber,
-                firstName: createdUser.firstName,
-                lastName: createdUser.lastName,
-                email: createdUser.email || '',
-                phone: createdUser.phone || '',
-                address: createdUser.address || '',
-                birthDate: createdUser.birthDate,
-            },
-        });
-
-    } catch (error) {
-        if (axios.isAxiosError(error)) {
-            // Usuario ya existe (el serializer devuelve 400 con error en documentNumber)
-            if (error.response?.status === 400) {
-                const errorData = error.response?.data;
-                
-                // Verificar si es error de usuario existente
-                if (errorData?.documentNumber) {
-                    return NextResponse.json(
-                        { 
-                            success: false, 
-                            error: 'USER_EXISTS',
-                            detail: errorData.documentNumber[0] || 'El usuario ya existe'
-                        },
-                        { status: 409 }
-                    );
-                }
-                
-                // Otros errores de validacion
-                return NextResponse.json(
-                    { 
-                        success: false, 
-                        error: 'VALIDATION_ERROR',
-                        detail: errorData?.detail || errorData?.non_field_errors?.[0] || 'Datos invalidos'
-                    },
-                    { status: 400 }
-                );
-            }
-
-            // Otros errores
-            serverLogger.error('Error creating user', {
-                error: error.message,
-                status: error.response?.status,
-            });
-            
+        if (!form_id) {
+            serverLogger.error('Backend no devolvió form_id tras registro', { id });
             return NextResponse.json(
-                { 
-                    success: false, 
-                    error: 'BACKEND_ERROR',
-                    detail: error.response?.data?.detail || 'Error al crear usuario'
-                },
-                { status: error.response?.status || 500 }
+                { success: false, error: 'MISSING_FORM_ID',
+                  detail: 'El backend no devolvió el ID del formulario' },
+                { status: 502 }
             );
         }
 
-        // Error inesperado
-        serverLogger.error('Unexpected error creating user', {
-            error: error instanceof Error ? error.message : 'Unknown error',
-        });
-        
-        return NextResponse.json(
-            { 
-                success: false, 
-                error: 'INTERNAL_ERROR',
-                detail: 'Error interno del servidor'
+        // ── Paso 2: guardar datos personales en step 2 ────────────────────────
+        await axios.patch(
+            `${apiBaseUrl}/insolvency-form/${form_id}/?step=2`,
+            {
+                debtor_first_name:      firstName,
+                debtor_last_name:       lastName,
+                debtor_email:           email    ?? '',
+                debtor_cell_phone:      phone    ?? '',
+                debtor_address:         address  ?? '',
+                debtor_document_number: cedula,
+                debtor_birth_date:      birthDate,
             },
+            {
+                headers: { Authorization: `Bearer ${token}` },
+                timeout: 10000,
+            }
+        );
+
+        // ── Respuesta al frontend ─────────────────────────────────────────────
+        const res = NextResponse.json({
+            success: true,
+            user: {
+                id,
+                formId:    form_id,
+                cedula,
+                firstName,
+                lastName,
+                email:    email   ?? '',
+                phone:    phone   ?? '',
+                address:  address ?? '',
+                birthDate,
+            },
+        });
+
+        // Persistir el token igual que en /login
+        res.cookies.set({
+            name:     'auth_token',
+            value:    token,
+            httpOnly: true,
+            secure:   process.env.NODE_ENV === 'production',
+            sameSite: 'lax',
+            path:     '/',
+            maxAge:   expires_in,
+        });
+
+        return res;
+
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            if (error.response?.status === 400) {
+                const errData = error.response.data;
+                if (errData?.documentNumber) {
+                    return NextResponse.json(
+                        { success: false, error: 'USER_EXISTS',
+                          detail: errData.documentNumber[0] || 'El usuario ya existe' },
+                        { status: 409 }
+                    );
+                }
+                return NextResponse.json(
+                    { success: false, error: 'VALIDATION_ERROR',
+                      detail: errData?.detail || errData?.non_field_errors?.[0] || 'Datos inválidos' },
+                    { status: 400 }
+                );
+            }
+            serverLogger.error('Error registering user', {
+                error: error.message, status: error.response?.status,
+            });
+            return NextResponse.json(
+                { success: false, error: 'BACKEND_ERROR',
+                  detail: error.response?.data?.detail || 'Error al crear usuario' },
+                { status: error.response?.status || 500 }
+            );
+        }
+        return NextResponse.json(
+            { success: false, error: 'INTERNAL_ERROR', detail: 'Error interno' },
             { status: 500 }
         );
     }

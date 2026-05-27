@@ -2,81 +2,28 @@
 
 'use client';
 import PropTypes from 'prop-types';
-import { useEffect, useRef, useState } from 'react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
-import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { ReactSVG } from 'react-svg';
-import { toast } from 'react-toastify';
 import { MdSaveAs } from "react-icons/md";
+
+import { useStep } from '../hooks/useStep';
 
 import SubTitleComponent from '@/components/micro-components/sub_title';
 import TitleComponent from '@/components/micro-components/title';
 
-async function GetStep1() {
-    const { data } = await axios.get('/api/platform/insolvency-form/get-data/?step=1');
-    return data;
-}
+export default function Step1LegalRequirements({ updateData, onNext }) {
 
-export default function Step1LegalRequirements({ data, updateData, onNext }) {
-    const t = useTranslations('Platform.pages.home.wizard.steps.step1');
-    const queryClient = useQueryClient();
-
-    // 1) Fetch DB data on every mount
-    const { data: step1Data } = useQuery({
-        queryKey: ['step1Data'],
-        queryFn: GetStep1,
-        refetchOnMount: true,
+    const buildInitial = (data) => ({
+        accept_legal_requirements: data ? !!data.accept_legal_requirements : false,
+        accept_terms_and_conditions: data ? !!data.accept_terms_and_conditions : false,
     });
 
-    // 2) Local form state
-    const [form, setForm] = useState({
-        accept_legal_requirements: false,
-        accept_terms_and_conditions: false,
+    const { form, t, handleChange, handleSubmit, handleSave, saveLoading } = useStep({
+        stepNumber: 1,
+        buildInitial,
+        updateData,
+        onNext,
     });
-
-    // 3) Init only once per mount
-    const initialized = useRef(false);
-    useEffect(() => {
-        if (step1Data && !initialized.current) {
-            const init = {
-                accept_legal_requirements: !!step1Data.accept_legal_requirements,
-                accept_terms_and_conditions: !!step1Data.accept_terms_and_conditions,
-            };
-            setForm(init);
-            updateData(init);
-            initialized.current = true;
-        }
-    }, [step1Data, updateData]);
-
-    // 4) PATCH step 1 without advancing
-    const saveMutation = useMutation({
-        mutationFn: () =>
-            axios.patch('/api/platform/insolvency-form/?step=1', form),
-        onSuccess: () => {
-            toast.success(t('messages.saveSuccess'));
-            queryClient.invalidateQueries(['step1Data']);
-        },
-        onError: () => toast.error(t('messages.saveError'))
-    });
-
-    const handleSave = () => saveMutation.mutate();
-
-    // 5) Submit form and advance to next step
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        onNext(form);
-    };
-
-    // 6) Handle checkbox changes
-    const handleChange = ({ target: { name, checked } }) => {
-        setForm((prev) => {
-            const next = { ...prev, [name]: checked };
-            updateData(next);
-            return next;
-        });
-    };
 
     function commonText({ articleTitle, articleDescription }) {
         return (
@@ -183,7 +130,7 @@ export default function Step1LegalRequirements({ data, updateData, onNext }) {
                             className="form-check-input"
                             checked={form.accept_legal_requirements}
                             onChange={handleChange}
-                            
+
                         />
                         <label className="form-check-label" htmlFor="accept_legal_requirements">
                             {t('accept_terms')}
@@ -198,7 +145,7 @@ export default function Step1LegalRequirements({ data, updateData, onNext }) {
                             className="form-check-input"
                             checked={form.accept_terms_and_conditions}
                             onChange={handleChange}
-                            
+
                         />
                         <label className="form-check-label" htmlFor="accept_terms_and_conditions">
                             {t.rich('accept_terms_and_conditions', {
@@ -231,9 +178,9 @@ export default function Step1LegalRequirements({ data, updateData, onNext }) {
                     type="button"
                     className="btn btn-outline-info"
                     onClick={handleSave}
-                    disabled={saveMutation.isLoading}
+                    disabled={saveLoading}
                 >
-                    <MdSaveAs /> {saveMutation.isLoading ? t('messages.saving') : t('messages.save')}
+                    <MdSaveAs /> {saveLoading ? t('messages.saving') : t('messages.save')}
                 </button>
             </div>
         </>
@@ -241,7 +188,6 @@ export default function Step1LegalRequirements({ data, updateData, onNext }) {
 }
 
 Step1LegalRequirements.propTypes = {
-    data: PropTypes.object,
     updateData: PropTypes.func.isRequired,
     onNext: PropTypes.func.isRequired,
 };
