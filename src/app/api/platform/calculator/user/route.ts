@@ -40,7 +40,7 @@ export async function POST(request: Request) {
             found: true,
             user: {
                 id:        u.id,
-                formId:    u.form_id  ?? null,   // <-- exponer form_id si el backend lo devuelve
+                formId:    u.form_id  ?? null,
                 cedula:    u.documentNumber,
                 firstName: u.firstName,
                 lastName:  u.lastName,
@@ -71,9 +71,9 @@ export async function POST(request: Request) {
 }
 
 /**
- * PUT — Registrar cliente nuevo (2 pasos internos):
- *   1) POST /register/            → crea usuario, devuelve { id, form_id, token, expires_in }
- *   2) PATCH /insolvency-form/<form_id>/?step=2  → guarda datos personales
+ * PUT — Registrar cliente nuevo en un solo paso.
+ * Backend: POST /clients/  → ClientCreateSerializer
+ * Crea auth user + form con datos personales atómicamente.
  */
 export async function PUT(request: Request) {
     const { isValid } = validateOrigin(request);
@@ -93,70 +93,36 @@ export async function PUT(request: Request) {
 
         const { cedula, birthDate, firstName, lastName, email, phone, address } = validation.data;
 
-        // ── Paso 1: crear registro base ───────────────────────────────────────
-        const registerRes = await axios.post(
-            `${apiBaseUrl}/register/`,
-            { documentNumber: cedula, birthDate },
+        const createRes = await axios.post(
+            `${apiBaseUrl}/clients/`,
+            {
+                documentNumber: cedula,
+                birthDate,
+                firstName,
+                lastName,
+                email:   email   ?? '',
+                phone:   phone   ?? '',
+                address: address ?? '',
+            },
             { timeout: 10000 }
         );
 
-        const { id, form_id, token, expires_in } = registerRes.data;
+        const u = createRes.data;
 
-        if (!form_id) {
-            serverLogger.error('Backend no devolvió form_id tras registro', { id });
-            return NextResponse.json(
-                { success: false, error: 'MISSING_FORM_ID',
-                  detail: 'El backend no devolvió el ID del formulario' },
-                { status: 502 }
-            );
-        }
-
-        // ── Paso 2: guardar datos personales en step 2 ────────────────────────
-        await axios.patch(
-            `${apiBaseUrl}/insolvency-form/${form_id}/?step=2`,
-            {
-                debtor_first_name:      firstName,
-                debtor_last_name:       lastName,
-                debtor_email:           email    ?? '',
-                debtor_cell_phone:      phone    ?? '',
-                debtor_address:         address  ?? '',
-                debtor_document_number: cedula,
-                debtor_birth_date:      birthDate,
-            },
-            {
-                headers: { Authorization: `Bearer ${token}` },
-                timeout: 10000,
-            }
-        );
-
-        // ── Respuesta al frontend ─────────────────────────────────────────────
-        const res = NextResponse.json({
+        return NextResponse.json({
             success: true,
             user: {
-                id,
-                formId:    form_id,
-                cedula,
-                firstName,
-                lastName,
-                email:    email   ?? '',
-                phone:    phone   ?? '',
-                address:  address ?? '',
-                birthDate,
+                id:        u.id,
+                formId:    u.formId ?? null,
+                cedula:    u.documentNumber ?? cedula,
+                firstName: u.firstName      ?? firstName,
+                lastName:  u.lastName       ?? lastName,
+                email:     u.email          ?? email    ?? '',
+                phone:     u.phone          ?? phone    ?? '',
+                address:   u.address        ?? address  ?? '',
+                birthDate: u.birthDate      ?? birthDate,
             },
         });
-
-        // Persistir el token igual que en /login
-        res.cookies.set({
-            name:     'auth_token',
-            value:    token,
-            httpOnly: true,
-            secure:   process.env.NODE_ENV === 'production',
-            sameSite: 'lax',
-            path:     '/',
-            maxAge:   expires_in,
-        });
-
-        return res;
 
     } catch (error) {
         if (axios.isAxiosError(error)) {
@@ -165,7 +131,9 @@ export async function PUT(request: Request) {
                 if (errData?.documentNumber) {
                     return NextResponse.json(
                         { success: false, error: 'USER_EXISTS',
-                          detail: errData.documentNumber[0] || 'El usuario ya existe' },
+                          detail: Array.isArray(errData.documentNumber)
+                              ? errData.documentNumber[0]
+                              : errData.documentNumber },
                         { status: 409 }
                     );
                 }
