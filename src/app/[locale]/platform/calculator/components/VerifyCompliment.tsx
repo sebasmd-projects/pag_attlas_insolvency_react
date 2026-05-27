@@ -1,14 +1,32 @@
 // src/app/[locale]/platform/calculator/components/VerifyCompliment.tsx
+//
+// Versión actualizada:
+// • Lee y escribe en el mismo endpoint que Step5 (useCreditors).
+// • Trabaja con el shape simple (name, nature, capital_value, days_overdue).
+// • Al guardar, los campos que la calculadora no gestiona se rellenan con 'TODO'
+//   si el registro es nuevo (mergeSimpleToCanonical). Si ya existía, se preservan.
 
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
-import { Alert, Spinner } from 'react-bootstrap';
+import { useState, useEffect, useCallback, useMemo } from 'react';
+import { Alert, Button, Spinner } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { useTranslations } from 'next-intl';
+
+import {
+    useCreditors,
+    toSimpleCreditor,
+    EXCLUDED_NATURES,
+    NATURE_OPTIONS_SIMPLE,
+    formatLocale,
+    parseLocale,
+} from '../../hooks/useCreditors';
+
 import type { UserData } from '@/lib/calculator/types';
 
-interface Creditor {
+/* ─── Types ───────────────────────────────────────────────────── */
+interface SimpleCreditor {
+    _canonicalId?: number | string;
     name: string;
     nature: string;
     other_nature: string;
@@ -16,214 +34,147 @@ interface Creditor {
     days_overdue: string;
 }
 
-interface VerifyComplimentProps {
-    user: UserData;
-}
-
-interface ComplianceResult {
-    overdueCount: number;
-    overdueDebt: number;
-    totalDebt: number;
-    overduePercentage: number;
-}
-
-const EMPTY_CREDITOR: Creditor = {
-    name: '',
-    nature: '',
-    other_nature: '',
-    capital_value: '',
-    days_overdue: '',
+const EMPTY_SIMPLE: SimpleCreditor = {
+    name: '', nature: '', other_nature: '', capital_value: '', days_overdue: '',
 };
 
-export default function VerifyCompliment({ user }: VerifyComplimentProps) {
+interface Props {
+    user: UserData;
+    onBack: () => void;
+}
+
+/* ─── Componente ──────────────────────────────────────────────── */
+export default function VerifyCompliment({ user, onBack }: Props) {
     const t = useTranslations('Platform.calculator.insolvency');
-    
-    const [creditors, setCreditors] = useState<Creditor[]>([{ ...EMPTY_CREDITOR }]);
-    const [result, setResult] = useState<ComplianceResult | null>(null);
-    const [overdueDebt, setOverdueDebt] = useState(0);
-    const [onTimeDebt, setOnTimeDebt] = useState(0);
-    const [totalDebt, setTotalDebt] = useState(0);
-    const [isLoading, setIsLoading] = useState(true);
-    const [isSaving, setIsSaving] = useState(false);
 
-    // Load creditors data for this user
+    /* useCreditors: mismo hook que Step5 */
+    const {
+        creditors: canonicalList,
+        isLoading,
+        isSaving,
+        saveFromSimple,
+    } = useCreditors({
+        onSaveSuccess: () => { /* silencioso en la calculadora */ },
+        onSaveError: () => { /* silencioso */ },
+    });
+
+    /* Lista simple (shape reducido para la calculadora) */
+    const [simpleList, setSimpleList] = useState<SimpleCreditor[]>([{ ...EMPTY_SIMPLE }]);
+    const [validated, setValidated] = useState(false);
+
+    /* Cuando llegan datos del servidor, convertimos a shape simple */
     useEffect(() => {
-        async function loadCreditors() {
-            try {
-                setIsLoading(true);
-                const response = await fetch(
-                    `/api/platform/calculator/creditors?documentNumber=${encodeURIComponent(user.cedula)}&birthDate=${encodeURIComponent(user.birthDate || '')}`
-                );
-                
-                if (response.ok) {
-                    const data = await response.json();
-                    if (data.success && data.creditors && data.creditors.length > 0) {
-                        setCreditors(data.creditors);
-                    }
-                }
-            } catch (error) {
-                console.error('Error loading creditors:', error);
-            } finally {
-                setIsLoading(false);
-            }
-        }
-        
-        loadCreditors();
-    }, [user.cedula, user.birthDate]);
+        if (!canonicalList.length) return;
+        setSimpleList(canonicalList.map(toSimpleCreditor));
+    }, [canonicalList]);
 
-    // Save creditors when they change (debounced)
-    const saveCreditors = useCallback(async (creditorsToSave: Creditor[]) => {
-        try {
-            setIsSaving(true);
-            await fetch('/api/platform/calculator/creditors', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    documentNumber: user.cedula,
-                    birthDate: user.birthDate || '',
-                    creditors: creditorsToSave,
-                }),
-            });
-        } catch (error) {
-            console.error('Error saving creditors:', error);
-        } finally {
-            setIsSaving(false);
-        }
-    }, [user.cedula, user.birthDate]);
-
-    // Calculate totals when creditors change
-    useEffect(() => {
-        const filteredCreditors = creditors.filter(c =>
-            c.nature !== 'CRÉDITO DE LIBRANZA' && c.nature !== 'CRÉDITO DE NÓMINA'
+    /* Totales (excluye libranza y nómina) */
+    const { overdueDebt, onTimeDebt, totalDebt } = useMemo(() => {
+        const filtered = simpleList.filter(
+            (c) => !EXCLUDED_NATURES.includes(c.nature)
         );
-
-        let overdue = 0;
-        let onTime = 0;
-        let total = 0;
-
-        filteredCreditors.forEach(c => {
-            const capital = parseCurrencyToNumber(c.capital_value);
-            const overdueDays = parseInt(c.days_overdue);
-
-            if (!isNaN(capital)) {
-                total += capital;
-                if (!isNaN(overdueDays)) {
-                    if (overdueDays >= 90) {
-                        overdue += capital;
-                    } else {
-                        onTime += capital;
-                    }
-                }
-            }
+        let overdue = 0, onTime = 0, total = 0;
+        filtered.forEach((c) => {
+            const cap = parseLocale(c.capital_value);
+            const days = parseInt(c.days_overdue, 10);
+            total += cap;
+            if (!isNaN(days) && days >= 90) overdue += cap;
+            else onTime += cap;
         });
+        return { overdueDebt: overdue, onTimeDebt: onTime, totalDebt: total };
+    }, [simpleList]);
 
-        setOverdueDebt(overdue);
-        setOnTimeDebt(onTime);
-        setTotalDebt(total);
-    }, [creditors]);
+    /* ─── Handlers ────────────────────────────────────────────── */
+    const handleChange = useCallback(
+        (index: number, e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+            const { name, value } = e.target;
+            setSimpleList((prev) => {
+                const next = [...prev];
+                const row = { ...next[index] };
 
-    const normalizeText = (str: string) => str.normalize('NFD').replace(/[^a-zA-Z0-9 ]/g, '').toUpperCase();
+                if (name === 'capital_value') {
+                    row.capital_value = value.replace(/[^0-9.,]/g, '');
+                } else if (name === 'name' || name === 'other_nature') {
+                    row[name as 'name' | 'other_nature'] = value
+                        .normalize('NFD')
+                        .replace(/[^a-zA-Z0-9 ]/g, '')
+                        .toUpperCase();
+                } else {
+                    (row as Record<string, string>)[name] = value;
+                }
 
-    const formatToLocaleNumber = (value: number | string) => {
-        const numericValue = typeof value === 'string' ? parseFloat(value) : value;
-        if (isNaN(numericValue)) return '';
-        return new Intl.NumberFormat('es-CO', {
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 2,
-        }).format(numericValue);
-    };
+                if (name === 'nature' && value !== 'OTRO') {
+                    row.other_nature = '';
+                }
 
-    const parseCurrencyToNumber = (value: string) => {
-        if (!value) return 0;
-        const numericString = value.replace(/\./g, '').replace(',', '.');
-        return parseFloat(numericString);
-    };
+                next[index] = row;
+                return next;
+            });
+        },
+        []
+    );
 
-    const handleChange = (index: number, e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        const { name, value } = e.target;
-        const updated = [...creditors];
+    const handleBlurCapital = useCallback((index: number) => {
+        setSimpleList((prev) => {
+            const next = [...prev];
+            next[index] = {
+                ...next[index],
+                capital_value: formatLocale(parseLocale(next[index].capital_value)),
+            };
+            // Guardado auto-persistente al salir del campo capital
+            saveFromSimple(next);
+            return next;
+        });
+    }, [saveFromSimple]);
 
-        if (name === 'capital_value') {
-            const filteredValue = value.replace(/[^0-9.,]/g, '');
-            updated[index] = { ...updated[index], [name]: filteredValue };
-        } else if (name === 'name' || name === 'other_nature') {
-            updated[index] = { ...updated[index], [name]: normalizeText(value) };
-        } else {
-            updated[index] = { ...updated[index], [name]: value };
-        }
+    const handleBlurOther = useCallback(() => {
+        saveFromSimple(simpleList);
+    }, [saveFromSimple, simpleList]);
 
-        if (name === 'nature' && value !== 'OTRO') {
-            updated[index] = { ...updated[index], other_nature: '' };
-        }
+    const addRow = useCallback(() => {
+        setSimpleList((prev) => [...prev, { ...EMPTY_SIMPLE }]);
+    }, []);
 
-        setCreditors(updated);
-    };
+    const removeRow = useCallback((index: number) => {
+        if (simpleList.length <= 1) return;
+        const next = simpleList.filter((_, i) => i !== index);
+        setSimpleList(next);
+        saveFromSimple(next);
+    }, [simpleList, saveFromSimple]);
 
-    const handleBlur = (index: number, e: React.FocusEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        if (name === 'capital_value') {
-            const updated = [...creditors];
-            updated[index] = { ...updated[index], [name]: formatToLocaleNumber(parseCurrencyToNumber(value)) };
-            setCreditors(updated);
-            
-            // Save on blur for capital value
-            saveCreditors(updated);
-        } else {
-            // Save on blur for other fields
-            saveCreditors(creditors);
-        }
-    };
-
-    const addRow = () => {
-        const newCreditors = [...creditors, { ...EMPTY_CREDITOR }];
-        setCreditors(newCreditors);
-    };
-
-    const removeRow = (index: number) => {
-        if (creditors.length <= 1) return;
-        const updated = [...creditors];
-        updated.splice(index, 1);
-        setCreditors(updated);
-        saveCreditors(updated);
-    };
-
+    /* ─── Validar y mostrar resultado ─────────────────────────── */
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
-        const incomplete = creditors.some(c =>
-            !c.name || !c.nature || (c.nature === 'OTRO' && !c.other_nature) || !c.capital_value || !c.days_overdue
+        const incomplete = simpleList.some(
+            (c) => !c.name || !c.nature || (c.nature === 'OTRO' && !c.other_nature) ||
+                !c.capital_value || !c.days_overdue
         );
-
         if (incomplete) {
             toast.error(t('errors.incompleteFields'));
             return;
         }
 
-        validateCompliance();
-        saveCreditors(creditors);
+        saveFromSimple(simpleList);
+        setValidated(true);
     };
 
-    const validateCompliance = () => {
-        const filteredCreditors = creditors.filter(c =>
-            c.nature !== 'CRÉDITO DE LIBRANZA' && c.nature !== 'CRÉDITO DE NÓMINA'
-        );
+    /* Resultado de cumplimiento */
+    const complianceResult = useMemo(() => {
+        if (!validated) return null;
+        const filtered = simpleList.filter((c) => !EXCLUDED_NATURES.includes(c.nature));
+        const overdueCr = filtered.filter((c) => parseInt(c.days_overdue, 10) >= 90);
+        const total = filtered.reduce((s, c) => s + parseLocale(c.capital_value), 0);
+        const overdue = overdueCr.reduce((s, c) => s + parseLocale(c.capital_value), 0);
+        return {
+            count: overdueCr.length,
+            overdueAmt: overdue,
+            total,
+            pct: total ? (overdue / total) * 100 : 0,
+        };
+    }, [validated, simpleList]);
 
-        const overdueCreditors = filteredCreditors.filter(c => parseInt(c.days_overdue) >= 90);
-        const overdueCount = overdueCreditors.length;
-
-        const totalDebtCalc = filteredCreditors.reduce((sum, c) => sum + parseCurrencyToNumber(c.capital_value), 0);
-        const overdueDebtCalc = overdueCreditors.reduce((sum, c) => sum + parseCurrencyToNumber(c.capital_value), 0);
-
-        const overduePercentage = totalDebtCalc ? (overdueDebtCalc / totalDebtCalc) * 100 : 0;
-
-        setResult({
-            overdueCount,
-            overdueDebt: overdueDebtCalc,
-            totalDebt: totalDebtCalc,
-            overduePercentage,
-        });
-    };
-
+    /* ─── Render ──────────────────────────────────────────────── */
     if (isLoading) {
         return (
             <div className="container my-5 text-center">
@@ -237,6 +188,7 @@ export default function VerifyCompliment({ user }: VerifyComplimentProps) {
 
     return (
         <form onSubmit={handleSubmit} className="container my-5">
+            {/* Encabezado */}
             <div className="d-flex justify-content-between align-items-center mb-4">
                 <h5 className="mb-0">{t('title')}</h5>
                 {isSaving && (
@@ -246,11 +198,25 @@ export default function VerifyCompliment({ user }: VerifyComplimentProps) {
                     </small>
                 )}
             </div>
-            
-            <Alert variant="info" className="mb-4">
-                <strong>{t('calculatingFor')}:</strong> {user.firstName} {user.lastName} ({user.cedula})
-            </Alert>
 
+            {user && (
+                <Alert variant="info" className="mb-4">
+                    <div className="d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong>{t('calculatingFor')}:</strong> {user.firstName} {user.lastName}
+                            <br />
+                            <small className="text-muted">C.C: {user.cedula}</small>
+                        </div>
+                        {onBack && (
+                            <Button variant="outline-primary" size="sm" onClick={onBack}>
+                                {t('changeUser')}
+                            </Button>
+                        )}
+                    </div>
+                </Alert>
+            )}
+
+            {/* Tabla simplificada */}
             <div className="table-responsive mb-4">
                 <table className="table table-bordered align-middle">
                     <thead className="table-light">
@@ -263,41 +229,35 @@ export default function VerifyCompliment({ user }: VerifyComplimentProps) {
                         </tr>
                     </thead>
                     <tbody>
-                        {creditors.map((c, index) => (
+                        {simpleList.map((c, index) => (
                             <tr key={index}>
+                                {/* Nombre */}
                                 <td>
                                     <input
                                         type="text"
                                         name="name"
                                         value={c.name}
                                         onChange={(e) => handleChange(index, e)}
-                                        onBlur={(e) => handleBlur(index, e)}
+                                        onBlur={handleBlurOther}
                                         className="form-control"
                                         required
                                     />
                                 </td>
+
+                                {/* Naturaleza */}
                                 <td>
                                     <select
                                         name="nature"
                                         value={c.nature}
                                         onChange={(e) => handleChange(index, e)}
-                                        onBlur={() => saveCreditors(creditors)}
+                                        onBlur={handleBlurOther}
                                         className="form-control"
                                         required
                                     >
                                         <option value="">{t('table.selectNature')}</option>
-                                        <option value="CRÉDITO DE LIBRANZA">{t('natures.libranza')}</option>
-                                        <option value="CRÉDITO HIPOTECARIO">{t('natures.mortgage')}</option>
-                                        <option value="CRÉDITO CON GARANTÍA MOBILIARIA">{t('natures.movableGuarantee')}</option>
-                                        <option value="CRÉDITO FISCAL O TRIBUTARIO">{t('natures.fiscal')}</option>
-                                        <option value="CRÉDITO DE LIBRE INVERSIÓN">{t('natures.freeInvestment')}</option>
-                                        <option value="CRÉDITO DE NÓMINA">{t('natures.payroll')}</option>
-                                        <option value="CRÉDITO PERSONAL">{t('natures.personal')}</option>
-                                        <option value="CRÉDITO COMERCIAL">{t('natures.commercial')}</option>
-                                        <option value="CRÉDITO ROTATIVO">{t('natures.rotary')}</option>
-                                        <option value="CRÉDITO EDUCATIVO O DE ESTUDIO">{t('natures.educational')}</option>
-                                        <option value="CRÉDITO DE CONSUMO">{t('natures.consumer')}</option>
-                                        <option value="OTRO">{t('natures.other')}</option>
+                                        {NATURE_OPTIONS_SIMPLE.map(([val, lbl]) => (
+                                            <option key={val} value={val}>{lbl}</option>
+                                        ))}
                                     </select>
                                     {c.nature === 'OTRO' && (
                                         <input
@@ -305,44 +265,50 @@ export default function VerifyCompliment({ user }: VerifyComplimentProps) {
                                             name="other_nature"
                                             value={c.other_nature}
                                             onChange={(e) => handleChange(index, e)}
-                                            onBlur={(e) => handleBlur(index, e)}
+                                            onBlur={handleBlurOther}
                                             className="form-control mt-2"
                                             placeholder={t('table.specifyOther')}
                                             required
                                         />
                                     )}
                                 </td>
+
+                                {/* Capital */}
                                 <td>
                                     <input
                                         type="text"
                                         name="capital_value"
                                         value={c.capital_value}
                                         onChange={(e) => handleChange(index, e)}
-                                        onBlur={(e) => handleBlur(index, e)}
+                                        onBlur={() => handleBlurCapital(index)}
                                         className="form-control text-end"
                                         inputMode="decimal"
                                         required
                                     />
                                 </td>
+
+                                {/* Días mora */}
                                 <td>
                                     <input
                                         className="form-control"
                                         min="0"
                                         name="days_overdue"
                                         onChange={(e) => handleChange(index, e)}
-                                        onBlur={(e) => handleBlur(index, e)}
+                                        onBlur={handleBlurOther}
                                         onWheel={(e) => (e.target as HTMLInputElement).blur()}
                                         required
                                         type="number"
                                         value={c.days_overdue}
                                     />
                                 </td>
+
+                                {/* Eliminar */}
                                 <td className="text-center">
                                     <button
                                         type="button"
                                         className="btn btn-danger btn-sm"
                                         onClick={() => removeRow(index)}
-                                        disabled={creditors.length <= 1}
+                                        disabled={simpleList.length <= 1}
                                     >
                                         {t('table.remove')}
                                     </button>
@@ -353,18 +319,20 @@ export default function VerifyCompliment({ user }: VerifyComplimentProps) {
                 </table>
             </div>
 
+            {/* Totales rápidos */}
             <div className="row mb-4">
                 <div className="col-md-4">
-                    <strong>{t('summary.overdueCapital')}:</strong> $ {formatToLocaleNumber(overdueDebt)}
+                    <strong>{t('summary.overdueCapital')}:</strong> $ {formatLocale(overdueDebt)}
                 </div>
                 <div className="col-md-4">
-                    <strong>{t('summary.onTimeCapital')}:</strong> $ {formatToLocaleNumber(onTimeDebt)}
+                    <strong>{t('summary.onTimeCapital')}:</strong> $ {formatLocale(onTimeDebt)}
                 </div>
                 <div className="col-md-4">
-                    <strong>{t('summary.totalDebts')}:</strong> $ {formatToLocaleNumber(totalDebt)}
+                    <strong>{t('summary.totalDebts')}:</strong> $ {formatLocale(totalDebt)}
                 </div>
             </div>
 
+            {/* Acciones */}
             <div className="d-flex mb-4 gap-2">
                 <button type="button" className="btn btn-outline-success" onClick={addRow}>
                     + {t('addCreditor')}
@@ -374,30 +342,34 @@ export default function VerifyCompliment({ user }: VerifyComplimentProps) {
                 </button>
             </div>
 
-            {result && (
+            {/* Resultado */}
+            {complianceResult && (
                 <div className="mt-4">
-                    {result.overdueCount >= 2 && result.overduePercentage >= 30 ? (
+                    {complianceResult.count >= 2 && complianceResult.pct >= 30 ? (
                         <Alert variant="success">
-                            <strong>{t('result.complies')}</strong> {t('result.compliesDetail', { 
-                                count: result.overdueCount, 
-                                percentage: result.overduePercentage.toFixed(2) 
+                            <strong>{t('result.complies')}</strong>{' '}
+                            {t('result.compliesDetail', {
+                                count: complianceResult.count,
+                                percentage: complianceResult.pct.toFixed(2),
                             })}
                         </Alert>
                     ) : (
                         <Alert variant="danger">
-                            <strong>{t('result.notComplies')}</strong> {result.overdueCount < 2 
-                                ? t('result.notEnoughDebts', { count: result.overdueCount })
-                                : t('result.notEnoughPercentage', { percentage: result.overduePercentage.toFixed(2) })
-                            }
+                            <strong>{t('result.notComplies')}</strong>{' '}
+                            {complianceResult.count < 2
+                                ? t('result.notEnoughDebts', { count: complianceResult.count })
+                                : t('result.notEnoughPercentage', { percentage: complianceResult.pct.toFixed(2) })}
                         </Alert>
                     )}
 
                     <div className="row mt-4">
                         <div className="col-md-6">
-                            <strong>{t('result.overdueCapitalExcluding')}:</strong> $ {formatToLocaleNumber(result.overdueDebt)}
+                            <strong>{t('result.overdueCapitalExcluding')}:</strong>{' '}
+                            $ {formatLocale(complianceResult.overdueAmt)}
                         </div>
                         <div className="col-md-6">
-                            <strong>{t('result.totalDebtsExcluding')}:</strong> $ {formatToLocaleNumber(result.totalDebt)}
+                            <strong>{t('result.totalDebtsExcluding')}:</strong>{' '}
+                            $ {formatLocale(complianceResult.total)}
                         </div>
                     </div>
                 </div>

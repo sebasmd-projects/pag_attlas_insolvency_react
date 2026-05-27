@@ -515,6 +515,11 @@
       },
       "sectionSelector": "Seleccionar sección",
       "insolvency": {
+        "userData": {
+          "insolvencyFor": "Insolvencia para",
+          "documentCC": "C.C",
+          "changeUser": "Cambiar usuario"
+        },
         "title": "Verificación de cumplimiento para insolvencia",
         "loading": "Cargando...",
         "loadingData": "Cargando información...",
@@ -522,6 +527,7 @@
         "calculatingFor": "Calculando para",
         "addCreditor": "Agregar acreedor",
         "verifyCompliance": "Verificar cumplimiento",
+        "changeUser": "Cambiar usuario",
         "table": {
           "creditor": "Acreedor",
           "nature": "Naturaleza",
@@ -807,7 +813,8 @@
                 "saving": "Guardando...",
                 "save": "Guardar",
                 "saveSuccess": "Acreedores guardados correctamente",
-                "saveError": "Error al guardar los acreedores, por favor intenta nuevamente"
+                "saveError": "Error al guardar los acreedores, por favor intenta nuevamente",
+                "loading": "Cargando acreedores..."
               },
               "errors": {
                 "minSevereCount": "Debes tener al menos 2 deudas en mora (>= 90 días)",
@@ -818,6 +825,7 @@
                 "error": "Debes completar al menos el nombre, la naturaleza, el capital y los días en mora de cada acreedor",
                 "addCreditor": "+ Agregar Acreedor",
                 "save": "Guardar",
+                "newCreditor": "Nuevo acreedor",
                 "headers": {
                   "creditor": "Acreedor",
                   "nit": "NIT",
@@ -846,7 +854,10 @@
                   "consanguinity": "Seleccione el grado consanguineo",
                   "interestRate": "Tasa de interés (% mensual)",
                   "otherNature": "Especifique ¿cuál?",
-                  "selectClassification": "Clasificación de la deuda"
+                  "selectClassification": "Clasificación de la deuda",
+                  "guarantee": "¿Cuál es la garantía?",
+                  "contact": "Correo electrónico del acreedor",
+                  "creditor": "Nombre del acreedor"
                 }
               },
               "validation": {
@@ -863,6 +874,12 @@
                 "severeArrears": "Total actual en mora (>= 90)",
                 "severeCount": "Número de deudas en mora (>= 90)",
                 "compliancePercentage": "Porcentaje de cumplimiento"
+              },
+              "status":{
+                "current": "Al día",
+                "severe": "En mora (>= 90 días)",
+                "overdue1": "En mora (1-29 días)",
+                "overdue2": "En mora (30-89 días)"
               }
             },
             "step6": {

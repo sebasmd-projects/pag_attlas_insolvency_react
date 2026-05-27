@@ -83,9 +83,8 @@ export default function CalculatorClient() {
                 {steps.map((s, index) => (
                     <div key={s.key} className="d-flex align-items-center">
                         <div
-                            className={`rounded-circle d-flex align-items-center justify-content-center ${
-                                index <= currentIndex ? 'bg-primary text-white' : 'bg-light text-muted'
-                            }`}
+                            className={`rounded-circle d-flex align-items-center justify-content-center ${index <= currentIndex ? 'bg-primary text-white' : 'bg-light text-muted'
+                                }`}
                             style={{ width: 32, height: 32 }}
                         >
                             {index + 1}
@@ -170,7 +169,6 @@ export default function CalculatorClient() {
                                 </button>
                             </div>
                         </div>
-
                         {/* Calculator section */}
                         {activeSection === 'calculator' && (
                             <CalculatorForm
@@ -186,7 +184,7 @@ export default function CalculatorClient() {
                                     <TitleComponent title={t('caseOfInsolvency')} />
                                     <SubTitleComponent sub_title="becomeInsolvent" t={t} />
                                 </div>
-                                <VerifyCompliment user={user} />
+                                <VerifyCompliment user={user} onBack={handleChangeUser}/>
                             </>
                         )}
                     </div>

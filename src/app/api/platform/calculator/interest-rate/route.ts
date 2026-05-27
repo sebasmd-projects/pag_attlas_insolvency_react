@@ -4,8 +4,8 @@ import axios from 'axios';
 import { NextResponse } from 'next/server';
 import { validateOrigin, corsErrorResponse } from '@/lib/cors';
 import { serverLogger } from '@/lib/logger';
+import {apiBaseUrl} from '@/config';
 
-const BACKEND_URL = 'https://propensionesabogados.com/api/v1/calculator';
 
 // Default usury rate if backend fails
 const DEFAULT_USURA_RATE = 27.14;
@@ -23,7 +23,7 @@ export async function GET(request: Request) {
 
     try {
         const response = await axios.get(
-            `${BACKEND_URL}/interest-rate/`,
+            `${apiBaseUrl}/interest-rate/`,
             { timeout: 10000 }
         );
 

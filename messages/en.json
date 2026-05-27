@@ -515,6 +515,11 @@
       },
       "sectionSelector": "Select section",
       "insolvency": {
+        "userData": {
+          "insolvencyFor": "Insolvency for",
+          "documentCC": "C.C",
+          "changeUser": "Change User"
+        },
         "title": "Insolvency Compliance Verification",
         "loading": "Loading...",
         "loadingData": "Loading information...",
@@ -522,6 +527,7 @@
         "calculatingFor": "Calculating for",
         "addCreditor": "Add creditor",
         "verifyCompliance": "Verify Compliance",
+        "changeUser": "Change User",
         "table": {
           "creditor": "Creditor",
           "nature": "Nature",
@@ -807,7 +813,8 @@
                 "saving": "Saving...",
                 "save": "Save",
                 "saveSuccess": "Creditors saved successfully",
-                "saveError": "Error saving creditors, please try again"
+                "saveError": "Error saving creditors, please try again",
+                "loading": "Loading creditors..."
               },
               "errors": {
                 "minSevereCount": "You must have at least 2 debts in default (>= 90 days)",
@@ -818,6 +825,7 @@
                 "error": "You must complete at least the name, nature, principal and days in default for each creditor",
                 "addCreditor": "+ Add Creditor",
                 "save": "Save",
+                "newCreditor": "New Creditor",
                 "headers": {
                   "creditor": "Creditor",
                   "nit": "Tax ID",
@@ -846,7 +854,10 @@
                   "consanguinity": "Select the consanguinity degree",
                   "interestRate": "Interest rate (% monthly)",
                   "otherNature": "Specify which?",
-                  "selectClassification": "Debt classification"
+                  "selectClassification": "Debt classification",
+                  "guarantee": "What is the guarantee?",
+                  "contact": "Email of the creditor",
+                  "creditor": "Name of the creditor"
                 }
               },
               "validation": {
@@ -863,6 +874,12 @@
                 "severeArrears": "Total current in default (>= 90)",
                 "severeCount": "Number of debts in default (>= 90)",
                 "compliancePercentage": "Compliance percentage"
+              },
+              "status":{
+                "current": "Current",
+                "severe": "Critical/Overdue (>= 90 days)",
+                "overdue1": "Overdue (1-29 days)",
+                "overdue2": "Overdue (30-89 days)"
               }
             },
             "step6": {
