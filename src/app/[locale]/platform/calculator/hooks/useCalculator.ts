@@ -88,7 +88,7 @@ export interface UseCalculatorReturn {
   
   // Loading state for interest rate
   isLoadingRate: boolean;
-  rateSource: 'backend' | 'default' | 'manual';
+  rateSource: 'default' | 'manual';
 }
 
 /**
@@ -123,33 +123,10 @@ export function useCalculator(): UseCalculatorReturn {
   
   // Interest rate loading state
   const [isLoadingRate, setIsLoadingRate] = useState<boolean>(true);
-  const [rateSource, setRateSource] = useState<'backend' | 'default' | 'manual'>('default');
+  const [rateSource, setRateSource] = useState< 'default' | 'manual'>('default');
 
   // Result state
   const [result, setResult] = useState<CalculatorResult | null>(null);
-  
-  // Fetch interest rate from backend on mount
-  useEffect(() => {
-    async function fetchInterestRate() {
-      try {
-        setIsLoadingRate(true);
-        const response = await fetch('/api/platform/calculator/interest-rate');
-        const data = await response.json();
-        
-        if (data.success && typeof data.rate === 'number') {
-          setUsuraRate(data.rate.toString());
-          setRateSource(data.source === 'backend' ? 'backend' : 'default');
-        }
-      } catch {
-        // Keep default rate on error
-        setRateSource('default');
-      } finally {
-        setIsLoadingRate(false);
-      }
-    }
-    
-    fetchInterestRate();
-  }, []);
 
   // Parsed usura rate
   const parsedUsuraRate = useMemo(() => {

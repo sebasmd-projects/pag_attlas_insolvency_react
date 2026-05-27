@@ -37,8 +37,6 @@ function CalculatorFormComponent({ user, onBack }: CalculatorFormProps) {
         result,
         calculate,
         parsedUsuraRate,
-        isLoadingRate,
-        rateSource,
     } = useCalculator();
 
     const translations = useMemo(() => ({
@@ -221,15 +219,9 @@ function CalculatorFormComponent({ user, onBack }: CalculatorFormProps) {
                                     onChange={(e) => setUsuraRate(e.target.value)}
                                     placeholder={DEFAULT_USURA_RATE.toString()}
                                     aria-label={t('form.inputs.usuraRate')}
-                                    disabled={isLoadingRate}
                                 />
                                 <span className="input-group-text">% {t('form.inputs.annual')}</span>
                             </div>
-                            {rateSource === 'backend' && (
-                                <Form.Text className="text-success">
-                                    <small>Tasa obtenida del servidor</small>
-                                </Form.Text>
-                            )}
                         </Form.Group>
 
                         {/* Tipo de interes */}
