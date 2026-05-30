@@ -823,7 +823,7 @@
               "form": {
                 "minTwoCreditorsError": "You must complete at least two creditors",
                 "error": "You must complete at least the name, nature, principal and days in default for each creditor",
-                "addCreditor": "+ Add Creditor",
+                "addCreditor": "Add Creditor",
                 "save": "Save",
                 "newCreditor": "New Creditor",
                 "headers": {

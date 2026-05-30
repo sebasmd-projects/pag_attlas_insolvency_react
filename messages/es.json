@@ -823,7 +823,7 @@
               "form": {
                 "minTwoCreditorsError": "Debes completar al menos dos acreedores",
                 "error": "Debes completar al menos el nombre, la naturaleza, el capital y los días en mora de cada acreedor",
-                "addCreditor": "+ Agregar Acreedor",
+                "addCreditor": "Agregar Acreedor",
                 "save": "Guardar",
                 "newCreditor": "Nuevo acreedor",
                 "headers": {

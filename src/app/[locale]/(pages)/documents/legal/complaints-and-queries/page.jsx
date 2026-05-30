@@ -14,7 +14,7 @@ import ContactMethodsStep from './components/steps/ContactMethodsStep';
 import DescriptionStep from './components/steps/DescriptionStep';
 import PrivateDataStep from './components/steps/PrivateDataStep';
 import RequestTypeStep from './components/steps/RequestTypeStep';
-import {apiBaseUrl} from '@/config';
+import { apiBaseUrl } from '@/config';
 
 export default function ComplaintFormWizard() {
 
@@ -76,25 +76,69 @@ export default function ComplaintFormWizard() {
     const [formData, setFormData] = useState(initialFormData);
 
     const { mutate, isPending } = useMutation({
-
         mutationFn: async (data) => {
             const formDataToSend = new FormData();
-            Object.entries(data).forEach(([key, value]) => {
-                if (key === 'documents') {
-                    Object.entries(value).forEach(([docKey, file]) => {
-                        formDataToSend.append(docKey, file);
-                    });
-                } else {
-                    formDataToSend.append(key, value);
+
+            // When "use existing contact" is on, copy from step-1 fields.
+            const contact = data.useExistingContact
+                ? {
+                    contact_methods: 'email,cell',
+                    contact_email: data.email,
+                    contact_cell_prefix: data.cell_prefix,
+                    contact_cellphone: data.cellphone,   // model field name
+                    contact_phone_prefix: '',
+                    contact_phone: '',
+                }
+                : {
+                    contact_methods: data.contact_methods.join(','), // array → string
+                    contact_email: data.contact_email,
+                    contact_cell_prefix: data.contact_cell_prefix,
+                    contact_cellphone: data.contact_cell,              // rename: contact_cell → contact_cellphone
+                    contact_phone_prefix: data.contact_phone_prefix,
+                    contact_phone: data.contact_phone,
+                };
+
+            const payload = {
+                // request_type is already a valid choice code (ACCESS, CLAIM, …)
+                request_type: data.request_type,
+
+                is_legal_entity: data.is_legal_entity,
+                company_name: data.company_name,
+                nit: data.nit,
+                legal_representative: data.legal_representative,
+                name: data.name,
+                surname: data.surname,
+                id_type: data.id_type,
+                id_number: data.id_number,
+                country: data.country,
+                city: data.city,
+                address: data.address,   // serializer maps address → addres
+                email: data.email,
+                cell_prefix: data.cell_prefix,
+                cellphone: data.cellphone,
+                description: data.description,
+                terms_accepted: data.terms_accepted,
+                ...contact,
+                // useExistingContact is intentionally omitted — it's frontend-only
+            };
+
+            Object.entries(payload).forEach(([key, value]) => {
+                if (value !== null && value !== undefined && value !== '') {
+                    formDataToSend.append(key, String(value));
+                }
+            });
+
+            // Append document files (id_document / legal_certificate)
+            Object.entries(data.documents ?? {}).forEach(([docKey, file]) => {
+                if (file instanceof File) {
+                    formDataToSend.append(docKey, file);
                 }
             });
 
             const response = await axios.post(
-                `${apiBaseUrl}/complaints/`,
+                '/api/pqrs/',           // ← was ${apiBaseUrl}/complaints/
                 formDataToSend,
-                {
-                    headers: { 'Content-Type': 'multipart/form-data' }
-                }
+                { headers: { 'Content-Type': 'multipart/form-data' } }
             );
 
             return response.data;
@@ -108,7 +152,8 @@ export default function ComplaintFormWizard() {
         },
 
         onError: (error) => {
-            toast.error(`Error al enviar la solicitud: ${error.message}`);
+            const detail = error?.response?.data?.detail || error.message;
+            toast.error(`Error al enviar la solicitud: ${detail}`);
         },
     });
 

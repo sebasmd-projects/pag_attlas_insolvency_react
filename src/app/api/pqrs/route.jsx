@@ -9,29 +9,29 @@ import { serverLogger } from '@/lib/logger';
 export async function POST(request) {
     // CORS validation
     const { isValid } = validateOrigin(request);
-    if (!isValid) {
-        return corsErrorResponse();
-    }
+    if (!isValid) return corsErrorResponse();
 
     try {
-        const data = await request.json();
+        const formData = await request.formData();
 
-        const response = await axios.post(
-            `${apiBaseUrl}/pqrs/`,
-            data,
-            { timeout: 10000 }
-        );
-
-        return NextResponse.json(response.data, { status: 200 });
-    } catch (error) {
-        serverLogger.error('Error in PQRS route', {
-            error: error?.message,
-            status: error?.response?.status,
+        const response = await fetch(`${apiBaseUrl}/pqrs/`, {
+            method: 'POST',
+            body: formData,
         });
-        
+
+        const responseData = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+            return NextResponse.json(responseData, { status: response.status });
+        }
+
+        return NextResponse.json(responseData, { status: response.status });
+
+    } catch (error) {
+        serverLogger.error('Error in PQRS route', { error: error?.message });
         return NextResponse.json(
-            { detail: error?.response?.data?.detail || 'Error al enviar el formulario PQRS' },
-            { status: 400 }
+            { detail: 'Error al enviar el formulario PQRS' },
+            { status: 500 }
         );
     }
 }

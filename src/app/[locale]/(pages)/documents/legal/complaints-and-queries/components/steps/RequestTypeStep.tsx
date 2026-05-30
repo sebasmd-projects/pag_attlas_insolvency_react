@@ -6,13 +6,13 @@ interface RequestTypeStepProps {
 }
 
 const requestTypes = [
-    'Acceso',
-    'Actualización',
-    'Rectificación',
-    'Supresión',
-    'Petición',
-    'Reclamo',
-    'Consulta'
+    { value: 'ACCESS', label: 'Acceso' },
+    { value: 'UPDATE', label: 'Actualización' },
+    { value: 'RECTIFICATION', label: 'Rectificación' },
+    { value: 'DELETE', label: 'Supresión' },
+    { value: 'REQUEST', label: 'Petición' },
+    { value: 'CLAIM', label: 'Reclamo' },
+    { value: 'INQUIRY', label: 'Consulta' },
 ];
 
 function RequestTypeStep({ formData, setFormData }: RequestTypeStepProps) {
@@ -21,15 +21,15 @@ function RequestTypeStep({ formData, setFormData }: RequestTypeStepProps) {
             <Card.Body>
                 <Card.Title>1. Seleccione el tipo de solicitud</Card.Title>
                 <Row>
-                    {requestTypes.map(type => (
-                        <Col key={type} md={6}>
+                    {requestTypes.map(({ value, label }) => (
+                        <Col key={value} md={6}>
                             <Form.Check
-                                checked={formData.request_type === type}
-                                id={type}
-                                label={type}
+                                checked={formData.request_type === value}
+                                id={value}
+                                label={label}
                                 name="request_type"
                                 onChange={() =>
-                                    setFormData((prev: any) => ({ ...prev, request_type: type }))
+                                    setFormData((prev: any) => ({ ...prev, request_type: value }))
                                 }
                                 type="radio"
                             />

@@ -294,7 +294,6 @@ export default function Step5Creditors({ data, updateData, onNext }) {
     const addRow = useCallback(() => {
         const next = [...list, { ...EMPTY_CREDITOR }];
         persist(next);
-        // Auto-expand the new card: handled inside CreditorCard (index === newIndex)
     }, [list, persist]);
 
     const removeRow = useCallback((idx) => {
@@ -310,11 +309,9 @@ export default function Step5Creditors({ data, updateData, onNext }) {
 
         if (noEx.severeCount < 2) {
             toast.error(t('errors.minSevereCount'));
-            return;
         }
         if (noEx.pct < 30) {
             toast.error(t('errors.minSeverePct'));
-            return;
         }
 
         onNext({
@@ -335,7 +332,7 @@ export default function Step5Creditors({ data, updateData, onNext }) {
         );
     }
 
-    const meetsRequirements = noEx.severeCount >= 2 && noEx.pct >= 30;
+    const meetsRequirements = (noEx.severeCount >= 2 && noEx.pct >= 30);
 
     return (
         <>
