@@ -1,0 +1,310 @@
++-- messages
+|   +-- en.json
+|   \-- es.json
++-- public
+|   +-- api
+|   |   \-- financial-education.json
+|   +-- assets
+|   |   +-- css
+|   |   |   \-- globals.css
+|   |   +-- documents
+|   |   |   +-- legal
+|   |   |   |   +-- es-cookies.pdf
+|   |   |   |   +-- es-policy-for-the-treatment-of-personal-data.pdf
+|   |   |   |   \-- es-terms-and-conditions.pdf
+|   |   |   \-- undesa
+|   |   |       +-- Jorge UNDESA nombramiento.pdf
+|   |   |       \-- Todos UNDESA nombramiento.pdf
+|   |   +-- imgs
+|   |   |   +-- favicon
+|   |   |   |   +-- favicon.ico
+|   |   |   |   +-- favicon.png
+|   |   |   |   \-- favicon.webp
+|   |   |   +-- icons
+|   |   |   |   +-- asesoria.svg
+|   |   |   |   +-- blearning.svg
+|   |   |   |   +-- calculadora.svg
+|   |   |   |   +-- contact.svg
+|   |   |   |   +-- document.svg
+|   |   |   |   +-- family.svg
+|   |   |   |   +-- family_insolvency.svg
+|   |   |   |   +-- hand_person_hearth.svg
+|   |   |   |   \-- talking.svg
+|   |   |   +-- page
+|   |   |   |   +-- 1-soup kitchens for homeless.webp
+|   |   |   |   +-- 2-pets.webp
+|   |   |   |   +-- 3-support for the elderly.webp
+|   |   |   |   +-- 306x241.webp
+|   |   |   |   +-- 337x450.avif
+|   |   |   |   +-- 337x450.png
+|   |   |   |   +-- 337x450.webp
+|   |   |   |   +-- 4-diaries.webp
+|   |   |   |   +-- 600x400.webp
+|   |   |   |   +-- aegis_app.png
+|   |   |   |   +-- aegis_app.webp
+|   |   |   |   +-- alarm.gif
+|   |   |   |   +-- brand3.webp
+|   |   |   |   +-- calma_app.png
+|   |   |   |   +-- calma_app.webp
+|   |   |   |   +-- desa.gif
+|   |   |   |   +-- desa.webp
+|   |   |   |   +-- diplomado_insolvencia.webp
+|   |   |   |   +-- equipo.webp
+|   |   |   |   +-- flag.png
+|   |   |   |   +-- flag.webp
+|   |   |   |   +-- gea_app.png
+|   |   |   |   +-- gea_app.webp
+|   |   |   |   +-- group_en.png
+|   |   |   |   +-- group_es.png
+|   |   |   |   +-- hermes_app.png
+|   |   |   |   +-- hermes_app.webp
+|   |   |   |   +-- huella de carbono.webp
+|   |   |   |   +-- logo h fundacion attlas.webp
+|   |   |   |   +-- logo-propensiones-h.webp
+|   |   |   |   +-- propensiones_h.png
+|   |   |   |   +-- propensiones_h.webp
+|   |   |   |   +-- que_necesito.webp
+|   |   |   |   +-- recovery_repatriation_h.png
+|   |   |   |   +-- recovery_repatriation_h.webp
+|   |   |   |   +-- responsabilidad_corporativa.webp
+|   |   |   |   +-- solutions-img.webp
+|   |   |   |   +-- stepBYstepImg.webp
+|   |   |   |   \-- whyUsImg.webp
+|   |   |   \-- convert_to_webp.py
+|   |   \-- videos
+|   |       \-- hero-bg-video.gif
+|   \-- favicon.ico
++-- src
+|   +-- app
+|   |   +-- [locale]
+|   |   |   +-- (pages)
+|   |   |   |   +-- (home)
+|   |   |   |   |   +-- components
+|   |   |   |   |   |   \-- sections
+|   |   |   |   |   |       +-- HeroSection
+|   |   |   |   |   |       |   +-- HeroSection.jsx
+|   |   |   |   |   |       |   \-- HeroSection.module.css
+|   |   |   |   |   |       +-- AlliesSection.jsx
+|   |   |   |   |   |       +-- ContactSection.jsx
+|   |   |   |   |   |       +-- FootPrintSection.jsx
+|   |   |   |   |   |       +-- MainTeamSection.jsx
+|   |   |   |   |   |       +-- SocialProjectsSection.jsx
+|   |   |   |   |   |       +-- SolutionsSection.jsx
+|   |   |   |   |   |       +-- StepByStepSection.jsx
+|   |   |   |   |   |       \-- WhyUsSection.jsx
+|   |   |   |   |   \-- page.jsx
+|   |   |   |   +-- about-us
+|   |   |   |   |   \-- frequently-asked-questions
+|   |   |   |   |       +-- components
+|   |   |   |   |       |   +-- otherFAQContent.jsx
+|   |   |   |   |       |   +-- searchInput.jsx
+|   |   |   |   |       |   \-- skeletonLoader.jsx
+|   |   |   |   |       +-- FAQClient.jsx
+|   |   |   |   |       +-- FAQPage.module.css
+|   |   |   |   |       +-- fetchFAQ.js
+|   |   |   |   |       \-- page.jsx
+|   |   |   |   +-- documents
+|   |   |   |   |   \-- legal
+|   |   |   |   |       +-- complaints-and-queries
+|   |   |   |   |       |   +-- components
+|   |   |   |   |       |   |   +-- steps
+|   |   |   |   |       |   |   |   +-- ConfirmationStep.tsx
+|   |   |   |   |       |   |   |   +-- ContactMethodsStep.tsx
+|   |   |   |   |       |   |   |   +-- DescriptionStep.tsx
+|   |   |   |   |       |   |   |   +-- PrivateDataStep.tsx
+|   |   |   |   |       |   |   |   \-- RequestTypeStep.tsx
+|   |   |   |   |       |   |   \-- FormControlGroup.jsx
+|   |   |   |   |       |   +-- ComplaintsAndQueries.module.css
+|   |   |   |   |       |   \-- page.jsx
+|   |   |   |   |       +-- cookies
+|   |   |   |   |       |   +-- CookiesClient.jsx
+|   |   |   |   |       |   \-- page.jsx
+|   |   |   |   |       +-- policies-for-the-treatment-of-information
+|   |   |   |   |       |   +-- page.jsx
+|   |   |   |   |       |   \-- PoliciesForTheTreatmentClient.jsx
+|   |   |   |   |       +-- privacy-notice
+|   |   |   |   |       |   +-- page.jsx
+|   |   |   |   |       |   \-- PrivacyClient.jsx
+|   |   |   |   |       +-- processing-of-personal-data
+|   |   |   |   |       |   +-- page.jsx
+|   |   |   |   |       |   \-- ProcessingOfPersonalDataClient.jsx
+|   |   |   |   |       \-- terms-and-conditions
+|   |   |   |   |           +-- page.jsx
+|   |   |   |   |           \-- TermsClient.jsx
+|   |   |   |   \-- services
+|   |   |   |       +-- components
+|   |   |   |       |   \-- sections
+|   |   |   |       |       +-- HeroSection.jsx
+|   |   |   |       |       \-- RequirementsSection.jsx
+|   |   |   |       +-- financial-education
+|   |   |   |       |   +-- components
+|   |   |   |       |   |   +-- sections
+|   |   |   |       |   |   |   +-- Content.jsx
+|   |   |   |       |   |   |   +-- Filters.jsx
+|   |   |   |       |   |   |   \-- Header.jsx
+|   |   |   |       |   |   \-- fetchFinancialEducation.js
+|   |   |   |       |   \-- page.jsx
+|   |   |   |       \-- page.jsx
+|   |   |   +-- [...rest]
+|   |   |   |   \-- page.tsx
+|   |   |   +-- consultants
+|   |   |   |   \-- auth
+|   |   |   |       \-- register
+|   |   |   |           \-- page.jsx
+|   |   |   +-- onu
+|   |   |   |   \-- undesa
+|   |   |   |       \-- certificate
+|   |   |   |           \-- page.jsx
+|   |   |   +-- platform
+|   |   |   |   +-- (home)
+|   |   |   |   |   +-- components
+|   |   |   |   |   |   \-- WizardNav.jsx
+|   |   |   |   |   +-- hooks
+|   |   |   |   |   |   +-- useLocalUserStorage.jsx
+|   |   |   |   |   |   +-- useSessionGuard.jsx
+|   |   |   |   |   |   +-- useStep.jsx
+|   |   |   |   |   |   \-- useWizardForm.jsx
+|   |   |   |   |   +-- services
+|   |   |   |   |   |   \-- api.jsx
+|   |   |   |   |   +-- steps
+|   |   |   |   |   |   +-- index.jsx
+|   |   |   |   |   |   +-- Step10Expenses.jsx
+|   |   |   |   |   |   +-- Step1LegalRequirements.jsx
+|   |   |   |   |   |   +-- Step2PersonalData.jsx
+|   |   |   |   |   |   +-- Step3DeclarationOfCessationOfPayments.jsx
+|   |   |   |   |   |   +-- Step4CessationReport.jsx
+|   |   |   |   |   |   +-- Step5Creditors.jsx
+|   |   |   |   |   |   +-- Step6MovableImmovableProperty.jsx
+|   |   |   |   |   |   +-- Step7JudicialProcesses.jsx
+|   |   |   |   |   |   +-- Step8Income.jsx
+|   |   |   |   |   |   \-- Step9PermanentPartner.jsx
+|   |   |   |   |   \-- page.jsx
+|   |   |   |   +-- auth
+|   |   |   |   |   +-- login
+|   |   |   |   |   |   \-- page.jsx
+|   |   |   |   |   \-- register
+|   |   |   |   |       \-- page.jsx
+|   |   |   |   +-- calculator
+|   |   |   |   |   +-- components
+|   |   |   |   |   |   +-- CalculatorForm.tsx
+|   |   |   |   |   |   +-- DebtGauge.tsx
+|   |   |   |   |   |   +-- UserDataDisplay.tsx
+|   |   |   |   |   |   +-- UserIdentification.tsx
+|   |   |   |   |   |   +-- UserRegistrationForm.tsx
+|   |   |   |   |   |   \-- VerifyCompliment.tsx
+|   |   |   |   |   +-- hooks
+|   |   |   |   |   |   \-- useCalculator.ts
+|   |   |   |   |   +-- CalculatorClient.tsx
+|   |   |   |   |   +-- error.tsx
+|   |   |   |   |   +-- layout.tsx
+|   |   |   |   |   \-- page.tsx
+|   |   |   |   +-- hooks
+|   |   |   |   |   \-- useCreditors.js
+|   |   |   |   \-- signature
+|   |   |   |       +-- page.jsx
+|   |   |   |       \-- SignaturePad.jsx
+|   |   |   +-- error.tsx
+|   |   |   +-- layout.tsx
+|   |   |   \-- not-found.tsx
+|   |   +-- api
+|   |   |   +-- consultants
+|   |   |   |   \-- auth
+|   |   |   |       \-- register
+|   |   |   |           \-- route.jsx
+|   |   |   +-- contact
+|   |   |   |   \-- route.jsx
+|   |   |   +-- faq
+|   |   |   |   +-- main
+|   |   |   |   |   \-- route.jsx
+|   |   |   |   \-- other
+|   |   |   |       \-- route.jsx
+|   |   |   +-- financial-education
+|   |   |   |   \-- route.jsx
+|   |   |   +-- platform
+|   |   |   |   +-- auth
+|   |   |   |   |   +-- login
+|   |   |   |   |   |   \-- route.jsx
+|   |   |   |   |   +-- logout
+|   |   |   |   |   |   \-- route.jsx
+|   |   |   |   |   +-- register
+|   |   |   |   |   |   \-- route.jsx
+|   |   |   |   |   \-- token-info
+|   |   |   |   |       \-- route.jsx
+|   |   |   |   +-- calculator
+|   |   |   |   |   +-- creditors
+|   |   |   |   |   |   \-- route.ts
+|   |   |   |   |   \-- user
+|   |   |   |   |       \-- route.ts
+|   |   |   |   \-- insolvency-form
+|   |   |   |       +-- [id]
+|   |   |   |       |   \-- route.jsx
+|   |   |   |       +-- fetch
+|   |   |   |       |   \-- route.jsx
+|   |   |   |       +-- get-data
+|   |   |   |       |   \-- route.jsx
+|   |   |   |       +-- signature
+|   |   |   |       |   \-- route.jsx
+|   |   |   |       \-- route.jsx
+|   |   |   \-- pqrs
+|   |   |       \-- route.jsx
+|   |   +-- layout.tsx
+|   |   +-- manifest.ts
+|   |   +-- not-found.tsx
+|   |   +-- page.tsx
+|   |   +-- robots.txt
+|   |   \-- sitemap.ts
+|   +-- components
+|   |   +-- Footer
+|   |   |   \-- Footer.jsx
+|   |   +-- lib
+|   |   |   \-- rate-limit.jsx
+|   |   +-- LocaleSwitcher
+|   |   |   \-- LocaleSwitcher.jsx
+|   |   +-- micro-components
+|   |   |   +-- card.jsx
+|   |   |   +-- sub_title.jsx
+|   |   |   \-- title.jsx
+|   |   +-- Navigation
+|   |   |   +-- components
+|   |   |   |   \-- NavButton.tsx
+|   |   |   +-- Navigation.module.css
+|   |   |   +-- Navigation.tsx
+|   |   |   \-- NavigationLink.tsx
+|   |   +-- WhatsAppButton
+|   |   |   +-- WhatsAppButton.jsx
+|   |   |   \-- WhatsAppButton.module.css
+|   |   +-- BaseLayout.tsx
+|   |   \-- NotFoundPage.tsx
+|   +-- i18n
+|   |   +-- request.ts
+|   |   \-- routing.ts
+|   +-- lib
+|   |   +-- calculator
+|   |   |   +-- calculations.ts
+|   |   |   +-- index.ts
+|   |   |   \-- types.ts
+|   |   +-- validation
+|   |   |   +-- index.ts
+|   |   |   \-- schemas.ts
+|   |   +-- cors.ts
+|   |   \-- logger.ts
+|   +-- providers
+|   |   +-- AOSProvider.jsx
+|   |   +-- QueryProvider.jsx
+|   |   \-- ToastProvider.jsx
+|   +-- config.ts
+|   \-- proxy.ts
++-- .env
++-- .gitignore
++-- eslint.config.mjs
++-- global.d.ts
++-- jest.config.js
++-- next-env.d.ts
++-- next.config.js
++-- package.json
++-- pnpm-lock.yaml
++-- postcss.config.js
++-- README.md
++-- server.js
++-- tsconfig.json
+\-- vercel.json
