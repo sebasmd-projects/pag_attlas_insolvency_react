@@ -3,6 +3,7 @@
 import axios from 'axios';
 import { NextResponse } from 'next/server';
 import {apiBaseUrl} from '@/config';
+import { djangoHeaders } from '@/lib/djangoHeaders';
 
 export async function POST(request) {
     try {
@@ -11,7 +12,7 @@ export async function POST(request) {
         const response = await axios.post(
             `${apiBaseUrl}/register-consultants/`,
             data,
-            { timeout: 5000 }
+            { headers: djangoHeaders(), timeout: 5000 }
         );
 
         return NextResponse.json(response.data, {

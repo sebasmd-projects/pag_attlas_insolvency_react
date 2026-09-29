@@ -6,6 +6,7 @@ import { NextResponse } from 'next/server';
 import { apiBaseUrl } from '@/config';
 import { validateOrigin, corsErrorResponse } from '@/lib/cors';
 import { serverLogger } from '@/lib/logger';
+import { djangoHeaders } from '@/lib/djangoHeaders';
 
 export async function GET(request) {
     // CORS validation
@@ -26,9 +27,7 @@ export async function GET(request) {
         }
 
         const response = await axios.get(`${apiBaseUrl}/token-info/`, {
-            headers: {
-                Authorization: `Bearer ${rawToken}`,
-            },
+            headers: djangoHeaders({ Authorization: `Bearer ${rawToken}` }),
             timeout: 10000,
         });
 

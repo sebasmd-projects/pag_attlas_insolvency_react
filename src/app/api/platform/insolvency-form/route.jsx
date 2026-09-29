@@ -7,6 +7,7 @@ import { NextResponse } from 'next/server';
 import { apiBaseUrl } from '@/config';
 import { validateOrigin, corsErrorResponse } from '@/lib/cors';
 import { serverLogger } from '@/lib/logger';
+import { djangoHeaders } from '@/lib/djangoHeaders';
 
 export async function PATCH(request) {
     // CORS validation
@@ -34,7 +35,7 @@ export async function PATCH(request) {
             `${apiBaseUrl}/insolvency-form/?step=${step}`,
             body,
             { 
-                headers: { Authorization: `Bearer ${rawToken}` },
+                headers: djangoHeaders({ Authorization: `Bearer ${rawToken}` }),
                 timeout: 30000,
             }
         );

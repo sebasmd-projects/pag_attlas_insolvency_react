@@ -29,10 +29,6 @@ export default function middleware(request: NextRequest) {
     '/platform/auth/register',
     '/en/platform/auth/register',
     '/es/plataforma/auth/registro',
-
-    '/platform/signature',
-    '/en/platform/signature',
-    '/es/plataforma/firma-electronica',
   ];
 
   const isLoginRoute =

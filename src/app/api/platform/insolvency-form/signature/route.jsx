@@ -1,13 +1,22 @@
+import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { apiBaseUrl } from '@/config';
 import { validateOrigin, corsErrorResponse } from '@/lib/cors';
 import { serverLogger } from '@/lib/logger';
+import { djangoHeaders } from '@/lib/djangoHeaders';
 
 export async function POST(request) {
     // CORS validation
     const { isValid } = validateOrigin(request);
     if (!isValid) {
         return corsErrorResponse();
+    }
+
+    const cookieStore = await cookies();
+    const rawToken = cookieStore.get('auth_token')?.value;
+
+    if (!rawToken) {
+        return NextResponse.json({ detail: 'Token no encontrado' }, { status: 401 });
     }
 
     try {
@@ -17,10 +26,11 @@ export async function POST(request) {
 
         const res = await fetch(apiUrl, {
             method: 'POST',
-            headers: {
+            headers: djangoHeaders({
                 'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ cedula: body.cedula, signature: body.signature }),
+                Authorization: `Bearer ${rawToken}`,
+            }),
+            body: JSON.stringify({ signature: body.signature }),
         });
 
         const data = await res.json();

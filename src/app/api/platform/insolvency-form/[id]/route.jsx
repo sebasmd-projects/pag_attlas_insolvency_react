@@ -4,6 +4,7 @@ import axios from 'axios';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 import {apiBaseUrl} from '@/config';
+import { djangoHeaders } from '@/lib/djangoHeaders';
 
 export async function PATCH(request, context) {
 
@@ -26,9 +27,7 @@ export async function PATCH(request, context) {
             `${apiBaseUrl}/insolvency-form/${id}/?step=${step}`,
             body,
             {
-                headers: {
-                    Authorization: `Bearer ${rawToken}`,
-                },
+                headers: djangoHeaders({ Authorization: `Bearer ${rawToken}` }),
             }
         );
 

@@ -4,6 +4,7 @@ import axios from 'axios';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 import {apiBaseUrl} from '@/config';
+import { djangoHeaders } from '@/lib/djangoHeaders';
 
 export async function GET(request) {
     const cookieStore = await cookies();
@@ -20,10 +21,10 @@ export async function GET(request) {
         const { data, status } = await axios.get(
             `${apiBaseUrl}/insolvency-form/?step=${step}`,
             {
-                headers: {
+                headers: djangoHeaders({
                     Authorization: `Bearer ${rawToken}`,
-                    'Content-Type': 'application/json'
-                }
+                    'Content-Type': 'application/json',
+                })
             }
         );
         return NextResponse.json(data, { status });

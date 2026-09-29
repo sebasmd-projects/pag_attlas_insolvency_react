@@ -6,22 +6,14 @@ import { serverLogger } from '@/lib/logger';
 import axios from 'axios';
 import { NextResponse } from 'next/server';
 import {apiBaseUrl} from '@/config';
+import { djangoHeaders } from '@/lib/djangoHeaders';
+import { splitAdvisorPassword, mapBackendError } from '@/lib/platformLogin';
 
 // Rate limiter: 5 attempts per 15 minutes per IP
 const limiter = rateLimit({
     interval: 15 * 60 * 1000, // 15 minutes
     uniqueTokenPerInterval: 500,
 });
-
-// Error codes mapping from backend serializer
-const ERROR_CODES = {
-    USER_NOT_FOUND: 'userNotFound',
-    INVALID_BIRTH_DATE: 'invalidBirthDate',
-    INVALID_CREDENTIALS: 'invalidCredentials',
-    INVALID_ADVISOR: 'invalidAdvisor',
-    ACCOUNT_LOCKED: 'accountLocked',
-    ACCOUNT_DISABLED: 'accountDisabled',
-};
 
 /**
  * Get client IP from request
@@ -32,54 +24,6 @@ function getClientIP(request) {
         return forwarded.split(',')[0].trim();
     }
     return request.headers.get('x-real-ip') || 'unknown';
-}
-
-/**
- * Map backend error to frontend error code
- */
-function mapBackendError(errorData, statusCode) {
-    if (errorData) {
-        if (errorData.document_number) {
-            const msg = Array.isArray(errorData.document_number) 
-                ? errorData.document_number[0] 
-                : errorData.document_number;
-            if (msg.toLowerCase().includes('fecha')) {
-                return { code: ERROR_CODES.INVALID_BIRTH_DATE, detail: msg };
-            }
-            return { code: ERROR_CODES.USER_NOT_FOUND, detail: msg };
-        }
-        
-        if (errorData.user) {
-            const msg = Array.isArray(errorData.user) 
-                ? errorData.user[0] 
-                : errorData.user;
-            return { code: ERROR_CODES.INVALID_ADVISOR, detail: msg };
-        }
-        
-        if (errorData.password) {
-            const msg = Array.isArray(errorData.password) 
-                ? errorData.password[0] 
-                : errorData.password;
-            return { code: ERROR_CODES.INVALID_CREDENTIALS, detail: msg };
-        }
-        
-        if (errorData.non_field_errors) {
-            const msg = Array.isArray(errorData.non_field_errors) 
-                ? errorData.non_field_errors[0] 
-                : errorData.non_field_errors;
-            return { code: 'generalError', detail: msg };
-        }
-
-        if (errorData.detail) {
-            return { code: 'generalError', detail: errorData.detail };
-        }
-    }
-    
-    if (statusCode === 400 || statusCode === 401) {
-        return { code: ERROR_CODES.INVALID_CREDENTIALS, detail: 'Credenciales invalidas' };
-    }
-    
-    return { code: 'generalError', detail: 'Error de autenticacion' };
 }
 
 export async function POST(request) {
@@ -124,10 +68,10 @@ export async function POST(request) {
         }
 
         // Parse password format: USER-PASSWORD
-        const [user, password] = data.password.split('-');
-        
+        const parsed = splitAdvisorPassword(String(data.password));
+
         // Validate password format
-        if (!user || !password) {
+        if (!parsed) {
             return NextResponse.json(
                 { 
                     success: false,
@@ -138,6 +82,8 @@ export async function POST(request) {
                 { status: 400 }
             );
         }
+
+        const { user, password } = parsed;
 
         // Build backend request data matching AttlasInsolvencyAuthSerializer
         const backendData = {
@@ -150,7 +96,7 @@ export async function POST(request) {
         const response = await axios.post(
             `${apiBaseUrl}/login/`,
             backendData,
-            { timeout: 30000 }
+            { headers: djangoHeaders(), timeout: 30000 }
         );
 
         const { token, expires_in } = response.data;
@@ -194,7 +140,7 @@ export async function POST(request) {
                     errorCode,
                     detail,
                 },
-                { status: statusCode === 500 ? 500 : 400 }
+                { status: statusCode === 500 ? 500 : statusCode === 429 ? 429 : 400 }
             );
         }
         

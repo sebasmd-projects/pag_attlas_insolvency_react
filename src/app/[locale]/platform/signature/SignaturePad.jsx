@@ -4,7 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { useTranslations } from 'next-intl';
 import Image from "next/image";
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { TbBrush, TbBrushOff } from "react-icons/tb";
 import SignatureCanvas from "react-signature-canvas";
 import { toast } from 'react-toastify';
@@ -16,13 +16,11 @@ export default function SignaturePad() {
 
     const t = useTranslations('Platform.pages.home.wizard.steps.step11');
 
-    const [cedula, setCedula] = useState('');
-
     const saveSignature = useMutation({
-        mutationFn: ({ cedula, signature }) =>
+        mutationFn: ({ signature }) =>
             axios.post(
                 '/api/platform/insolvency-form/signature',
-                { cedula, signature },
+                { signature },
                 { withCredentials: true }
             ),
         onSuccess: () => {
@@ -45,18 +43,18 @@ export default function SignaturePad() {
 
     const save = () => {
 
-        if (!cedula.trim()) {
-            toast.error(t('messages.noSignature'));
-            return;
-        }
-
         if (sigPadRef.current) {
+            if (sigPadRef.current.isEmpty()) {
+                toast.error(t('messages.noSignature'));
+                return;
+            }
+
             const canvas = sigPadRef.current.getCanvas();
             const dataUrl = canvas.toDataURL("image/png");
             const base64Image = dataUrl.split(",")[1];
 
             saveSignature.mutate(
-                { cedula: cedula, signature: base64Image },
+                { signature: base64Image },
                 {
                     onError: (error) => {
                         console.error('[Client] Error en mutación:', error);
@@ -104,21 +102,6 @@ export default function SignaturePad() {
                     <p className="text-start">
                         Bajo la gravedad de juramento, manifiesto que el presente documento, su membrete, contenido, anexos y cualquier información asociada, se encuentra protegido por los principios y obligaciones derivados del Acuerdo sobre los Aspectos de los Derechos de Propiedad Intelectual relacionados con el Comercio (ADPIC/TRIPS), la Convención de Viena sobre el Derecho de los Tratados (1969), la Convención Interamericana sobre Obligaciones de Derecho Internacional Privado (CIDIP), así como por las disposiciones del Título 18 del Código de los Estados Unidos —incluyendo, entre otras, la Sección 1905 (Divulgación No Autorizada de Información Confidencial), las Secciones 1831-1839 (Ley de Espionaje Económico y Protección de Secretos Comerciales) y la Ley de Privacidad de 1974—, quedando prohibida su reproducción, distribución o divulgación total o parcial, por cualquier medio físico, electrónico o digital, sin autorización escrita y expresa de las partes facultadas. Reconozco que toda infracción podrá generar responsabilidad civil, penal y administrativa, tanto a nivel nacional como internacional, siendo susceptible de acciones judiciales en la jurisdicción de los Estados Unidos de América, la República de Colombia y foros arbitrales internacionales conforme a la Convención de Nueva York de 1958, y que el incumplimiento de estas obligaciones conllevará las sanciones legales aplicables. Declaro que he leído, comprendo y acepto en su totalidad el contenido de la presente declaración, comprometiéndome a su estricto cumplimiento.
                     </p>
-
-                    <div className="mb-3">
-                        <label htmlFor="cedula" className="form-label">
-                            {t('form.inputs.documentNumberLabel')}
-                        </label>
-                        <input
-                            id="cedula"
-                            type="text"
-                            value={cedula}
-                            className="form-control"
-                            onChange={(e) => setCedula(e.target.value)}
-                            onWheel={(e) => e.target.blur()}
-                            placeholder={t('form.inputs.documentNumberPlaceholder')}
-                        />
-                    </div>
 
                     <div className="border">
                         <SignatureCanvas

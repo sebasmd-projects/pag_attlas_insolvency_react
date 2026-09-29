@@ -7,6 +7,7 @@ import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { apiBaseUrl } from '@/config';
 import { serverLogger } from '@/lib/logger';
+import { djangoHeaders } from '@/lib/djangoHeaders';
 
 export async function GET(request) {
     const cookieStore = await cookies();
@@ -34,7 +35,7 @@ export async function GET(request) {
         const { data, status } = await axios.get(
             `${apiBaseUrl}/insolvency-form/${formId}/?step=${step}`,
             { 
-                headers: { Authorization: `Bearer ${rawToken}` },
+                headers: djangoHeaders({ Authorization: `Bearer ${rawToken}` }),
                 timeout: 10000,
             }
         );

@@ -6,6 +6,7 @@ import { serverLogger } from '@/lib/logger';
 import axios from 'axios';
 import { NextResponse } from 'next/server';
 import { apiBaseUrl } from '@/config';
+import { djangoHeaders } from '@/lib/djangoHeaders';
 
 /**
  * POST — Buscar cliente existente
@@ -31,6 +32,7 @@ export async function POST(request: Request) {
 
         const response = await axios.get(`${apiBaseUrl}/clients/search/`, {
             params: { documentNumber: cedula, birthDate },
+            headers: djangoHeaders(),
             timeout: 10000,
         });
 
@@ -104,7 +106,7 @@ export async function PUT(request: Request) {
                 phone:   phone   ?? '',
                 address: address ?? '',
             },
-            { timeout: 10000 }
+            { headers: djangoHeaders(), timeout: 10000 }
         );
 
         const u = createRes.data;
