@@ -1,4 +1,4 @@
-// SOLO SERVIDOR: este módulo lee ATTLAS_SERVER_KEY y NUNCA debe importarse
+// SOLO SERVIDOR: este módulo lee SERVER_KEY y NUNCA debe importarse
 // desde componentes cliente ("use client"). La variable no debe llevar prefijo NEXT_PUBLIC_.
 
 import { isIP } from 'node:net';
@@ -14,13 +14,28 @@ function clientIp(request: Request): string | null {
   return null;
 }
 
+let legacyWarned = false;
+
+// Transición: SERVER_KEY manda; si falta se usa ATTLAS_SERVER_KEY (nombre viejo)
+// y se avisa una sola vez. Retirar el fallback cuando Vercel ya use SERVER_KEY.
+function serverKey(): string | undefined {
+  const key = process.env.SERVER_KEY;
+  if (key) return key;
+  const legacy = process.env.ATTLAS_SERVER_KEY;
+  if (legacy && !legacyWarned) {
+    legacyWarned = true;
+    console.warn('ATTLAS_SERVER_KEY está en desuso: define SERVER_KEY (el mismo valor) y retira la vieja.');
+  }
+  return legacy || undefined;
+}
+
 export function djangoHeaders(
   extra: Record<string, string> = {},
   request?: Request,
 ): Record<string, string> {
-  const key = process.env.ATTLAS_SERVER_KEY;
+  const key = serverKey();
   if (!key) {
-    throw new Error('ATTLAS_SERVER_KEY no está definida: es obligatoria para llamar a la API de Attlas.');
+    throw new Error('SERVER_KEY no está definida: es obligatoria para llamar a la API de Attlas.');
   }
   const headers: Record<string, string> = { 'X-Server-Key': key, ...extra };
   if (request) {

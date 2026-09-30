@@ -4,19 +4,49 @@
 import { djangoHeaders } from '../djangoHeaders';
 
 describe('djangoHeaders', () => {
-  const original = process.env.ATTLAS_SERVER_KEY;
+  const original = process.env.SERVER_KEY;
+  const originalLegacy = process.env.ATTLAS_SERVER_KEY;
+  const restore = (name: string, value: string | undefined) => {
+    if (value === undefined) delete process.env[name];
+    else process.env[name] = value;
+  };
+  beforeEach(() => {
+    delete process.env.ATTLAS_SERVER_KEY;
+  });
   afterEach(() => {
-    if (original === undefined) delete process.env.ATTLAS_SERVER_KEY;
-    else process.env.ATTLAS_SERVER_KEY = original;
+    restore('SERVER_KEY', original);
+    restore('ATTLAS_SERVER_KEY', originalLegacy);
+    jest.restoreAllMocks();
   });
 
   it('lanza si falta la clave', () => {
-    delete process.env.ATTLAS_SERVER_KEY;
-    expect(() => djangoHeaders()).toThrow(/ATTLAS_SERVER_KEY/);
+    delete process.env.SERVER_KEY;
+    expect(() => djangoHeaders()).toThrow(/SERVER_KEY/);
+  });
+
+  it('con SERVER_KEY no avisa aunque exista la vieja', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    process.env.SERVER_KEY = 'nueva';
+    process.env.ATTLAS_SERVER_KEY = 'vieja';
+    expect(djangoHeaders()['X-Server-Key']).toBe('nueva');
+    expect(warn).not.toHaveBeenCalled();
+  });
+
+  it('con solo la vieja funciona y avisa una sola vez', () => {
+    jest.isolateModules(() => {
+      const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      const { djangoHeaders: fresh } = require('../djangoHeaders');
+      delete process.env.SERVER_KEY;
+      process.env.ATTLAS_SERVER_KEY = 'vieja';
+      expect(fresh()['X-Server-Key']).toBe('vieja');
+      expect(fresh()['X-Server-Key']).toBe('vieja');
+      expect(warn).toHaveBeenCalledTimes(1);
+    });
   });
 
   it('incluye la clave y combina cabeceras extra', () => {
-    process.env.ATTLAS_SERVER_KEY = 'k';
+    process.env.SERVER_KEY = 'k';
     expect(djangoHeaders({ Authorization: 'Bearer t' })).toEqual({
       'X-Server-Key': 'k',
       Authorization: 'Bearer t',
@@ -26,7 +56,7 @@ describe('djangoHeaders', () => {
   describe('X-Client-IP', () => {
     const req = (headers: Record<string, string>) => new Request('http://x', { headers });
     beforeEach(() => {
-      process.env.ATTLAS_SERVER_KEY = 'k';
+      process.env.SERVER_KEY = 'k';
     });
 
     it('usa x-vercel-forwarded-for con prioridad', () => {
