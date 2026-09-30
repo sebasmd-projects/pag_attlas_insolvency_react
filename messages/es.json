@@ -378,8 +378,28 @@
           "form": {
             "first_name": "Nombres Completos",
             "last_name": "Apellidos",
-            "password": "Contraseña"
-          }
+            "email": "Correo",
+            "password": "Contraseña",
+            "passwordConfirm": "Confirmar contraseña",
+            "showPassword": "Mostrar contraseña",
+            "hidePassword": "Ocultar contraseña",
+            "submit": "Registrar Consultor",
+            "submitting": "Registrando..."
+          },
+          "errors": {
+            "emailDomain": "El correo debe ser de @propensionesabogados.com, @fundacionattlas.com o @fundacionattlas.org.",
+            "passwordMismatch": "Las contraseñas no coinciden.",
+            "invalidCode": "Código inválido o caducado",
+            "rateLimit": "Demasiados intentos, espera unos minutos"
+          },
+          "codeDescription": "Ingresa el código de 6 dígitos que llegó al correo {email}",
+          "codeLabel": "Código de verificación",
+          "codePlaceholder": "000000",
+          "verify": "Verificar",
+          "verifying": "Verificando...",
+          "back": "Volver",
+          "verified": "Cuenta verificada. Tu usuario para iniciar sesión es {user}. En el inicio de sesión escribe la contraseña como {user}-tuclave.",
+          "goToLogin": "Ir al inicio de sesión"
         }
       }
     }

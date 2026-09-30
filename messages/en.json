@@ -378,8 +378,28 @@
           "form": {
             "first_name": "Full Names",
             "last_name": "Last Names",
-            "password": "Password"
-          }
+            "email": "Email",
+            "password": "Password",
+            "passwordConfirm": "Confirm password",
+            "showPassword": "Show password",
+            "hidePassword": "Hide password",
+            "submit": "Register Consultant",
+            "submitting": "Registering..."
+          },
+          "errors": {
+            "emailDomain": "The email must be from @propensionesabogados.com, @fundacionattlas.com or @fundacionattlas.org.",
+            "passwordMismatch": "Passwords do not match.",
+            "invalidCode": "Invalid or expired code",
+            "rateLimit": "Too many attempts, please wait a few minutes"
+          },
+          "codeDescription": "Enter the 6-digit code sent to the email {email}",
+          "codeLabel": "Verification code",
+          "codePlaceholder": "000000",
+          "verify": "Verify",
+          "verifying": "Verifying...",
+          "back": "Back",
+          "verified": "Account verified. Your login user is {user}. On the login page, type your password as {user}-yourpassword.",
+          "goToLogin": "Go to login"
         }
       }
     }
