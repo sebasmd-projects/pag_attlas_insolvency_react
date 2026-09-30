@@ -24,7 +24,7 @@ export async function GET(request) {
                 headers: djangoHeaders({
                     Authorization: `Bearer ${rawToken}`,
                     'Content-Type': 'application/json',
-                })
+                }, request)
             }
         );
         return NextResponse.json(data, { status });

@@ -12,7 +12,7 @@ export async function POST(request) {
         const response = await axios.post(
             `${apiBaseUrl}/register-consultants/`,
             data,
-            { headers: djangoHeaders(), timeout: 5000 }
+            { headers: djangoHeaders({}, request), timeout: 5000 }
         );
 
         return NextResponse.json(response.data, {

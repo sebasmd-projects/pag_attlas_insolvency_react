@@ -35,7 +35,7 @@ export async function GET(request) {
         const { data, status } = await axios.get(
             `${apiBaseUrl}/insolvency-form/${formId}/?step=${step}`,
             { 
-                headers: djangoHeaders({ Authorization: `Bearer ${rawToken}` }),
+                headers: djangoHeaders({ Authorization: `Bearer ${rawToken}` }, request),
                 timeout: 10000,
             }
         );

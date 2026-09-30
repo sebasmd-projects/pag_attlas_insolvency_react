@@ -34,7 +34,7 @@ export async function POST(request: Request) {
         const response = await axios.post(
             `${apiBaseUrl}/clients/lookup/`,
             { documentNumber: cedula, birthDate },
-            { headers: djangoHeaders(), timeout: 10000, validateStatus: () => true }
+            { headers: djangoHeaders({}, request), timeout: 10000, validateStatus: () => true }
         );
 
         const mapped = mapLookupResponse(response.status, response.data);
@@ -85,7 +85,7 @@ export async function PUT(request: Request) {
                 phone:   phone   ?? '',
                 address: address ?? '',
             },
-            { headers: djangoHeaders(), timeout: 10000 }
+            { headers: djangoHeaders({}, request), timeout: 10000 }
         );
 
         const u = createRes.data;

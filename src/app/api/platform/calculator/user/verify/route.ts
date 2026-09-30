@@ -36,7 +36,7 @@ export async function POST(request: Request) {
         const response = await axios.post(
             `${apiBaseUrl}/clients/lookup/verify/`,
             { challenge_id: validation.data.challengeId, code: validation.data.code },
-            { headers: djangoHeaders(), timeout: 10000, validateStatus: () => true }
+            { headers: djangoHeaders({}, request), timeout: 10000, validateStatus: () => true }
         );
 
         const mapped = mapVerifyResponse(response.status, response.data);

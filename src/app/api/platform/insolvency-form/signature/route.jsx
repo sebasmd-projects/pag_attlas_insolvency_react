@@ -29,7 +29,7 @@ export async function POST(request) {
             headers: djangoHeaders({
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${rawToken}`,
-            }),
+            }, request),
             body: JSON.stringify({ signature: body.signature }),
         });
 

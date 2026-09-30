@@ -12,7 +12,7 @@ export async function POST(request) {
         const response = await axios.post(
             `${apiBaseUrl}/register/`,
             data,
-            { headers: djangoHeaders() }
+            { headers: djangoHeaders({}, request) }
         );
 
         return NextResponse.json(response.data, {

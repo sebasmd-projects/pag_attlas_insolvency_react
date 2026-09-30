@@ -27,7 +27,7 @@ export async function PATCH(request, context) {
             `${apiBaseUrl}/insolvency-form/${id}/?step=${step}`,
             body,
             {
-                headers: djangoHeaders({ Authorization: `Bearer ${rawToken}` }),
+                headers: djangoHeaders({ Authorization: `Bearer ${rawToken}` }, request),
             }
         );
 

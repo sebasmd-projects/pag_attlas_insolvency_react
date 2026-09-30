@@ -96,7 +96,7 @@ export async function POST(request) {
         const response = await axios.post(
             `${apiBaseUrl}/login/`,
             backendData,
-            { headers: djangoHeaders(), timeout: 30000 }
+            { headers: djangoHeaders({}, request), timeout: 30000 }
         );
 
         const { token, expires_in } = response.data;
