@@ -403,9 +403,18 @@
         "birthDate": "Date of Birth",
         "continue": "Continue",
         "searching": "Searching...",
+        "codeDescription": "If the details match a record, we sent a code to your email. Enter it here.",
+        "codeLabel": "6-digit code",
+        "codePlaceholder": "123456",
+        "verify": "Verify",
+        "verifying": "Verifying...",
+        "back": "Back",
+        "noCode": "Didn't get the code? Register",
         "errors": {
           "searchFailed": "Error searching for user. Please try again.",
-          "networkError": "Connection error. Please try again."
+          "networkError": "Connection error. Please try again.",
+          "rateLimit": "Too many attempts, please wait a few minutes.",
+          "invalidCode": "Invalid or expired code."
         }
       },
       "userRegistration": {

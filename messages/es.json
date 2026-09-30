@@ -403,9 +403,18 @@
         "birthDate": "Fecha de nacimiento",
         "continue": "Continuar",
         "searching": "Buscando...",
+        "codeDescription": "Si los datos coinciden con un registro, te enviamos un código a tu correo. Escríbelo aquí.",
+        "codeLabel": "Código de 6 dígitos",
+        "codePlaceholder": "123456",
+        "verify": "Verificar",
+        "verifying": "Verificando...",
+        "back": "Volver",
+        "noCode": "¿No recibiste el código? Regístrate",
         "errors": {
           "searchFailed": "Error al buscar usuario. Por favor intente nuevamente.",
-          "networkError": "Error de conexión. Por favor intente nuevamente."
+          "networkError": "Error de conexión. Por favor intente nuevamente.",
+          "rateLimit": "Demasiados intentos, espera unos minutos.",
+          "invalidCode": "Código inválido o caducado."
         }
       },
       "userRegistration": {

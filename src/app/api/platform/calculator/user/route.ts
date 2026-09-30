@@ -7,10 +7,11 @@ import axios from 'axios';
 import { NextResponse } from 'next/server';
 import { apiBaseUrl } from '@/config';
 import { djangoHeaders } from '@/lib/djangoHeaders';
+import { mapLookupResponse } from '@/lib/calculatorLookup';
 
 /**
- * POST — Buscar cliente existente
- * Backend: GET /clients/search/?documentNumber=xxx&birthDate=yyyy-mm-dd
+ * POST — Iniciar identificación (paso 1 del OTP).
+ * Backend: POST /clients/lookup/  → siempre 202 {challenge_id}, exista o no el cliente.
  */
 export async function POST(request: Request) {
     const { isValid } = validateOrigin(request);
@@ -30,44 +31,22 @@ export async function POST(request: Request) {
 
         const { cedula, birthDate } = validation.data;
 
-        const response = await axios.get(`${apiBaseUrl}/clients/search/`, {
-            params: { documentNumber: cedula, birthDate },
-            headers: djangoHeaders(),
-            timeout: 10000,
-        });
+        const response = await axios.post(
+            `${apiBaseUrl}/clients/lookup/`,
+            { documentNumber: cedula, birthDate },
+            { headers: djangoHeaders(), timeout: 10000, validateStatus: () => true }
+        );
 
-        const u = response.data;
-        return NextResponse.json({
-            success: true,
-            found: true,
-            user: {
-                id:        u.id,
-                formId:    u.form_id  ?? null,
-                cedula:    u.documentNumber,
-                firstName: u.firstName,
-                lastName:  u.lastName,
-                email:     u.email    ?? '',
-                phone:     u.phone    ?? '',
-                address:   u.address  ?? '',
-                birthDate: u.birthDate,
-            },
-        });
+        const mapped = mapLookupResponse(response.status, response.data);
+        return NextResponse.json(mapped.body, { status: mapped.status });
 
     } catch (error) {
-        if (axios.isAxiosError(error)) {
-            if (error.response?.status === 404 || error.response?.status === 400) {
-                return NextResponse.json({ success: true, found: false, user: null });
-            }
-            serverLogger.error('Error searching user', { error: error.message });
-            return NextResponse.json(
-                { success: false, error: 'BACKEND_ERROR',
-                  detail: error.response?.data?.detail || 'Error al buscar usuario' },
-                { status: error.response?.status || 500 }
-            );
-        }
+        serverLogger.error('Error starting user lookup', {
+            error: error instanceof Error ? error.message : 'unknown',
+        });
         return NextResponse.json(
-            { success: false, error: 'INTERNAL_ERROR', detail: 'Error interno' },
-            { status: 500 }
+            { success: false, error: 'BACKEND_ERROR' },
+            { status: 502 }
         );
     }
 }
