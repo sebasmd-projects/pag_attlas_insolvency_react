@@ -5,6 +5,7 @@ import { NextResponse } from 'next/server';
 import { apiBaseUrl } from '@/config';
 import { validateOrigin, corsErrorResponse } from '@/lib/cors';
 import { serverLogger } from '@/lib/logger';
+import { djangoHeaders } from '@/lib/djangoHeaders';
 
 export async function POST(request) {
     // CORS validation
@@ -19,7 +20,7 @@ export async function POST(request) {
         const response = await axios.post(
             `${apiBaseUrl}/contact/`,
             data,
-            { timeout: 10000 }
+            { headers: djangoHeaders({}, request), timeout: 10000 }
         );
 
         return NextResponse.json(response.data, { status: 200 });
@@ -31,7 +32,7 @@ export async function POST(request) {
         
         return NextResponse.json(
             { detail: error?.response?.data?.detail || 'Error al enviar el formulario de contacto' },
-            { status: 400 }
+            { status: error?.response?.status === 429 ? 429 : 400 }
         );
     }
 }

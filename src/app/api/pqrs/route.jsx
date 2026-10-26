@@ -5,6 +5,7 @@ import { NextResponse } from 'next/server';
 import { apiBaseUrl } from '@/config';
 import { validateOrigin, corsErrorResponse } from '@/lib/cors';
 import { serverLogger } from '@/lib/logger';
+import { djangoHeaders } from '@/lib/djangoHeaders';
 
 export async function POST(request) {
     // CORS validation
@@ -16,6 +17,7 @@ export async function POST(request) {
 
         const response = await fetch(`${apiBaseUrl}/pqrs/`, {
             method: 'POST',
+            headers: djangoHeaders({}, request),
             body: formData,
         });
 
